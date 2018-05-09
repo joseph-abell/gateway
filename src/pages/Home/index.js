@@ -1,8 +1,9 @@
 import React from 'react';
+import H1 from '../../components/H1'
 
 const Home = () => (
   <div>
-    <h1>Home</h1>
+    <H1>Home</H1>
   </div>
 );
 
