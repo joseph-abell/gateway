@@ -1,10 +1,8 @@
 import React from 'react';
-import H1 from '../../components/H1'
+import HeaderContainer from '../../components/HeaderContainer'
 
 const Home = () => (
-  <div>
-    <H1>Home</H1>
-  </div>
+  <HeaderContainer text='Welcome' image='' />
 );
 
 export default Home;
