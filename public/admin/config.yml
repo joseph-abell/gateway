@@ -9,6 +9,9 @@ public_folder: "/uploads"
 collections: # A list of collections the CMS should be able to edit
   - label: 'Pages'
     name: 'pages'
-    file: 'src/data/pages/homepage.json'
-    fields:
-      - {label: 'Title', name: 'title', widget: 'string'}
+    files:
+      - label: 'Home'
+        name: 'home'
+        file: 'src/data/pages/homepage.json'
+        fields:
+          - {label: 'Title', name: 'title', widget: 'string'}
