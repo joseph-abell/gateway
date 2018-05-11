@@ -1,4 +1,5 @@
 {
   "title": "Welcome",
-  "headerImage": "/uploads/church_family.jpg"
+  "headerImage": "/uploads/church_family.jpg",
+  "menuColour": "red"
 }
