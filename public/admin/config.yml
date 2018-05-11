@@ -15,3 +15,4 @@ collections: # A list of collections the CMS should be able to edit
         file: 'src/data/homepage.json'
         fields:
           - {label: 'Title', name: 'title', widget: 'string'}
+          - {label: 'Header Image', name: 'headerImage', widget: 'image'}
