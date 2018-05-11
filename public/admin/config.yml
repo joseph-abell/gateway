@@ -14,5 +14,24 @@ collections: # A list of collections the CMS should be able to edit
         name: 'home'
         file: 'src/data/homepage.json'
         fields:
-          - {label: 'Title', name: 'title', widget: 'string'}
-          - {label: 'Header Image', name: 'headerImage', widget: 'image'}
+          - {
+              label: 'Title',
+              name: 'title',
+              widget: 'string'
+            }
+          - {
+              label: 'Header Image',
+              name: 'headerImage',
+              widget: 'image'
+            }
+          - {
+              label: 'Menu Colour',
+              name: 'menuColour',
+              widget: 'select',
+              options: [
+                - {label: 'Red', value: 'red'}
+                - {label: 'Orange', value: 'orange'}
+                - {label: 'Purple', value: 'purple'}
+                - {label: 'Green', value: 'green'}
+              ]
+            }
