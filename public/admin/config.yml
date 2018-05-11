@@ -26,5 +26,15 @@ collections: # A list of collections the CMS should be able to edit
             options:
               - {label: 'Red', value: 'red'}
               - {label: 'Orange', value: 'orange'}
-              - {label: 'Purple', value: 'purple'} 
+              - {label: 'Purple', value: 'purple'}
               - {label: 'Green', value: 'green'}
+          - label: 'Quotes'
+            name: 'quotes'
+            widget: 'list'
+            fields:
+              - label: 'Quote'
+                name: 'quote'
+                widget: 'string'
+              - label: 'Author'
+                name: 'author'
+                widget: 'string'
