@@ -28,10 +28,9 @@ collections: # A list of collections the CMS should be able to edit
               label: 'Menu Colour',
               name: 'menuColour',
               widget: 'select',
-              options: [
+              options:
                 - {label: 'Red', value: 'red'},
                 - {label: 'Orange', value: 'orange'},
-                - {label: 'Purple', value: 'purple'},
+                - {label: 'Purple', value: 'purple'}, 
                 - {label: 'Green', value: 'green'}
-              ]
             }
