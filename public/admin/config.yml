@@ -12,6 +12,6 @@ collections: # A list of collections the CMS should be able to edit
     files:
       - label: 'Home'
         name: 'home'
-        file: 'src/data/pages/homepage.json'
+        file: 'src/data/homepage.json'
         fields:
           - {label: 'Title', name: 'title', widget: 'string'}
