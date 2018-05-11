@@ -5,7 +5,7 @@ import data from '../../data/homepage.json'
 console.log(data);
 
 const Home = () => (
-  <HeaderContainer text={data.title} image='' />
+  <HeaderContainer text={data.title} image={data.headerImage} />
 );
 
 export default Home;
