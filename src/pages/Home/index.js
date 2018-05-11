@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderContainer from '../../components/HeaderContainer'
 
 const Home = () => (
-  <HeaderContainer text='Welcome' image='' />
+  <HeaderContainer text='hi' image='' />
 );
 
 export default Home;
