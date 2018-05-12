@@ -18,6 +18,12 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Link'
         name: 'link'
         widget: 'string'
+      - label: 'Parent Menu Item'
+        name: 'parentMenuItem'
+        widget: 'relation'
+        collection: 'menu'
+        searchField: ['text']
+        valueField: 'text'
   - label: 'Pages'
     name: 'pages'
     files:
