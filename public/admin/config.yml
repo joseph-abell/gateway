@@ -16,6 +16,22 @@ collections: # A list of collections the CMS should be able to edit
       - {label: 'Title', name: 'title', widget: 'string'}
       - {label: 'Link', name: 'link', widget: 'string'}
       # - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['title'], valueField: 'title', required: false}
+  - label: 'Footer'
+    name: 'footer'
+    folder: 'src/data/footer'
+    extension: 'json'
+    create: false
+    fields:
+      - label: 'Address'
+        name: 'address'
+        widget: 'object'
+        fields: 
+          - label: 'Name'
+            name: 'name'
+            widget: 'string'
+          - label: 'Address'
+            name: 'address'
+            widget: 'text'    
   - label: 'Pages'
     name: 'pages'
     files:
