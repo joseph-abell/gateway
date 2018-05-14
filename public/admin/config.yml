@@ -10,6 +10,7 @@ collections: # A list of collections the CMS should be able to edit
   - label: 'Menu'
     name: 'menu'
     folder: 'src/data/menu'
+    extension: 'json'
     create: true
     fields:
       - {label: 'Title', name: 'title', widget: 'string'}
