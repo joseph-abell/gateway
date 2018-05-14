@@ -14,7 +14,7 @@ collections: # A list of collections the CMS should be able to edit
     fields:
       - {label: 'Title', name: 'title', widget: 'string'}
       - {label: 'Link', name: 'link', widget: 'string'}
-      - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['text'], valueField: 'text', required: false}
+      - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['title'], valueField: 'title', required: false}
   - label: 'Pages'
     name: 'pages'
     files:
