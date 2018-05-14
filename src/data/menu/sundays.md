@@ -1,6 +1,0 @@
----
-title: Sundays
-link: /what-we-do/sundays
-parent: What We Do
----
-
