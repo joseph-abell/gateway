@@ -1,5 +1,19 @@
 {
   "title": "Welcome",
   "headerImage": "/uploads/church_family.jpg",
-  "menuColour": "red"
+  "menuColour": "red",
+  "cta": [
+    {
+      "title": "Sundays",
+      "deck": "We gather every Sunday at 10.40am at the Gateway Centre. More details here.",
+      "image": "/uploads/img_0072-small-.jpg",
+      "colour": "green"
+    }
+  ],
+  "quotes": [
+    {
+      "quote": "I've been made to feel so welcome at Gateway.",
+      "author": "Karen"
+    }
+  ]
 }
