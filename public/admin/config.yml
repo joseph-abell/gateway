@@ -37,6 +37,27 @@ collections: # A list of collections the CMS should be able to edit
               - {label: 'Orange', value: 'orange'}
               - {label: 'Purple', value: 'purple'}
               - {label: 'Green', value: 'green'}
+          - label: 'Call To Actions'
+            name: 'cta'
+            widget: 'list'
+            fields:
+              - label: 'Title'
+                name: 'title'
+                widget: 'string'
+              - label: 'Description'
+                name: 'deck'
+                widget: 'text'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Colour'
+                name: 'colour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
           - label: 'Quotes'
             name: 'quotes'
             widget: 'list'
