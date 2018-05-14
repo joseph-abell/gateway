@@ -71,3 +71,17 @@ collections: # A list of collections the CMS should be able to edit
               - label: 'Author'
                 name: 'author'
                 widget: 'string'
+          - label: 'Description'
+            name: 'deck'
+            widget: 'text'
+          - label: 'Colour'
+            name: 'colour'
+            widget: 'select'
+            options:
+              - {label: 'Red', value: 'red'}
+              - {label: 'Orange', value: 'orange'}
+              - {label: 'Purple', value: 'purple'}
+              - {label: 'Green', value: 'green'}
+          - label: 'Image'
+            name: 'image'
+            widget: 'image'
