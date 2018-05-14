@@ -12,12 +12,9 @@ collections: # A list of collections the CMS should be able to edit
     folder: 'src/data/menu'
     create: true
     fields:
-      - label: 'Text'
-        name: 'text'
-        widget: 'string'
-      - label: 'Link'
-        name: 'link'
-        widget: 'string'
+      - {label: 'Title', name: 'title', widget: 'string'}
+      - {label: 'Link', name: 'link', widget: 'string'}
+      - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['text'], valueField: 'text', required: false}
   - label: 'Pages'
     name: 'pages'
     files:
