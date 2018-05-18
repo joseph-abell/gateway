@@ -57,7 +57,22 @@ collections: # A list of collections the CMS should be able to edit
           - label: 'Email'
             name: 'email'
             widget: 'string'
-
+      - label: 'Social Media'
+        name: 'socialMedia'
+        widget: 'object'
+          - label: 'Title'
+            name: 'title'
+            widget: 'string'
+          - label: 'List'
+            name: 'list'
+            widget: 'list'
+            fields:
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Link'
+                name: 'link'
+                widget: 'string'  
 
   - label: 'Pages'
     name: 'pages'
