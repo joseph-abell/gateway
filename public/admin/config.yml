@@ -44,6 +44,21 @@ collections: # A list of collections the CMS should be able to edit
           - label: 'Postcode'
             name: 'postcode'
             widget: 'string'
+      - label: 'Contact'
+        name: 'contact'
+        widget: 'object'
+        fields:
+          - label: 'Title'
+            name: 'title'
+            widget: 'string'
+          - label: 'Contact number'
+            name: 'contactNumber'
+            widget: 'string'
+          - label: 'Email'
+            name: 'email'
+            widget: 'string'
+
+
   - label: 'Pages'
     name: 'pages'
     files:
