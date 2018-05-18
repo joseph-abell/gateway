@@ -2,6 +2,9 @@
   "title": "Site Footer",
   "address": {
     "name": "Gateway Church",
-    "address": "Gateway Centre\nFront Street, York\nYO24 3BZ"
+    "addressLine1": "Gateway Centre",
+    "addressLine2": "Front Street",
+    "city": "York",
+    "postcode": "YO24 3BZ"
   }
 }
