@@ -60,6 +60,7 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Social Media'
         name: 'socialMedia'
         widget: 'object'
+        fields:
           - label: 'Title'
             name: 'title'
             widget: 'string'
