@@ -97,22 +97,26 @@ collections: # A list of collections the CMS should be able to edit
     files:
       - label: 'Home'
         name: 'home'
-        file: 'src/data/homepage.json'
+        file: 'src/data/pages/homepage.json'
         fields:
-          - label: 'Title'
-            name: 'title'
-            widget: 'string'
-          - label: 'Header Image'
-            name: 'headerImage'
-            widget: 'image'
-          - label: 'Menu Colour'
-            name: 'menuColour'
-            widget: 'select'
-            options:
-              - {label: 'Red', value: 'red'}
-              - {label: 'Orange', value: 'orange'}
-              - {label: 'Purple', value: 'purple'}
-              - {label: 'Green', value: 'green'}
+          - label: 'Header'
+            name: 'header'
+            widget: 'object'
+            fields:
+              - label: 'Title'
+                name: 'title'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Menu Colour'
+                name: 'menuColour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
           - label: 'Call To Actions'
             name: 'cta'
             widget: 'list'
@@ -161,3 +165,48 @@ collections: # A list of collections the CMS should be able to edit
           - label: 'Image'
             name: 'image'
             widget: 'image'
+      - label: 'Who We Are'
+        name: 'whoWeAre'
+        file: 'src/data/pages/who-we-are.json'
+        fields:
+          - label: 'Header'
+            name: 'header'
+            widget: 'object'
+            fields:
+              - label: 'Title'
+                name: 'title'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Menu Colour'
+                name: 'menuColour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
+          - label: 'Starter Image'
+            name: 'starterImage'
+            widget: 'image'
+          - label: 'Description'
+            name: 'deck'
+            widget: 'object'
+            fields: 
+              - label: 'Title'
+                name: 'title'
+                widget: 'text'
+              - label: 'Paragraph'
+                name: 'paragraph'
+                widget: 'text'
+              - label: 'Colour'
+                name: 'colour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
+
+
