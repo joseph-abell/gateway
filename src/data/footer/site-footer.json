@@ -6,5 +6,30 @@
     "addressLine2": "Front Street",
     "city": "York",
     "postcode": "YO24 3BZ"
-  }
+  },
+  "contact": {
+    "title": "Contact",
+    "contactNumber": "01904 781983",
+    "email": "office@gatewaychurch.co.uk"
+  },
+  "socialMedia": {
+    "title": "Connect",
+    "list": [
+      {
+        "image": "/uploads/church_family.jpg",
+        "link": "https://facebook.com/gatewayyork"
+      }
+    ]
+  },
+  "credits": [
+    {
+      "role": "Design",
+      "links": [
+        {
+          "name": "Dave Rax",
+          "link": "http://www.daverax.co.uk"
+        }
+      ]
+    }
+  ]
 }
