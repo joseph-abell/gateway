@@ -209,4 +209,3 @@ collections: # A list of collections the CMS should be able to edit
                   - {label: 'Purple', value: 'purple'}
                   - {label: 'Green', value: 'green'}
 
-
