@@ -223,19 +223,44 @@ collections: # A list of collections the CMS should be able to edit
                 name: 'content'
                 widget: 'object'
                 fields:
-                  - label: 'Description'
-                    name: 'deck'
-                    widget: 'text'
-                    required: false
-                  - label: 'Image'
-                    name: 'image'
-                    widget: 'image'
-                    required: false
-                  - label: 'Colour'
-                    name: 'colour'
-                    widget: 'select'
-                    options:
-                      - {label: 'Red', value: 'red'}
-                      - {label: 'Orange', value: 'orange'}
-                      - {label: 'Purple', value: 'purple'}
-                      - {label: 'Green', value: 'green'}
+                  - label: 'Left'
+                    name: 'left'
+                    widget: 'object'
+                    fields:
+                      - label: 'Description'
+                        name: 'deck'
+                        widget: 'text'
+                        required: false
+                      - label: 'Image'
+                        name: 'image'
+                        widget: 'image'
+                        required: false
+                      - label: 'Colour'
+                        name: 'colour'
+                        widget: 'select'
+                        options:
+                          - {label: 'Red', value: 'red'}
+                          - {label: 'Orange', value: 'orange'}
+                          - {label: 'Purple', value: 'purple'}
+                          - {label: 'Green', value: 'green'}
+                  - label: 'Right'
+                    name: 'right'
+                    widget: 'object'
+                    fields:
+                      - label: 'Description'
+                        name: 'deck'
+                        widget: 'text'
+                        required: false
+                      - label: 'Image'
+                        name: 'image'
+                        widget: 'image'
+                        required: false
+                      - label: 'Colour'
+                        name: 'colour'
+                        widget: 'select'
+                        options:
+                          - {label: 'Red', value: 'red'}
+                          - {label: 'Orange', value: 'orange'}
+                          - {label: 'Purple', value: 'purple'}
+                          - {label: 'Green', value: 'green'}
+                    
