@@ -9,13 +9,19 @@ public_folder: "/uploads"
 collections: # A list of collections the CMS should be able to edit
   - label: 'Menu'
     name: 'menu'
-    file: 'src/data/menu.json'
     extension: 'json'
-    create: true
-    fields:
-      - {label: 'Title', name: 'title', widget: 'string'}
-      - {label: 'Link', name: 'link', widget: 'string'}
-      # - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['title'], valueField: 'title', required: false}
+    files:
+      - label: 'Menu'
+        name: 'menu'
+        file: 'src/data/menu.json'
+        fields:
+          - label: 'Menu Item'
+            name: 'menuItem'
+            widget: 'list'
+            fields:
+              - {label: 'Title', name: 'title', widget: 'string'}
+              - {label: 'Link', name: 'link', widget: 'string'}
+              # - {label: 'Parent', name: 'parent', widget: 'relation', collection: 'menu', searchField: ['title'], valueField: 'title', required: false}
   - label: 'Footer'
     name: 'footer'
     folder: 'src/data/footer'
@@ -91,7 +97,6 @@ collections: # A list of collections the CMS should be able to edit
               - label: 'Link'
                 name: 'link'
                 widget: 'string'
-
   - label: 'Pages'
     name: 'pages'
     files:
