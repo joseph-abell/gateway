@@ -9,7 +9,7 @@ public_folder: "/uploads"
 collections: # A list of collections the CMS should be able to edit
   - label: 'Menu'
     name: 'menu'
-    folder: 'src/data/menu'
+    file: 'src/data/menu.json'
     extension: 'json'
     create: true
     fields:
