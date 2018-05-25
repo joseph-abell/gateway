@@ -223,13 +223,13 @@ collections: # A list of collections the CMS should be able to edit
                 name: 'content'
                 widget: 'object'
                 fields:
-                  - label: 'Image'
-                    name: 'image'
-                    widget: 'image'
-                    required: false
                   - label: 'Description'
                     name: 'deck'
                     widget: 'text'
+                    required: false
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
                     required: false
                   - label: 'Colour'
                     name: 'colour'
