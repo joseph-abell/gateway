@@ -215,4 +215,33 @@ collections: # A list of collections the CMS should be able to edit
                   - {label: 'Orange', value: 'orange'}
                   - {label: 'Purple', value: 'purple'}
                   - {label: 'Green', value: 'green'}
-
+          - label: 'Contents'
+            name: 'contents'
+            widget: 'list'
+            fields:
+              - label: 'Content'
+                name: 'content'
+                widget: 'object'
+                fields:
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
+                    required: false
+                  - label: 'Description'
+                    name: 'deck'
+                    widget: 'text'
+                    required: false
+                  - label: 'Colour'
+                    name: 'colour'
+                    widget: 'select'
+                    options:
+                      - {label: 'Red', value: 'red'}
+                      - {label: 'Orange', value: 'orange'}
+                      - {label: 'Purple', value: 'purple'}
+                      - {label: 'Green', value: 'green'}
+                  - label: 'Text Position'
+                    name: 'textPosition'
+                    widget: 'select'
+                    options:
+                      - {label: 'Left', name: 'left'}
+                      - {label: 'Right', name: 'right'}
