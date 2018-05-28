@@ -239,7 +239,7 @@ collections: # A list of collections the CMS should be able to edit
                 fields:
                   - label: 'Description'
                     name: 'deck'
-                    widget: 'text'
+                    widget: 'markdown'
                     required: false
                   - label: 'Image'
                     name: 'image'
