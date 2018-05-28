@@ -279,7 +279,7 @@ collections: # A list of collections the CMS should be able to edit
         name: 'optionalContent'
         widget: 'select'
         default: 'noContent'
-        required: 'false'
+        required: false
         options:
           - label: 'No Content'
             value: 'noContent'
@@ -289,3 +289,35 @@ collections: # A list of collections the CMS should be able to edit
             value: 'people'
           - label: 'Words'
             value: 'words'
+  - label: 'Events' 
+    name: 'events'
+    folder: 'src/data/events'
+    create: true
+    fields:
+      - label: 'Header'
+        name: 'header'
+        widget: 'object'
+        fields: 
+          - label: 'Title'
+            name: 'title'
+            widget: 'string'
+          - label: 'Image'
+            name: 'image'
+            widget: 'image'
+          - label: 'Menu Colour'
+            name: 'menuColour'
+            widget: 'select'
+            options:
+              - {label: 'Red', value: 'red'}
+              - {label: 'Orange', value: 'orange'}
+              - {label: 'Purple', value: 'purple'}
+              - {label: 'Green', value: 'green'}
+      - label: 'Date'
+        name: 'date'
+        widget: 'date'
+      - label: 'Time'
+        name: 'time'
+        widget: 'datetime'
+      - label: 'Description'
+        name: 'deck'
+        widget: 'markdown'
