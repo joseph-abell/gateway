@@ -178,6 +178,9 @@ collections: # A list of collections the CMS should be able to edit
     folder: 'src/data/pages'
     create: true
     fields:
+      - label: 'Title'
+        name: 'title'
+        widget: 'string'
       - label: 'Header'
         name: 'header'
         widget: 'object'
