@@ -321,3 +321,46 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Description'
         name: 'deck'
         widget: 'markdown'
+  - label: 'People'
+    name: 'people'
+    folder: 'src/data/people'
+    create: true
+    fields:
+      - label: 'Title'
+        name: 'title'
+        widget: 'string'
+      - label: 'Description'
+        name: 'deck'
+        widget: 'markdown'
+      - label: 'Menu Colour'
+        name: 'menuColour'
+        widget: 'select'
+        options:
+          - {label: 'Red', value: 'red'}
+          - {label: 'Orange', value: 'orange'}
+          - {label: 'Purple', value: 'purple'}
+          - {label: 'Green', value: 'green'}
+      - label: 'Image'
+        name: 'image'
+        widget: 'image'
+      - label: 'Email'
+        name: 'email'
+        widget: 'string'
+      - label: 'Roles'
+        name: 'roles'
+        widget: 'object'
+        fields:
+          - label: 'All'
+            name: 'all'
+            widget: 'select'
+            default: 'true'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
+          - label: 'Elders'
+            name: 'elders'
+            widget: 'select'
+            default: 'false'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
