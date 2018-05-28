@@ -273,4 +273,17 @@ collections: # A list of collections the CMS should be able to edit
                       - {label: 'Orange', value: 'orange'}
                       - {label: 'Purple', value: 'purple'}
                       - {label: 'Green', value: 'green'}
-                    
+      - label: 'Optional Content'
+        name: 'optionalContent'
+        widget: 'select'
+        default: 'noContent'
+        required: 'false'
+        options:
+          - label: 'No Content'
+            value: 'noContent'
+          - label: 'Events'
+            value: 'events'
+          - label: 'People'
+            value: 'people'
+          - label: 'Words'
+            value: 'words'
