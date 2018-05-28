@@ -196,13 +196,14 @@ collections: # A list of collections the CMS should be able to edit
               - {label: 'Orange', value: 'orange'}
               - {label: 'Purple', value: 'purple'}
               - {label: 'Green', value: 'green'}
-      - label: 'Title'
-        name: 'title'
+      - label: 'Subtitle'
+        name: 'subtitle'
         widget: 'object'
         fields:
-          - label: 'Title'
-            name: 'title'
+          - label: 'Subtitle'
+            name: 'subtitle'
             widget: 'string'
+            required: false
           - label: 'Image'
             name: 'image'
             widget: 'image'
