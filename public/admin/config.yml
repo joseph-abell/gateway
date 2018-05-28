@@ -207,6 +207,7 @@ collections: # A list of collections the CMS should be able to edit
           - label: 'Image'
             name: 'image'
             widget: 'image'
+            required: false
       - label: 'Description'
         name: 'deck'
         widget: 'object'
