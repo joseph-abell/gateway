@@ -7,6 +7,80 @@ media_folder: "public/uploads" # Folder where user uploaded files should go
 public_folder: "/uploads"
 
 collections: # A list of collections the CMS should be able to edit
+  - label: 'Homepage'
+    name: 'homepage'
+    extension: 'json'
+    files:
+      - label: 'Homepage'
+        name: 'homepage'
+        file: 'src/data/homepage.json'
+        fields:
+          - label: 'Header'
+            name: 'header'
+            widget: 'object'
+            fields:
+              - label: 'Title'
+                name: 'title'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Menu Colour'
+                name: 'menuColour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
+          - label: 'Call To Actions'
+            name: 'cta'
+            widget: 'list'
+            fields:
+              - label: 'Title'
+                name: 'title'
+                widget: 'string'
+              - label: 'Description'
+                name: 'deck'
+                widget: 'text'
+              - label: 'Link'
+                name: 'link'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Colour'
+                name: 'colour'
+                widget: 'select'
+                options:
+                  - {label: 'Red', value: 'red'}
+                  - {label: 'Orange', value: 'orange'}
+                  - {label: 'Purple', value: 'purple'}
+                  - {label: 'Green', value: 'green'}
+          - label: 'Quotes'
+            name: 'quotes'
+            widget: 'list'
+            fields:
+              - label: 'Quote'
+                name: 'quote'
+                widget: 'string'
+              - label: 'Author'
+                name: 'author'
+                widget: 'string'
+          - label: 'Description'
+            name: 'deck'
+            widget: 'text'
+          - label: 'Colour'
+            name: 'colour'
+            widget: 'select'
+            options:
+              - {label: 'Red', value: 'red'}
+              - {label: 'Orange', value: 'orange'}
+              - {label: 'Purple', value: 'purple'}
+              - {label: 'Green', value: 'green'}
+          - label: 'Image'
+            name: 'image'
+            widget: 'image'
   - label: 'Menu'
     name: 'menu'
     extension: 'json'
@@ -101,65 +175,46 @@ collections: # A list of collections the CMS should be able to edit
                     widget: 'string'
   - label: 'Pages'
     name: 'pages'
-    files:
-      - label: 'Home'
-        name: 'home'
-        file: 'src/data/pages/homepage.json'
+    folder: 'src/data/pages'
+    create: true
+    fields:
+      - label: 'Header'
+        name: 'header'
+        widget: 'object'
         fields:
-          - label: 'Header'
-            name: 'header'
-            widget: 'object'
-            fields:
-              - label: 'Title'
-                name: 'title'
-                widget: 'string'
-              - label: 'Image'
-                name: 'image'
-                widget: 'image'
-              - label: 'Menu Colour'
-                name: 'menuColour'
-                widget: 'select'
-                options:
-                  - {label: 'Red', value: 'red'}
-                  - {label: 'Orange', value: 'orange'}
-                  - {label: 'Purple', value: 'purple'}
-                  - {label: 'Green', value: 'green'}
-          - label: 'Call To Actions'
-            name: 'cta'
-            widget: 'list'
-            fields:
-              - label: 'Title'
-                name: 'title'
-                widget: 'string'
-              - label: 'Description'
-                name: 'deck'
-                widget: 'text'
-              - label: 'Link'
-                name: 'link'
-                widget: 'string'
-              - label: 'Image'
-                name: 'image'
-                widget: 'image'
-              - label: 'Colour'
-                name: 'colour'
-                widget: 'select'
-                options:
-                  - {label: 'Red', value: 'red'}
-                  - {label: 'Orange', value: 'orange'}
-                  - {label: 'Purple', value: 'purple'}
-                  - {label: 'Green', value: 'green'}
-          - label: 'Quotes'
-            name: 'quotes'
-            widget: 'list'
-            fields:
-              - label: 'Quote'
-                name: 'quote'
-                widget: 'string'
-              - label: 'Author'
-                name: 'author'
-                widget: 'string'
-          - label: 'Description'
-            name: 'deck'
+          - label: 'Title'
+            name: 'title'
+            widget: 'string'
+          - label: 'Image'
+            name: 'image'
+            widget: 'image'
+          - label: 'Menu Colour'
+            name: 'menuColour'
+            widget: 'select'
+            options:
+              - {label: 'Red', value: 'red'}
+              - {label: 'Orange', value: 'orange'}
+              - {label: 'Purple', value: 'purple'}
+              - {label: 'Green', value: 'green'}
+      - label: 'Title'
+        name: 'title'
+        widget: 'object'
+        fields:
+          - label: 'Title'
+            name: 'title'
+            widget: 'string'
+          - label: 'Image'
+            name: 'image'
+            widget: 'image'
+      - label: 'Description'
+        name: 'deck'
+        widget: 'object'
+        fields: 
+          - label: 'Title'
+            name: 'title'
+            widget: 'text'
+          - label: 'Paragraph'
+            name: 'paragraph'
             widget: 'text'
           - label: 'Colour'
             name: 'colour'
@@ -169,105 +224,52 @@ collections: # A list of collections the CMS should be able to edit
               - {label: 'Orange', value: 'orange'}
               - {label: 'Purple', value: 'purple'}
               - {label: 'Green', value: 'green'}
-          - label: 'Image'
-            name: 'image'
-            widget: 'image'
-      - label: 'Who We Are'
-        name: 'whoWeAre'
-        file: 'src/data/pages/who-we-are.json'
+      - label: 'Contents'
+        name: 'contents'
+        widget: 'list'
         fields:
-          - label: 'Header'
-            name: 'header'
+          - label: 'Content'
+            name: 'content'
             widget: 'object'
             fields:
-              - label: 'Title'
-                name: 'title'
-                widget: 'string'
-              - label: 'Image'
-                name: 'image'
-                widget: 'image'
-              - label: 'Menu Colour'
-                name: 'menuColour'
-                widget: 'select'
-                options:
-                  - {label: 'Red', value: 'red'}
-                  - {label: 'Orange', value: 'orange'}
-                  - {label: 'Purple', value: 'purple'}
-                  - {label: 'Green', value: 'green'}
-          - label: 'Title'
-            name: 'title'
-            widget: 'object'
-            fields:
-              - label: 'Title'
-                name: 'title'
-                widget: 'string'
-              - label: 'Image'
-                name: 'image'
-                widget: 'image'
-          - label: 'Description'
-            name: 'deck'
-            widget: 'object'
-            fields: 
-              - label: 'Title'
-                name: 'title'
-                widget: 'text'
-              - label: 'Paragraph'
-                name: 'paragraph'
-                widget: 'text'
-              - label: 'Colour'
-                name: 'colour'
-                widget: 'select'
-                options:
-                  - {label: 'Red', value: 'red'}
-                  - {label: 'Orange', value: 'orange'}
-                  - {label: 'Purple', value: 'purple'}
-                  - {label: 'Green', value: 'green'}
-          - label: 'Contents'
-            name: 'contents'
-            widget: 'list'
-            fields:
-              - label: 'Content'
-                name: 'content'
+              - label: 'Left'
+                name: 'left'
                 widget: 'object'
                 fields:
-                  - label: 'Left'
-                    name: 'left'
-                    widget: 'object'
-                    fields:
-                      - label: 'Description'
-                        name: 'deck'
-                        widget: 'text'
-                        required: false
-                      - label: 'Image'
-                        name: 'image'
-                        widget: 'image'
-                        required: false
-                      - label: 'Colour'
-                        name: 'colour'
-                        widget: 'select'
-                        options:
-                          - {label: 'Red', value: 'red'}
-                          - {label: 'Orange', value: 'orange'}
-                          - {label: 'Purple', value: 'purple'}
-                          - {label: 'Green', value: 'green'}
-                  - label: 'Right'
-                    name: 'right'
-                    widget: 'object'
-                    fields:
-                      - label: 'Description'
-                        name: 'deck'
-                        widget: 'markdown'
-                        required: false
-                      - label: 'Image'
-                        name: 'image'
-                        widget: 'image'
-                        required: false
-                      - label: 'Colour'
-                        name: 'colour'
-                        widget: 'select'
-                        options:
-                          - {label: 'Red', value: 'red'}
-                          - {label: 'Orange', value: 'orange'}
-                          - {label: 'Purple', value: 'purple'}
-                          - {label: 'Green', value: 'green'}
+                  - label: 'Description'
+                    name: 'deck'
+                    widget: 'text'
+                    required: false
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
+                    required: false
+                  - label: 'Colour'
+                    name: 'colour'
+                    widget: 'select'
+                    options:
+                      - {label: 'Red', value: 'red'}
+                      - {label: 'Orange', value: 'orange'}
+                      - {label: 'Purple', value: 'purple'}
+                      - {label: 'Green', value: 'green'}
+              - label: 'Right'
+                name: 'right'
+                widget: 'object'
+                fields:
+                  - label: 'Description'
+                    name: 'deck'
+                    widget: 'markdown'
+                    required: false
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
+                    required: false
+                  - label: 'Colour'
+                    name: 'colour'
+                    widget: 'select'
+                    options:
+                      - {label: 'Red', value: 'red'}
+                      - {label: 'Orange', value: 'orange'}
+                      - {label: 'Purple', value: 'purple'}
+                      - {label: 'Green', value: 'green'}
                     
