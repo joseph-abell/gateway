@@ -199,18 +199,18 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Subtitle'
         name: 'subtitle'
         widget: 'object'
+        required: false
         fields:
           - label: 'Subtitle'
             name: 'subtitle'
             widget: 'string'
-            required: false
           - label: 'Image'
             name: 'image'
             widget: 'image'
-            required: false
       - label: 'Description'
         name: 'deck'
         widget: 'object'
+        required: false
         fields: 
           - label: 'Title'
             name: 'title'
