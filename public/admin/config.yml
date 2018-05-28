@@ -364,3 +364,31 @@ collections: # A list of collections the CMS should be able to edit
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
+          - label: 'Lifegroup Leaders'
+            name: 'lifegroupLeaders'
+            widget: 'select'
+            default: 'false'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
+          - label: 'Ministry Leaders'
+            name: 'ministryLeaders'
+            widget: 'select'
+            default: 'false'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
+          - label: 'Staff'
+            name: 'staff'
+            widget: 'select'
+            default: 'false'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
+          - label: 'Trustees'
+            name: 'trustees'
+            widget: 'select'
+            default: 'false'
+            options:
+              - { label: 'Yes', value: 'true' }
+              - { label: 'No', value: 'false' }
