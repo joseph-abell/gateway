@@ -229,6 +229,7 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Contents'
         name: 'contents'
         widget: 'list'
+        required: false
         fields:
           - label: 'Content'
             name: 'content'
