@@ -346,8 +346,14 @@ collections: # A list of collections the CMS should be able to edit
       - label: 'Email'
         name: 'email'
         widget: 'string'
-      - label: 'Roles'
-        name: 'roles'
+      - label: 'Phone Number'
+        name: 'number'
+        widget: 'string'
+      - label: 'Title / Role'
+        name: 'titleRole'
+        widget: string
+      - label: 'Filters'
+        name: 'filters'
         widget: 'object'
         fields:
           - label: 'All'
