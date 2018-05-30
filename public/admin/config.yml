@@ -347,7 +347,7 @@ collections: # A list of collections the CMS should be able to edit
         name: 'email'
         widget: 'string'
       - label: 'Phone Number'
-        name: 'number'
+        name: 'phoneNumber'
         widget: 'string'
       - label: 'Title / Role'
         name: 'titleRole'
