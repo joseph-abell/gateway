@@ -353,42 +353,42 @@ collections: # A list of collections the CMS should be able to edit
           - label: 'All'
             name: 'all'
             widget: 'select'
-            default: 'true'
+            default: 'Yes'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
           - label: 'Elders'
             name: 'elders'
             widget: 'select'
-            default: 'false'
+            default: 'No'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
           - label: 'Lifegroup Leaders'
             name: 'lifegroupLeaders'
             widget: 'select'
-            default: 'false'
+            default: 'No'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
           - label: 'Ministry Leaders'
             name: 'ministryLeaders'
             widget: 'select'
-            default: 'false'
+            default: 'No'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
           - label: 'Staff'
             name: 'staff'
             widget: 'select'
-            default: 'false'
+            default: 'No'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
           - label: 'Trustees'
             name: 'trustees'
             widget: 'select'
-            default: 'false'
+            default: 'No'
             options:
               - { label: 'Yes', value: 'true' }
               - { label: 'No', value: 'false' }
