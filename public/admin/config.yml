@@ -89,8 +89,8 @@ collections: # A list of collections the CMS should be able to edit
         name: 'menu'
         file: 'src/data/menu.json'
         fields:
-          - label: 'Menu Item'
-            name: 'menuItem'
+          - label: 'Menu'
+            name: 'menu'
             widget: 'list'
             fields:
               - {label: 'Title', name: 'title', widget: 'string'}
