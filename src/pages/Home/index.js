@@ -7,8 +7,7 @@ import menuData from '../../data/menu.json';
 const Home = () => (
   <div>
     <HeaderContainer text={homepageData.title} image={homepageData.headerImage} />
-    <Menu />
-    { console.log(menuData) }
+    <Menu menu={menuData.menu} menuColour={homepageData.menuColour} />
   </div>
 );
 

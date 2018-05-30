@@ -1,8 +1,20 @@
 {
   "menu": [
     {
-      "title": "hi",
-      "link": "hey"
+      "title": "Who We Are",
+      "link": "/who-we-are"
+    },
+    {
+      "title": "What We Do",
+      "link": "/what-we-do"
+    },
+    {
+      "title": "Events",
+      "link": "events"
+    },
+    {
+      "title": "People",
+      "link": "/people"
     }
   ]
 }
