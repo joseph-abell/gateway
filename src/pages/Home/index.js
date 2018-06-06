@@ -14,12 +14,31 @@ const ctaMap = ({ link, title, deck, image }) => (
   </a>
 );
 
+const quotesMap = ({quote, author}) => (
+  <div>
+    <blockquote>
+      <p>{quote}</p>
+    </blockquote>
+    <p>{author}</p>
+  </div>
+);
+
+/* 
+  <div>
+    <blockquote>
+      <p>I Love Gateway!</p>
+    </blockquote>
+    <p>Janet</p>
+  </div>
+*/
+
 const Home = () => {
   return (
     <div>
       <HeaderContainer text={homepageData.title} image={homepageData.headerImage} />
       <Menu menu={menuData.menu} menuColour={homepageData.menuColour} />
       { homepageData.cta.map(ctaMap) }
+      { homepageData.quotes.map(quotesMap) }
     </div>
   );
 };
