@@ -23,15 +23,6 @@ const quotesMap = ({quote, author}) => (
   </div>
 );
 
-/* 
-  <div>
-    <blockquote>
-      <p>I Love Gateway!</p>
-    </blockquote>
-    <p>Janet</p>
-  </div>
-*/
-
 const Home = () => {
   return (
     <div>
@@ -39,6 +30,18 @@ const Home = () => {
       <Menu menu={menuData.menu} menuColour={homepageData.menuColour} />
       { homepageData.cta.map(ctaMap) }
       { homepageData.quotes.map(quotesMap) }
+      <div>
+        <p className={homepageData.deck.colour}>
+          {homepageData.deck.text}
+        </p>
+        <div
+          className={homepageData.deck.colour}
+          style={{
+            backgroundImage: 'url(' + homepageData.deck.image + ')',
+            height: '500px'
+          }}
+        />
+      </div>
     </div>
   );
 };
