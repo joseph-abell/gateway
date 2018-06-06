@@ -23,25 +23,43 @@ const quotesMap = ({quote, author}) => (
   </div>
 );
 
+const Description = ({colour, text, image}) => (
+  <div>
+    <p className={colour}>
+      {text}
+    </p>
+    <div
+      className={colour}
+      style={{
+        backgroundImage: 'url(' + image + ')',
+        height: '500px'
+      }}
+    />
+  </div>
+);
+
 const Home = () => {
+  const {
+    deck,
+    title,
+    headerImage,
+    menuColour,
+    cta,
+    quotes
+  } = homepageData;
+  const {colour, text, image} = deck;
+
   return (
     <div>
-      <HeaderContainer text={homepageData.title} image={homepageData.headerImage} />
-      <Menu menu={menuData.menu} menuColour={homepageData.menuColour} />
-      { homepageData.cta.map(ctaMap) }
-      { homepageData.quotes.map(quotesMap) }
-      <div>
-        <p className={homepageData.deck.colour}>
-          {homepageData.deck.text}
-        </p>
-        <div
-          className={homepageData.deck.colour}
-          style={{
-            backgroundImage: 'url(' + homepageData.deck.image + ')',
-            height: '500px'
-          }}
-        />
-      </div>
+      <HeaderContainer text={title} image={headerImage} />
+      <Menu menu={menuData.menu} menuColour={menuColour} />
+      { cta.map(ctaMap) }
+      { quotes.map(quotesMap) }
+      <Description
+        colour={colour}
+        text={text}
+        image={image}
+      />
     </div>
   );
 };
