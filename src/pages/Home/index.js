@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderContainer from '../../components/HeaderContainer';
+import Header from '../../components/HeaderContainer';
 import Menu from '../../components/Menu';
 import homepageData from '../../data/homepage.json';
 import menuData from '../../data/menu.json';
@@ -51,7 +51,7 @@ const Home = () => {
 
   return (
     <div>
-      <HeaderContainer text={title} image={headerImage} />
+      <Header text={title} image={headerImage} />
       <Menu menu={menuData.menu} menuColour={menuColour} />
       { cta.map(ctaMap) }
       { quotes.map(quotesMap) }
