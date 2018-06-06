@@ -6,7 +6,7 @@ import menuData from '../../data/menu.json';
 
 import './style.css';
 
-const ctaMap = ({ link, title, deck, image }) => (
+const CtaMap = ({ link, title, deck, image }) => (
   <a href={link}>
     <h2>{title}</h2>
     <p>{deck}</p>
@@ -14,7 +14,7 @@ const ctaMap = ({ link, title, deck, image }) => (
   </a>
 );
 
-const quotesMap = ({quote, author}) => (
+const QuotesMap = ({quote, author}) => (
   <div>
     <blockquote>
       <p>{quote}</p>
@@ -53,8 +53,8 @@ const Home = () => {
     <div>
       <Header text={title} image={headerImage} />
       <Menu menu={menuData.menu} menuColour={menuColour} />
-      { cta.map(ctaMap) }
-      { quotes.map(quotesMap) }
+      { cta.map(CtaMap) }
+      { quotes.map(QuotesMap) }
       <Description
         colour={colour}
         text={text}
