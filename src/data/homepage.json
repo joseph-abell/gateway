@@ -1,7 +1,9 @@
 {
-  "title": "Welcome",
-  "headerImage": "/uploads/church_family.jpg",
-  "menuColour": "red",
+  "header": {
+    "title": "Welcome",
+    "image": "/uploads/caleb.jpg",
+    "menuColour": "red"
+  },
   "cta": [
     {
       "title": "Sundays",
@@ -38,5 +40,10 @@
       "quote": "3",
       "author": "Joe"
     }
-  ]
+  ],
+  "deck": {
+    "text": "This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. ",
+    "colour": "purple",
+    "image": "/uploads/church_family.jpg"
+  }
 }
