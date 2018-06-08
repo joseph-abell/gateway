@@ -17,4 +17,16 @@ describe('Homepage', () => {
   it('contains a header', () => {
     expect(component.find('HeaderContainer')).toExist();
   });
+
+  it('contains a menu', () => {
+    expect(component.find('Menu')).toExist();
+  });
+
+  it('contains a description', () => {
+    expect(component.find('Description')).toExist();
+  });
+
+  it('contains a footer', () => {
+    expect(component.find('FooterContainer')).toExist();
+  });
 });
