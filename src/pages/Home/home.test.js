@@ -26,6 +26,23 @@ describe('Homepage', () => {
     expect(component.find('Description')).toExist();
   });
 
+  describe('contains a list of call to actions', () => {
+    let ctas;
+
+    beforeEach(() => {
+      ctas = component.find('ul.call-to-actions');
+    });
+
+    it('should have an unorderedList', () => {
+      expect(ctas).toExist();
+    });
+
+    it('should not have any items when there is no data', () => {
+      console.log(ctas.debug());
+      expect(ctas.find('li')).not.toExist();
+    });
+  });
+
   it('contains a footer', () => {
     expect(component.find('FooterContainer')).toExist();
   });

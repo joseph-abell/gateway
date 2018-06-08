@@ -13,7 +13,7 @@ collections: # A list of collections the CMS should be able to edit
     files:
       - label: 'Homepage'
         name: 'homepage'
-        file: 'src/data/homepage.json'
+        file: 'public/data/homepage.json'
         fields:
           - label: 'Header'
             name: 'header'
@@ -91,7 +91,7 @@ collections: # A list of collections the CMS should be able to edit
     files:
       - label: 'Menu'
         name: 'menu'
-        file: 'src/data/menu.json'
+        file: 'public/data/menu.json'
         fields:
           - label: 'Menu'
             name: 'menu'
@@ -179,7 +179,7 @@ collections: # A list of collections the CMS should be able to edit
                     widget: 'string'
   - label: 'Pages'
     name: 'pages'
-    folder: 'src/data/pages'
+    folder: 'public/data/pages'
     create: true
     fields:
       - label: 'Title'
@@ -295,7 +295,7 @@ collections: # A list of collections the CMS should be able to edit
             value: 'words'
   - label: 'Events' 
     name: 'events'
-    folder: 'src/data/events'
+    folder: 'public/data/events'
     create: true
     fields:
       - label: 'Header'
@@ -327,7 +327,7 @@ collections: # A list of collections the CMS should be able to edit
         widget: 'markdown'
   - label: 'People'
     name: 'people'
-    folder: 'src/data/people'
+    folder: 'public/data/people'
     create: true
     fields:
       - label: 'Title'

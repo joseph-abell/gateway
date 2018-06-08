@@ -2,18 +2,21 @@ import React from 'react';
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
-import homepageData from '../../data/homepage.json';
-import menuData from '../../data/menu.json';
 
 import './style.css';
+
+const homepageData = {};
+const menuData = {
+  menu: []
+};
 
 const {
   deck = {},
   title,
   headerImage,
   menuColour,
-  cta,
-  quotes
+  cta = [],
+  quotes = []
 } = homepageData;
 const { colour, text } = deck;
 const deckImage = deck.image;
