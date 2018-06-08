@@ -29,12 +29,12 @@ const CtaMap = ({ link, title, deck, image }, index) => (
 );
 
 const QuotesMap = ({quote, author}, index) => (
-  <div key={index}>
+  <li key={index}>
     <blockquote>
       <p>{quote}</p>
     </blockquote>
     <p>{author}</p>
-  </div>
+  </li>
 );
 
 const Description = ({colour, text, image}) => (
@@ -59,7 +59,9 @@ const Home = () => (
     <ul className='call-to-actions'>
       { cta.map(CtaMap) }
     </ul>
-    { quotes.map(QuotesMap) }
+    <ul className='quotes'>
+      { quotes.map(QuotesMap) }
+    </ul>
     <Description
       colour={colour}
       text={text}
