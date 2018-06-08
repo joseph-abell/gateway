@@ -7,6 +7,17 @@ import menuData from '../../data/menu.json';
 
 import './style.css';
 
+const {
+  deck = {},
+  title,
+  headerImage,
+  menuColour,
+  cta,
+  quotes
+} = homepageData;
+const { colour, text } = deck;
+const deckImage = deck.image;
+
 const CtaMap = ({ link, title, deck, image }, index) => (
   <li key={index}>
     <a href={link}>
@@ -41,37 +52,21 @@ const Description = ({colour, text, image}) => (
   </div>
 );
 
-const Home = () => {
-  const {
-    deck = {},
-    title,
-    headerImage,
-    menuColour,
-    cta,
-    quotes
-  } = homepageData;
-  const {
-    colour,
-    text,
-    image
-  } = deck;
-
-  return (
-    <div>
-      <Header text={title} image={headerImage} />
-      <Menu menu={menuData.menu} menuColour={menuColour} />
-      <ul className='call-to-actions'>
-        { cta.map(CtaMap) }
-      </ul>
-      { quotes.map(QuotesMap) }
-      <Description
-        colour={colour}
-        text={text}
-        image={image}
-      />
-      <Footer />
-    </div>
-  );
-};
+const Home = () => (
+  <div>
+    <Header text={title} image={headerImage} />
+    <Menu menu={menuData.menu} menuColour={menuColour} />
+    <ul className='call-to-actions'>
+      { cta.map(CtaMap) }
+    </ul>
+    { quotes.map(QuotesMap) }
+    <Description
+      colour={colour}
+      text={text}
+      image={deckImage}
+    />
+    <Footer />
+  </div>
+);
 
 export default Home;
