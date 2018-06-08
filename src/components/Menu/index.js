@@ -17,8 +17,8 @@ const Search = () => (
 const Menu = ({ menu, menuColour }) => (
     <div className="menu">
         <Logo />
-        { menu.map((menuItem) => (
-            <MenuItem menuItem={menuItem} />
+        { menu.map((menuItem, id) => (
+            <MenuItem menuItem={menuItem} key={id} />
         )) }
         <Search />
     </div>
