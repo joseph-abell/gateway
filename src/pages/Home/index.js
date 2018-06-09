@@ -1,25 +1,11 @@
 import React from 'react';
+import request from 'request-promise-native';
+
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
 
 import './style.css';
-
-const homepageData = {};
-const menuData = {
-  menu: []
-};
-
-const {
-  deck = {},
-  title,
-  headerImage,
-  menuColour,
-  cta = [],
-  quotes = []
-} = homepageData;
-const { colour, text } = deck;
-const deckImage = deck.image;
 
 const CtaMap = ({ link, title, deck, image }, index) => (
   <li key={index}>
@@ -31,7 +17,7 @@ const CtaMap = ({ link, title, deck, image }, index) => (
   </li>
 );
 
-const QuotesMap = ({quote, author}, index) => (
+const QuoteMap = ({quote, author}, index) => (
   <li key={index}>
     <blockquote>
       <p>{quote}</p>
@@ -55,23 +41,56 @@ const Description = ({colour, text, image}) => (
   </div>
 );
 
-const Home = () => (
-  <div>
-    <Header text={title} image={headerImage} />
-    <Menu menu={menuData.menu} menuColour={menuColour} />
-    <ul className='call-to-actions'>
-      { cta.map(CtaMap) }
-    </ul>
-    <ul className='quotes'>
-      { quotes.map(QuotesMap) }
-    </ul>
-    <Description
-      colour={colour}
-      text={text}
-      image={deckImage}
-    />
-    <Footer />
-  </div>
-);
+class Home extends React.Component {
+  state = {
+    loading: true,
+    header: {},
+    menu: [],
+    cta: [],
+    quotes: [],
+    deck: {}
+  }
+
+  async componentDidMount() {
+    const homepageData = JSON.parse(await request(window.location.href + '/data/homepage.json'));
+    const menuData = JSON.parse(await request(window.location.href + '/data/menu.json'));
+
+    this.setState({
+      loading: false,
+      header: homepageData.header,
+      menu: menuData.menu,
+      cta: homepageData.cta,
+      quotes: homepageData.quotes,
+      deck: homepageData.deck
+    });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <div>Loading</div>
+      );
+    }
+
+    return (
+      <div>
+        <Header text={this.state.header.title} image={this.state.header.image} />
+        <Menu menu={this.state.menu} menuColour={this.state.header.menuColour} />
+        <ul className='call-to-actions'>
+          { this.state.cta.map(CtaMap) }
+        </ul>
+        <ul className='quotes'>
+          { this.state.quotes.map(QuoteMap) }
+        </ul>
+        <Description
+          colour={this.state.deck.colour}
+          text={this.state.deck.text}
+          image={this.state.deck.image}
+        />
+        <Footer />
+      </div>
+    );
+  }
+};
 
 export default Home;
