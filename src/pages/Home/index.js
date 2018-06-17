@@ -7,12 +7,14 @@ import Menu from '../../components/Menu';
 
 import './style.css';
 
+const url = 'https://gateway-cms.netlify.com/';
+
 const CtaMap = ({ link, title, deck, image }, index) => (
   <li key={index}>
     <a href={link}>
       <h2>{title}</h2>
       <p>{deck}</p>
-      <img src={image} alt='' />
+      <img src={url + image} alt='' />
     </a>
   </li>
 );
@@ -34,7 +36,7 @@ const Description = ({colour, text, image}) => (
     <div
       className={colour}
       style={{
-        backgroundImage: 'url(' + image + ')',
+        backgroundImage: 'url(' + url + image + ')',
         height: '500px'
       }}
     />
@@ -52,8 +54,8 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
-    const homepageData = JSON.parse(await request(window.location.href + '/data/homepage.json'));
-    const menuData = JSON.parse(await request(window.location.href + '/data/menu.json'));
+    const homepageData = JSON.parse(await request(url + 'data/homepage.json'));
+    const menuData = JSON.parse(await request(url + 'data/menu.json'));
 
     this.setState({
       loading: false,
@@ -74,7 +76,7 @@ class Home extends React.Component {
 
     return (
       <div>
-        <Header text={this.state.header.title} image={this.state.header.image} />
+        <Header text={this.state.header.title} image={url + this.state.header.image} />
         <Menu menu={this.state.menu} menuColour={this.state.header.menuColour} />
         <ul className='call-to-actions'>
           { this.state.cta.map(CtaMap) }
