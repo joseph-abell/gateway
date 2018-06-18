@@ -46,21 +46,38 @@ const Description = ({colour, text, image}) => (
 class Home extends React.Component {
   state = {
     loading: true,
-    header: {},
-    menu: [],
+    header: {
+      title: '',
+      image: '',
+      menuColour: ''
+    },
+    menu: {
+      menuItems: [],
+      iconUrl: ''
+    },
     cta: [],
     quotes: [],
-    deck: {}
+    deck: {
+      text: '',
+      colour: '',
+      image: ''
+    }
   }
 
   async componentDidMount() {
     const homepageData = JSON.parse(await request(url + 'data/homepage.json'));
+    const iconData = JSON.parse(await request(url + 'data/logos/' + homepageData.header.menuColour + '.json'));
+    const iconUrl = url + iconData.image.slice(1);
+  
     const menuData = JSON.parse(await request(url + 'data/menu.json'));
 
     this.setState({
       loading: false,
       header: homepageData.header,
-      menu: menuData.menu,
+      menu: {
+        menuItems: menuData.menu,
+        iconUrl
+      },
       cta: homepageData.cta,
       quotes: homepageData.quotes,
       deck: homepageData.deck
@@ -77,7 +94,11 @@ class Home extends React.Component {
     return (
       <div>
         <Header text={this.state.header.title} image={url + this.state.header.image} />
-        <Menu menu={this.state.menu} menuColour={this.state.header.menuColour} />
+        <Menu
+          menuItems={this.state.menu.menuItems}
+          menuColour={this.state.header.menuColour}
+          iconUrl={this.state.menu.iconUrl}
+        />
         <ul className='call-to-actions'>
           { this.state.cta.map(CtaMap) }
         </ul>
