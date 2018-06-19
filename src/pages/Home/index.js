@@ -65,9 +65,12 @@ class Home extends React.Component {
   async componentDidMount() {
     const homepageResponse = await fetch(url + 'data/homepage.json');
     const homepageData = await homepageResponse.json();
+
     const iconResponse = await fetch(url + 'data/logos/' + homepageData.header.menuColour + '.json');
     const iconData = await iconResponse.json();
+
     const iconUrl = url + iconData.image.slice(1);
+
     const menuResponse = await fetch(url + 'data/menu.json');
     const menuData = await menuResponse.json();
 
