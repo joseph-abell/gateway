@@ -5,6 +5,13 @@ import fetchMock from 'fetch-mock';
 
 let component;
 
+const updateComponentWithData = (cb) => {
+  process.nextTick(() => {
+    component.update();
+    cb();
+  });
+}
+
 describe('Homepage', () => {
   beforeEach(() => {
     fetchMock.get('https://gateway-cms.netlify.com/data/homepage.json', {
@@ -40,13 +47,6 @@ describe('Homepage', () => {
   });
 
   describe('after data has loaded', () => {
-    const updateComponentWithData = (cb) => {
-      process.nextTick(() => {
-        component.update();
-        cb();
-      });
-    }
-
     it('contains a header', () => {
       updateComponentWithData(() => {
         expect(component.find('HeaderContainer')).toExist();
