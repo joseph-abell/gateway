@@ -6,9 +6,9 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-test-renderer": "^16.4.0",
-    "request-promise-native": "^1.0.5",
     "styled-components": "^3.2.6"
   },
   "scripts": {
@@ -19,7 +19,7 @@
   "devDependencies": {
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest-enzyme": "^6.0.1",
-    "nock": "^9.3.3"
+    "fetch-mock": "^6.4.4",
+    "jest-enzyme": "^6.0.1"
   }
 }

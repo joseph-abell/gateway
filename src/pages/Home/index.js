@@ -1,6 +1,4 @@
 import React from 'react';
-import request from 'request-promise-native';
-
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
@@ -65,11 +63,13 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
-    const homepageData = JSON.parse(await request(url + 'data/homepage.json'));
-    const iconData = JSON.parse(await request(url + 'data/logos/' + homepageData.header.menuColour + '.json'));
+    const homepageResponse = await fetch(url + 'data/homepage.json');
+    const homepageData = await homepageResponse.json();
+    const iconResponse = await fetch(url + 'data/logos/' + homepageData.header.menuColour + '.json');
+    const iconData = await iconResponse.json();
     const iconUrl = url + iconData.image.slice(1);
-  
-    const menuData = JSON.parse(await request(url + 'data/menu.json'));
+    const menuResponse = await fetch(url + 'data/menu.json');
+    const menuData = await menuResponse.json();
 
     this.setState({
       loading: false,
@@ -87,7 +87,7 @@ class Home extends React.Component {
   render() {
     if (this.state.loading) {
       return (
-        <div>Loading</div>
+        <div className='loading'>Loading</div>
       );
     }
 
