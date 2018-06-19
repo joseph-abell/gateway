@@ -12,26 +12,24 @@ const updateComponentWithData = (cb) => {
   });
 }
 
+const mockUrl = (url, data) => {
+  fetchMock.get(url, data, { overwriteRoutes: true });
+}
+
 describe('Homepage', () => {
   beforeEach(() => {
-    fetchMock.get('https://gateway-cms.netlify.com/data/homepage.json', {
+    mockUrl('https://gateway-cms.netlify.com/data/homepage.json', {
       header: {
         menuColour: 'red'
       },
       cta: [],
       quotes: [],
       deck: {}
-    }, {
-      overwriteRoutes: true
     });
-    fetchMock.get("https://gateway-cms.netlify.com/data/logos/red.json", {
+    mockUrl("https://gateway-cms.netlify.com/data/logos/red.json", {
       image: "/uploads/gateway_logo_pink.png"
-    }, {
-      overwriteRoutes: true
     });
-    fetchMock.get("https://gateway-cms.netlify.com/data/menu.json", {}, {
-      overwriteRoutes: true
-    });
+    mockUrl("https://gateway-cms.netlify.com/data/menu.json", {});
 
     component = shallow(<Home />);
   });
