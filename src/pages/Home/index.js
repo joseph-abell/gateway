@@ -41,6 +41,10 @@ const Description = ({colour, text, image}) => (
   </div>
 );
 
+const Loading = () => (
+  <div className='loading'>Loading</div>
+);
+
 class Home extends React.Component {
   state = {
     loading: true,
@@ -90,7 +94,7 @@ class Home extends React.Component {
   render() {
     if (this.state.loading) {
       return (
-        <div className='loading'>Loading</div>
+        <Loading />
       );
     }
 

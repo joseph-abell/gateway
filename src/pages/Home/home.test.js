@@ -33,8 +33,10 @@ describe('Homepage', () => {
     expect(component).toBeDefined();
   });
 
-  it('contains Loading', () => {
-    expect(component.find('.loading')).toExist();
+  describe('before data has loaded', () => {
+    it('contains loading', () => {
+      expect(component.find('Loading')).toExist();
+    });
   });
 
   describe('after data has loaded', () => {
