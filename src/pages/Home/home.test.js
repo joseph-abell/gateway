@@ -45,36 +45,30 @@ describe('Homepage', () => {
   });
 
   describe('after data has loaded', () => {
+    beforeEach((done) => {
+      updateComponentWithData(done);
+    });
+
     it('contains a header', () => {
-      updateComponentWithData(() => {
-        expect(component.find('HeaderContainer')).toExist();
-      });
+      expect(component.find('HeaderContainer')).toExist();
     });
 
     it('contains a menu', () => {
-      updateComponentWithData(() => {
         expect(component.find('Menu')).toExist();
-      });
     });
 
     it('contains a description', () => {
-      updateComponentWithData(() => {
-        expect(component.find('Description')).toExist();
-      })
+      expect(component.find('Description')).toExist();
     });
 
     describe('contains a list of call to actions', () => {
       it('should have an unorderedList', () => {
-        updateComponentWithData(() => {
-          expect(component.find('ul.call-to-actions')).toExist();
-        });
+        expect(component.find('ul.call-to-actions')).toExist();
       });
     });
 
     it('contains a footer', () => {
-      updateComponentWithData(() => {
         expect(component.find('FooterContainer')).toExist();
-      })
     });
   });
 });
