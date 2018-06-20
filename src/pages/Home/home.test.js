@@ -5,10 +5,10 @@ import fetchMock from 'fetch-mock';
 
 let component;
 
-const updateComponentWithData = (cb) => {
+const updateComponentWithData = (callback) => {
   process.nextTick(() => {
     component.update();
-    cb();
+    callback();
   });
 }
 
@@ -57,14 +57,20 @@ describe('Homepage', () => {
         expect(component.find('Menu')).toExist();
     });
 
-    it('contains a description', () => {
-      expect(component.find('Description')).toExist();
-    });
-
     describe('contains a list of call to actions', () => {
-      it('should have an unorderedList', () => {
+      it('should have an unordered list', () => {
         expect(component.find('ul.call-to-actions')).toExist();
       });
+    });
+
+    describe('contains a list of quotes', () => {
+      it('should have an unordered list', () => {
+        expect(component.find('ul.quotes')).toExist();
+      });
+    });
+
+    it('contains a description', () => {
+      expect(component.find('Description')).toExist();
     });
 
     it('contains a footer', () => {
