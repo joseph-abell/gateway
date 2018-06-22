@@ -16,4 +16,9 @@ describe('HeaderContainer', () => {
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();
   });
+
+  describe('Header with content', () => {
+    component = shallow(<HeaderContainer text='This is Text' image='fake-image.jpg' />);
+    expect(component).toMatchSnapshot();
+  });
 })

@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+<styled.header>
+  <styled.h1>
+    This is Text
+  </styled.h1>
+  <img
+    alt=""
+    src="fake-image.jpg"
+  />
+</styled.header>
+`;
+
 exports[`HeaderContainer should match snapshot 1`] = `
 <styled.header>
   <styled.h1 />
