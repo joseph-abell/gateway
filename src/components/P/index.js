@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
-const P = styled.p``;
+import P from "./P";
 
 export default P;

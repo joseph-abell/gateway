@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
-const Header = styled.header``;
+import Header from "./Header";
 
 export default Header;

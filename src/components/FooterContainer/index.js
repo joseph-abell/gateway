@@ -1,7 +1,3 @@
-import React from 'react';
-
-const FooterContainer = () => (
-  <footer />
-);
+import FooterContainer from "./FooterContainer";
 
 export default FooterContainer;

@@ -77,7 +77,7 @@ describe('Homepage', () => {
       expect(component.find('Description')).toExist();
     });
 
-    it('contains a footer', () => {
+    it('contains a Footer', () => {
         expect(component.find('FooterContainer')).toExist();
     });
 

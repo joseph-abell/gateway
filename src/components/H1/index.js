@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
-const H1 = styled.h1``;
+import H1 from "./H1";
 
 export default H1;
