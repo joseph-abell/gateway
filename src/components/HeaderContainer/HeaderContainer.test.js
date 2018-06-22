@@ -13,15 +13,7 @@ describe('HeaderContainer', () => {
     expect(component).toBeDefined();
   });
 
-  it('should render a header', () => {
-    expect(component.find('header')).toExist();
-  });
-
-  it('should render a h1', () => {
-    expect(component.find('h1')).toExist();
-  });
-
-  it('should render an image', () => {
-    expect(component.find('img')).toExist();
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot();
   });
 })

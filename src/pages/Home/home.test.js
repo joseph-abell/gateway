@@ -42,6 +42,10 @@ describe('Homepage', () => {
     it('contains loading', () => {
       expect(component.find('Loading')).toExist();
     });
+
+    it('should match snapshot', () => {
+      expect(component).toMatchSnapshot();
+    });
   });
 
   describe('after data has loaded', () => {
@@ -76,5 +80,9 @@ describe('Homepage', () => {
     it('contains a footer', () => {
         expect(component.find('FooterContainer')).toExist();
     });
+
+    it('should match snapshot', () => {
+      expect(component).toMatchSnapshot();
+    })
   });
 });
