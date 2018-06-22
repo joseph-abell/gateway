@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
-const Footer = styled.footer``;
+import Footer from './Footer';
 
 export default Footer;

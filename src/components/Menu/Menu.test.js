@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import P from './index';
+import Menu from './index';
 
 let component;
 
-describe('P', () => {
+describe('Menu', () => {
   beforeEach(() => {
-    component = shallow(<P />);
+    component = shallow(<Menu />);
   });
 
   it('should render without crashing', () => {

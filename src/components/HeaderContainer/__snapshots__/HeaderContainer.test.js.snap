@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
+exports[`HeaderContainer should match snapshot with data 1`] = `
 <styled.header>
   <styled.h1>
     This is Text
@@ -12,7 +12,7 @@ exports[` 1`] = `
 </styled.header>
 `;
 
-exports[`HeaderContainer should match snapshot 1`] = `
+exports[`HeaderContainer should match snapshot with no data 1`] = `
 <styled.header>
   <styled.h1 />
   <img

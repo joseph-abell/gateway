@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu should match snapshot with no data 1`] = `
+<div
+  className="menu"
+>
+  <Logo />
+  <Search />
+</div>
+`;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import P from './index';
+import FooterContainer from './index';
 
 let component;
 
-describe('P', () => {
+describe('FooterContainer', () => {
   beforeEach(() => {
-    component = shallow(<P />);
+    component = shallow(<FooterContainer />);
   });
 
   it('should render without crashing', () => {

@@ -14,7 +14,7 @@ const Search = () => (
   <img src='' alt='search' />
 );
 
-const Menu = ({ menuItems, menuColour, iconUrl }) => (
+const Menu = ({ menuItems = [], menuColour, iconUrl }) => (
   <div className="menu">
     <Logo iconUrl={iconUrl} />
     { menuItems.map((menuItem, id) => (
