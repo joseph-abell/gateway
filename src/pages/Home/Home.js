@@ -2,10 +2,9 @@ import React from 'react';
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
+import { url } from '../../config.js';
 
 import './style.css';
-
-const url = 'https://gateway-cms.netlify.com/';
 
 const CtaMap = ({ link, title, deck, image }, index) => (
   <li key={index}>

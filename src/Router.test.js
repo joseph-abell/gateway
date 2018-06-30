@@ -1,10 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './App';
-import fetchMock from 'fetch-mock';
+import Router from './Router';
 
-describe('App', () => {
+describe('Router', () => {
   it('renders without crashing', () => {
-    shallow(<App />);
+    shallow(<Router />);
   });
 });

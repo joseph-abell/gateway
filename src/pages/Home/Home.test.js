@@ -2,15 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Home from './index';
 import fetchMock from 'fetch-mock';
+import { updateComponentWithData } from '../../helpers/testHelpers';
 
 let component;
-
-const updateComponentWithData = (callback) => {
-  process.nextTick(() => {
-    component.update();
-    callback();
-  });
-}
 
 const mockUrl = (url, data) => {
   fetchMock.get(url, data, { overwriteRoutes: true });
@@ -50,7 +44,7 @@ describe('Homepage', () => {
 
   describe('after data has loaded', () => {
     beforeEach((done) => {
-      updateComponentWithData(done);
+      updateComponentWithData(component, done);
     });
 
     it('contains a header', () => {
