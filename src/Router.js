@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
     
-class App extends Component {
+class Router extends Component {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div>
           <Route exact path='/' component={Home} />
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default Router;
