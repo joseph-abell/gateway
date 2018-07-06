@@ -1,4 +1,5 @@
 import React from 'react';
+import Async from 'react-promise';
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
@@ -40,86 +41,54 @@ const Description = ({colour, text, image}) => (
   </div>
 );
 
-const Loading = () => (
-  <div className='loading'>Loading</div>
-);
+const Home = () => (
+  <Async
+    promise={new Promise(async (resolve) => {
+      const homepageResponse = await fetch(url + 'data/homepage.json');
+      const homepageData = await homepageResponse.json();
 
-class Home extends React.Component {
-  state = {
-    loading: true,
-    header: {
-      title: '',
-      image: '',
-      menuColour: ''
-    },
-    menu: {
-      menuItems: [],
-      iconUrl: ''
-    },
-    cta: [],
-    quotes: [],
-    deck: {
-      text: '',
-      colour: '',
-      image: ''
-    }
-  }
+      const iconResponse = await fetch(url + 'data/logos/' + homepageData.header.menuColour + '.json');
+      const iconData = await iconResponse.json();
+      const iconUrl = url + iconData.image.slice(1);
 
-  async componentDidMount() {
-    const homepageResponse = await fetch(url + 'data/homepage.json');
-    const homepageData = await homepageResponse.json();
+      const menuResponse = await fetch(url + 'data/menu.json');
+      const menuData = await menuResponse.json();
 
-    const iconResponse = await fetch(url + 'data/logos/' + homepageData.header.menuColour + '.json');
-    const iconData = await iconResponse.json();
+      resolve({
+        header: homepageData.header,
+        menu: {
+          menuItems: menuData.menu,
+          iconUrl
+        },
+        cta: homepageData.cta,
+        quotes: homepageData.quotes,
+        deck: homepageData.deck
+      });
+    })}
 
-    const iconUrl = url + iconData.image.slice(1);
-
-    const menuResponse = await fetch(url + 'data/menu.json');
-    const menuData = await menuResponse.json();
-
-    this.setState({
-      loading: false,
-      header: homepageData.header,
-      menu: {
-        menuItems: menuData.menu,
-        iconUrl
-      },
-      cta: homepageData.cta,
-      quotes: homepageData.quotes,
-      deck: homepageData.deck
-    });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return (
-        <Loading />
-      );
-    }
-
-    return (
+    then={({header, menu, cta, quotes, deck}) => (
       <div>
-        <Header text={this.state.header.title} image={url + this.state.header.image} />
+        <Header text={header.title} image={url + header.image} />
         <Menu
-          menuItems={this.state.menu.menuItems}
-          menuColour={this.state.header.menuColour}
-          iconUrl={this.state.menu.iconUrl}
+          menuItems={menu.menuItems}
+          menuColour={header.menuColour}
+          iconUrl={menu.iconUrl}
         />
         <ul className='call-to-actions'>
-          { this.state.cta.map(CtaMap) }
+          { cta.map(CtaMap) }
         </ul>
         <ul className='quotes'>
-          { this.state.quotes.map(QuoteMap) }
+          { quotes.map(QuoteMap) }
         </ul>
         <Description
-          colour={this.state.deck.colour}
-          text={this.state.deck.text}
-          image={this.state.deck.image}
+          colour={deck.colour}
+          text={deck.text}
+          image={deck.image}
         />
         <Footer />
       </div>
-    );
-  }
-};
+    )}
+  />
+);
 
 export default Home;
