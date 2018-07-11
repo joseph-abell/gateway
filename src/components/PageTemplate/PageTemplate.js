@@ -4,20 +4,23 @@ import { Redirect } from 'react-router';
 import { url } from '../../config';
 import Header from '../../components/HeaderContainer';
 
-const Content = ({ content }) => (
-  <li>
-    <div className='left'>
-      <div>{content.left.deck}</div>
-      <div>{content.left.image}</div>
-      <div>{content.left.colour}</div>
-    </div>
-    <div className='right'>
-      <div>{content.right.deck}</div>
-      <div>{content.right.image}</div>
-      <div>{content.right.colour}</div>
-    </div>
-  </li>
+const ContentPiece = ({ direction, deck, image, colour }) => (
+  <div className={direction}>
+    <div>{deck}</div>
+    <div>{image}</div>
+    <div>{colour}</div>
+  </div>
 );
+
+const Content = ({ content }) => {
+  const { left, right } = content;
+  return (
+    <li>
+      <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
+      <ContentPiece direction='right' deck={right.deck} image={right.image} colour={right.colour} />
+    </li>
+  );
+};
 
 const Contents = ({ contents }) => (
   <ul>
@@ -75,6 +78,7 @@ const PageTemplate = ({ location }) => {
             image={image}
           />
           <img src={subtitleImage} alt='' />
+          <div>{subtitleText}</div>
           {deckTitle}
           <Contents contents={contents} />
         </div>
