@@ -1,5 +1,6 @@
 import React from 'react';
 import Async from 'react-promise';
+import { Redirect } from 'react-router';
 import { url } from '../../config';
 import Header from '../../components/HeaderContainer';
 
@@ -26,51 +27,64 @@ const Contents = ({ contents }) => (
   </ul>
 );
 
-const PageTemplate = () => (
-  <Async
-    promise={new Promise(async (resolve) => {
-      const whoWeAreResponse = await fetch(url + 'data/pages/who-we-are.json');
-      const { title, header, subtitle, deck, contents } = await whoWeAreResponse.json();
-      const { image, menuColour } = header;
-      const subtitleText = subtitle.subtitle;
-      const subtitleImage = url + subtitle.image.slice(1);
-      const deckTitle = deck.title;
-      const deckParagraph = deck.paragraph;
-      const deckColour = deck.colour;
+const PageTemplate = ({ location }) => {
+  const { pathname } = location;
+  return (
+    <Async
+      promise={new Promise(async (resolve, reject) => {
+        const fullUrl = `${url}data/pages${pathname}.json`;
+        const response = await fetch(fullUrl);
 
-      resolve({
+        if (response.ok) {
+          const { title, header, subtitle, deck, contents } = await response.json();
+          const { image, menuColour } = header;
+          const subtitleText = subtitle.subtitle;
+          const subtitleImage = url + subtitle.image.slice(1);
+          const deckTitle = deck.title;
+          const deckParagraph = deck.paragraph;
+          const deckColour = deck.colour;
+
+          resolve({
+            title,
+            image: url + image.slice(1),
+            subtitleImage,
+            subtitleText,
+            deckTitle,
+            deckParagraph,
+            deckColour,
+            contents
+          });
+        } else {
+          reject();
+        }
+      })}
+
+      then={({
         title,
-        image: url + image.slice(1),
+        image,
         subtitleImage,
         subtitleText,
         deckTitle,
         deckParagraph,
         deckColour,
         contents
-      });
-    })}
+      }) => (
+        <div>
+          <Header
+            text={title}
+            image={image}
+          />
+          <img src={subtitleImage} alt='' />
+          {deckTitle}
+          <Contents contents={contents} />
+        </div>
+      )}
 
-    then={({
-      title,
-      image,
-      subtitleImage,
-      subtitleText,
-      deckTitle,
-      deckParagraph,
-      deckColour,
-      contents
-    }) => (
-      <div>
-        <Header
-          text={title}
-          image={image}
-        />
-        <img src={subtitleImage} alt='' />
-        {deckTitle}
-        <Contents contents={contents} />
-      </div>
-    )}
-  />
-);
+      catch={() => (
+        <Redirect to='/404' />
+      )}
+    />
+  );
+};
 
 export default PageTemplate;
