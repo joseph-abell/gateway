@@ -26,7 +26,7 @@ const Contents = ({ contents }) => (
   </ul>
 );
 
-const WhoWeAre = () => (
+const PageTemplate = () => (
   <Async
     promise={new Promise(async (resolve) => {
       const whoWeAreResponse = await fetch(url + 'data/pages/who-we-are.json');
@@ -73,4 +73,4 @@ const WhoWeAre = () => (
   />
 );
 
-export default WhoWeAre;
+export default PageTemplate;

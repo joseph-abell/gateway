@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import WhoWeAre from './index';
+import PageTemplate from './index';
 import { updateComponentWithData, mockUrl } from '../../helpers/testHelpers';
 
 let component;
@@ -15,7 +15,7 @@ describe('Who We Are page', () => {
       quotes: [],
       deck: {}
     });
-    component = shallow(<WhoWeAre />);
+    component = shallow(<PageTemplate />);
   });
 
   it('renders without crashing', () => {
