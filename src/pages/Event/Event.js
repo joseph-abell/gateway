@@ -16,9 +16,21 @@ const Event = () => (
         deck: eventData.deck
       });
     })}
+
     then={({title, image, header, date, time, deck}) => (
-      <div/>
-    )} />
+      <div>
+        <header>
+          <h1>{title}</h1>
+          <img src={url + image.slice(1)} />
+        </header>
+        <div>
+          <div>{date}</div>
+          <div>{time}</div>
+        </div>
+        <div>{deck}</div>
+      </div>
+    )}
+  />
 );
 
 export default Event;
