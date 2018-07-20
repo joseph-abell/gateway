@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Error404 from './pages/Error404';
 import Event from './pages/Event';
 import PageTemplate from './components/PageTemplate';
+import Person from './pages/Person';
     
 class Router extends Component {
   render() {
@@ -14,6 +15,7 @@ class Router extends Component {
           <Route exact path='/' component={Home} />
           <Route exact path='/events/*' component={Event} />
           <Route exact path='/404' component={Error404} />
+          <Route exact path='/people/*' component={Person} />
           <Route component={PageTemplate} />
         </Switch>
       </BrowserRouter>
