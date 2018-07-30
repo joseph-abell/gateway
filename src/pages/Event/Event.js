@@ -1,6 +1,6 @@
 import React from 'react';
 import Async from 'react-promise';
-import { url } from '../../config.js';
+import { url } from '../../config';
 import { getData } from '../../helpers';
 
 const Event = () => (
