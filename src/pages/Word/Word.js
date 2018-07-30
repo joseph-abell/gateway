@@ -1,12 +1,13 @@
 import React from 'react';
 import Async from 'react-promise';
 import { url } from '../../config';
+import { getData } from '../../helpers';
 
 const Word = () => (
   <Async
     promise={new Promise(async (resolve) => {
-      const response = await fetch(url+ 'data/words/bhggfhuj.json');
-      const wordData = await response.json();
+      const data = await getData(url, 'data/words/bhggfhuj.json');
+      const wordData = data.pageData;
 
       resolve({
         title: wordData.title,

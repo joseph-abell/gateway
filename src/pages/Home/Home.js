@@ -3,7 +3,8 @@ import Async from 'react-promise';
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
 import Menu from '../../components/Menu';
-import { url } from '../../config.js';
+import { url } from '../../config';
+import { getData } from '../../helpers';
 
 import './style.css';
 
@@ -44,25 +45,17 @@ const Description = ({colour, text, image}) => (
 const Home = () => (
   <Async
     promise={new Promise(async (resolve) => {
-      const homepageResponse = await fetch(url + 'data/homepage.json');
-      const homepageData = await homepageResponse.json();
-
-      const iconResponse = await fetch(url + 'data/logos/' + homepageData.header.menuColour + '.json');
-      const iconData = await iconResponse.json();
-      const iconUrl = url + iconData.image.slice(1);
-
-      const menuResponse = await fetch(url + 'data/menu.json');
-      const menuData = await menuResponse.json();
+      const data = await getData(url, 'data/homepage.json');
 
       resolve({
-        header: homepageData.header,
+        header: data.pageData.header,
         menu: {
-          menuItems: menuData.menu,
-          iconUrl
+          menuItems: data.menuData.menu,
+          iconUrl: data.iconUrl
         },
-        cta: homepageData.cta,
-        quotes: homepageData.quotes,
-        deck: homepageData.deck
+        cta: data.pageData.cta,
+        quotes: data.pageData.quotes,
+        deck: data.pageData.deck
       });
     })}
 

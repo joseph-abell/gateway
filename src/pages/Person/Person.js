@@ -1,13 +1,14 @@
 import React from 'react';
 import Async from 'react-promise';
-import { url } from '../../config.js';
+import { url } from '../../config';
+import { getData } from '../../helpers';
 
 const Person = () => (
   <Async
     promise={new Promise(async (resolve) => {
-      const response = await fetch(url + 'data/people/joe-abell.json');
-      const personData = await response.json();
-      
+      const data = await getData(url, 'data/people/joe-abell.json');
+      const personData = data.pageData;
+
       resolve({
         title: personData.title,
         image: personData.image,

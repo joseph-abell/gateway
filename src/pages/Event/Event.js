@@ -1,12 +1,14 @@
 import React from 'react';
 import Async from 'react-promise';
 import { url } from '../../config.js';
+import { getData } from '../../helpers';
 
 const Event = () => (
   <Async
     promise={new Promise(async (resolve) => {
-      const response = await fetch(url + 'data/events/new-event.json');
-      const eventData = await response.json();
+      const data = await getData(url, 'data/events/new-event.json');
+      const eventData = data.pageData;
+
       resolve({
         title: eventData.title,
         image: eventData.image,
