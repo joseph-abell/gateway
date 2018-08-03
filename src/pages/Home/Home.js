@@ -61,7 +61,11 @@ const Home = () => (
 
     then={({header, menu, cta, quotes, deck}) => (
       <div>
-        <Header text={header.title} image={url + header.image} />
+        <Header
+          text={header.title}
+          image={url + header.image}
+          colour={header.menuColour}
+        />
         <Menu
           menuItems={menu.menuItems}
           menuColour={header.menuColour}
