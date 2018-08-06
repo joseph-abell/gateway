@@ -13,6 +13,24 @@ const Header = styled.header`
   h1 {
     line-height: 200px;
     text-align: center;
+    font-size: 40px;
+  }
+
+  @media screen and (min-width: 991px) {
+    height: 400px;
+
+    h1 {
+      line-height: 400px;
+    }
+  }
+
+  @media screen and (min-width: 1241px) {
+    height: 600px;
+
+    h1 {
+      line-height: 600px;
+      font-size: 145px;
+    }
   }
 `;
 
