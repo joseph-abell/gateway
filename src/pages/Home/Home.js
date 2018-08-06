@@ -71,10 +71,11 @@ const Home = () => (
           menuColour={header.menuColour}
           iconUrl={menu.iconUrl}
         />
-        <ul className='call-to-actions'>
+        <div className="clearfix" />
+        <ul className="call-to-actions">
           { cta.map(CtaMap) }
         </ul>
-        <ul className='quotes'>
+        <ul className="quotes">
           { quotes.map(QuoteMap) }
         </ul>
         <Description
