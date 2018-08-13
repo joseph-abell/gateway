@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
+import MobileMenu from '../../components/MobileMenu';
 import Menu from '../../components/Menu';
 import { url } from '../../config';
 import { getData } from '../../helpers';
@@ -47,8 +48,15 @@ const Home = () => (
     promise={new Promise(async (resolve) => {
       const data = await getData(url, 'data/homepage.json');
 
+      let colour = '';
+
+      if (data.pageData.header.menuColour === 'red') {
+        colour = '#f05a64';
+      }
+
       resolve({
         header: data.pageData.header,
+        menuColour: colour,
         menu: {
           menuItems: data.menuData.menu,
           iconUrl: data.iconUrl
@@ -59,16 +67,21 @@ const Home = () => (
       });
     })}
 
-    then={({header, menu, cta, quotes, deck}) => (
+    then={({header, menuColour, menu, cta, quotes, deck}) => (
       <div>
+        <MobileMenu
+          menuItems={menu.menuItems}
+          menuColour={menuColour}
+          iconUrl={menu.iconUrl}
+        />
         <Header
           text={header.title}
           image={url + header.image}
-          colour={header.menuColour}
+          colour={menuColour}
         />
         <Menu
           menuItems={menu.menuItems}
-          menuColour={header.menuColour}
+          menuColour={menuColour}
           iconUrl={menu.iconUrl}
         />
         <div className="clearfix" />

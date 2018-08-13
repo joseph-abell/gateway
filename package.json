@@ -5,6 +5,7 @@
   "dependencies": {
     "enzyme-to-json": "^3.3.4",
     "react": "^16.3.2",
+    "react-burger-menu": "^2.5.2",
     "react-dom": "^16.3.2",
     "react-promise": "^2.0.3",
     "react-router": "^4.2.0",
