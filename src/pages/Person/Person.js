@@ -1,46 +1,59 @@
 import React from 'react';
 import Async from 'react-promise';
 import { url } from '../../config';
-import { getData } from '../../helpers';
+import Header from '../../components/templates/Header';
+import HeaderContainer from '../../components/HeaderContainer';
+import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 const Person = () => (
   <Async
     promise={new Promise(async (resolve) => {
       const data = await getData(url, 'data/people/joe-abell.json');
-      const personData = data.pageData;
+      const colour = getMenuColour(data);
+      const colourHex = parseColour(colour);
+      const { header, title, image, deck, email, phoneNumber, titleRole, filters } = data;
 
       resolve({
-        title: personData.title,
-        image: personData.image,
-        deck: personData.deck,
-        header: personData.header,
-        email: personData.email,
-        phoneNumber: personData.phoneNumber,
-        titleRole: personData.titleRole,
-        filters: personData.filters
+        title,
+        image,
+        deck,
+        header,
+        email,
+        phoneNumber,
+        titleRole,
+        filters,
+        colour,
+        colourHex
       });
     })}
 
     then={({
       title,
-      image,
+      image, 
       deck,
       header,
       email,
       phoneNumber,
       titleRole,
-      filter
+      filter,
+      colour,
+      colourHex
     }) => (
-      <div>
-        <div>
-          <img src={url + image.slice(1)} />
-        </div>
+
+      <React.Fragment>
+        <Header
+          colour={colour}
+          colourHex={colourHex}
+          title={header.title}
+          image={getFullUrl(header.image)}
+        />
+           
         <div>
           <h1>{title}</h1>
           <h2>{titleRole}</h2>
           <p>{deck}</p>
         </div>
-      </div>
+      </React.Fragment>
     )}
   />   
 )
