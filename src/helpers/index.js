@@ -46,6 +46,10 @@ export const getData = async (pageName) => {
 };
 
 export const getFullUrl = (urlEnd) => {
+  if (urlEnd.includes('http')) {
+    return urlEnd;
+  }
+
   if (urlEnd[0] === '/') {
     urlEnd = urlEnd.replace('/', '');
   }

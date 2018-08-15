@@ -2,30 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import { slide as SlideMenu } from 'react-burger-menu';
 
-const MenuLink = styled.a`
-  color: ${props => props.menuColour};
+const SearchLink = styled.a`
+  color: white;
   padding: 20px 25px;
   display: inline-block;
   text-decoration: none;
 `;
 
-const MenuItem = ({ menuItem, menuColour }) => (
-  <div key={menuItem.title}>
-    <MenuLink href={menuItem.link} menuColour={menuColour}>{menuItem.title}</MenuLink>
+const SearchItem = ({ searchItem, colour }) => (
+  <div key={searchItem.text}>
+    <SearchLink href={searchItem.link}>{searchItem.title}</SearchLink>
   </div>
 );
 
-const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
+const Search = ({ colour, searchItems }) => {
   const styles = {
     bmBurgerButton: {
       position: 'fixed',
       width: '26px',
       height: '20px',
-      left: '20px',
+      right: '20px',
       top: '221px'
     },
     bmBurgerBars: {
-      background: menuColour,
+      background: colour,
       height: '3px'
     },
     bmCrossButton: {
@@ -33,10 +33,10 @@ const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
       width: '24px'
     },
     bmCross: {
-      background: menuColour
+      background: 'white'
     },
     bmMenu: {
-      background: 'white',
+      background: colour,
       padding: '2.5em 1.5em 0',
       fontSize: '1.15em'
     },
@@ -44,7 +44,7 @@ const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
       fill: '#373a47'
     },
     bmItemList: {
-      color: menuColour,
+      color: 'white',
       padding: '0.8em'
     },
     bmItem: {
@@ -53,15 +53,16 @@ const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
     bmOverlay: {
       background: 'rgba(0, 0, 0, 0.2)'
     }
-  }
+  };
 
   return (
-    <SlideMenu styles={styles}>
-      { menuItems.map((menuItem, id) => (
-        <MenuItem menuItem={menuItem} menuColour={menuColour} key={id} />
+    <SlideMenu styles={styles} right>
+      { searchItems && searchItems.map((searchItem, id) => (
+        <SearchItem searchItem={searchItem} colour={colour} key={id} />
       )) }
     </SlideMenu>
   );
 };
 
-export default MobileMenu;
+export default Search;
+

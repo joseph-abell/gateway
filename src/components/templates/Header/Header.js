@@ -1,6 +1,7 @@
 import React from 'react';
 import Async from 'react-promise';
 import MobileMenu from '../../MobileMenu';
+import Search from '../../Search';
 import Menu from '../../Menu';
 import Clearfix from '../../Clearfix';
 
@@ -22,6 +23,9 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image }) => (
         <MobileMenu
           menuItems={menu}
           menuColour={colourHex}
+        />
+        <Search
+          colour={colourHex}
         />
         <Header text={title} image={getFullUrl(image)} />
         <Menu

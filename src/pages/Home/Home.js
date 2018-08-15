@@ -1,8 +1,8 @@
 import React from 'react';
 import Async from 'react-promise';
 import Footer from '../../components/FooterContainer';
-import HeaderTemplate from '../../components/templates/Header';
-import Header from '../../components/HeaderContainer';
+import Header from '../../components/templates/Header';
+import HeaderContainer from '../../components/HeaderContainer';
 import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
@@ -61,26 +61,26 @@ const Home = () => (
 
     then={({header, colour, colourHex, cta, quotes, deck}) => (
       <React.Fragment>
-        <HeaderTemplate
+        <Header
           colour={colour}
           colourHex={colourHex}
           title={header.title}
           image={getFullUrl(header.image)}
-          Header={Header}
-          title={header.title}
-          image={header.image}
+          Header={HeaderContainer}
         />
-        <ul className="call-to-actions">
-          { cta.map(CtaMap) }
-        </ul>
-        <ul className="quotes">
-          { quotes.map(QuoteMap) }
-        </ul>
-        <Description
-          colour={deck.colour}
-          text={deck.text}
-          image={deck.image}
-        />
+        <main>
+          <ul className="call-to-actions">
+            { cta.map(CtaMap) }
+          </ul>
+          <ul className="quotes">
+            { quotes.map(QuoteMap) }
+          </ul>
+          <Description
+            colour={deck.colour}
+            text={deck.text}
+            image={deck.image}
+          />
+        </main>
         <Footer />
       </React.Fragment>
     )}
