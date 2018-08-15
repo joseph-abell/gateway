@@ -1,23 +1,30 @@
 import React from 'react';
 import Async from 'react-promise';
 import { url } from '../../config';
-import { getData } from '../../helpers';
+import { getData, getMenuColour, parseColour, getFullUrl } from '../../helpers';
+import Header from '../../components/templates/Header';
+import HeaderContainer from '../../components/HeaderContainer';
 
 const Word = () => (
   <Async
     promise={new Promise(async (resolve) => {
       const data = await getData(url, 'data/words/bhggfhuj.json');
       const wordData = data.pageData;
+      const colour = getMenuColour(data);
+      const colourHex = parseColour(colour);
+      const { title, image, deck, date, subtitle, audioFile, file, youtubeLink, header } = data;
 
       resolve({
-        title: wordData.title,
-        image: wordData.image,
-        deck: wordData.deck,
-        date: wordData.date,
-        subtitle: wordData.subtitle,
-        audioFile: wordData.audioFile,
-        file: wordData.file,
-        youtubeLink: wordData.youtubeLink
+        title,
+        image,
+        deck,
+        date,
+        subtitle,
+        audioFile,
+        file,
+        youtubeLink,
+        colour,
+        colourHex
       });
     })}
 
@@ -29,26 +36,34 @@ const Word = () => (
       subtitle,
       audioFile,
       file,
-      youtubeLink
+      youtubeLink,
+      colour,
+      colourHex
     }) => (
-      <div>
+      <React.Fragment>
+        <Header
+          colour={colour}
+          colourHex={colourHex}
+          title={title}
+          image={getFullUrl(image)}
+          Header={HeaderContainer}
+        />
+
         <div>
-          <div>
-            {date}
-          </div>
-          <div>
-            author (to do)
-          </div>
-          <h1>{title}</h1>
-          <h2>{subtitle}</h2>
+          {date}
         </div>
+        <div>
+          author (to do)
+        </div>
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
         <img src={url + image.slice(1)} />
         <div>
           {audioFile}
         </div>
-      </div>
+      </React.Fragment>
     )}
   />
-)
+);
 
 export default Word;
