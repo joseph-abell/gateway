@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Logo = ({iconUrl}) => (
-  <img src={iconUrl} alt='logo' />
+const Logo = ({ logoUrl }) => (
+  <img src={logoUrl} alt='logo' />
 );
 
 const MenuItem = ({ menuItem }) => (
@@ -24,14 +24,15 @@ const StyledLogo = styled.div`
 const StyledSearch = styled.div`
   float: right;
 `;
+
 const MenuContainer = styled.div`
   height: 60px;
 `;
 
-const Menu = ({ iconUrl }) => (
+const Menu = ({ logoUrl }) => (
   <MenuContainer classname="menu">
     <StyledLogo>
-      <Logo iconUrl={iconUrl} />
+      <Logo logoUrl={logoUrl} />
     </StyledLogo>
     <StyledSearch>
       <Search />

@@ -1,28 +1,55 @@
-export const getData = async (urlStart, pageName) => {
-  const pageUrl = urlStart + pageName;
-  const response = await fetch(pageUrl);
-  const pageData = await response.json();
-  let menuColour = 'red';
+import { url as urlStart } from '../config';
 
-  if (pageData.header) {
-    if (pageData.header.menuColour) {
-      menuColour = pageData.header.menuColour;
+export const parseColour = (colour, lightVariant) => {
+  if (lightVariant) {
+    switch(colour) {
+      case 'red':
+        return '#f05a64';
+      default:
+        return '#f05a64';
     }
   }
 
-  const iconLocation = `${urlStart}data/logos/${menuColour}.json`;
-  const iconResponse = await fetch(iconLocation);
-  const iconData = await iconResponse.json();
-  const iconUrl = urlStart + iconData.image.slice(1);
+  switch(colour) {
+    case 'red':
+      return '#f05a64';
+    default:
+      return '#f05a64';
+  }
+}
 
-  const menuResponse = await fetch(urlStart + 'data/menu.json');
+export const getMenuColour = pageData => pageData.header.menuColour || 'red';
+
+export const getMenu = async () => {
+  const menuUrl = urlStart + 'data/menu.json';
+  const menuResponse = await fetch(menuUrl);
   const menuData = await menuResponse.json();
 
-  const result = {
-    pageData,
-    iconUrl,
-    menuData
-  };
-
-  return result;
+  return menuData;
 };
+
+export const getLogo = async (menuColour) => {
+  const logoLocation = `${urlStart}data/logos/${menuColour}.json`;
+  const logoResponse = await fetch(logoLocation);
+  const logoData = await logoResponse.json();
+  const logoUrl = getFullUrl(logoData.image);
+
+  return logoUrl;
+}
+
+export const getData = async (pageName) => {
+  const pageUrl = urlStart + pageName;
+  const response = await fetch(pageUrl);
+  const pageData = await response.json();
+
+  return pageData;
+};
+
+export const getFullUrl = (urlEnd) => {
+  if (urlEnd[0] === '/') {
+    urlEnd = urlEnd.replace('/', '');
+  }
+
+  return urlStart + urlEnd;
+};
+

@@ -1,11 +1,9 @@
 import React from 'react';
 import Async from 'react-promise';
-import Header from '../../components/HeaderContainer';
 import Footer from '../../components/FooterContainer';
-import MobileMenu from '../../components/MobileMenu';
-import Menu from '../../components/Menu';
-import { url } from '../../config';
-import { getData } from '../../helpers';
+import HeaderTemplate from '../../components/templates/Header';
+import Header from '../../components/HeaderContainer';
+import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
 
@@ -14,7 +12,7 @@ const CtaMap = ({ link, title, deck, image }, index) => (
     <a href={link}>
       <h2>{title}</h2>
       <p>{deck}</p>
-      <img src={url + image} alt='' />
+      <img src={ getFullUrl(image) } alt='' />
     </a>
   </li>
 );
@@ -36,7 +34,7 @@ const Description = ({colour, text, image}) => (
     <div
       className={colour}
       style={{
-        backgroundImage: 'url(' + url + image + ')',
+        backgroundImage: 'url(' + getFullUrl(image) +  ')',
         height: '500px'
       }}
     />
@@ -46,45 +44,32 @@ const Description = ({colour, text, image}) => (
 const Home = () => (
   <Async
     promise={new Promise(async (resolve) => {
-      const data = await getData(url, 'data/homepage.json');
-
-      let colour = '';
-
-      if (data.pageData.header.menuColour === 'red') {
-        colour = '#f05a64';
-      }
+      const data = await getData('data/homepage.json');
+      const colour = getMenuColour(data);
+      const colourHex = parseColour(colour);
+      const { cta, quotes, deck, header } = data;
 
       resolve({
-        header: data.pageData.header,
-        menuColour: colour,
-        menu: {
-          menuItems: data.menuData.menu,
-          iconUrl: data.iconUrl
-        },
-        cta: data.pageData.cta,
-        quotes: data.pageData.quotes,
-        deck: data.pageData.deck
+        header,
+        colour,
+        colourHex,
+        cta,
+        quotes,
+        deck
       });
     })}
 
-    then={({header, menuColour, menu, cta, quotes, deck}) => (
-      <div>
-        <MobileMenu
-          menuItems={menu.menuItems}
-          menuColour={menuColour}
-          iconUrl={menu.iconUrl}
+    then={({header, colour, colourHex, cta, quotes, deck}) => (
+      <React.Fragment>
+        <HeaderTemplate
+          colour={colour}
+          colourHex={colourHex}
+          title={header.title}
+          image={getFullUrl(header.image)}
+          Header={Header}
+          title={header.title}
+          image={header.image}
         />
-        <Header
-          text={header.title}
-          image={url + header.image}
-          colour={menuColour}
-        />
-        <Menu
-          menuItems={menu.menuItems}
-          menuColour={menuColour}
-          iconUrl={menu.iconUrl}
-        />
-        <div className="clearfix" />
         <ul className="call-to-actions">
           { cta.map(CtaMap) }
         </ul>
@@ -97,7 +82,7 @@ const Home = () => (
           image={deck.image}
         />
         <Footer />
-      </div>
+      </React.Fragment>
     )}
   />
 );
