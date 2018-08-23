@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import Footer from '../../components/templates/Footer';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
+import CallToActions from '../../components/CallToActions';
 import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
@@ -69,9 +70,7 @@ const Home = () => (
           Header={HeaderContainer}
         />
         <main>
-          <ul className="call-to-actions">
-            { cta.map(CtaMap) }
-          </ul>
+          <CallToActions cta={cta} />
           <ul className="quotes">
             { quotes.map(QuoteMap) }
           </ul>
