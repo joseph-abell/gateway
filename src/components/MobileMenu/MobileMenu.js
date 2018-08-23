@@ -15,14 +15,10 @@ const MenuItem = ({ menuItem, menuColour }) => (
   </div>
 );
 
-const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
+const MobileMenu = ({ menuItems = [], menuColour, iconUrl, isOpen, handleStateChange }) => {
   const styles = {
     bmBurgerButton: {
-      position: 'fixed',
-      width: '26px',
-      height: '20px',
-      left: '20px',
-      top: '221px'
+      display: 'none'
     },
     bmBurgerBars: {
       background: menuColour,
@@ -56,7 +52,7 @@ const MobileMenu = ({ menuItems = [], menuColour, iconUrl }) => {
   }
 
   return (
-    <SlideMenu styles={styles}>
+    <SlideMenu styles={styles} isOpen={isOpen} onStateChange={(state) => handleStateChange(state)}>
       { menuItems.map((menuItem, id) => (
         <MenuItem menuItem={menuItem} menuColour={menuColour} key={id} />
       )) }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Async from 'react-promise';
-import Footer from '../../components/FooterContainer';
+import Footer from '../../components/templates/Footer';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';

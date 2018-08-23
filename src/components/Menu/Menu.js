@@ -14,8 +14,24 @@ const MenuContainer = styled.div`
   height: 60px;
 `;
 
-const Menu = ({ logoUrl }) => (
+const MenuButton = styled.div`
+  height: 60px;
+  width: 60px;
+  background-color: red;
+  float: left;
+`;
+
+const SearchButton = styled.div`
+  height: 60px;
+  width: 60px;
+  background-color: red;
+  float: right;
+`;
+
+const Menu = ({ logoUrl, onMenuClick, onSearchClick }) => (
   <MenuContainer classname="menu">
+    <MenuButton onClick={onMenuClick} />
+    <SearchButton onClick={onSearchClick} />
     <StyledLogo>
       <Logo logoUrl={logoUrl} />
     </StyledLogo>

@@ -15,14 +15,10 @@ const SearchItem = ({ searchItem, colour }) => (
   </div>
 );
 
-const Search = ({ colour, searchItems }) => {
+const Search = ({ colour, searchItems, isOpen, handleStateChange }) => {
   const styles = {
     bmBurgerButton: {
-      position: 'fixed',
-      width: '26px',
-      height: '20px',
-      right: '20px',
-      top: '221px'
+      display: 'none'
     },
     bmBurgerBars: {
       background: colour,
@@ -56,7 +52,7 @@ const Search = ({ colour, searchItems }) => {
   };
 
   return (
-    <SlideMenu styles={styles} right>
+    <SlideMenu styles={styles} right isOpen={isOpen} onStateChange={(state) => handleStateChange(state)}>
       { searchItems && searchItems.map((searchItem, id) => (
         <SearchItem searchItem={searchItem} colour={colour} key={id} />
       )) }

@@ -7,7 +7,58 @@ import Clearfix from '../../Clearfix';
 
 import { getMenu, getFullUrl, getLogo } from '../../../helpers';
 
-const HeaderTemplate = ({ colour, colourHex, Header, title, image }) => (
+class MenuTemplate extends React.Component {
+  state = {
+    menuOpen: false,
+    searchOpen: false
+  }
+
+  handleMenuStateChange ({ isOpen }) {
+    this.setState({ menuOpen: isOpen });
+  }
+
+  handleSearchStateChange ({ isOpen }) {
+    this.setState({ searchOpen: isOpen });
+  }
+
+  render () {
+    const { menuItems, menuColour, logoUrl, children } = this.props;
+    return (
+      <React.Fragment>
+        <MobileMenu
+          menuItems={menuItems}
+          menuColour={menuColour}
+          isOpen={this.state.menuOpen}
+          handleStateChange={(state) => {
+            this.handleMenuStateChange(state);
+          }}
+        />
+        <Search
+          colour={menuColour}
+          isOpen={this.state.searchOpen}
+          handleStateChange={(state) => {
+            this.handleSearchStateChange(state);
+          }}
+        />
+        {children}
+        <Menu
+          menuItem={menuItems}
+          menuColour={menuColour}
+          logoUrl={logoUrl}
+          onMenuClick={() => {
+            this.handleMenuStateChange({ isOpen: true });
+          }}
+          onSearchClick={() => {
+            this.handleSearchStateChange({ isOpen: true });
+          }}
+        />
+        <Clearfix />
+      </React.Fragment>
+    );
+  };
+};
+
+const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
   <Async
     promise={new Promise(async (resolve) => {
       const { menu } = await getMenu();
@@ -18,23 +69,11 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image }) => (
         logoUrl
       });
     })}
+
     then={({ menu, logoUrl }) => (
-      <React.Fragment>
-        <MobileMenu
-          menuItems={menu}
-          menuColour={colourHex}
-        />
-        <Search
-          colour={colourHex}
-        />
+      <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
         <Header text={title} image={getFullUrl(image)} />
-        <Menu
-          menuItems={menu}
-          menuColour={colourHex}
-          logoUrl={logoUrl}
-        />
-        <Clearfix />
-      </React.Fragment>
+      </MenuTemplate>
     )}
   />
 );
