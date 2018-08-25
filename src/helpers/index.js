@@ -5,6 +5,8 @@ export const parseColour = (colour, lightVariant) => {
     switch(colour) {
       case 'red':
         return '#f05a64';
+      case 'green':
+        return 'green';
       default:
         return '#f05a64';
     }
@@ -13,6 +15,8 @@ export const parseColour = (colour, lightVariant) => {
   switch(colour) {
     case 'red':
       return '#f05a64';
+    case 'green':
+      return 'green';
     default:
       return '#f05a64';
   }

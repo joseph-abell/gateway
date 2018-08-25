@@ -8,16 +8,6 @@ import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
 
-const CtaMap = ({ link, title, deck, image }, index) => (
-  <li key={index}>
-    <a href={link}>
-      <h2>{title}</h2>
-      <p>{deck}</p>
-      <img src={ getFullUrl(image) } alt='' />
-    </a>
-  </li>
-);
-
 const QuoteMap = ({quote, author}, index) => (
   <li key={index}>
     <blockquote>
