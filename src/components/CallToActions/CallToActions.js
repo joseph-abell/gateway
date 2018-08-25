@@ -12,6 +12,7 @@ const Image = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  transition: opacity 0.3s;
 `;
 
 const H2 = styled.h2`
@@ -25,6 +26,7 @@ const H2 = styled.h2`
   bottom: 0;
   left: 0;
   right: 0;
+  transition: line-height: 0.3s padding: 0.3s;
 `;
 
 const P = styled.p`
@@ -38,6 +40,7 @@ const P = styled.p`
   font-size: 24px;
   line-height: 30px;
   text-align: center;
+  transition: opacity 0.3s, top: 0.3s;
 `;
 
 const A = styled.a`
@@ -47,18 +50,6 @@ const A = styled.a`
   background-color: ${props => props.colour};
   color: white;
   text-decoration: none;
-
-  ${Image} {
-    transition: opacity 0.3s;
-  }
-  
-  ${H2} {
-    transition: line-height 0.3s, padding 0.3s;
-  }
-  
-  ${P} {
-    transition: opacity 0.3s, top 0.3s;
-  }
 
   &:hover {
     ${Image} {
