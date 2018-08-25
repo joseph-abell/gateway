@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getFullUrl } from '../../helpers';
 
 const Image = styled.div`
   background-image: url('${props => props.url}');
@@ -26,7 +25,7 @@ const H2 = styled.h2`
   bottom: 0;
   left: 0;
   right: 0;
-  transition: line-height: 0.3s padding: 0.3s;
+  transition: line-height 0.3s, padding 0.3s;
 `;
 
 const P = styled.p`
@@ -40,7 +39,7 @@ const P = styled.p`
   font-size: 24px;
   line-height: 30px;
   text-align: center;
-  transition: opacity 0.3s, top: 0.3s;
+  transition: opacity 0.3s, top 0.3s;
 `;
 
 const A = styled.a`
@@ -68,10 +67,10 @@ const A = styled.a`
   }
 `;
 
-const CallToAction = ({ link, title, deck, image, colour }, index) => (
-  <li key={index}>
+const CallToAction = ({ link, title, deck, image, colour }) => (
+  <li key={title}>
     <A href={link} colour={colour}>
-      <Image url={ getFullUrl(image) } />
+      <Image url={image} />
       <H2>{title}</H2>
       <P>{deck}</P>
     </A>

@@ -41,9 +41,9 @@ const FooterTemplate = () => (
 
         <ul>
           {credits.map((credit) => (
-            <li>
+            <li key={credit}>
               {credit.role} by {credit.links.map((link) => (
-                <a href={link.link}>{link.name}</a>
+                <a key={link.link} href={link.link}>{link.name}</a>
               ))}
             </li>
           ))}

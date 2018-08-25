@@ -4,18 +4,10 @@ import Footer from '../../components/templates/Footer';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import CallToActions from '../../components/CallToActions';
+import Quotes from '../../components/Quotes';
 import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
-
-const QuoteMap = ({quote, author}, index) => (
-  <li key={index}>
-    <blockquote>
-      <p>{quote}</p>
-    </blockquote>
-    <p>{author}</p>
-  </li>
-);
 
 const Description = ({colour, text, image}) => (
   <div>
@@ -38,7 +30,14 @@ const Home = () => (
       const data = await getData('data/homepage.json');
       const colour = getMenuColour(data);
       const colourHex = parseColour(colour);
-      const { cta, quotes, deck, header } = data;
+      const { quotes, deck, header } = data;
+      let { cta } = data;
+      
+      cta = cta.map((item) => {
+        item.image = getFullUrl(item.image);
+        
+        return item;
+      });
 
       resolve({
         header,
@@ -61,9 +60,7 @@ const Home = () => (
         />
         <main>
           <CallToActions cta={cta} />
-          <ul className="quotes">
-            { quotes.map(QuoteMap) }
-          </ul>
+          <Quotes quotes={quotes} />
           <Description
             colour={deck.colour}
             text={deck.text}
