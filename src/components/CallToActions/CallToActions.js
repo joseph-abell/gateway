@@ -36,10 +36,10 @@ const P = styled.p`
   right: 50px;
   transition: opacity 0.3s;
   opacity: 0;
-  font-size: 24px;
-  line-height: 30px;
   text-align: center;
   transition: opacity 0.3s, top 0.3s;
+  font-size: 16px;
+  line-height: 22px;
 `;
 
 const A = styled.a`
@@ -57,12 +57,12 @@ const A = styled.a`
     
     ${H2} {
       line-height: 36px;
-      padding-top: 20px;
+      padding-top: 30px;
     }
     
     ${P} {
       opacity: 1;
-      top: 70px;
+      top: 40%;
     }
   }
 `;

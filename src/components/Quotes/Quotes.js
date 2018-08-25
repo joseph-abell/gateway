@@ -9,13 +9,16 @@ const settings = {
 	infinite: true,
 	speed: 500,
 	slidesToShow: 1,
-	slidesToScroll: 1
+	slidesToScroll: 1,
+	arrows: false,
+	fade: true
 };
 
 const Blockquote = styled.blockquote`
   font-size: 24px;
   line-height: 30px;
   color: #333;
+  padding: 20px 40px 0;
   text-align: center;
 `;
 

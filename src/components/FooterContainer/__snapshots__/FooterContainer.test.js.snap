@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`FooterContainer should match snapshot with no data 1`] = `<styled.footer />`;

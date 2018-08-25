@@ -1,6 +1,34 @@
 import React from 'react';
 import Async from 'react-promise';
+import styled from 'styled-components';
 import { getData } from '../../../helpers';
+
+const H3 = styled.h3`
+  color: #666;
+`;
+
+const Footer = styled.footer`
+	background: rgb(180,180,180);
+	font-size: 14px;
+`;
+
+const Section = styled.section`
+  padding: 20px;
+`;
+
+const Credits = styled.ul`
+  color: #fff;
+`;
+
+const CreditLink = styled.a`
+  color: #fff;
+`;
+
+const Main = styled.div`
+  margin-top: 20px;
+  line-height: 18px;
+  color: white;
+`;
 
 const FooterTemplate = () => (
   <Async
@@ -17,38 +45,45 @@ const FooterTemplate = () => (
     })}
 
     then={({ address, contact, credits, socialMedia }) => (
-      <footer>
+      <Footer>
         <div>
-          <div>
-            <h3>{contact.title}</h3>
-            <address>
-              <p>{address.addressLine1}</p>
-              <p>{address.addressLine2}, {address.city}</p>
-              <p>{address.postcode}</p>
-            </address>
-          </div>
+          <Section>
+            <H3>{address.name}</H3>
+            <Main>
+              <address>
+                <p>{address.addressLine1}</p>
+                <p>{address.addressLine2}, {address.city}</p>
+                <p>{address.postcode}</p>
+              </address>
+            </Main>
+          </Section>
 
-          <div>
-            <h3>{contact.title}</h3>
-            <p>{contact.contactNumber}</p>
-            <p>{contact.email}</p>
-          </div>
+          <Section>
+            <H3>{contact.title}</H3>
+            <Main>
+              <p>{contact.contactNumber}</p>
+              <p>{contact.email}</p>
+            </Main>
+          </Section>
 
-          <div>
-            <h3>{socialMedia.title}</h3>
-          </div>
+          <Section>
+            <H3>{socialMedia.title}</H3>
+            <Main />
+          </Section>
         </div>
 
-        <ul>
-          {credits.map((credit) => (
-            <li key={credit}>
-              {credit.role} by {credit.links.map((link) => (
-                <a key={link.link} href={link.link}>{link.name}</a>
-              ))}
-            </li>
-          ))}
-        </ul>
-      </footer>
+        <Section>
+          <Credits>
+            {credits.map((credit) => (
+              <li key={credit}>
+                {credit.role} by {credit.links.map((link) => (
+                  <CreditLink key={link.link} href={link.link}>{link.name}</CreditLink>
+                ))}
+              </li>
+            ))}
+          </Credits>
+        </Section>
+      </Footer>
     )}
   />
 );

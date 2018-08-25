@@ -5,24 +5,10 @@ import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import CallToActions from '../../components/CallToActions';
 import Quotes from '../../components/Quotes';
+import Deck from './Deck';
 import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
 
 import './style.css';
-
-const Description = ({colour, text, image}) => (
-  <div>
-    <p className={colour}>
-      {text}
-    </p>
-    <div
-      className={colour}
-      style={{
-        backgroundImage: 'url(' + getFullUrl(image) +  ')',
-        height: '500px'
-      }}
-    />
-  </div>
-);
 
 const Home = () => (
   <Async
@@ -33,11 +19,17 @@ const Home = () => (
       const { quotes, deck, header } = data;
       let { cta } = data;
       
+      header.image = getFullUrl(header.image);
+      
       cta = cta.map((item) => {
         item.image = getFullUrl(item.image);
+        item.colour = parseColour(item.colour);
         
         return item;
       });
+      
+      deck.image = getFullUrl(deck.image);
+      deck.colour = parseColour(deck.colour);
 
       resolve({
         header,
@@ -49,27 +41,31 @@ const Home = () => (
       });
     })}
 
-    then={({header, colour, colourHex, cta, quotes, deck}) => (
-      <React.Fragment>
-        <Header
-          colour={colour}
-          colourHex={colourHex}
-          title={header.title}
-          image={getFullUrl(header.image)}
-          Header={HeaderContainer}
-        />
-        <main>
-          <CallToActions cta={cta} />
-          <Quotes quotes={quotes} />
-          <Description
-            colour={deck.colour}
-            text={deck.text}
-            image={deck.image}
+    then={({header, colour, colourHex, cta, quotes, deck}) => {
+      const { title, image } = header;
+      
+      return (
+        <React.Fragment>
+          <Header
+            colour={colour}
+            colourHex={colourHex}
+            title={title}
+            image={image}
+            Header={HeaderContainer}
           />
-        </main>
-        <Footer />
-      </React.Fragment>
-    )}
+          <main>
+            <CallToActions cta={cta} />
+            <Quotes quotes={quotes} />
+            <Deck
+              colour={deck.colour}
+              text={deck.text}
+              image={deck.image}
+            />
+          </main>
+          <Footer />
+        </React.Fragment>
+      );
+    }}
   />
 );
 
