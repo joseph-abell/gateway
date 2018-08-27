@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaBars, FaSearch } from 'react-icons/fa';
 
 const Logo = ({ logoUrl }) => (
   <img src={logoUrl} alt='logo' />
@@ -26,17 +27,35 @@ const MenuContainer = styled.div`
 const MenuButton = styled.div`
   height: 60px;
   width: 60px;
-  background-color: red;
   float: left;
   cursor: pointer;
+  line-height: 60px;
+  margin: 0 auto;
+  font-size: 30px;
+  color: ${props => props.colour};
+  
+  svg {
+    display: block;
+    padding-top: 15px;
+    padding-left: 15px;
+  }
 `;
 
 const SearchButton = styled.div`
   height: 60px;
   width: 60px;
-  background-color: red;
   float: right;
   cursor: pointer;
+  line-height: 60px;
+  margin: 0 auto;
+  font-size: 30px;
+  color: ${props => props.colour};
+  
+  svg {
+    display: block;
+    padding-top: 15px;
+    padding-left: 15px;
+  }
 `;
 
 class Menu extends React.Component {
@@ -65,13 +84,17 @@ class Menu extends React.Component {
   }
   
   render () {
-    const { logoUrl, onMenuClick, onSearchClick } = this.props;
+    const { logoUrl, onMenuClick, onSearchClick, colour } = this.props;
     const { stickyMenu } = this.state;
 
     return (
       <MenuContainer classname="menu" stickyMenu={stickyMenu}>
-        <MenuButton onClick={onMenuClick} />
-        <SearchButton onClick={onSearchClick} />
+        <MenuButton onClick={onMenuClick} colour={colour}>
+          <FaBars />
+        </MenuButton>
+        <SearchButton onClick={onSearchClick} colour={colour}>
+          <FaSearch />
+        </SearchButton>
         <StyledLogo>
           <A href='/'>
             <Logo logoUrl={logoUrl} />

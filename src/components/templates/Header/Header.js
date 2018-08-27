@@ -43,7 +43,7 @@ class MenuTemplate extends React.Component {
         {children}
         <Menu
           menuItem={menuItems}
-          menuColour={menuColour}
+          colour={menuColour}
           logoUrl={logoUrl}
           onMenuClick={() => {
             this.handleMenuStateChange({ isOpen: true });
