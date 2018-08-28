@@ -4,25 +4,18 @@ import { slide as SlideMenu } from 'react-burger-menu';
 import Async from 'react-promise';
 import Downshift from 'downshift';
 import flat from 'flat';
+import { Link } from 'react-router-dom';
 import { getData } from '../../helpers';
 
-const SearchLink = styled.a`
+const StyledLink = styled(Link)`
   color: white;
   padding: 20px 25px;
   display: inline-block;
   text-decoration: none;
 `;
 
-const SearchItem = ({ searchItem, value }) => {
-  return (
-    <li key={searchItem.data.text}>
-      <SearchLink href={searchItem.link}>{searchItem.data.title}</SearchLink>
-    </li>
-  );
-};
-
 const SearchInput = (props) => (
-  <input {...props} type='text' />  
+  <input {...props} type='text' />
 );
 
 class Search extends React.Component {
@@ -30,24 +23,24 @@ class Search extends React.Component {
     value: '',
     searchData: []
   };
-  
+
   handleSearch = (event) => {
     this.setState({ value: event.target.value });
   };
-  
+
   promise = new Promise(async (resolve) => {
     if (this.state.searchData.length) {
       return resolve(this.state.searchData);
     }
-  
+
     const data = await getData('data/search/index.json');
-  
+
     const blackList = [
       'audioFile', 'colour', 'date', 'email', 'file',
       'filters', 'time', 'titleRole', 'image', 'menuColour',
       'optionalContent', 'phoneNumber', 'youtubeLink'
     ];
-    
+
     data.forEach((item, index) => {
       const flattened = Object.entries(flat(data[index].data));
       const filtered = flattened
@@ -55,17 +48,27 @@ class Search extends React.Component {
           const inBlackList = blackList.some(blackListItem =>
             item[0].includes(blackListItem)
           );
-          
+
           return inBlackList ? acc : [...acc, item];
         }, []);
 
       data[index].flat = filtered;
 
+      let pageUrl = data[index].url
+        .slice(0, -5)
+        .split('data/')[1];
+
+      data[index].pageUrl = pageUrl;
+
+      const breadcrumb = pageUrl.split('/').join(' - ');
+
+      data[index].breadcrumb = breadcrumb;
+
       this.setState({
         searchData: data
       });
     });
-  
+
     return resolve(data);
   })
 
@@ -112,7 +115,6 @@ class Search extends React.Component {
         <Downshift
           onChange={this.handleSearch}
           itemToString={item => {
-            console.log(item);
             return '';
           }}
         >
@@ -124,18 +126,8 @@ class Search extends React.Component {
                 <SearchInput {...getInputProps()} />
                   {(isOpen && !!inputValue.length) && (
                     <Async
-                      before={() => {
-                        if (!this.state.value) {
-                          return null;
-                        }
-                        
-                        return (
-                          <div>Loading</div>
-                        );
-                      }}
-          
                       promise={this.promise}
-          
+
                       then={(data) => (
                         <ul {...getMenuProps()}>
                           { data
@@ -147,7 +139,7 @@ class Search extends React.Component {
                                   flatItem[1]
                                     .toLowerCase()
                                     .includes(inputValue.toLowerCase())
-                                  
+
                                 )
                             )
                             .map(item => (
@@ -157,7 +149,10 @@ class Search extends React.Component {
                                   item: item
                                 })}
                               >
-                                {item.data.title}
+                                <StyledLink to={item.pageUrl}>
+                                  <div>{item.data.title}</div>
+                                  <div>{item.breadcrumb}</div>
+                                </StyledLink>
                               </li>
                             ))
                           }

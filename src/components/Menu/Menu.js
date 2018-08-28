@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaBars, FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Logo = ({ logoUrl }) => (
   <img src={logoUrl} alt='logo' />
@@ -11,7 +12,7 @@ const StyledLogo = styled.div`
   text-align: center;
 `;
 
-const A = styled.a`
+const StyledLink = styled(Link)`
   padding-top: 15px;
   display: inline-block;
 `;
@@ -33,7 +34,7 @@ const MenuButton = styled.div`
   margin: 0 auto;
   font-size: 30px;
   color: ${props => props.colour};
-  
+
   svg {
     display: block;
     padding-top: 15px;
@@ -50,7 +51,7 @@ const SearchButton = styled.div`
   margin: 0 auto;
   font-size: 30px;
   color: ${props => props.colour};
-  
+
   svg {
     display: block;
     padding-top: 15px;
@@ -66,11 +67,11 @@ class Menu extends React.Component {
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll);
   }
-  
+
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll);
   }
-  
+
   handleScroll = () => {
     if (window.scrollY >= 200 && !this.state.stickyMenu) {
       this.setState({
@@ -82,7 +83,7 @@ class Menu extends React.Component {
       });
     }
   }
-  
+
   render () {
     const { logoUrl, onMenuClick, onSearchClick, colour } = this.props;
     const { stickyMenu } = this.state;
@@ -96,9 +97,9 @@ class Menu extends React.Component {
           <FaSearch />
         </SearchButton>
         <StyledLogo>
-          <A href='/'>
+          <StyledLink to='/'>
             <Logo logoUrl={logoUrl} />
-          </A>
+          </StyledLink>
         </StyledLogo>
       </MenuContainer>
     );

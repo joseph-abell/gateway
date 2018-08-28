@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Image = styled.div`
   background-image: url('${props => props.url}');
@@ -42,7 +43,7 @@ const P = styled.p`
   line-height: 22px;
 `;
 
-const A = styled.a`
+const StyledLink = styled(Link)`
   display: block;
   height: 200px;
   position: relative;
@@ -54,12 +55,12 @@ const A = styled.a`
     ${Image} {
       opacity: 0;
     }
-    
+
     ${H2} {
       line-height: 36px;
       padding-top: 30px;
     }
-    
+
     ${P} {
       opacity: 1;
       top: 40%;
@@ -69,18 +70,18 @@ const A = styled.a`
 
 const CallToAction = ({ link, title, deck, image, colour }) => (
   <li key={title}>
-    <A href={link} colour={colour}>
+    <StyledLink to={link} colour={colour}>
       <Image url={image} />
       <H2>{title}</H2>
       <P>{deck}</P>
-    </A>
+    </StyledLink>
   </li>
 );
 
 const CallToActions = ({cta}) => (
 	<ul className="call-to-actions">
     { cta.map(CallToAction) }
-  </ul>	
+  </ul>
 );
 
 export default CallToActions;

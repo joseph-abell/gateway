@@ -8,7 +8,7 @@ import Event from './pages/Event';
 import PageTemplate from './components/PageTemplate';
 import Person from './pages/Person';
 import Word from './pages/Word';
-    
+
 class Router extends Component {
   render() {
     return (
