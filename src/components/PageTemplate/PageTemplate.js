@@ -1,19 +1,67 @@
 import React from 'react';
 import Async from 'react-promise';
+import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import { url } from '../../config';
-import Header from '../../components/HeaderContainer';
+import Header from '../../components/templates/Header';
+import HeaderContainer from '../../components/HeaderContainer';
+import Image from '../../components/Image';
+import { getData, getFullUrl, parseColour } from '../../helpers';
 
-const ContentPiece = ({ direction, deck, image, colour }) => (
-  <div className={direction}>
-    <div>{deck}</div>
-    <div>{image}</div>
-    <div>{colour}</div>
-  </div>
-);
+const ImageWrapper = styled.div`
+  position: relative;
+  height: 200px;
+  background: ${props => props.color};
+  overflow: hidden;
+`;
+
+const Deck = styled.div`
+  position: relative;
+  z-index: 1;
+  padding: 35px;
+  line-height: 30px;
+  color: #fff;
+`;
+
+const PageSummary = styled.div`
+  padding: 100px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 36px;
+  color: #fff;
+  background-color: ${props => props.color};
+`;
+
+const ContentPiece = ({ direction, deck, image, colour }) => {
+  if (image) {
+    return (
+      <ImageWrapper className={direction} color={colour}>
+        <Image url={getFullUrl(image)} />
+        <Deck>{deck}</Deck>
+      </ImageWrapper>
+    );  
+  }
+  
+  return (
+    <ImageWrapper className={direction} color={colour}>
+      <Deck>{deck}</Deck>
+    </ImageWrapper>
+  );  
+};
 
 const Content = ({ content }) => {
   const { left, right } = content;
+  
+  if (right.deck && !left.deck) {
+    return (
+      <li>
+        <ContentPiece direction='right' deck={right.deck} image={right.image} colour={right.colour} />
+        <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
+      </li>  
+    );    
+  }
+
   return (
     <li>
       <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
@@ -35,31 +83,39 @@ const PageTemplate = ({ location }) => {
   return (
     <Async
       promise={new Promise(async (resolve, reject) => {
-        const fullUrl = `${url}data/pages${pathname}.json`;
-        const response = await fetch(fullUrl);
+        let data;
 
-        if (response.ok) {
-          const { title, header, subtitle, deck, contents } = await response.json();
-          const { image, menuColour } = header;
-          const subtitleText = subtitle.subtitle;
-          const subtitleImage = url + subtitle.image.slice(1);
-          const deckTitle = deck.title;
-          const deckParagraph = deck.paragraph;
-          const deckColour = deck.colour;
+        try {
+          data = await getData(`data/pages${pathname}.json`);
 
-          resolve({
-            title,
-            image: url + image.slice(1),
-            subtitleImage,
-            subtitleText,
-            deckTitle,
-            deckParagraph,
-            deckColour,
-            contents
-          });
-        } else {
-          reject();
+          if (data instanceof Error) {
+            throw data;
+          }
+        } catch (e) {
+          reject(e);
         }
+
+        const { title, header = {}, subtitle, deck, contents } = data;
+        const { image, menuColour } = header;
+        const colourHex = parseColour(menuColour);
+        const subtitleText = subtitle.subtitle;
+        const subtitleImage = url + subtitle.image.slice(1);
+        const deckTitle = deck.title;
+        const deckParagraph = deck.paragraph;
+        const deckColour = deck.colour;
+
+        resolve({
+          title,
+          image: url + image.slice(1),
+          subtitleImage,
+          subtitleText,
+          deckTitle,
+          deckParagraph,
+          deckColour,
+          contents,
+          menuColour,
+          colourHex
+        });
       })}
 
       then={({
@@ -70,16 +126,22 @@ const PageTemplate = ({ location }) => {
         deckTitle,
         deckParagraph,
         deckColour,
-        contents
+        contents,
+        menuColour,
+        colourHex
       }) => (
         <div>
           <Header
-            text={title}
+            colour={menuColour}
+            colourHex={colourHex}
+            title={title}
             image={image}
+            Header={HeaderContainer}
           />
-          <img src={subtitleImage} alt='' />
-          <div>{subtitleText}</div>
-          {deckTitle}
+          <ImageWrapper>
+            <Image url={subtitleImage} />
+          </ImageWrapper>
+          <PageSummary color={colourHex}>{subtitleText}</PageSummary>
           <Contents contents={contents} />
         </div>
       )}

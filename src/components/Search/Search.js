@@ -18,6 +18,20 @@ const SearchInput = (props) => (
   <input {...props} type='text' />
 );
 
+const SearchListItem = ({item, getItemProps}) => (
+  <li
+    {...getItemProps({
+      key: item.data.title,
+      item: item
+    })}
+  >
+    <StyledLink to={item.pageUrl}>
+      <div>{item.data.title}</div>
+      <div>{item.breadcrumb}</div>
+    </StyledLink>
+  </li>
+);
+
 class Search extends React.Component {
   state = {
     value: '',
@@ -27,6 +41,18 @@ class Search extends React.Component {
   handleSearch = (event) => {
     this.setState({ value: event.target.value });
   };
+  
+  search = (data, inputValue) => (
+    data.filter(item =>
+      item.flat.some(flatItem =>
+        flatItem[1] &&
+        !Array.isArray(flatItem[1]) &&
+        flatItem[1]
+          .toLowerCase()
+          .includes(inputValue.toLowerCase())
+      )
+    )
+  );
 
   promise = new Promise(async (resolve) => {
     if (this.state.searchData.length) {
@@ -111,7 +137,12 @@ class Search extends React.Component {
     };
 
     return (
-      <SlideMenu styles={styles} right isOpen={isOpen} onStateChange={(state) => handleStateChange(state)}>
+      <SlideMenu
+        styles={styles}
+        right
+        isOpen={isOpen}
+        onStateChange={handleStateChange}
+      >
         <Downshift
           onChange={this.handleSearch}
           itemToString={item => {
@@ -124,42 +155,24 @@ class Search extends React.Component {
             return (
               <div>
                 <SearchInput {...getInputProps()} />
-                  {(isOpen && !!inputValue.length) && (
-                    <Async
-                      promise={this.promise}
+                {(isOpen && !!inputValue.length) && (
+                  <Async
+                    promise={this.promise}
 
-                      then={(data) => (
-                        <ul {...getMenuProps()}>
-                          { data
-                            .filter(item =>
-                              item.flat
-                                .some(flatItem =>
-                                  flatItem[1] &&
-                                  !Array.isArray(flatItem[1]) &&
-                                  flatItem[1]
-                                    .toLowerCase()
-                                    .includes(inputValue.toLowerCase())
-
-                                )
-                            )
-                            .map(item => (
-                              <li
-                                {...getItemProps({
-                                  key: item.data.title,
-                                  item: item
-                                })}
-                              >
-                                <StyledLink to={item.pageUrl}>
-                                  <div>{item.data.title}</div>
-                                  <div>{item.breadcrumb}</div>
-                                </StyledLink>
-                              </li>
-                            ))
-                          }
-                        </ul>
-                      )}
-                    />
-                  )}
+                    then={data => (
+                      <ul {...getMenuProps()}>
+                        {
+                          this.search(data, inputValue).map(item =>
+                            <SearchListItem
+                              item={item}
+                              getItemProps={getItemProps}
+                            />
+                          )
+                        }
+                      </ul>
+                    )}
+                  />
+                )}
               </div>
             );
           }}

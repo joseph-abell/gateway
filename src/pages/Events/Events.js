@@ -20,7 +20,7 @@ const Events = () => (
       );
     })}
 
-    then={(colour, colourHex, header) => (
+    then={(colour, colourHex, header = {}) => (
       <React.Fragment>
         <Header
           colour={colour}

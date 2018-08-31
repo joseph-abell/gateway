@@ -1,19 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const Image = styled.div`
-  background-image: url('${props => props.url}');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition: opacity 0.3s;
-`;
+import Image from '../../components/Image';
 
 const H2 = styled.h2`
   height: 200px;

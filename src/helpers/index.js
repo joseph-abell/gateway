@@ -1,3 +1,4 @@
+/* global fetch */
 import { url as urlStart } from '../config';
 
 export const parseColour = (colour, lightVariant) => {
@@ -26,11 +27,20 @@ export const parseColour = (colour, lightVariant) => {
   }
 }
 
-export const getMenuColour = pageData => pageData.header.menuColour || 'red';
+export const getMenuColour = pageData =>
+  (
+    pageData.header &&
+    pageData.header.menuColour
+  ) ||
+  pageData.menuColour ||
+  'red';
 
 export const getMenu = async () => {
   const menuUrl = urlStart + 'data/menu.json';
-  const menuResponse = await fetch(menuUrl);
+  const menuResponse = await fetch(menuUrl).catch((e) => {
+    console.log(e);
+    return e;
+  });
   const menuData = await menuResponse.json();
 
   return menuData;
@@ -38,7 +48,10 @@ export const getMenu = async () => {
 
 export const getLogo = async (menuColour) => {
   const logoLocation = `${urlStart}data/logos/${menuColour}.json`;
-  const logoResponse = await fetch(logoLocation);
+  const logoResponse = await fetch(logoLocation).catch((e) => {
+    console.log(e);
+    return e;
+  });
   const logoData = await logoResponse.json();
   const logoUrl = getFullUrl(logoData.image);
 
@@ -48,12 +61,17 @@ export const getLogo = async (menuColour) => {
 export const getData = async (pageName) => {
   const pageUrl = urlStart + pageName;
   const response = await fetch(pageUrl);
+
+  if (!response.ok) {
+    return new Error('something messed up');
+  }
+  
   const pageData = await response.json();
 
   return pageData;
 };
 
-export const getFullUrl = (urlEnd) => {
+export const getFullUrl = (urlEnd = '') => {
   if (urlEnd.includes('http')) {
     return urlEnd;
   }
@@ -64,4 +82,3 @@ export const getFullUrl = (urlEnd) => {
 
   return urlStart + urlEnd;
 };
-
