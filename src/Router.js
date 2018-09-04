@@ -9,6 +9,8 @@ import PageTemplate from './components/PageTemplate';
 import Person from './pages/Person';
 import Word from './pages/Word';
 
+console.log(Route);
+
 class Router extends Component {
   render() {
     return (

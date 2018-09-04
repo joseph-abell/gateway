@@ -95,7 +95,7 @@ const PageTemplate = ({ location }) => {
           reject(e);
         }
 
-        const { title, header = {}, subtitle, deck, contents } = data;
+        const { title, header = {}, subtitle = {}, deck, contents } = data;
         const { image, menuColour } = header;
         const colourHex = parseColour(menuColour);
         const subtitleText = subtitle.subtitle;

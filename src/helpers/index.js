@@ -47,7 +47,7 @@ export const getMenu = async () => {
 };
 
 export const getLogo = async (menuColour) => {
-  const logoLocation = `${urlStart}data/logos/${menuColour}.json`;
+  const logoLocation = getFullUrl(`data/logos/${menuColour}.json`);
   const logoResponse = await fetch(logoLocation).catch((e) => {
     console.log(e);
     return e;
