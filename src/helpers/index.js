@@ -5,13 +5,13 @@ export const parseColour = (colour, lightVariant) => {
   if (lightVariant) {
     switch(colour) {
       case 'red':
-        return '#f05a64';
+        return '#f7a994';
       case 'orange':
-        return 'rgb(252, 180, 46)';
+        return '#ffd782';
       case 'green':
-        return '#067f8e';
+        return '#55c2b8';
       default:
-        return '#9666a8';
+        return '#c1a2cd';
     }
   }
 
@@ -65,7 +65,7 @@ export const getData = async (pageName) => {
   if (!response.ok) {
     return new Error('something messed up');
   }
-  
+
   const pageData = await response.json();
 
   return pageData;

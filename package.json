@@ -10,6 +10,7 @@
     "lodash.flatmapdeep": "^4.10.0",
     "lodash.values": "^4.3.0",
     "lodash.valuesin": "^4.3.0",
+    "moment": "^2.22.2",
     "react": "^16.3.2",
     "react-burger-menu": "^2.5.2",
     "react-dom": "^16.3.2",

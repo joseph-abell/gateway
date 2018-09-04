@@ -1,6 +1,7 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
+import moment from 'moment';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import Image from '../../components/Image';
@@ -39,15 +40,29 @@ const StyledPagination = styled.div`
   background: ${({color}) => color};
 `;
 
-const EventList = ({events}) => {
+const StyledEvent = styled.div`
+  padding: 35px;
+  background: ${props => props.color};
+  color: #fff;
+  line-height: 30px;
+  margin-bottom: 10px;
+`;
+
+const EventList = ({events, color}) => {
   return events.map(({data}) => {
-    console.log('data', data);
+    const date = moment(data.date).format('dddd, DD MMM YYYY');
+    const time = moment(data.time).format('kk:ss');
+    const image = getFullUrl(data.image);
+
     return (
-      <div key={data.title}>
+      <StyledEvent key={data.title + date + time} color={color}>
         <h2>{data.title}</h2>
-        <div>{data.date}</div>
-        <div>{data.time}</div>
-      </div>
+        <div>{date}</div>
+        <div>{time}</div>
+
+        <div>{data.deck}</div>
+        <div>Read More +</div>
+      </StyledEvent>
     );
   });
 };
@@ -59,6 +74,7 @@ const Events = () => (
       const eventsPageData = await getData('data/pages/events.json');
       const colour = getMenuColour(eventsPageData);
       const colourHex = parseColour(colour);
+      const lightColourHex = parseColour(colour, true);
       const { header, subtitle } = eventsPageData;
       const image = getFullUrl(header.image);
       const subtitleImage = getFullUrl(subtitle.image);
@@ -71,6 +87,7 @@ const Events = () => (
       resolve({
         colour,
         colourHex,
+        lightColourHex,
         header,
         image,
         subtitleImage,
@@ -83,6 +100,7 @@ const Events = () => (
     then={({
       colour,
       colourHex,
+      lightColourHex,
       header = {},
       image,
       subtitleImage,
@@ -105,7 +123,7 @@ const Events = () => (
         <StyledPagination color={colourHex}>
           <Pagination maxCount={maxPageCount} />
         </StyledPagination>
-        <EventList events={events} />
+        <EventList events={events} color={lightColourHex} />
       </React.Fragment>
     )}
   />
