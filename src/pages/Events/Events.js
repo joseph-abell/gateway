@@ -38,6 +38,10 @@ const Pagination = ({ maxCount }) => {
 
 const StyledPagination = styled.div`
   background: ${({color}) => color};
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
 `;
 
 const StyledEvent = styled.div`
@@ -45,7 +49,7 @@ const StyledEvent = styled.div`
   background: ${props => props.color};
   color: #fff;
   line-height: 30px;
-  margin-bottom: 10px;
+  margin: 20px 0 0;
 `;
 
 const EventList = ({events, color}) => {
@@ -83,7 +87,7 @@ const Events = () => (
       const eventCount = Object.keys(data).length;
       const events = Object.values(data);
       const maxPageCount = Math.ceil(eventCount / 10);
-      console.log(events);
+
       resolve({
         colour,
         colourHex,
