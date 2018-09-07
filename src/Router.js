@@ -6,10 +6,9 @@ import Error404 from './pages/Error404';
 import Events from './pages/Events';
 import Event from './pages/Event';
 import PageTemplate from './components/PageTemplate';
+import People from './pages/People';
 import Person from './pages/Person';
 import Word from './pages/Word';
-
-console.log(Route);
 
 class Router extends Component {
   render() {
@@ -20,6 +19,7 @@ class Router extends Component {
           <Route exact path='/events' component={Events} />
           <Route exact path='/events/*' component={Event} />
           <Route exact path='/404' component={Error404} />
+          <Route exact path='/people' component={People} />
           <Route exact path='/people/*' component={Person} />
           <Route exact path='/words/*' component={Word} />
           <Route component={PageTemplate} />
