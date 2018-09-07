@@ -1,7 +1,7 @@
 import React from 'react';
 import Async from 'react-promise';
 import { url } from '../../config';
-import { getData, getMenuColour, parseColour, getFullUrl } from '../../helpers';
+import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../../helpers';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 
@@ -11,7 +11,7 @@ const Word = () => (
       const data = await getData(url, 'data/words/bhggfhuj.json');
       const wordData = data.pageData;
       const colour = getMenuColour(data);
-      const colourHex = parseColour(colour);
+      const colourHex = changeColourToHex(colour);
       const { title, image, deck, date, subtitle, audioFile, file, youtubeLink, header } = data;
 
       resolve({

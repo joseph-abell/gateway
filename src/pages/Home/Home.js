@@ -6,7 +6,7 @@ import HeaderContainer from '../../components/HeaderContainer';
 import CallToActions from '../../components/CallToActions';
 import Quotes from '../../components/Quotes';
 import Deck from './Deck';
-import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
+import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../helpers';
 
 import './style.css';
 
@@ -15,7 +15,7 @@ const Home = () => (
     promise={new Promise(async (resolve) => {
       const data = await getData('data/homepage.json');
       const colour = getMenuColour(data);
-      const colourHex = parseColour(colour);
+      const colourHex = changeColourToHex(colour);
       const { quotes, deck, header } = data;
       let { cta } = data;
       
@@ -23,13 +23,13 @@ const Home = () => (
       
       cta = cta.map((item) => {
         item.image = getFullUrl(item.image);
-        item.colour = parseColour(item.colour);
+        item.colour = changeColourToHex(item.colour);
         
         return item;
       });
       
       deck.image = getFullUrl(deck.image);
-      deck.colour = parseColour(deck.colour);
+      deck.colour = changeColourToHex(deck.colour);
 
       resolve({
         header,

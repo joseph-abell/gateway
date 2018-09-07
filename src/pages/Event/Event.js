@@ -3,7 +3,7 @@ import Async from 'react-promise';
 import { url } from '../../config';
 import { getData } from '../../helpers';
 import Header from '../../components/templates/Header';
-import { getMenuColour, parseColour, getFullUrl } from '../../helpers';
+import { getMenuColour, changeColourToHex, getFullUrl } from '../../helpers';
 import HeaderContainer from '../../components/HeaderContainer';
 
 const Event = () => (
@@ -11,7 +11,7 @@ const Event = () => (
     promise={new Promise(async (resolve) => {
       const data = await getData('data/events/new-event.json');
       const colour = getMenuColour(data);
-      const colourHex = parseColour(colour);
+      const colourHex = changeColourToHex(colour);
       const { title, image, header, date, time, deck } = data;
 
       resolve({

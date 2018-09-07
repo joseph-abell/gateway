@@ -5,7 +5,7 @@ import moment from 'moment';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import Image from '../../components/Image';
-import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
+import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../helpers';
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -77,8 +77,8 @@ const Events = () => (
       const data = await getData('data/events/index.json');
       const eventsPageData = await getData('data/pages/events.json');
       const colour = getMenuColour(eventsPageData);
-      const colourHex = parseColour(colour);
-      const lightColourHex = parseColour(colour, true);
+      const colourHex = changeColourToHex(colour);
+      const lightColourHex = changeColourToHex(colour, true);
       const { header, subtitle } = eventsPageData;
       const image = getFullUrl(header.image);
       const subtitleImage = getFullUrl(subtitle.image);

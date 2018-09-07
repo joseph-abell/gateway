@@ -6,7 +6,7 @@ import { url } from '../../config';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
 import Image from '../../components/Image';
-import { getData, getFullUrl, parseColour } from '../../helpers';
+import { getData, getFullUrl, changeColourToHex } from '../../helpers';
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -97,7 +97,7 @@ const PageTemplate = ({ location }) => {
 
         const { title, header = {}, subtitle = {}, deck, contents } = data;
         const { image, menuColour } = header;
-        const colourHex = parseColour(menuColour);
+        const colourHex = changeColourToHex(menuColour);
         const subtitleText = subtitle.subtitle;
         const subtitleImage = url + subtitle.image.slice(1);
         const deckTitle = deck.title;

@@ -1,7 +1,7 @@
 /* global fetch */
 import { url as urlStart } from '../config';
 
-export const parseColour = (colour, lightVariant) => {
+export const changeColourToHex = (colour, lightVariant) => {
   if (lightVariant) {
     switch(colour) {
       case 'red':

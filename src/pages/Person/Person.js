@@ -3,14 +3,14 @@ import Async from 'react-promise';
 import { url } from '../../config';
 import Header from '../../components/templates/Header';
 import HeaderContainer from '../../components/HeaderContainer';
-import { getData, getFullUrl, parseColour, getMenuColour } from '../../helpers';
+import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../helpers';
 
 const Person = () => (
   <Async
     promise={new Promise(async (resolve) => {
       const data = await getData(url, 'data/people/joe-abell.json');
       const colour = getMenuColour(data);
-      const colourHex = parseColour(colour);
+      const colourHex = changeColourToHex(colour);
       const { header, title, image, deck, email, phoneNumber, titleRole, filters } = data;
 
       resolve({
