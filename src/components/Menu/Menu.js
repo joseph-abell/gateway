@@ -60,9 +60,15 @@ const SearchButton = styled.div`
 `;
 
 class Menu extends React.Component {
-  state = {
-    stickyMenu: false
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      stickyMenu: props.sticky || false,
+      alwaysSticky: props.sticky || false
+    }  
   }
+  
 
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll);
@@ -73,6 +79,10 @@ class Menu extends React.Component {
   }
 
   handleScroll = () => {
+    if (this.state.alwaysSticky) {
+      return;
+    }
+
     if (window.scrollY >= 200 && !this.state.stickyMenu) {
       this.setState({
         stickyMenu: true
@@ -86,6 +96,7 @@ class Menu extends React.Component {
 
   render () {
     const { logoUrl, onMenuClick, onSearchClick, colour } = this.props;
+    
     const { stickyMenu } = this.state;
 
     return (

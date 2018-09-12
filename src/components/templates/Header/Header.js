@@ -22,7 +22,7 @@ class MenuTemplate extends React.Component {
   }
 
   render () {
-    const { menuItems, menuColour, logoUrl, children } = this.props;
+    const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
     return (
       <React.Fragment>
         <MobileMenu
@@ -45,6 +45,7 @@ class MenuTemplate extends React.Component {
           menuItem={menuItems}
           colour={menuColour}
           logoUrl={logoUrl}
+          sticky={sticky}
           onMenuClick={() => {
             this.handleMenuStateChange({ isOpen: true });
           }}
@@ -73,7 +74,7 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
     then={({ menu, logoUrl }) => {
       if (!title || !image) {
         return (
-          <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl} />
+          <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl} sticky={true} />
         );
       }
       
