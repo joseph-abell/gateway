@@ -46,7 +46,7 @@ class Search extends React.Component {
     data.filter(item =>
       item.flat.some(flatItem =>
         flatItem[1] &&
-        !Array.isArray(flatItem[1]) &&
+        !Array.isArray(flatItem[1]) &&  
         flatItem[1]
           .toLowerCase()
           .includes(inputValue.toLowerCase())
