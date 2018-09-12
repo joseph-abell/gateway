@@ -70,11 +70,19 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
       });
     })}
 
-    then={({ menu, logoUrl }) => (
-      <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
-        <Header text={title} image={getFullUrl(image)} />
-      </MenuTemplate>
-    )}
+    then={({ menu, logoUrl }) => {
+      if (!title || !image) {
+        return (
+          <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl} />
+        );
+      }
+      
+      return (
+        <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
+          <Header text={title} image={getFullUrl(image)} />
+        </MenuTemplate>
+      );
+    }}
   />
 );
 
