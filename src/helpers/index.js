@@ -1,5 +1,5 @@
 /* global fetch */
-import { url as urlStart } from '../config';
+import { url as urlStart } from './config';
 
 export const changeColourToHex = (colour, lightVariant) => {
   if (lightVariant) {
