@@ -56,7 +56,6 @@ const ContactUs = () => (
           <p>
             <A colour={colourHexLight} href='mailto:office@gatewaychurch.co.uk'>Email</A>
           </p>
-
         </Deck>
         <Footer/>
       </React.Fragment>
