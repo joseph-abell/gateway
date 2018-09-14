@@ -4,7 +4,7 @@ import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../../../
 import { Link } from 'react-router-dom';
 import HeaderContainer from '../../../components/HeaderContainer';
 import Header from '../../../components/templates/Header';
-import Deck from '../Home/Deck';
+import Deck from '../../../components/Deck';
 import Footer from '../../../components/templates/Footer';
 
 const People = ({ location = {} }) => (
@@ -90,7 +90,7 @@ const People = ({ location = {} }) => (
                 { people.map((person) => (
                   <li key={person.data.title}>{person.data.title}</li>
                 )) }
-              </ul>      
+              </ul>
             </main>
           </React.Fragment>
         );

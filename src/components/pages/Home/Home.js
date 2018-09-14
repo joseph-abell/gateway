@@ -1,11 +1,12 @@
 import React from 'react';
 import Async from 'react-promise';
+import styled from 'styled-components';
 import Footer from '../../../components/templates/Footer';
 import Header from '../../../components/templates/Header';
 import HeaderContainer from '../../../components/HeaderContainer';
 import CallToActions from '../../../components/CallToActions';
 import Quotes from '../../../components/Quotes';
-import Deck from './Deck';
+import Deck from '../../../components/Deck';
 import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../../helpers';
 
 import './style.css';
@@ -18,16 +19,16 @@ const Home = () => (
       const colourHex = changeColourToHex(colour);
       const { quotes, deck, header } = data;
       let { cta } = data;
-      
+
       header.image = getFullUrl(header.image);
-      
+
       cta = cta.map((item) => {
         item.image = getFullUrl(item.image);
         item.colour = changeColourToHex(item.colour);
-        
+
         return item;
       });
-      
+
       deck.image = getFullUrl(deck.image);
       deck.colour = changeColourToHex(deck.colour);
 
@@ -43,7 +44,7 @@ const Home = () => (
 
     then={({header, colour, colourHex, cta, quotes, deck}) => {
       const { title, image } = header;
-      
+
       return (
         <React.Fragment>
           <Header
