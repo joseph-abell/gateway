@@ -54,7 +54,7 @@ const ContactUs = () => (
         <Deck colour={colourHex}>
           <p>{deck}</p>
           <p>
-            <A colour={colourHexLight} href='mailto://office@gatewaychurch.co.uk'>Email</A>
+            <A colour={colourHexLight} href='mailto:office@gatewaychurch.co.uk'>Email</A>
           </p>
 
         </Deck>
