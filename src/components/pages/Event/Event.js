@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import { url } from '../../../helpers/config';
 import { getData } from '../../../helpers';
 import Header from '../../../components/templates/Header';
 import Footer from '../../../components/templates/Footer';
@@ -63,7 +62,7 @@ const Event = () => (
         image,
         date,
         time,
-        deck, 
+        deck,
         colour,
         colourHex,
         colourHexLight

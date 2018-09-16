@@ -40,26 +40,26 @@ const ContentPiece = ({ direction, deck, image, colour }) => {
         <Image url={getFullUrl(image)} />
         <Deck>{deck}</Deck>
       </ImageWrapper>
-    );  
+    );
   }
-  
+
   return (
     <ImageWrapper className={direction} color={colour}>
       <Deck>{deck}</Deck>
     </ImageWrapper>
-  );  
+  );
 };
 
 const Content = ({ content }) => {
   const { left, right } = content;
-  
+
   if (right.deck && !left.deck) {
     return (
       <li>
         <ContentPiece direction='right' deck={right.deck} image={right.image} colour={right.colour} />
         <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
-      </li>  
-    );    
+      </li>
+    );
   }
 
   return (
@@ -73,7 +73,7 @@ const Content = ({ content }) => {
 const Contents = ({ contents }) => (
   <ul>
     { contents.map(({content}) => (
-      <Content content={content} />
+      <Content key={content.left.deck + content.right.deck} content={content} />
     )) }
   </ul>
 );
@@ -98,15 +98,15 @@ const Page = ({ location }) => {
         const { title, header = {}, subtitle = {}, deck, contents } = data;
         const { image, menuColour } = header;
         const colourHex = changeColourToHex(menuColour);
-        const subtitleText = subtitle.subtitle;
-        const subtitleImage = url + subtitle.image.slice(1);
-        const deckTitle = deck.title;
-        const deckParagraph = deck.paragraph;
-        const deckColour = deck.colour;
+        const subtitleText = subtitle && subtitle.subtitle;
+        const subtitleImage = subtitle && subtitle.image && getFullUrl(subtitle.image);
+        const deckTitle = deck && deck.title;
+        const deckParagraph = deck && deck.paragraph;
+        const deckColour = deck && deck.colour;
 
         resolve({
           title,
-          image: url + image.slice(1),
+          image: image && url + image.slice(1),
           subtitleImage,
           subtitleText,
           deckTitle,

@@ -39,17 +39,16 @@ const People = ({ location = {} }) => (
 
         // filter the list into only people that match the filter
         people = people.filter((person) => {
+	        // get data from person
+	        const { data } = person || {};
 
-	      // get data from person
-	      const { data } = person || {};
+	        // get filters from data
+	        const { filters } = data || {};
 
-	      // get filters from data
-	      const { filters } = data || {};
+	        // get the part of the filters we care about, the keys
+	        const keys = Object.keys(filters);
 
-	      // get the part of the filters we care about, the keys
-	      const keys = Object.keys(filters);
-
-	      // check whether the filter is in the list of keys
+	        // check whether the filter is in the list of keys
   	      return keys.includes(filter);
         });
       }
@@ -61,8 +60,8 @@ const People = ({ location = {} }) => (
 
       header.image = getFullUrl(header.image);
 
-      deck.image = getFullUrl(deck.image);
-      deck.colour = changeColourToHex(deck.colour);
+      deck.image = deck && deck.image && getFullUrl(deck.image);
+      deck.colour = changeColourToHex(deck && deck.colour);
 
       resolve({
         header,
@@ -76,7 +75,7 @@ const People = ({ location = {} }) => (
     then={({header, colour, colourHex, deck, people}) => {
       const { title, image } = header;
 
-      if (people) {
+      if (people.length) {
   	    return (
           <React.Fragment>
             <Header

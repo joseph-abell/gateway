@@ -29,7 +29,7 @@ const Person = () => (
 
     then={({
       title,
-      image, 
+      image,
       deck,
       header,
       email,
@@ -46,8 +46,9 @@ const Person = () => (
           colourHex={colourHex}
           title={header.title}
           image={getFullUrl(header.image)}
+          Header={HeaderContainer}
         />
-           
+
         <div>
           <h1>{title}</h1>
           <h2>{titleRole}</h2>
@@ -55,7 +56,7 @@ const Person = () => (
         </div>
       </React.Fragment>
     )}
-  />   
+  />
 )
 
 export default Person;
