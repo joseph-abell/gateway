@@ -72,13 +72,8 @@ const Content = ({ content }) => {
 
 const Contents = ({ contents }) => (
   <ul>
-<<<<<<< HEAD
     { contents && contents.map(({content}) => (
       <Content content={content} />
-=======
-    { contents.map(({content}) => (
-      <Content key={content.left.deck + content.right.deck} content={content} />
->>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
     )) }
   </ul>
 );
@@ -103,19 +98,11 @@ const Page = ({ location }) => {
         const { title, header = {}, subtitle = {}, deck, contents } = data;
         const { image, menuColour } = header;
         const colourHex = changeColourToHex(menuColour);
-<<<<<<< HEAD
         const subtitleText = subtitle.subtitle;
         const subtitleImage = subtitle && subtitle.image && url + subtitle.image.slice(1);
-        const deckTitle = deck.title;
-        const deckParagraph = deck.paragraph;
-        const deckColour = deck.colour;
-=======
-        const subtitleText = subtitle && subtitle.subtitle;
-        const subtitleImage = subtitle && subtitle.image && getFullUrl(subtitle.image);
         const deckTitle = deck && deck.title;
         const deckParagraph = deck && deck.paragraph;
         const deckColour = deck && deck.colour;
->>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
 
         resolve({
           title,

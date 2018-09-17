@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaBars, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import ShowOnMobile from '../ShowOnMobile';
-import HideOnMobile from '../HideOnMobile';
+import ShowOnDesktop from '../ShowOnDesktop';
+import HideOnDesktop from '../HideOnDesktop';
 
 const Logo = ({ logoUrl }) => (
   <img src={logoUrl} alt='logo' />
@@ -166,11 +166,11 @@ class Menu extends React.Component {
     return (
       <MenuContainer classname="menu" stickyMenu={stickyMenu}>
         <MenuInnerContainer>
-          <ShowOnMobile>
+          <HideOnDesktop>
             <MenuButton onClick={onMenuClick} colour={colour}>
               <FaBars />
             </MenuButton>
-          </ShowOnMobile>
+          </HideOnDesktop>
           <SearchButton onClick={onSearchClick} colour={colour}>
             <FaSearch />
           </SearchButton>
@@ -179,7 +179,7 @@ class Menu extends React.Component {
               <Logo logoUrl={logoUrl} />
             </StyledLink>
           </StyledLogo>
-          <HideOnMobile>
+          <ShowOnDesktop>
             <nav>
               <MainMenu>
                 {menuItems.map(item => (
@@ -200,7 +200,7 @@ class Menu extends React.Component {
                 ))}
               </MainMenu>
             </nav>
-          </HideOnMobile>
+          </ShowOnDesktop>
         </MenuInnerContainer>
       </MenuContainer>
     );

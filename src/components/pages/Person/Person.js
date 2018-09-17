@@ -1,10 +1,9 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
-import { url } from '../../../helpers/config';
 import Header from '../../../components/templates/Header';
 import HeaderContainer from '../../../components/HeaderContainer';
-import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../../helpers';
+import { getData, changeColourToHex, getMenuColour } from '../../../helpers';
 
 const Container = styled.div`
   padding: 20px;
@@ -66,22 +65,11 @@ const Person = ({ location }) => (
         <Header
           colour={colour}
           colourHex={colourHex}
-<<<<<<< HEAD
           Header={HeaderContainer}
         />
         <Container colour={colourHexLight}>
           <H1>{title}</H1>
           <H2>{titleRole}</H2>
-=======
-          title={header.title}
-          image={getFullUrl(header.image)}
-          Header={HeaderContainer}
-        />
-
-        <div>
-          <h1>{title}</h1>
-          <h2>{titleRole}</h2>
->>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
           <p>{deck}</p>
         </Container>
       </React.Fragment>

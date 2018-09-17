@@ -3,7 +3,7 @@ import Async from 'react-promise';
 import MobileMenu from '../../MobileMenu';
 import Search from '../../Search';
 import Menu from '../../Menu';
-import ShowOnMobile from '../../ShowOnMobile';
+import HideOnDesktop from '../../HideOnDesktop';
 import Clearfix from '../../Clearfix';
 
 import { getMenu, getFullUrl, getLogo } from '../../../helpers';
@@ -26,7 +26,7 @@ class MenuTemplate extends React.Component {
     const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
     return (
       <React.Fragment>
-        <ShowOnMobile>
+        <HideOnDesktop>
           <MobileMenu
             menuItems={menuItems}
             menuColour={menuColour}
@@ -35,7 +35,7 @@ class MenuTemplate extends React.Component {
               this.handleMenuStateChange(state);
             }}
           />
-        </ShowOnMobile>
+        </HideOnDesktop>
         <Search
           colour={menuColour}
           isOpen={this.state.searchOpen}

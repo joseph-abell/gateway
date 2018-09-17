@@ -8,6 +8,7 @@ import Event from '../pages/Event';
 import Page from '../pages/Page';
 import People from '../pages/People';
 import Person from '../pages/Person';
+import Words from '../pages/Words';
 import Word from '../pages/Word';
 import ContactUs from '../pages/ContactUs';
 
@@ -22,6 +23,7 @@ class Router extends Component {
           <Route exact path='/404' component={Error404} />
           <Route exact path='/people' component={People} />
           <Route exact path='/people/*' component={Person} />
+          <Route exact path='/words' component={Words} />
           <Route exact path='/words/*' component={Word} />
           <Route exact path='/contact-us' component={ContactUs} />
           <Route component={Page} />

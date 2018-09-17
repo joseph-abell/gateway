@@ -126,13 +126,7 @@ const People = ({ location = {} }) => (
       });
     })}
 
-<<<<<<< HEAD
     then={({title, image, colour, colourHex, colourHexLight, deck, people, acceptedFilters}) => {
-=======
-    then={({header, colour, colourHex, deck, people}) => {
-      const { title, image } = header;
-
->>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
       if (people.length) {
   	    return (
           <React.Fragment>
