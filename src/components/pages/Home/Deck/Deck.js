@@ -1,11 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import HideOnMobile from '../../../HideOnMobile';
+
 const Text = styled.div`
 	background-color: ${props => props.colour};
 	color: white;
 	padding: 35px;
 	line-height: 30px;
+	font-size: 20px;
+	margin-bottom: 20px;
 `;
 
 const Image = styled.div`
@@ -30,9 +34,11 @@ const Deck = ({colour, text, image}) => (
     <Text colour={colour}>
       {text}
     </Text>
-    <ImageWrapper>
-    	<Image src={image} />
-    </ImageWrapper>
+    <HideOnMobile>
+      <ImageWrapper>
+    	  <Image src={image} />
+      </ImageWrapper>
+    </HideOnMobile>
   </div>
 );
 

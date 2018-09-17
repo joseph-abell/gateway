@@ -72,7 +72,7 @@ const Content = ({ content }) => {
 
 const Contents = ({ contents }) => (
   <ul>
-    { contents.map(({content}) => (
+    { contents && contents.map(({content}) => (
       <Content content={content} />
     )) }
   </ul>
@@ -99,7 +99,7 @@ const Page = ({ location }) => {
         const { image, menuColour } = header;
         const colourHex = changeColourToHex(menuColour);
         const subtitleText = subtitle.subtitle;
-        const subtitleImage = url + subtitle.image.slice(1);
+        const subtitleImage = subtitle && subtitle.image && url + subtitle.image.slice(1);
         const deckTitle = deck.title;
         const deckParagraph = deck.paragraph;
         const deckColour = deck.colour;
@@ -138,9 +138,11 @@ const Page = ({ location }) => {
             image={image}
             Header={HeaderContainer}
           />
-          <ImageWrapper>
-            <Image url={subtitleImage} />
-          </ImageWrapper>
+          {subtitleImage && (
+            <ImageWrapper>
+              <Image url={subtitleImage} />
+            </ImageWrapper>
+          )}
           <PageSummary color={colourHex}>{subtitleText}</PageSummary>
           <Contents contents={contents} />
         </div>
