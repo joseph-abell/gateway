@@ -66,7 +66,7 @@ const People = ({ location = {} }) => (
 
       // make a list of filters that we want
       let acceptedFilters = await getData('data/peopleFilters/index.json');
-      
+
       acceptedFilters = Object
         .values(acceptedFilters)
         .map(f => f.data)
@@ -93,24 +93,12 @@ const People = ({ location = {} }) => (
 	        // get data from person
 	        const { data } = person || {};
 
-<<<<<<< HEAD
-	        // get data from person
-	        const { data } = person || {};
-
 	        // get filters from data
 	        const { filters } = data || {};
 
 	        // get the part of the filters we care about, the keys
 	        const keys = Object.keys(filters);
 
-=======
-	        // get filters from data
-	        const { filters } = data || {};
-
-	        // get the part of the filters we care about, the keys
-	        const keys = Object.keys(filters);
-
->>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
 	        // check whether the filter is in the list of keys
   	      return keys.includes(filter);
         });
