@@ -32,7 +32,7 @@ const Words = ({ location = {} }) => (
       let words = Object
         .values(data)
         .map(word => word.data)
-        .sort((a, b) => moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1);
+        .sort((a, b) => moment(a.dateTime).isBefore(b.dateTime) ? 1 : -1);
 
       resolve();
     })}
