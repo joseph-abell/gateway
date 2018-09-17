@@ -38,7 +38,7 @@ const Words = ({ location = {} }) => (
     })}
 
     then={() => (
-      <div>Events</div>
+      <div>Words</div>
     )}
   />
 );
