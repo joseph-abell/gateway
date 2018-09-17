@@ -5,7 +5,7 @@ import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../../../
 import { Link } from 'react-router-dom';
 import HeaderContainer from '../../../components/HeaderContainer';
 import Header from '../../../components/templates/Header';
-import Deck from '../Home/Deck';
+import Deck from '../../../components/Deck';
 import Footer from '../../../components/templates/Footer';
 import Image from '../../../components/Image';
 
@@ -90,7 +90,10 @@ const People = ({ location = {} }) => (
 
         // filter the list into only people that match the filter
         people = people.filter((person) => {
+	        // get data from person
+	        const { data } = person || {};
 
+<<<<<<< HEAD
 	        // get data from person
 	        const { data } = person || {};
 
@@ -100,6 +103,14 @@ const People = ({ location = {} }) => (
 	        // get the part of the filters we care about, the keys
 	        const keys = Object.keys(filters);
 
+=======
+	        // get filters from data
+	        const { filters } = data || {};
+
+	        // get the part of the filters we care about, the keys
+	        const keys = Object.keys(filters);
+
+>>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
 	        // check whether the filter is in the list of keys
   	      return keys.includes(filter);
         });
@@ -112,8 +123,8 @@ const People = ({ location = {} }) => (
       const { deck, header, title } = data;
       const image = getFullUrl(header.image);
 
-      deck.image = getFullUrl(deck.image);
-      deck.colour = changeColourToHex(deck.colour);
+      deck.image = deck && deck.image && getFullUrl(deck.image);
+      deck.colour = changeColourToHex(deck && deck.colour);
 
       resolve({
         title,
@@ -127,7 +138,13 @@ const People = ({ location = {} }) => (
       });
     })}
 
+<<<<<<< HEAD
     then={({title, image, colour, colourHex, colourHexLight, deck, people, acceptedFilters}) => {
+=======
+    then={({header, colour, colourHex, deck, people}) => {
+      const { title, image } = header;
+
+>>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
       if (people.length) {
   	    return (
           <React.Fragment>
@@ -155,7 +172,7 @@ const People = ({ location = {} }) => (
                     </Link>
                   </li>
                 )) }
-              </ul>      
+              </ul>
             </main>
           </React.Fragment>
         );

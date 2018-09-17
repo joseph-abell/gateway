@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import MobileMenu from '../../MobileMenu';
 import Search from '../../Search';
 import Menu from '../../Menu';
+import ShowOnMobile from '../../ShowOnMobile';
 import Clearfix from '../../Clearfix';
 
 import { getMenu, getFullUrl, getLogo } from '../../../helpers';
@@ -25,14 +26,16 @@ class MenuTemplate extends React.Component {
     const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
     return (
       <React.Fragment>
-        <MobileMenu
-          menuItems={menuItems}
-          menuColour={menuColour}
-          isOpen={this.state.menuOpen}
-          handleStateChange={(state) => {
-            this.handleMenuStateChange(state);
-          }}
-        />
+        <ShowOnMobile>
+          <MobileMenu
+            menuItems={menuItems}
+            menuColour={menuColour}
+            isOpen={this.state.menuOpen}
+            handleStateChange={(state) => {
+              this.handleMenuStateChange(state);
+            }}
+          />
+        </ShowOnMobile>
         <Search
           colour={menuColour}
           isOpen={this.state.searchOpen}
@@ -42,7 +45,7 @@ class MenuTemplate extends React.Component {
         />
         {children}
         <Menu
-          menuItem={menuItems}
+          menuItems={menuItems}
           colour={menuColour}
           logoUrl={logoUrl}
           sticky={sticky}
@@ -77,7 +80,7 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
           <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl} sticky={true} />
         );
       }
-      
+
       return (
         <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
           <Header text={title} image={getFullUrl(image)} />

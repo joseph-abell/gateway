@@ -15,6 +15,10 @@ const H2 = styled.h2`
   left: 0;
   right: 0;
   transition: line-height 0.3s, padding 0.3s;
+
+  @media screen and (min-width: 768px) {
+    line-height: 350px;
+  }
 `;
 
 const P = styled.p`
@@ -39,6 +43,10 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
 
+  @media screen and (min-width: 768px) {
+    height: 350px;
+  }
+
   &:hover {
     ${Image} {
       opacity: 0;
@@ -52,18 +60,29 @@ const StyledLink = styled(Link)`
     ${P} {
       opacity: 1;
       top: 40%;
+
+      @media screen and (min-width: 768px) {
+        top: 25%;
+      }
     }
   }
 `;
 
+const Wrapper = styled.li`
+  @media screen and (min-width: 768px) {
+    width: 33.33vw;
+    display: inline-block;
+  }
+`;
+
 const CallToAction = ({ link, title, deck, image, colour }) => (
-  <li key={title}>
+  <Wrapper key={title}>
     <StyledLink to={link} colour={colour}>
       <Image url={image} />
       <H2>{title}</H2>
       <P>{deck}</P>
     </StyledLink>
-  </li>
+  </Wrapper>
 );
 
 const CallToActions = ({cta}) => (

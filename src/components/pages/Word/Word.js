@@ -9,10 +9,9 @@ const Word = () => (
   <Async
     promise={new Promise(async (resolve) => {
       const data = await getData(url, 'data/words/bhggfhuj.json');
-      const wordData = data.pageData;
       const colour = getMenuColour(data);
       const colourHex = changeColourToHex(colour);
-      const { title, image, deck, date, subtitle, audioFile, file, youtubeLink, header } = data;
+      const { title, image, deck, date, subtitle, audioFile, file, youtubeLink } = data;
 
       resolve({
         title,
@@ -57,7 +56,7 @@ const Word = () => (
         </div>
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
-        <img src={url + image.slice(1)} />
+        <img src={url + image.slice(1)} alt='' />
         <div>
           {audioFile}
         </div>

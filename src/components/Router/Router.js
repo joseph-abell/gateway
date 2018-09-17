@@ -9,6 +9,7 @@ import Page from '../pages/Page';
 import People from '../pages/People';
 import Person from '../pages/Person';
 import Word from '../pages/Word';
+import ContactUs from '../pages/ContactUs';
 
 class Router extends Component {
   render() {
@@ -22,6 +23,7 @@ class Router extends Component {
           <Route exact path='/people' component={People} />
           <Route exact path='/people/*' component={Person} />
           <Route exact path='/words/*' component={Word} />
+          <Route exact path='/contact-us' component={ContactUs} />
           <Route component={Page} />
         </Switch>
       </BrowserRouter>

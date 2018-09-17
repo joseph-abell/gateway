@@ -51,7 +51,7 @@ const Person = ({ location }) => (
 
     then={({
       title,
-      image, 
+      image,
       deck,
       email,
       phoneNumber,
@@ -66,16 +66,27 @@ const Person = ({ location }) => (
         <Header
           colour={colour}
           colourHex={colourHex}
+<<<<<<< HEAD
           Header={HeaderContainer}
         />
         <Container colour={colourHexLight}>
           <H1>{title}</H1>
           <H2>{titleRole}</H2>
+=======
+          title={header.title}
+          image={getFullUrl(header.image)}
+          Header={HeaderContainer}
+        />
+
+        <div>
+          <h1>{title}</h1>
+          <h2>{titleRole}</h2>
+>>>>>>> 08bb98d986cffe1e5962d8b43ac96e12b598eba8
           <p>{deck}</p>
         </Container>
       </React.Fragment>
     )}
-  />   
+  />
 )
 
 export default Person;

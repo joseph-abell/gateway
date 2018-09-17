@@ -51,13 +51,13 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
         <StyledNotLink key={link}>{link}</StyledNotLink>
       );
     }
-    
+
     if (link === 1) {
       return (
         <StyledLink key={link} to='events'>{link}</StyledLink>
       );
     }
-    
+
     return (
       <StyledLink key={link} to={`events?page=${link}`}>{link}</StyledLink>
     );
@@ -82,21 +82,21 @@ const StyledEvent = styled(Link)`
 `;
 
 const EventList = ({events, color}) => {
-  return events.map(({data}) => {
-    const date = moment(data.date).format('dddd, DD MMM YYYY');
-    const time = moment(data.time).format('kk:ss');
+  return events.map((event) => {
+    const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
+    const time = moment(event.dateTime).format('kk:ss');
 
     return (
       <StyledEvent
-        key={data.title + date + time}
+        key={event.title + date + time}
         color={color}
-        to={`events/${data.title}`}
+        to={`events/${event.title}`}
       >
-        <h2>{data.title}</h2>
+        <h2>{event.title}</h2>
         <div>{date}</div>
         <div>{time}</div>
 
-        <div>{data.deck}</div>
+        <div>{event.deck}</div>
         <div>Read More +</div>
       </StyledEvent>
     );
@@ -111,7 +111,7 @@ const Events = ({ location = {} }) => (
       if (!currentPage) {
         currentPage = '?page=1';
       }
-      
+
       currentPage = parseInt(currentPage.split('page=')[1], 10);
 
       const data = await getData('data/events/index.json');
@@ -124,8 +124,15 @@ const Events = ({ location = {} }) => (
       const subtitleImage = getFullUrl(subtitle.image);
       const subtitleText = subtitle.subtitle;
 
-      const eventCount = Object.keys(data).length;
-      const events = Object.values(data).slice(currentPage * 10 - 10, currentPage * 10);
+
+      let events = Object
+        .values(data)
+        .map(event => event.data)
+        .filter(event => event && event.dateTime && moment().isBefore(event.dateTime))
+        .sort((a, b) => moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1);
+
+      const eventCount = events.length;
+      events = events.slice(currentPage * 10 - 10, currentPage * 10);
 
       const maxPageCount = Math.ceil(eventCount / 10);
 
@@ -158,7 +165,7 @@ const Events = ({ location = {} }) => (
       if (!events.length) {
         return (<Redirect to='events' />);
       }
-      
+
       return (
         <React.Fragment>
           <Header
