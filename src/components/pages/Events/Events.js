@@ -7,24 +7,9 @@ import Header from '../../../components/templates/Header';
 import Footer from '../../../components/templates/Footer';
 import HeaderContainer from '../../../components/HeaderContainer';
 import Image from '../../../components/Image';
+import ImageWrapper from '../../../components/ImageWrapper';
+import PageSummary from '../../../components/PageSummary';
 import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../../../helpers';
-
-const ImageWrapper = styled.div`
-  position: relative;
-  height: 200px;
-  background: ${props => props.color};
-  overflow: hidden;
-`;
-
-const PageSummary = styled.div`
-  padding: 100px 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 30px;
-  line-height: 36px;
-  color: #fff;
-  background-color: ${props => props.color};
-`;
 
 const StyledNotLink = styled.div`
   display: inline-block;
@@ -163,7 +148,9 @@ const Events = ({ location = {} }) => (
       currentPage
     }) => {
       if (!events.length) {
-        return (<Redirect to='events' />);
+        return (
+          <Redirect to='events' />
+        );
       }
 
       return (
