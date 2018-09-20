@@ -101,7 +101,7 @@ const ChildMenu = styled.ul`
   background: white;
   text-align: left;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   padding-bottom: 10px;
 `;
 

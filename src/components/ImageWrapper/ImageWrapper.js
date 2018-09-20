@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ImageWrapper = styled.div`
   position: relative;
-  height: 200px;
+  height: ${props => props.height || '200px'};
   background: ${props => props.color};
   overflow: hidden;
 `;
