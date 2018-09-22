@@ -38,7 +38,6 @@ export const getMenuColour = pageData =>
 export const getMenu = async () => {
   const menuUrl = urlStart + 'data/menu.json';
   const menuResponse = await fetch(menuUrl).catch((e) => {
-    console.log(e);
     return e;
   });
   const menuData = await menuResponse.json();
@@ -49,7 +48,6 @@ export const getMenu = async () => {
 export const getLogo = async (menuColour) => {
   const logoLocation = getFullUrl(`data/logos/${menuColour}.json`);
   const logoResponse = await fetch(logoLocation).catch((e) => {
-    console.log(e);
     return e;
   });
   const logoData = await logoResponse.json();
@@ -82,3 +80,16 @@ export const getFullUrl = (urlEnd = '') => {
 
   return urlStart + urlEnd;
 };
+
+export const getResizedImageUrl = (url) => {
+  if (!url) return;
+  const pageWidth = window.innerWidth;
+
+  if (pageWidth < 768) {
+    return url.split('uploads/').join('uploads/mobile/');
+  } else if (pageWidth < 991) {
+    return url.split('uploads/').join('uploads/tablet/');
+  }
+
+  return url.split('uploads/').join('uploads/desktop/');
+}

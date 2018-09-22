@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { getResizedImageUrl } from '../helpers';
 
 const Image = styled.div`
-  background-image: url('${props => props.url}');
+  background-image: url('${props => getResizedImageUrl(props.url)}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -6,7 +6,7 @@ import Menu from '../components/Menu';
 import HideOnDesktop from '../components/HideOnDesktop';
 import Clearfix from '../components/Clearfix';
 
-import { getMenu, getFullUrl, getLogo } from '../helpers';
+import { getMenu, getFullUrl, getLogo, getResizedImageUrl } from '../helpers';
 
 class MenuTemplate extends React.Component {
   state = {
@@ -83,7 +83,7 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
 
       return (
         <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
-          <Header text={title} image={getFullUrl(image)} />
+          <Header text={title} image={getResizedImageUrl(getFullUrl(image))} />
         </MenuTemplate>
       );
     }}
