@@ -1,43 +1,38 @@
 {
   "name": "gateway",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "downshift": "^2.1.5",
-    "enzyme-to-json": "^3.3.4",
-    "flat": "^4.1.0",
-    "lodash.flatmap": "^4.5.0",
-    "lodash.flatmapdeep": "^4.10.0",
-    "lodash.values": "^4.3.0",
-    "lodash.valuesin": "^4.3.0",
-    "moment": "^2.22.2",
-    "react": "^16.3.2",
-    "react-burger-menu": "^2.5.2",
-    "react-dom": "^16.3.2",
-    "react-icons": "^3.0.5",
-    "react-promise": "^2.0.3",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "react-slick": "^0.23.1",
-    "react-test-renderer": "^16.4.1",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^3.2.6"
-  },
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+    "prod": "NODE_ENV=production node server.js",
+    "build": "next build",
+    "start": "node server.js"
   },
-  "devDependencies": {
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "fetch-mock": "^6.4.4",
-    "jest-enzyme": "^6.0.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerbilsinspace/gateway.git"
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gerbilsinspace/gateway/issues"
+  },
+  "homepage": "https://github.com/gerbilsinspace/gateway#readme",
+  "dependencies": {
+    "downshift": "^2.2.2",
+    "flat": "^4.1.0",
+    "next": "^7.0.0",
+    "next-routes": "^1.4.2",
+    "rc-slider": "^8.6.3",
+    "react": "^16.5.2",
+    "react-burger-menu": "^2.5.2",
+    "react-dom": "^16.5.2",
+    "react-icons": "^3.1.0",
+    "react-promise": "^2.0.3",
+    "react-slick": "^0.23.1",
+    "react-sound": "^1.2.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^3.4.9"
   }
 }
