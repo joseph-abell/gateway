@@ -83,7 +83,11 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
 
       return (
         <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
-          <Header text={title} image={getResizedImageUrl(getFullUrl(image))} />
+          <Header
+            text={title}
+            image={getResizedImageUrl(getFullUrl(image))}
+            colour={colourHex}
+          />
         </MenuTemplate>
       );
     }}
