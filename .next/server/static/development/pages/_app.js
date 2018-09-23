@@ -159,6 +159,10 @@ function (_App) {
       }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("link", {
         href: "/static/index.css",
         rel: "stylesheet"
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("link", {
+        rel: "shortcut icon",
+        href: "/static/favicon.ico",
+        type: "image/x-icon"
       })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Component, pageProps));
     }
   }]);

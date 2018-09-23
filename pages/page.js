@@ -7,14 +7,10 @@ import { url } from '../helpers/config';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
+import ImageWrapper from '../components/ImageWrapper';
+import Container from '../components/Container';
+import Clearfix from '../components/Clearfix';
 import { getData, getFullUrl, changeColourToHex } from '../helpers';
-
-const ImageWrapper = styled.div`
-  position: relative;
-  height: 200px;
-  background: ${props => props.color};
-  overflow: hidden;
-`;
 
 const Deck = styled.div`
   position: relative;
@@ -25,49 +21,197 @@ const Deck = styled.div`
 `;
 
 const PageSummary = styled.div`
-  padding: 100px 20px;
-  margin-bottom: 20px;
+  position: absolute;
+  z-index: 1;
   text-align: center;
   font-size: 30px;
   line-height: 36px;
   color: #fff;
-  background-color: ${props => props.color};
+  height: 200px;
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    height: 500px;
+    padding: 240px 0 0;
+  }
 `;
 
-const ContentPiece = ({ direction, deck, image, colour }) => {
+const PageDeck = styled.div`
+  padding: 40px;
+  background-color: ${props => props.colour};
+  color: white;
+`;
+
+const H2 = styled.h2`
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 1221px) {
+    text-align: center;
+  }
+`;
+
+const P = styled.p`
+  @media screen and (min-width: 1221px) {
+    text-align: center;
+  }
+`;
+
+const HeaderDeck = styled.h3`
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  line-height: 200px;
+  height: 200px;
+  text-align: center;
+  font-size: 50px;
+  display: block;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    height: 500px;
+    line-height: 500px;
+  }
+`;
+
+const ContentPieceContainer = styled.div`
+  float: ${props => props.direction};
+  background-color: ${props => props.colour};
+  width: ${props => props.width ? '100%' : 0};
+  height: 200px;
+
+  @media screen and (min-width: 768px) {
+    width: calc(${props => props.width}% - 10px);
+    border-right: ${props => (props.direction === 'left' && props.width) ? '10px solid #fff' : 0};
+    border-left: ${props => (props.direction === 'right' && props.width) ? '10px solid #fff' : 0};
+    border-bottom: ${props => (props.width) ? '20px solid white' : 0};
+    height: 500px;
+  }
+`;
+
+const ContentPiece = ({
+  direction,
+  deck,
+  image,
+  colour,
+  width,
+  flipped
+}) => {
+  let adjustedDirection = direction;
+
+  if (flipped) {
+    if (adjustedDirection === 'left') {
+      adjustedDirection = 'right';
+    } else if (adjustedDirection === 'right') {
+      adjustedDirection = 'left';
+    }
+  }
+
   if (image) {
     return (
-      <ImageWrapper className={direction} color={colour}>
-        <Image url={getFullUrl(image)} />
-        <Deck>{deck}</Deck>
-      </ImageWrapper>
+      <ContentPieceContainer
+        direction={adjustedDirection}
+        colour={colour}
+        width={width}
+      >
+        <ImageWrapper color={colour}>
+          <Image url={getFullUrl(image)} />
+          { deck && (
+            <HeaderDeck>{deck}</HeaderDeck>
+          )}
+        </ImageWrapper>
+      </ContentPieceContainer>
     );
   }
 
   return (
-    <ImageWrapper className={direction} color={colour}>
+    <ContentPieceContainer
+      direction={adjustedDirection}
+      colour={colour}
+      width={width}
+    >
       <Deck>{deck}</Deck>
-    </ImageWrapper>
+    </ContentPieceContainer>
   );
 };
+
+const ContentContainer = styled.li`
+  display: block;
+  width: 100%;
+`;
 
 const Content = ({ content }) => {
   const { left, right } = content;
 
+  let leftWidth = 0;
+  let rightWidth = 0;
+
+  if (left.deck && right.deck) {
+    leftWidth = 50;
+    rightWidth = 50;
+  } else if (left.image && right.image) {
+    leftWidth = 50;
+    rightWidth = 50;
+  } else if (left.image && right.deck) {
+    leftWidth = 60;
+    rightWidth = 40;
+  } else if (left.deck && left.image) {
+    leftWidth = 40;
+    rightWidth = 60;
+  } else if (!left.deck && !left.image && (right.image || right.deck)) {
+    leftWidth = 0;
+    rightWidth = 100;
+  } else if (!right.deck && !right.image && (left.image || left.deck)) {
+    leftWidth = 100;
+    rightWidth = 0;
+  }
+
   if (right.deck && !left.deck) {
     return (
-      <li>
-        <ContentPiece direction='right' deck={right.deck} image={right.image} colour={right.colour} />
-        <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
-      </li>
+      <ContentContainer>
+        <ContentPiece
+          direction='right'
+          deck={right.deck}
+          image={right.image}
+          colour={right.colour}
+          width={rightWidth}
+          flipped={true}
+        />
+        <ContentPiece
+          direction='left'
+          deck={left.deck}
+          image={left.image}
+          colour={left.colour}
+          width={leftWidth}
+          flipped={true}
+        />
+        <Clearfix />
+      </ContentContainer>
     );
   }
 
   return (
-    <li>
-      <ContentPiece direction='left' deck={left.deck} image={left.image} colour={left.colour} />
-      <ContentPiece direction='right' deck={right.deck} image={right.image} colour={right.colour} />
-    </li>
+    <ContentContainer>
+      <ContentPiece
+        direction='left'
+        deck={left.deck}
+        image={left.image}
+        colour={left.colour}
+        width={leftWidth}
+      />
+      <ContentPiece
+        direction='right'
+        deck={right.deck}
+        image={right.image}
+        colour={right.colour}
+        width={rightWidth}
+      />
+      <Clearfix />
+    </ContentContainer>
   );
 };
 
@@ -143,13 +287,27 @@ const Page = withRouter(({ router }) => {
             image={image}
             Header={HeaderContainer}
           />
-          {subtitleImage && (
-            <ImageWrapper>
-              <Image url={subtitleImage} />
-            </ImageWrapper>
-          )}
-          <PageSummary color={colourHex}>{subtitleText}</PageSummary>
-          <Contents contents={contents} />
+          <Container>
+            {subtitleImage && (
+              <ImageWrapper>
+                <Image url={subtitleImage} />
+                <Container>
+                  <PageSummary color={colourHex}>{subtitleText}</PageSummary>
+                </Container>
+              </ImageWrapper>
+            )}
+          </Container>
+
+          <PageDeck colour={colourHex}>
+            <Container>
+              <H2>{deckTitle}</H2>
+              <P>{deckParagraph}</P>
+            </Container>
+          </PageDeck>
+
+          <Container>
+            <Contents contents={contents} />
+          </Container>
         </div>
       )}
 

@@ -95,4 +95,3 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image}) => (
 );
 
 export default HeaderTemplate;
-

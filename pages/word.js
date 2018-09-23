@@ -86,9 +86,7 @@ const Word = withRouter(({ router }) => (
           <Image url={url + image.slice(1)} />
         </ImageWrapper>
 
-        <div>
-          <Audio url={audioFile} />
-        </div>
+        <Audio url={audioFile} colour={colourHex} lightColour={colourHexLight} />
       </React.Fragment>
     )}
   />
