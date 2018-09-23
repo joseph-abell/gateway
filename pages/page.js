@@ -74,7 +74,7 @@ const Content = ({ content }) => {
 const Contents = ({ contents }) => (
   <ul>
     { contents && contents.map(({content}) => (
-      <Content content={content} />
+      <Content content={content} key={content.left.deck + content.right.deck} />
     )) }
   </ul>
 );

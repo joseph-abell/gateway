@@ -175,7 +175,7 @@ class Menu extends React.Component {
             <FaSearch />
           </SearchButton>
           <StyledLogo>
-            <Link href='/'>
+            <Link href='/' prefetch>
               <StyledLink>
                 <Logo logoUrl={logoUrl} />
               </StyledLink>
@@ -186,14 +186,14 @@ class Menu extends React.Component {
               <MainMenu>
                 {menuItems.map(item => (
                   <MenuItem colour={colour} key={item.link}>
-                    <Link href={item.link}>
+                    <Link href={item.link} prefetch>
                       <StyledMenuLink colour={colour}>{item.title}</StyledMenuLink>
                     </Link>
                     {item.childMenu && item.childMenu.length && (
                       <ChildMenu>
                         {item.childMenu.map(childItem => (
                           <li key={childItem.link}>
-                            <Link href={childItem.link}>
+                            <Link href={childItem.link} prefetch>
                               <ChildLink colour={colour}>
                                 <ChildUnderline>{childItem.title}</ChildUnderline>
                               </ChildLink>
