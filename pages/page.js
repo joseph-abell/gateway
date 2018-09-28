@@ -2,9 +2,11 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
+import Head from 'next/head';
 import { Router } from '../router';
 import { url } from '../helpers/config';
 import Header from '../templates/Header';
+import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
@@ -280,6 +282,9 @@ const Page = withRouter(({ router }) => {
         colourHex
       }) => (
         <div>
+          <Head>
+            <title key='title'>{title} - Gateway Church, York</title>
+          </Head>
           <Header
             colour={menuColour}
             colourHex={colourHex}
@@ -308,6 +313,8 @@ const Page = withRouter(({ router }) => {
           <Container>
             <Contents contents={contents} />
           </Container>
+
+          <Footer />
         </div>
       )}
 

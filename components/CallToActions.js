@@ -19,6 +19,10 @@ const H2 = styled.h2`
   @media screen and (min-width: 768px) {
     line-height: 350px;
   }
+
+  @media screen and (min-width: 1241px) {
+    line-height: 550px;
+  }
 `;
 
 const P = styled.p`
@@ -47,13 +51,17 @@ const StyledLink = styled.a`
     height: 350px;
   }
 
+  @media screen and (min-width: 1241px) {
+    height: 550px;
+  }
+
   &:hover {
     ${Image} {
       opacity: 0;
     }
 
     ${H2} {
-      line-height: 36px;
+      line-height: 300px;
       padding-top: 30px;
     }
 
@@ -63,6 +71,10 @@ const StyledLink = styled.a`
 
       @media screen and (min-width: 768px) {
         top: 25%;
+      }
+
+      @media screen and (min-width: 1241px) {
+        top: 40%;
       }
     }
   }

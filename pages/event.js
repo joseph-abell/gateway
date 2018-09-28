@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import moment from 'moment';
 import { withRouter } from 'next/router';
+import Head from 'next/head';
 
 import { Link } from '../router';
 
@@ -53,7 +54,6 @@ const StyledLink = styled.a`
 const Event = withRouter((props) => (
   <Async
     promise={new Promise(async (resolve) => {
-      console.log(props);
       const data = await getData('data/events/new-event.json');
       const colour = getMenuColour(data);
       const colourHex = changeColourToHex(colour);
@@ -74,6 +74,9 @@ const Event = withRouter((props) => (
 
     then={({title, image, date, time, deck, colour, colourHex, colourHexLight}) => (
       <React.Fragment>
+        <Head>
+          <title key='title'>{title} - Gateway Church, York</title>
+        </Head>
         <Header
           colour={colour}
           colourHex={colourHex}

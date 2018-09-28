@@ -31,6 +31,10 @@ const Author = styled.div`
 
 const StyledSlider = styled(Slider)`
   margin-bottom: 40px;
+
+  .slick-dots button {
+  	font-size: 14px;
+  }
 `;
 
 const Quote = ({ quote, author }) => (

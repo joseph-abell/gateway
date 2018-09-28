@@ -13,6 +13,7 @@ class Gateway extends App {
           <link href="/static/rc-slider.css" rel="stylesheet" />
           <link href="/static/index.css" rel="stylesheet" />
           <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+          <title key='title'>Gateway Church, York</title>
         </Head>
         <Component {...pageProps} />
       </Container>

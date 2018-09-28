@@ -11,11 +11,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/word": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/page": [
+    "/": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

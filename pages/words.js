@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import moment from 'moment';
 import styled from 'styled-components';
+import Head from 'next/head';
 import { Link } from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
@@ -118,6 +119,9 @@ const Words = ({ location = {} }) => (
 
       return (
         <React.Fragment>
+          <Head>
+            <title key='title'>Words - Gateway Church, York</title>
+          </Head>
           <Header
             colour={colour}
             colourHex={colourHex}

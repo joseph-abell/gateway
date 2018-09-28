@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
+import Head from 'next/head';
 import { url } from '../helpers/config';
 import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../helpers';
 import Header from '../templates/Header';
@@ -71,6 +72,9 @@ const Word = withRouter(({ router }) => (
       colourHexLight
     }) => (
       <React.Fragment>
+        <Head>
+          <title key='title'>{title} - Gateway Church, York</title>
+        </Head>
         <Header
           colour={colour}
           colourHex={colourHex}

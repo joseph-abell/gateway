@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
+import Head from 'next/head';
 import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../helpers';
 import { Link } from '../router';
 import HeaderContainer from '../components/HeaderContainer';
@@ -129,6 +130,9 @@ const People = withRouter(({ router = {} }) => (
       if (people.length) {
   	    return (
           <React.Fragment>
+            <Head>
+              <title key='title'>People - Gateway Church, York</title>
+            </Head>
             <Header
               colour={colour}
               colourHex={colourHex}

@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import moment from 'moment';
+import Head from 'next/head';
 import { Link } from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
@@ -157,6 +158,9 @@ const Events = ({ location = {} }) => (
 
       return (
         <React.Fragment>
+          <Head>
+            <title key='title'>Events - Gateway Church, York</title>
+          </Head>
           <Header
             colour={colour}
             colourHex={colourHex}
