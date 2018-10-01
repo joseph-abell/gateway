@@ -6,24 +6,16 @@ import Footer from '../templates/Footer';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
+import ImageWrapper from '../components/ImageWrapper';
 import CallToActions from '../components/CallToActions';
 import Quotes from '../components/Quotes';
-import Deck from '../components/HomeDeck';
+import HomeDeck from '../components/HomeDeck';
 import SimpleEvents from '../components/SimpleEvents';
 
 import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../helpers';
 
 const Padding = styled.div`
   padding: 20px;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  height: 200px;
-
-  @media screen and (min-width: 768px) {
-    height: 400px;
-  }
 `;
 
 const Home = () => (
@@ -62,6 +54,7 @@ const Home = () => (
 
     then={({header, colour, colourHex, colourHexLight, cta, quotes, deck, eventsImage}) => {
       const { title, image } = header;
+      const { TwitterTimelineEmbed } = require('react-twitter-embed');
 
       return (
         <React.Fragment>
@@ -79,17 +72,24 @@ const Home = () => (
             <CallToActions cta={cta} />
             <Padding>
               <Quotes quotes={quotes} />
-              <Deck
+              <HomeDeck
                 colour={deck.colour}
                 text={deck.text}
                 image={deck.image}
               />
-              <ImageWrapper>
+              <ImageWrapper
+                mobileHeight='400px'
+                mobileMarginBottom='0'
+              >
                 <Image url={eventsImage} />
               </ImageWrapper>
               <SimpleEvents
                 colour={colourHex}
                 colourLight={colourHexLight}
+              />
+              <TwitterTimelineEmbed
+                sourceType='profile'
+                screenName='gatewayyork'
               />
             </Padding>
           </main>

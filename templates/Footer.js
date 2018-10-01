@@ -2,7 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import { Link } from '../router';
-import { getData } from '../helpers';
+import { getData, getFullUrl } from '../helpers';
 
 const H3 = styled.h3`
   color: #666;
@@ -69,7 +69,17 @@ const FooterTemplate = () => (
 
           <Section>
             <H3>{socialMedia.title}</H3>
-            <Main />
+            <Main>
+              <ul>
+                {socialMedia.list.map((item) => (
+                  <li key={item.link}>
+                    <a href={item.link}>
+                      <img src={getFullUrl(item.image)} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Main>
           </Section>
         </div>
 

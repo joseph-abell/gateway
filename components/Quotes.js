@@ -32,7 +32,7 @@ const Author = styled.div`
 const StyledSlider = styled(Slider)`
   margin-bottom: 40px;
 
-  .slick-dots button {
+  .slick-dots button::before {
   	font-size: 14px;
   }
 `;

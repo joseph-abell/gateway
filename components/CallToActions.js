@@ -61,7 +61,7 @@ const StyledLink = styled.a`
     }
 
     ${H2} {
-      line-height: 300px;
+      line-height: 30px;
       padding-top: 30px;
     }
 
