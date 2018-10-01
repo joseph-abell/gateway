@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { Link } from '../router';
 import { getData, getFullUrl } from '../helpers';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 const H3 = styled.h3`
   color: #666;
@@ -30,6 +31,15 @@ const Main = styled.div`
   line-height: 18px;
   color: white;
 `;
+
+const Map = withScriptjs(withGoogleMap(() => (
+  <GoogleMap
+    defaultZoom={15}
+    defaultCenter={{ lat: 53.954981, lng: -1.124655 }}
+  >
+    <Marker position={{ lat: 53.954981, lng: -1.124655 }} />
+  </GoogleMap>
+)));
 
 const FooterTemplate = () => (
   <Async
@@ -96,6 +106,12 @@ const FooterTemplate = () => (
             ))}
           </Credits>
         </Section>
+        <Map
+          googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+          loadingElement={<div />}
+          containerElement={<div style={{ height: `150px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </Footer>
     )}
   />

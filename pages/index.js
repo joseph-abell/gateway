@@ -2,6 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import Head from 'next/head';
+
 import Footer from '../templates/Footer';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
@@ -18,6 +19,13 @@ const Padding = styled.div`
   padding: 20px;
 `;
 
+const TwitterWrapper = styled.div`
+  background-color: ${props => props.colour};
+  padding: 20px;
+  height: 400px;
+  margin-bottom: ${props => props.mobileMarginBottom || '20px'};
+`;
+
 const Home = () => (
   <Async
     promise={new Promise(async (resolve) => {
@@ -25,7 +33,7 @@ const Home = () => (
       const colour = getMenuColour(data);
       const colourHex = changeColourToHex(colour);
       const colourHexLight = changeColourToHex(colour, true);
-      const { quotes, deck, header, eventsImage } = data;
+      const { quotes, deck, header, eventsImage, twitterImage } = data;
       let { cta } = data;
 
       header.image = getFullUrl(header.image);
@@ -48,11 +56,22 @@ const Home = () => (
         cta,
         quotes,
         deck,
-        eventsImage: getFullUrl(eventsImage)
+        eventsImage: getFullUrl(eventsImage),
+        twitterImage: getFullUrl(twitterImage)
       });
     })}
 
-    then={({header, colour, colourHex, colourHexLight, cta, quotes, deck, eventsImage}) => {
+    then={({
+      header,
+      colour,
+      colourHex,
+      colourHexLight,
+      cta,
+      quotes,
+      deck,
+      eventsImage,
+      twitterImage
+    }) => {
       const { title, image } = header;
       const { TwitterTimelineEmbed } = require('react-twitter-embed');
 
@@ -87,10 +106,20 @@ const Home = () => (
                 colour={colourHex}
                 colourLight={colourHexLight}
               />
-              <TwitterTimelineEmbed
-                sourceType='profile'
-                screenName='gatewayyork'
-              />
+              <TwitterWrapper colour={colourHex}>
+                <TwitterTimelineEmbed
+                  sourceType='profile'
+                  screenName='gatewayyork'
+                  options={{
+                    height: 400
+                  }}
+                />
+              </TwitterWrapper>
+              <ImageWrapper
+                mobileHeight='400px'
+              >
+                <Image url={twitterImage} />
+              </ImageWrapper>
             </Padding>
           </main>
           <Footer />
