@@ -99,9 +99,9 @@ class Audio extends React.Component {
   }
 
   handleVolumeChange = (volume) => {
-    this.setState({ playState: 'PAUSED' });
+    this.setState({ playStatus: 'PAUSED' });
     this.setState({ volume });
-    this.setState({ playState: 'PLAYING' });
+    this.setState({ playStatus: 'PLAYING' });
   }
 
   handlePlaying = ({ position }) => {
