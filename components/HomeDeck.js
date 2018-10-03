@@ -32,13 +32,6 @@ const Image = styled.div`
   right: 0;
 `;
 
-const StyledHideOnMobile = styled(HideOnMobile)`
-  @media screen and (min-width: 991px) {
-    width: calc(60% - 20px);
-    float: right;
-  }
-`;
-
 const HomeDeck = ({colour, text, image}) => (
   <Container>
     <Text colour={colour}>
