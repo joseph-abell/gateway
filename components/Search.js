@@ -36,12 +36,7 @@ const SearchListItem = ({item, getItemProps}) => (
 
 class Search extends React.Component {
   state = {
-    value: '',
     searchData: []
-  };
-
-  handleSearch = (event) => {
-    this.setState({ value: event.target.value });
   };
 
   search = (data, inputValue) => (
@@ -146,7 +141,6 @@ class Search extends React.Component {
         onStateChange={handleStateChange}
       >
         <Downshift
-          onChange={this.handleSearch}
           itemToString={item => {
             return '';
           }}
