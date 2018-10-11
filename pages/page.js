@@ -83,26 +83,21 @@ const HeaderDeck = styled.h3`
 const ContentPieceContainer = styled.div`
   float: ${props => props.direction};
   background-color: ${props => props.colour};
-  width: ${props => props.width ? '100%' : 0};
+  width: ${props => (props.width ? '100%' : 0)};
   height: 200px;
 
   @media screen and (min-width: 768px) {
     width: calc(${props => props.width}% - 10px);
-    border-right: ${props => (props.direction === 'left' && props.width) ? '10px solid #fff' : 0};
-    border-left: ${props => (props.direction === 'right' && props.width) ? '10px solid #fff' : 0};
-    border-bottom: ${props => (props.width) ? '20px solid white' : 0};
+    border-right: ${props =>
+      props.direction === 'left' && props.width ? '10px solid #fff' : 0};
+    border-left: ${props =>
+      props.direction === 'right' && props.width ? '10px solid #fff' : 0};
+    border-bottom: ${props => (props.width ? '20px solid white' : 0)};
     height: 500px;
   }
 `;
 
-const ContentPiece = ({
-  direction,
-  deck,
-  image,
-  colour,
-  width,
-  flipped
-}) => {
+const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
   let adjustedDirection = direction;
 
   if (flipped) {
@@ -122,9 +117,7 @@ const ContentPiece = ({
       >
         <ImageWrapper color={colour}>
           <Image url={getFullUrl(image)} />
-          { deck && (
-            <HeaderDeck>{deck}</HeaderDeck>
-          )}
+          {deck && <HeaderDeck>{deck}</HeaderDeck>}
         </ImageWrapper>
       </ContentPieceContainer>
     );
@@ -176,7 +169,7 @@ const Content = ({ content }) => {
     return (
       <ContentContainer>
         <ContentPiece
-          direction='right'
+          direction="right"
           deck={right.deck}
           image={right.image}
           colour={right.colour}
@@ -184,7 +177,7 @@ const Content = ({ content }) => {
           flipped={true}
         />
         <ContentPiece
-          direction='left'
+          direction="left"
           deck={left.deck}
           image={left.image}
           colour={left.colour}
@@ -199,14 +192,14 @@ const Content = ({ content }) => {
   return (
     <ContentContainer>
       <ContentPiece
-        direction='left'
+        direction="left"
         deck={left.deck}
         image={left.image}
         colour={left.colour}
         width={leftWidth}
       />
       <ContentPiece
-        direction='right'
+        direction="right"
         deck={right.deck}
         image={right.image}
         colour={right.colour}
@@ -219,9 +212,13 @@ const Content = ({ content }) => {
 
 const Contents = ({ contents }) => (
   <ul>
-    { contents && contents.map(({content}) => (
-      <Content content={content} key={content.left.deck + content.right.deck} />
-    )) }
+    {contents &&
+      contents.map(({ content }) => (
+        <Content
+          content={content}
+          key={content.left.deck + content.right.deck}
+        />
+      ))}
   </ul>
 );
 
@@ -233,42 +230,44 @@ const Page = withRouter(({ router }) => {
 
   return (
     <Async
-      promise={new Promise(async (resolve, reject) => {
-        let data;
+      promise={
+        new Promise(async (resolve, reject) => {
+          let data;
 
-        try {
-          data = await getData(`data/pages/${pathname}.json`);
+          try {
+            data = await getData(`data/pages/${pathname}.json`);
 
-          if (data instanceof Error) {
-            throw data;
+            if (data instanceof Error) {
+              throw data;
+            }
+          } catch (e) {
+            reject(e);
           }
-        } catch (e) {
-          reject(e);
-        }
 
-        const { title, header = {}, subtitle = {}, deck, contents } = data;
-        const { image, menuColour } = header;
-        const colourHex = changeColourToHex(menuColour);
-        const subtitleText = subtitle.subtitle;
-        const subtitleImage = subtitle && subtitle.image && url + subtitle.image.slice(1);
-        const deckTitle = deck && deck.title;
-        const deckParagraph = deck && deck.paragraph;
-        const deckColour = deck && deck.colour;
+          const { title, header = {}, subtitle = {}, deck, contents } = data;
+          const { image, menuColour } = header;
+          const colourHex = changeColourToHex(menuColour);
+          const subtitleText = subtitle.subtitle;
+          const subtitleImage =
+            subtitle && subtitle.image && url + subtitle.image.slice(1);
+          const deckTitle = deck && deck.title;
+          const deckParagraph = deck && deck.paragraph;
+          const deckColour = deck && deck.colour;
 
-        resolve({
-          title,
-          image: image && url + image.slice(1),
-          subtitleImage,
-          subtitleText,
-          deckTitle,
-          deckParagraph,
-          deckColour,
-          contents,
-          menuColour,
-          colourHex
-        });
-      })}
-
+          resolve({
+            title,
+            image: image && url + image.slice(1),
+            subtitleImage,
+            subtitleText,
+            deckTitle,
+            deckParagraph,
+            deckColour,
+            contents,
+            menuColour,
+            colourHex
+          });
+        })
+      }
       then={({
         title,
         image,
@@ -283,7 +282,7 @@ const Page = withRouter(({ router }) => {
       }) => (
         <div>
           <Head>
-            <title key='title'>{title} - Gateway Church, York</title>
+            <title key="title">{title} - Gateway Church, York</title>
           </Head>
           <Header
             colour={menuColour}
@@ -317,11 +316,8 @@ const Page = withRouter(({ router }) => {
           <Footer />
         </div>
       )}
-
       catch={() => (
-        <React.Fragment>
-          { Router.replaceRoute('/404') }
-        </React.Fragment>
+        <React.Fragment>{Router.replaceRoute('/404')}</React.Fragment>
       )}
     />
   );
