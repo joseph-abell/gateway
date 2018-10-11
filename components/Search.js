@@ -43,6 +43,7 @@ class Search extends React.Component {
         flatItem =>
           flatItem[1] &&
           !Array.isArray(flatItem[1]) &&
+          typeof flatItem[1] !== 'boolean' &&
           flatItem[1].toLowerCase().includes(inputValue.toLowerCase())
       )
     );
