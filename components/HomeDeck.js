@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import HideOnMobile from './HideOnMobile';
 import Clearfix from './Clearfix';
 import Container from './Container';
 import ImageWrapper from './ImageWrapper';

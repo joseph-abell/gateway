@@ -76,9 +76,9 @@ class Audio extends React.Component {
 
   pressFastForward = () => {
     if (this.state.position + 10000 > this.state.duration) {
-      this.setState({ position: this.state.duration });
+      this.setState({ position: this.state.duration }); // lgtm [js/react/inconsistent-state-update]
     } else {
-      this.setState({ position: this.state.position + 10000 });
+      this.setState({ position: this.state.position + 10000 }); // lgtm [js/react/inconsistent-state-update]
     }
   };
 
@@ -86,7 +86,7 @@ class Audio extends React.Component {
     if (this.state.position - 10000 < 0) {
       this.setState({ position: 0 });
     } else {
-      this.setState({ position: this.state.position - 10000 });
+      this.setState({ position: this.state.position - 10000 }); // lgtm [js/react/inconsistent-state-update]
     }
   };
 
