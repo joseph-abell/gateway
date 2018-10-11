@@ -10,7 +10,7 @@ class Gateway extends App {
       small: 768,
       medium: 991,
       large: 1021,
-      xlarge: 1221
+      xlarge: Infinity
     };
 
     return (

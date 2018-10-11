@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaBars, FaSearch } from 'react-icons/fa';
 import { Link } from '../router';
-import ShowOnDesktop from './ShowOnDesktop';
-import HideOnDesktop from './HideOnDesktop';
+import { HideAt, ShowAt } from 'react-with-breakpoints';
 
 const Logo = ({ logoUrl }) => <img src={logoUrl} alt="logo" />;
 
@@ -169,11 +168,11 @@ class Menu extends React.Component {
     return (
       <MenuContainer classname="menu" stickyMenu={stickyMenu}>
         <MenuInnerContainer>
-          <HideOnDesktop>
+          <ShowAt breakpoint="mediumAndBelow">
             <MenuButton onClick={onMenuClick} colour={colour}>
               <FaBars />
             </MenuButton>
-          </HideOnDesktop>
+          </ShowAt>
           <SearchButton onClick={onSearchClick} colour={colour}>
             <FaSearch />
           </SearchButton>
@@ -184,7 +183,7 @@ class Menu extends React.Component {
               </StyledLink>
             </Link>
           </StyledLogo>
-          <ShowOnDesktop>
+          <ShowAt breakpoint="mediumAndAbove">
             <nav>
               <MainMenu>
                 {menuItems.map(item => (
@@ -214,7 +213,7 @@ class Menu extends React.Component {
                 ))}
               </MainMenu>
             </nav>
-          </ShowOnDesktop>
+          </ShowAt>
         </MenuInnerContainer>
       </MenuContainer>
     );

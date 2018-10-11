@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import MobileMenu from '../components/MobileMenu';
 import Search from '../components/Search';
 import Menu from '../components/Menu';
+import { HideAt } from 'react-with-breakpoints';
 import HideOnDesktop from '../components/HideOnDesktop';
 import Clearfix from '../components/Clearfix';
 
@@ -26,7 +27,7 @@ class MenuTemplate extends React.Component {
     const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
     return (
       <React.Fragment>
-        <HideOnDesktop>
+        <HideAt breakpoint="mediumAndAbove">
           <MobileMenu
             menuItems={menuItems}
             menuColour={menuColour}
@@ -35,7 +36,7 @@ class MenuTemplate extends React.Component {
               this.handleMenuStateChange(state);
             }}
           />
-        </HideOnDesktop>
+        </HideAt>
         <Search
           colour={menuColour}
           isOpen={this.state.searchOpen}
