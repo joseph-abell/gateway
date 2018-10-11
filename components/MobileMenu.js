@@ -11,11 +11,19 @@ const MenuLink = styled.a`
 
 const MenuItem = ({ menuItem, menuColour }) => (
   <div key={menuItem.title}>
-    <MenuLink href={menuItem.link} menuColour={menuColour}>{menuItem.title}</MenuLink>
+    <MenuLink href={menuItem.link} menuColour={menuColour}>
+      {menuItem.title}
+    </MenuLink>
   </div>
 );
 
-const MobileMenu = ({ menuItems = [], menuColour, iconUrl, isOpen, handleStateChange }) => {
+const MobileMenu = ({
+  menuItems = [],
+  menuColour,
+  iconUrl,
+  isOpen,
+  handleStateChange
+}) => {
   const styles = {
     bmBurgerButton: {
       display: 'none'
@@ -49,13 +57,17 @@ const MobileMenu = ({ menuItems = [], menuColour, iconUrl, isOpen, handleStateCh
     bmOverlay: {
       background: 'rgba(0, 0, 0, 0.2)'
     }
-  }
+  };
 
   return (
-    <SlideMenu styles={styles} isOpen={isOpen} onStateChange={(state) => handleStateChange(state)}>
-      { menuItems.map((menuItem, id) => (
+    <SlideMenu
+      styles={styles}
+      isOpen={isOpen}
+      onStateChange={state => handleStateChange(state)}
+    >
+      {menuItems.map((menuItem, id) => (
         <MenuItem menuItem={menuItem} menuColour={menuColour} key={id} />
-      )) }
+      ))}
     </SlideMenu>
   );
 };

@@ -12,7 +12,12 @@ import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import HideOnMobile from '../components/HideOnMobile';
 import Clearfix from '../components/Clearfix';
-import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../helpers';
+import {
+  getData,
+  getFullUrl,
+  changeColourToHex,
+  getMenuColour
+} from '../helpers';
 
 const StyledLink = styled.a`
   background-color: ${props => props.colour};
@@ -57,48 +62,48 @@ const StyledImageWrapper = styled(ImageWrapper)`
 
 const Words = ({ location = {} }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      let currentPage = location.search;
+    promise={
+      new Promise(async resolve => {
+        let currentPage = location.search;
 
-      if (!currentPage) {
-        currentPage = '?page=1';
-      }
+        if (!currentPage) {
+          currentPage = '?page=1';
+        }
 
-      currentPage = parseInt(currentPage.split('page=')[1], 10);
+        currentPage = parseInt(currentPage.split('page=')[1], 10);
 
-      const data = await getData('data/words/index.json');
-      const wordsPageData = await getData('data/pages/words.json');
-      const colour = getMenuColour(wordsPageData);
-      const colourHex = changeColourToHex(colour);
-      const lightColourHex = changeColourToHex(colour, true);
-      const { header = {}, subtitle, title } = wordsPageData;
-      const image = getFullUrl(header && header.image);
+        const data = await getData('data/words/index.json');
+        const wordsPageData = await getData('data/pages/words.json');
+        const colour = getMenuColour(wordsPageData);
+        const colourHex = changeColourToHex(colour);
+        const lightColourHex = changeColourToHex(colour, true);
+        const { header = {}, subtitle, title } = wordsPageData;
+        const image = getFullUrl(header && header.image);
 
-      let words = Object
-        .values(data)
-        .map(word => word.data)
-        .sort((a, b) => moment(a.dateTime).isBefore(b.dateTime) ? 1 : -1);
+        let words = Object.values(data)
+          .map(word => word.data)
+          .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? 1 : -1));
 
-      const wordsCount = words.length;
+        const wordsCount = words.length;
 
-      words = words.slice(currentPage * 10 - 10, currentPage * 10);
+        words = words.slice(currentPage * 10 - 10, currentPage * 10);
 
-      const maxPageCount = Math.ceil(wordsCount / 10);
+        const maxPageCount = Math.ceil(wordsCount / 10);
 
-      resolve({
-        colour,
-        colourHex,
-        lightColourHex,
-        header,
-        image,
-        subtitle,
-        title,
-        maxPageCount,
-        words,
-        currentPage
-      });
-    })}
-
+        resolve({
+          colour,
+          colourHex,
+          lightColourHex,
+          header,
+          image,
+          subtitle,
+          title,
+          maxPageCount,
+          words,
+          currentPage
+        });
+      })
+    }
     then={({
       colour,
       colourHex,
@@ -112,15 +117,13 @@ const Words = ({ location = {} }) => (
       currentPage
     }) => {
       if (!words.length) {
-        return (
-          <Redirect to='words' />
-        );
+        return <Redirect to="words" />;
       }
 
       return (
         <React.Fragment>
           <Head>
-            <title key='title'>Words - Gateway Church, York</title>
+            <title key="title">Words - Gateway Church, York</title>
           </Head>
           <Header
             colour={colour}
@@ -129,12 +132,13 @@ const Words = ({ location = {} }) => (
             image={image}
             Header={HeaderContainer}
           />
-          { subtitle && subtitle.subtitle && (
-            <PageSummary color={colourHex}>{subtitle.subtitle}</PageSummary>
-          ) }
+          {subtitle &&
+            subtitle.subtitle && (
+              <PageSummary color={colourHex}>{subtitle.subtitle}</PageSummary>
+            )}
 
           <ul>
-            { words.map((word) => (
+            {words.map(word => (
               <li key={word.title}>
                 <Link href={`/words/${word.title}`}>
                   <StyledLink colour={changeColourToHex(word.colour, true)}>
@@ -143,16 +147,16 @@ const Words = ({ location = {} }) => (
                         <StyledDate colour={changeColourToHex(word.colour)}>
                           {moment(word.date).format('DD.MM.YY')}
                         </StyledDate>
-                        <Title>
-                          {word.title}
-                        </Title>
+                        <Title>{word.title}</Title>
                       </StyledText>
                       <ReadMore colour={changeColourToHex(word.colour)}>
                         Read More +
                       </ReadMore>
                     </StyledTextContainer>
                     <StyledHideOnMobile>
-                      <StyledImageWrapper colour={changeColourToHex(word.colour)}>
+                      <StyledImageWrapper
+                        colour={changeColourToHex(word.colour)}
+                      >
                         <Image url={getFullUrl(word.image)} />
                       </StyledImageWrapper>
                     </StyledHideOnMobile>
@@ -160,7 +164,7 @@ const Words = ({ location = {} }) => (
                   </StyledLink>
                 </Link>
               </li>
-            )) }
+            ))}
           </ul>
           <Footer />
         </React.Fragment>

@@ -99,10 +99,8 @@ const CallToAction = ({ link, title, deck, image, colour }) => (
   </Wrapper>
 );
 
-const CallToActions = ({cta}) => (
-	<ul className="call-to-actions">
-    { cta.map(CallToAction) }
-  </ul>
+const CallToActions = ({ cta }) => (
+  <ul className="call-to-actions">{cta.map(CallToAction)}</ul>
 );
 
 export default CallToActions;

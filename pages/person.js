@@ -26,29 +26,41 @@ const H2 = styled.h2`
 
 const Person = withRouter(({ router }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const { query } = router;
-      const pathname = query.id.split(' ').join('-').toLowerCase();
-      const data = await getData(`data/people/${pathname}.json`);
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { title, image, deck, email, phoneNumber, titleRole, filters } = data;
+    promise={
+      new Promise(async resolve => {
+        const { query } = router;
+        const pathname = query.id
+          .split(' ')
+          .join('-')
+          .toLowerCase();
+        const data = await getData(`data/people/${pathname}.json`);
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const {
+          title,
+          image,
+          deck,
+          email,
+          phoneNumber,
+          titleRole,
+          filters
+        } = data;
 
-      resolve({
-        title,
-        image,
-        deck,
-        email,
-        phoneNumber,
-        titleRole,
-        filters,
-        colour,
-        colourHex,
-        colourHexLight
-      });
-    })}
-
+        resolve({
+          title,
+          image,
+          deck,
+          email,
+          phoneNumber,
+          titleRole,
+          filters,
+          colour,
+          colourHex,
+          colourHexLight
+        });
+      })
+    }
     then={({
       title,
       image,
@@ -63,7 +75,7 @@ const Person = withRouter(({ router }) => (
     }) => (
       <React.Fragment>
         <Head>
-          <title key='title'>{title} - Gateway Church, York</title>
+          <title key="title">{title} - Gateway Church, York</title>
         </Head>
         <Header
           colour={colour}

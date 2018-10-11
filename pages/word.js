@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
 import { url } from '../helpers/config';
-import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../helpers';
+import {
+  getData,
+  getMenuColour,
+  changeColourToHex,
+  getFullUrl
+} from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import ImageWrapper from '../components/ImageWrapper';
@@ -34,30 +39,40 @@ const H2 = styled.h2`
 
 const Word = withRouter(({ router }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const { query } = router;
-      const { id } = query
-      const data = await getData(`data/words/${id}.json`);
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { title, image, deck, date, subtitle, audioFile, file, youtubeLink } = data;
+    promise={
+      new Promise(async resolve => {
+        const { query } = router;
+        const { id } = query;
+        const data = await getData(`data/words/${id}.json`);
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const {
+          title,
+          image,
+          deck,
+          date,
+          subtitle,
+          audioFile,
+          file,
+          youtubeLink
+        } = data;
 
-      resolve({
-        title,
-        image,
-        deck,
-        date,
-        subtitle,
-        audioFile: getFullUrl(audioFile),
-        file,
-        youtubeLink,
-        colour,
-        colourHex,
-        colourHexLight
-      });
-    })}
-
+        resolve({
+          title,
+          image,
+          deck,
+          date,
+          subtitle,
+          audioFile: getFullUrl(audioFile),
+          file,
+          youtubeLink,
+          colour,
+          colourHex,
+          colourHexLight
+        });
+      })
+    }
     then={({
       title,
       image,
@@ -73,7 +88,7 @@ const Word = withRouter(({ router }) => (
     }) => (
       <React.Fragment>
         <Head>
-          <title key='title'>{title} - Gateway Church, York</title>
+          <title key="title">{title} - Gateway Church, York</title>
         </Head>
         <Header
           colour={colour}
@@ -90,7 +105,11 @@ const Word = withRouter(({ router }) => (
           <Image url={url + image.slice(1)} />
         </ImageWrapper>
 
-        <Audio url={audioFile} colour={colourHex} lightColour={colourHexLight} />
+        <Audio
+          url={audioFile}
+          colour={colourHex}
+          lightColour={colourHexLight}
+        />
       </React.Fragment>
     )}
   />
