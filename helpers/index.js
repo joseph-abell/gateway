@@ -1,20 +1,20 @@
 /* global fetch */
 import { url as urlStart } from './config';
 
-export const changeColourToHex = (colour, lightVariant) => {
-  if (lightVariant) {
-    switch (colour) {
-      case 'red':
-        return '#f7a994';
-      case 'orange':
-        return '#ffd782';
-      case 'green':
-        return '#55c2b8';
-      default:
-        return '#c1a2cd';
-    }
+const changeLightColourToHex = colour => {
+  switch (colour) {
+    case 'red':
+      return '#f7a994';
+    case 'orange':
+      return '#ffd782';
+    case 'green':
+      return '#55c2b8';
+    default:
+      return '#c1a2cd';
   }
+};
 
+const changeDarkColourToHex = colour => {
   switch (colour) {
     case 'red':
       return '#f05a64';
@@ -25,6 +25,14 @@ export const changeColourToHex = (colour, lightVariant) => {
     default:
       return '#9666a8';
   }
+};
+
+export const changeColourToHex = (colour, lightVariant) => {
+  if (lightVariant) {
+    return changeLightColourToHex(colour);
+  }
+
+  return changeDarkColourToHex(colour);
 };
 
 export const getMenuColour = pageData =>
