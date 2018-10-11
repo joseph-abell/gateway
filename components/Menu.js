@@ -144,15 +144,15 @@ class Menu extends React.Component {
       return;
     }
 
-    if (window.scrollY >= 200 && !this.state.stickyMenu) {
+    if (window.scrollY >= 200) {
       this.setState({
         stickyMenu: true
       });
-    } else if (window.scrollY < 200 && this.state.stickyMenu) {
-      this.setState({
-        stickyMenu: false
-      });
     }
+
+    this.setState({
+      stickyMenu: false
+    });
   };
 
   render() {
