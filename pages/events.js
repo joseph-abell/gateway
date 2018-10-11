@@ -10,7 +10,12 @@ import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import PageSummary from '../components/PageSummary';
-import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../helpers';
+import {
+  getData,
+  getFullUrl,
+  changeColourToHex,
+  getMenuColour
+} from '../helpers';
 
 const StyledNotLink = styled.div`
   display: inline-block;
@@ -33,14 +38,12 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
 
   return links.map(link => {
     if (link === currentPage) {
-      return (
-        <StyledNotLink key={link}>{link}</StyledNotLink>
-      );
+      return <StyledNotLink key={link}>{link}</StyledNotLink>;
     }
 
     if (link === 1) {
       return (
-        <Link href='events' key={link}>
+        <Link href="events" key={link}>
           <StyledLink>{link}</StyledLink>
         </Link>
       );
@@ -55,7 +58,7 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
 };
 
 const StyledPagination = styled.div`
-  background: ${({color}) => color};
+  background: ${({ color }) => color};
   padding: 10px 20px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -71,13 +74,17 @@ const StyledEvent = styled.a`
   display: block;
 `;
 
-const EventList = ({events, color}) => {
-  return events.map((event) => {
+const EventList = ({ events, color }) => {
+  return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
     const time = moment(event.dateTime).format('kk:ss');
 
     return (
-      <Link key={event.title + date + time} route='event' params={{ id: event.title }}>
+      <Link
+        key={event.title + date + time}
+        route="event"
+        params={{ id: event.title }}
+      >
         <StyledEvent color={color}>
           <h2>{event.title}</h2>
           <div>{date}</div>
@@ -93,51 +100,53 @@ const EventList = ({events, color}) => {
 
 const Events = ({ location = {} }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      let currentPage = location.search;
+    promise={
+      new Promise(async resolve => {
+        let currentPage = location.search;
 
-      if (!currentPage) {
-        currentPage = '?page=1';
-      }
+        if (!currentPage) {
+          currentPage = '?page=1';
+        }
 
-      currentPage = parseInt(currentPage.split('page=')[1], 10);
+        currentPage = parseInt(currentPage.split('page=')[1], 10);
 
-      const data = await getData('data/events/index.json');
-      const eventsPageData = await getData('data/pages/events.json');
-      const colour = getMenuColour(eventsPageData);
-      const colourHex = changeColourToHex(colour);
-      const lightColourHex = changeColourToHex(colour, true);
-      const { header, subtitle } = eventsPageData;
-      const image = getFullUrl(header.image);
-      const subtitleImage = getFullUrl(subtitle.image);
-      const subtitleText = subtitle.subtitle;
+        const data = await getData('data/events/index.json');
+        const eventsPageData = await getData('data/pages/events.json');
+        const colour = getMenuColour(eventsPageData);
+        const colourHex = changeColourToHex(colour);
+        const lightColourHex = changeColourToHex(colour, true);
+        const { header, subtitle } = eventsPageData;
+        const image = getFullUrl(header.image);
+        const subtitleImage = getFullUrl(subtitle.image);
+        const subtitleText = subtitle.subtitle;
 
+        let events = Object.values(data)
+          .map(event => event.data)
+          .filter(
+            event =>
+              event && event.dateTime && moment().isBefore(event.dateTime)
+          )
+          .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1));
 
-      let events = Object
-        .values(data)
-        .map(event => event.data)
-        .filter(event => event && event.dateTime && moment().isBefore(event.dateTime))
-        .sort((a, b) => moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1);
+        const eventCount = events.length;
+        events = events.slice(currentPage * 10 - 10, currentPage * 10);
 
-      const eventCount = events.length;
-      events = events.slice(currentPage * 10 - 10, currentPage * 10);
+        const maxPageCount = Math.ceil(eventCount / 10);
 
-      const maxPageCount = Math.ceil(eventCount / 10);
-
-      resolve({
-        colour,
-        colourHex,
-        lightColourHex,
-        header,
-        image,
-        subtitleImage,
-        subtitleText,
-        maxPageCount,
-        events,
-        currentPage
-      });
-    })}
-
+        resolve({
+          colour,
+          colourHex,
+          lightColourHex,
+          header,
+          image,
+          subtitleImage,
+          subtitleText,
+          maxPageCount,
+          events,
+          currentPage
+        });
+      })
+    }
     then={({
       colour,
       colourHex,
@@ -151,15 +160,13 @@ const Events = ({ location = {} }) => (
       currentPage
     }) => {
       if (!events.length) {
-        return (
-          <Redirect to='events' />
-        );
+        return <Redirect to="events" />;
       }
 
       return (
         <React.Fragment>
           <Head>
-            <title key='title'>Events - Gateway Church, York</title>
+            <title key="title">Events - Gateway Church, York</title>
           </Head>
           <Header
             colour={colour}

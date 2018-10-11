@@ -40,20 +40,19 @@ const MoreEvents = styled.div`
 
 const SimpleEvents = ({ colour, colourLight }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const data = await getData('data/events/index.json');
-      let events = Object
-        .values(data)
-        .map(event => event.data);
+    promise={
+      new Promise(async resolve => {
+        const data = await getData('data/events/index.json');
+        let events = Object.values(data).map(event => event.data);
 
-      events = events
-        .filter(event => event.dateTime)
-        .sort((a, b) => moment(a.dateTime).isAfter(b.dateTime) ? 1 : -1)
-        .filter(event => moment().isBefore(event.dateTime))
-        .slice(0, 3);
-      resolve({ events });
-    })}
-
+        events = events
+          .filter(event => event.dateTime)
+          .sort((a, b) => (moment(a.dateTime).isAfter(b.dateTime) ? 1 : -1))
+          .filter(event => moment().isBefore(event.dateTime))
+          .slice(0, 3);
+        resolve({ events });
+      })
+    }
     then={({ events }) => (
       <div>
         <H3 colour={colour}>Events</H3>
@@ -62,7 +61,9 @@ const SimpleEvents = ({ colour, colourLight }) => (
             <LI key={event.title}>
               <Link href={`/events/${event.title}`}>
                 <StyledLink>
-                  <P colour={colour}>{moment(event.dateTime).format('dddd MMM Do YYYY')}</P>
+                  <P colour={colour}>
+                    {moment(event.dateTime).format('dddd MMM Do YYYY')}
+                  </P>
                   <p>{event.title}</p>
                   <p>{moment(event.dateTime).format('kk:mm')}</p>
                 </StyledLink>
@@ -71,7 +72,7 @@ const SimpleEvents = ({ colour, colourLight }) => (
           ))}
         </UL>
         <MoreEvents colour={colourLight}>
-          <Link href='/events'>
+          <Link href="/events">
             <StyledLink>More Events</StyledLink>
           </Link>
         </MoreEvents>

@@ -13,7 +13,12 @@ import Quotes from '../components/Quotes';
 import HomeDeck from '../components/HomeDeck';
 import SimpleEvents from '../components/SimpleEvents';
 
-import { getData, getFullUrl, changeColourToHex, getMenuColour } from '../helpers';
+import {
+  getData,
+  getFullUrl,
+  changeColourToHex,
+  getMenuColour
+} from '../helpers';
 
 const Padding = styled.div`
   padding: 20px;
@@ -28,39 +33,40 @@ const TwitterWrapper = styled.div`
 
 const Home = () => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const data = await getData('data/homepage.json');
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { quotes, deck, header, eventsImage, twitterImage } = data;
-      let { cta } = data;
+    promise={
+      new Promise(async resolve => {
+        const data = await getData('data/homepage.json');
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const { quotes, deck, header, eventsImage, twitterImage } = data;
+        let { cta } = data;
 
-      header.image = getFullUrl(header.image);
+        header.image = getFullUrl(header.image);
 
-      cta = cta.map((item) => {
-        item.image = getFullUrl(item.image);
-        item.colour = changeColourToHex(item.colour);
+        cta = cta.map(item => {
+          item.image = getFullUrl(item.image);
+          item.colour = changeColourToHex(item.colour);
 
-        return item;
-      });
+          return item;
+        });
 
-      deck.image = getFullUrl(deck.image);
-      deck.colour = changeColourToHex(deck.colour);
+        deck.image = getFullUrl(deck.image);
+        deck.colour = changeColourToHex(deck.colour);
 
-      resolve({
-        header,
-        colour,
-        colourHex,
-        colourHexLight,
-        cta,
-        quotes,
-        deck,
-        eventsImage: getFullUrl(eventsImage),
-        twitterImage: getFullUrl(twitterImage)
-      });
-    })}
-
+        resolve({
+          header,
+          colour,
+          colourHex,
+          colourHexLight,
+          cta,
+          quotes,
+          deck,
+          eventsImage: getFullUrl(eventsImage),
+          twitterImage: getFullUrl(twitterImage)
+        });
+      })
+    }
     then={({
       header,
       colour,
@@ -78,7 +84,7 @@ const Home = () => (
       return (
         <React.Fragment>
           <Head>
-            <title key='title'>Gateway Church, York</title>
+            <title key="title">Gateway Church, York</title>
           </Head>
           <Header
             colour={colour}
@@ -96,28 +102,20 @@ const Home = () => (
                 text={deck.text}
                 image={deck.image}
               />
-              <ImageWrapper
-                mobileHeight='400px'
-                mobileMarginBottom='0'
-              >
+              <ImageWrapper mobileHeight="400px" mobileMarginBottom="0">
                 <Image url={eventsImage} />
               </ImageWrapper>
-              <SimpleEvents
-                colour={colourHex}
-                colourLight={colourHexLight}
-              />
+              <SimpleEvents colour={colourHex} colourLight={colourHexLight} />
               <TwitterWrapper colour={colourHex}>
                 <TwitterTimelineEmbed
-                  sourceType='profile'
-                  screenName='gatewayyork'
+                  sourceType="profile"
+                  screenName="gatewayyork"
                   options={{
                     height: 400
                   }}
                 />
               </TwitterWrapper>
-              <ImageWrapper
-                mobileHeight='400px'
-              >
+              <ImageWrapper mobileHeight="400px">
                 <Image url={twitterImage} />
               </ImageWrapper>
             </Padding>

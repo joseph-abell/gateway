@@ -3,15 +3,20 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { Link } from '../router';
 import { getData, getFullUrl } from '../helpers';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from 'react-google-maps';
 
 const H3 = styled.h3`
   color: #666;
 `;
 
 const Footer = styled.footer`
-	background: rgb(180,180,180);
-	font-size: 14px;
+  background: rgb(180, 180, 180);
+  font-size: 14px;
 `;
 
 const Section = styled.section`
@@ -32,29 +37,32 @@ const Main = styled.div`
   color: white;
 `;
 
-const Map = withScriptjs(withGoogleMap(() => (
-  <GoogleMap
-    defaultZoom={15}
-    defaultCenter={{ lat: 53.954981, lng: -1.124655 }}
-  >
-    <Marker position={{ lat: 53.954981, lng: -1.124655 }} />
-  </GoogleMap>
-)));
+const Map = withScriptjs(
+  withGoogleMap(() => (
+    <GoogleMap
+      defaultZoom={15}
+      defaultCenter={{ lat: 53.954981, lng: -1.124655 }}
+    >
+      <Marker position={{ lat: 53.954981, lng: -1.124655 }} />
+    </GoogleMap>
+  ))
+);
 
 const FooterTemplate = () => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const data = await getData('data/footer.json');
-      const { address, contact, credits, socialMedia } = data;
+    promise={
+      new Promise(async resolve => {
+        const data = await getData('data/footer.json');
+        const { address, contact, credits, socialMedia } = data;
 
-      resolve({
-        address,
-        contact,
-        credits,
-        socialMedia
-      });
-    })}
-
+        resolve({
+          address,
+          contact,
+          credits,
+          socialMedia
+        });
+      })
+    }
     then={({ address, contact, credits, socialMedia }) => (
       <Footer>
         <div>
@@ -63,7 +71,9 @@ const FooterTemplate = () => (
             <Main>
               <address>
                 <p>{address.addressLine1}</p>
-                <p>{address.addressLine2}, {address.city}</p>
+                <p>
+                  {address.addressLine2}, {address.city}
+                </p>
                 <p>{address.postcode}</p>
               </address>
             </Main>
@@ -81,7 +91,7 @@ const FooterTemplate = () => (
             <H3>{socialMedia.title}</H3>
             <Main>
               <ul>
-                {socialMedia.list.map((item) => (
+                {socialMedia.list.map(item => (
                   <li key={item.link}>
                     <a href={item.link}>
                       <img src={getFullUrl(item.image)} />
@@ -95,9 +105,10 @@ const FooterTemplate = () => (
 
         <Section>
           <Credits>
-            {credits.map((credit) => (
+            {credits.map(credit => (
               <li key={credit}>
-                {credit.role} by {credit.links.map((link) => (
+                {credit.role} by{' '}
+                {credit.links.map(link => (
                   <Link href={link.link} key={link.link}>
                     <CreditLink>{link.name}</CreditLink>
                   </Link>
@@ -107,7 +118,7 @@ const FooterTemplate = () => (
           </Credits>
         </Section>
         <Map
-          googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div />}
           containerElement={<div style={{ height: `150px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
@@ -118,4 +129,3 @@ const FooterTemplate = () => (
 );
 
 export default FooterTemplate;
-

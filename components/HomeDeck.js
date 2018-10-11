@@ -1,23 +1,22 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import HideOnMobile from './HideOnMobile';
 import Clearfix from './Clearfix';
 import Container from './Container';
 import ImageWrapper from './ImageWrapper';
 
 const Text = styled.div`
-	background-color: ${props => props.colour};
-	color: white;
-	padding: 35px;
-	line-height: 30px;
-	font-size: 16px;
-	margin-bottom: 20px;
+  background-color: ${props => props.colour};
+  color: white;
+  padding: 35px;
+  line-height: 30px;
+  font-size: 16px;
+  margin-bottom: 20px;
 
-	@media screen and (min-width: 991px) {
-	  width: calc(40% - 70px);
-	  float: left;
-	}
+  @media screen and (min-width: 991px) {
+    width: calc(40% - 70px);
+    float: left;
+  }
 `;
 
 const Image = styled.div`
@@ -32,13 +31,11 @@ const Image = styled.div`
   right: 0;
 `;
 
-const HomeDeck = ({colour, text, image}) => (
+const HomeDeck = ({ colour, text, image }) => (
   <Container>
-    <Text colour={colour}>
-      {text}
-    </Text>
-    <ImageWrapper mobileHeight='400px'>
-  	  <Image src={image} />
+    <Text colour={colour}>{text}</Text>
+    <ImageWrapper mobileHeight="400px">
+      <Image src={image} />
     </ImageWrapper>
     <Clearfix />
   </Container>

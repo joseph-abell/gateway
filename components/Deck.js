@@ -29,7 +29,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const Deck = ({colour, text, image}) => {
+const Deck = ({ colour, text, image }) => {
   if (image) {
     return (
       <div>
@@ -41,9 +41,7 @@ const Deck = ({colour, text, image}) => {
     );
   }
 
-  return (
-    <Text colour={colour}>{text}</Text>
-  );
+  return <Text colour={colour}>{text}</Text>;
 };
 
 export default Deck;

@@ -25,28 +25,37 @@ const A = styled.a`
 
 const ContactUs = () => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const data = await getData('data/contact-us.json');
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { title, image, contentImage, deck } = data;
+    promise={
+      new Promise(async resolve => {
+        const data = await getData('data/contact-us.json');
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const { title, image, contentImage, deck } = data;
 
-      resolve({
-        title,
-        colour,
-        colourHex,
-        colourHexLight,
-        contentImage,
-        image,
-        deck
-      });
-    })}
-
-    then={({title, colour, colourHex, colourHexLight, contentImage, image, deck}) => (
+        resolve({
+          title,
+          colour,
+          colourHex,
+          colourHexLight,
+          contentImage,
+          image,
+          deck
+        });
+      })
+    }
+    then={({
+      title,
+      colour,
+      colourHex,
+      colourHexLight,
+      contentImage,
+      image,
+      deck
+    }) => (
       <React.Fragment>
         <Head>
-          <title key='title'>Contact Us - Gateway Church, York</title>
+          <title key="title">Contact Us - Gateway Church, York</title>
         </Head>
         <Header
           colour={colour}
@@ -58,15 +67,15 @@ const ContactUs = () => (
         <Deck colour={colourHex}>
           <p>{deck}</p>
           <p>
-            <A colour={colourHexLight} href='mailto:office@gatewaychurch.co.uk'>Email</A>
+            <A colour={colourHexLight} href="mailto:office@gatewaychurch.co.uk">
+              Email
+            </A>
           </p>
         </Deck>
-        <Footer/>
+        <Footer />
       </React.Fragment>
     )}
   />
 );
-
-
 
 export default ContactUs;

@@ -3,7 +3,12 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
-import { getData, getMenuColour, changeColourToHex, getFullUrl } from '../helpers';
+import {
+  getData,
+  getMenuColour,
+  changeColourToHex,
+  getFullUrl
+} from '../helpers';
 import { Link } from '../router';
 import HeaderContainer from '../components/HeaderContainer';
 import Header from '../templates/Header';
@@ -60,95 +65,114 @@ const Email = styled.p`
 
 const People = withRouter(({ router = {} }) => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const { query } = router || {};
-      const { filter } = query;
+    promise={
+      new Promise(async resolve => {
+        const { query } = router || {};
+        const { filter } = query;
 
-      // make a list of filters that we want
-      let acceptedFilters = await getData('data/peopleFilters/index.json');
+        // make a list of filters that we want
+        let acceptedFilters = await getData('data/peopleFilters/index.json');
 
-      acceptedFilters = Object
-        .values(acceptedFilters)
-        .map(f => f.data)
-        .map(f => ({
-          name: f.name,
-          title: f.title,
-          deck: f.deck,
-          colour: changeColourToHex(f.colour, true)
-        }));
+        acceptedFilters = Object.values(acceptedFilters)
+          .map(f => f.data)
+          .map(f => ({
+            name: f.name,
+            title: f.title,
+            deck: f.deck,
+            colour: changeColourToHex(f.colour, true)
+          }));
 
-      // make an empty people list
-      let people = [];
+        // make an empty people list
+        let people = [];
 
-      // if the filter is in the list of accepted filters, go ahead
-      if (filter && acceptedFilters.map(f => f.name).includes(filter)) {
-        // we get our data
-        people = await getData('data/people/index.json');
+        // if the filter is in the list of accepted filters, go ahead
+        if (filter && acceptedFilters.map(f => f.name).includes(filter)) {
+          // we get our data
+          people = await getData('data/people/index.json');
 
-        // we turn the data into what we care about, a list of people information
-        people = Object.values(people);
+          // we turn the data into what we care about, a list of people information
+          people = Object.values(people);
 
-        // filter the list into only people that match the filter
-        people = people.filter((person) => {
-	        // get data from person
-	        const { data } = person || {};
+          // filter the list into only people that match the filter
+          people = people.filter(person => {
+            // get data from person
+            const { data } = person || {};
 
-	        // get filters from data
-	        const { filters } = data || {};
+            // get filters from data
+            const { filters } = data || {};
 
-	        // get the part of the filters we care about, the keys
-	        const keys = Object.keys(filters);
+            // get the part of the filters we care about, the keys
+            const keys = Object.keys(filters);
 
-	        // check whether the filter is in the list of keys
-  	      return keys.includes(filter);
+            // check whether the filter is in the list of keys
+            return keys.includes(filter);
+          });
+        }
+
+        const data = await getData('/data/pages/people.json');
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const { deck, header, title } = data;
+        const image = getFullUrl(header.image);
+
+        deck.image = deck && deck.image && getFullUrl(deck.image);
+        deck.colour = changeColourToHex(deck && deck.colour);
+
+        resolve({
+          title,
+          image,
+          colour,
+          colourHex,
+          colourHexLight,
+          deck,
+          people,
+          acceptedFilters
         });
-      }
-
-      const data = await getData('/data/pages/people.json');
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { deck, header, title } = data;
-      const image = getFullUrl(header.image);
-
-      deck.image = deck && deck.image && getFullUrl(deck.image);
-      deck.colour = changeColourToHex(deck && deck.colour);
-
-      resolve({
-        title,
-        image,
-        colour,
-        colourHex,
-        colourHexLight,
-        deck,
-        people,
-        acceptedFilters
-      });
-    })}
-
-    then={({title, image, colour, colourHex, colourHexLight, deck, people, acceptedFilters}) => {
+      })
+    }
+    then={({
+      title,
+      image,
+      colour,
+      colourHex,
+      colourHexLight,
+      deck,
+      people,
+      acceptedFilters
+    }) => {
       if (people.length) {
-  	    return (
+        return (
           <React.Fragment>
             <Head>
-              <title key='title'>People - Gateway Church, York</title>
+              <title key="title">People - Gateway Church, York</title>
             </Head>
             <Header
               colour={colour}
               colourHex={colourHex}
               title={title}
               Header={HeaderContainer}
-		    />
+            />
             <main>
               <ul>
-                { people.map((person) => (
+                {people.map(person => (
                   <li key={person.data.title}>
                     <Link href={`/people/${person.data.title}`}>
                       <a>
-                        <PersonBlock colour={changeColourToHex(person.data.menuColour, true)}>
+                        <PersonBlock
+                          colour={changeColourToHex(
+                            person.data.menuColour,
+                            true
+                          )}
+                        >
                           <Image url={getFullUrl(person.data.image)} />
                         </PersonBlock>
-                        <PersonBlock colour={changeColourToHex(person.data.menuColour, true)}>
+                        <PersonBlock
+                          colour={changeColourToHex(
+                            person.data.menuColour,
+                            true
+                          )}
+                        >
                           <Padding>
                             <h2>{person.data.title}</h2>
                             <p>{person.data.titleRole}</p>
@@ -158,7 +182,7 @@ const People = withRouter(({ router = {} }) => (
                       </a>
                     </Link>
                   </li>
-                )) }
+                ))}
               </ul>
             </main>
           </React.Fragment>
@@ -185,7 +209,7 @@ const People = withRouter(({ router = {} }) => (
               {acceptedFilters.map(filter => (
                 <li key={filter.name}>
                   <Link href={`people?filter=${filter.name}`}>
-                    <StyledLink colour={filter.colour} >
+                    <StyledLink colour={filter.colour}>
                       <FilterItemTitle>{filter.title}</FilterItemTitle>
                       <FilterItemDeck>{filter.deck}</FilterItemDeck>
                     </StyledLink>

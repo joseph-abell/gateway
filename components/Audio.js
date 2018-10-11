@@ -56,7 +56,7 @@ class Audio extends React.Component {
     position: 0,
     duration: 0,
     volume: 100
-  }
+  };
 
   togglePlayPause = () => {
     if (this.state.playStatus === 'PLAYING') {
@@ -64,53 +64,53 @@ class Audio extends React.Component {
     } else {
       this.pressPlay();
     }
-  }
+  };
 
   pressPlay = () => {
     this.setState({ playStatus: 'PLAYING' });
-  }
+  };
 
   pressPause = () => {
     this.setState({ playStatus: 'PAUSED' });
-  }
+  };
 
   pressFastForward = () => {
     if (this.state.position + 10000 > this.state.duration) {
-      this.setState({ position: this.state.duration });
+      this.setState({ position: this.state.duration }); // lgtm [js/react/inconsistent-state-update]
     } else {
-      this.setState({ position: this.state.position + 10000 });
+      this.setState({ position: this.state.position + 10000 }); // lgtm [js/react/inconsistent-state-update]
     }
-  }
+  };
 
   pressBack = () => {
     if (this.state.position - 10000 < 0) {
       this.setState({ position: 0 });
     } else {
-      this.setState({ position: this.state.position - 10000 });
+      this.setState({ position: this.state.position - 10000 }); // lgtm [js/react/inconsistent-state-update]
     }
-  }
+  };
 
   setPositionAndDuration = ({ position, duration }) => {
     this.setState({ position, duration });
-  }
+  };
 
   setDuration = ({ duration }) => {
     this.setState({ duration });
-  }
+  };
 
-  handleVolumeChange = (volume) => {
+  handleVolumeChange = volume => {
     this.setState({ playStatus: 'PAUSED' });
     this.setState({ volume });
     this.setState({ playStatus: 'PLAYING' });
-  }
+  };
 
   handlePlaying = ({ position }) => {
     this.setState({ position });
-  }
+  };
 
   render = () => {
     return (
-      <AudioPlayer colour={this.props.colour} >
+      <AudioPlayer colour={this.props.colour}>
         <Sound
           url={this.props.url}
           volume={this.state.volume}
@@ -154,7 +154,7 @@ class Audio extends React.Component {
         <Clearfix />
       </AudioPlayer>
     );
-  }
-};
+  };
+}
 
 export default Audio;

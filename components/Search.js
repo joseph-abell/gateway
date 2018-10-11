@@ -14,11 +14,9 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-const SearchInput = (props) => (
-  <input {...props} type='text' />
-);
+const SearchInput = props => <input {...props} type="text" />;
 
-const SearchListItem = ({item, getItemProps}) => (
+const SearchListItem = ({ item, getItemProps }) => (
   <li
     {...getItemProps({
       key: item.data.title,
@@ -39,19 +37,17 @@ class Search extends React.Component {
     searchData: []
   };
 
-  search = (data, inputValue) => (
+  search = (data, inputValue) =>
     data.filter(item =>
-      item.flat.some(flatItem =>
-        flatItem[1] &&
-        !Array.isArray(flatItem[1]) &&
-        flatItem[1]
-          .toLowerCase()
-          .includes(inputValue.toLowerCase())
+      item.flat.some(
+        flatItem =>
+          flatItem[1] &&
+          !Array.isArray(flatItem[1]) &&
+          flatItem[1].toLowerCase().includes(inputValue.toLowerCase())
       )
-    )
-  );
+    );
 
-  promise = new Promise(async (resolve) => {
+  promise = new Promise(async resolve => {
     if (this.state.searchData.length) {
       return resolve(this.state.searchData);
     }
@@ -59,27 +55,34 @@ class Search extends React.Component {
     const data = await getData('data/search/index.json');
 
     const blackList = [
-      'audioFile', 'colour', 'date', 'email', 'file',
-      'filters', 'time', 'titleRole', 'image', 'menuColour',
-      'optionalContent', 'phoneNumber', 'youtubeLink'
+      'audioFile',
+      'colour',
+      'date',
+      'email',
+      'file',
+      'filters',
+      'time',
+      'titleRole',
+      'image',
+      'menuColour',
+      'optionalContent',
+      'phoneNumber',
+      'youtubeLink'
     ];
 
     data.forEach((item, index) => {
       const flattened = Object.entries(flat(data[index].data));
-      const filtered = flattened
-        .reduce((acc, item) => {
-          const inBlackList = blackList.some(blackListItem =>
-            item[0].includes(blackListItem)
-          );
+      const filtered = flattened.reduce((acc, item) => {
+        const inBlackList = blackList.some(blackListItem =>
+          item[0].includes(blackListItem)
+        );
 
-          return inBlackList ? acc : [...acc, item];
-        }, []);
+        return inBlackList ? acc : [...acc, item];
+      }, []);
 
       data[index].flat = filtered;
 
-      let pageUrl = data[index].url
-        .slice(0, -5)
-        .split('data/')[1];
+      let pageUrl = data[index].url.slice(0, -5).split('data/')[1];
 
       data[index].pageUrl = pageUrl;
 
@@ -93,7 +96,7 @@ class Search extends React.Component {
     });
 
     return resolve(data);
-  })
+  });
 
   render = () => {
     const { colour, isOpen, handleStateChange } = this.props;
@@ -145,30 +148,33 @@ class Search extends React.Component {
             return '';
           }}
         >
-          {(props) => {
-            const { getInputProps, getMenuProps, getItemProps, inputValue } = props;
+          {props => {
+            const {
+              getInputProps,
+              getMenuProps,
+              getItemProps,
+              inputValue
+            } = props;
 
             return (
               <div>
                 <SearchInput {...getInputProps()} />
-                {(isOpen && !!inputValue.length) && (
-                  <Async
-                    promise={this.promise}
-
-                    then={data => (
-                      <ul {...getMenuProps()}>
-                        {
-                          this.search(data, inputValue).map(item =>
+                {isOpen &&
+                  !!inputValue.length && (
+                    <Async
+                      promise={this.promise}
+                      then={data => (
+                        <ul {...getMenuProps()}>
+                          {this.search(data, inputValue).map(item => (
                             <SearchListItem
                               item={item}
                               getItemProps={getItemProps}
                             />
-                          )
-                        }
-                      </ul>
-                    )}
-                  />
-                )}
+                          ))}
+                        </ul>
+                      )}
+                    />
+                  )}
               </div>
             );
           }}
@@ -176,7 +182,6 @@ class Search extends React.Component {
       </SlideMenu>
     );
   };
-};
+}
 
 export default Search;
-

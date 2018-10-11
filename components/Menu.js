@@ -5,9 +5,7 @@ import { Link } from '../router';
 import ShowOnDesktop from './ShowOnDesktop';
 import HideOnDesktop from './HideOnDesktop';
 
-const Logo = ({ logoUrl }) => (
-  <img src={logoUrl} alt='logo' />
-);
+const Logo = ({ logoUrl }) => <img src={logoUrl} alt="logo" />;
 
 const StyledLogo = styled.div`
   padding: 0 20px 1px;
@@ -25,7 +23,7 @@ const StyledLink = styled.a`
 
 const MenuContainer = styled.div`
   height: 60px;
-  position: ${props => props.stickyMenu ? 'sticky' : 'static'};
+  position: ${props => (props.stickyMenu ? 'sticky' : 'static')};
   top: 0;
   z-index: 2;
   background: #fff;
@@ -130,36 +128,41 @@ class Menu extends React.Component {
     this.state = {
       stickyMenu: props.sticky || false,
       alwaysSticky: props.sticky || false
-    }
+    };
   }
-
 
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll);
-  }
+  };
 
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll);
-  }
+  };
 
   handleScroll = () => {
     if (this.state.alwaysSticky) {
       return;
     }
 
-    if (window.scrollY >= 200 && !this.state.stickyMenu) {
+    if (window.scrollY >= 200) {
       this.setState({
         stickyMenu: true
       });
-    } else if (window.scrollY < 200 && this.state.stickyMenu) {
-      this.setState({
-        stickyMenu: false
-      });
     }
-  }
 
-  render () {
-    const { logoUrl, onMenuClick, onSearchClick, colour, menuItems } = this.props;
+    this.setState({
+      stickyMenu: false
+    });
+  };
+
+  render() {
+    const {
+      logoUrl,
+      onMenuClick,
+      onSearchClick,
+      colour,
+      menuItems
+    } = this.props;
 
     const { stickyMenu } = this.state;
 
@@ -175,7 +178,7 @@ class Menu extends React.Component {
             <FaSearch />
           </SearchButton>
           <StyledLogo>
-            <Link href='/' prefetch>
+            <Link href="/" prefetch>
               <StyledLink>
                 <Logo logoUrl={logoUrl} />
               </StyledLink>
@@ -187,21 +190,26 @@ class Menu extends React.Component {
                 {menuItems.map(item => (
                   <MenuItem colour={colour} key={item.link}>
                     <Link href={item.link} prefetch>
-                      <StyledMenuLink colour={colour}>{item.title}</StyledMenuLink>
+                      <StyledMenuLink colour={colour}>
+                        {item.title}
+                      </StyledMenuLink>
                     </Link>
-                    {item.childMenu && item.childMenu.length && (
-                      <ChildMenu>
-                        {item.childMenu.map(childItem => (
-                          <li key={childItem.link}>
-                            <Link href={childItem.link} prefetch>
-                              <ChildLink colour={colour}>
-                                <ChildUnderline>{childItem.title}</ChildUnderline>
-                              </ChildLink>
-                            </Link>
-                          </li>
-                        ))}
-                      </ChildMenu>
-                    )}
+                    {item.childMenu &&
+                      item.childMenu.length && (
+                        <ChildMenu>
+                          {item.childMenu.map(childItem => (
+                            <li key={childItem.link}>
+                              <Link href={childItem.link} prefetch>
+                                <ChildLink colour={colour}>
+                                  <ChildUnderline>
+                                    {childItem.title}
+                                  </ChildUnderline>
+                                </ChildLink>
+                              </Link>
+                            </li>
+                          ))}
+                        </ChildMenu>
+                      )}
                   </MenuItem>
                 ))}
               </MainMenu>
@@ -210,7 +218,7 @@ class Menu extends React.Component {
         </MenuInnerContainer>
       </MenuContainer>
     );
-  };
-};
+  }
+}
 
 export default Menu;

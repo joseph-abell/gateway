@@ -12,7 +12,12 @@ import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
 
-import { getMenuColour, changeColourToHex, getFullUrl, getData } from '../helpers';
+import {
+  getMenuColour,
+  changeColourToHex,
+  getFullUrl,
+  getData
+} from '../helpers';
 
 const Subtitle = styled.div`
   height: 200px;
@@ -51,31 +56,41 @@ const StyledLink = styled.a`
   margin-top: 10px;
 `;
 
-const Event = withRouter((props) => (
+const Event = withRouter(props => (
   <Async
-    promise={new Promise(async (resolve) => {
-      const data = await getData('data/events/new-event.json');
-      const colour = getMenuColour(data);
-      const colourHex = changeColourToHex(colour);
-      const colourHexLight = changeColourToHex(colour, true);
-      const { title, image, date, time, deck } = data;
+    promise={
+      new Promise(async resolve => {
+        const data = await getData('data/events/new-event.json');
+        const colour = getMenuColour(data);
+        const colourHex = changeColourToHex(colour);
+        const colourHexLight = changeColourToHex(colour, true);
+        const { title, image, date, time, deck } = data;
 
-      resolve({
-        title,
-        image,
-        date,
-        time,
-        deck,
-        colour,
-        colourHex,
-        colourHexLight
-      });
-    })}
-
-    then={({title, image, date, time, deck, colour, colourHex, colourHexLight}) => (
+        resolve({
+          title,
+          image,
+          date,
+          time,
+          deck,
+          colour,
+          colourHex,
+          colourHexLight
+        });
+      })
+    }
+    then={({
+      title,
+      image,
+      date,
+      time,
+      deck,
+      colour,
+      colourHex,
+      colourHexLight
+    }) => (
       <React.Fragment>
         <Head>
-          <title key='title'>{title} - Gateway Church, York</title>
+          <title key="title">{title} - Gateway Church, York</title>
         </Head>
         <Header
           colour={colour}
@@ -93,8 +108,10 @@ const Event = withRouter((props) => (
           </Content>
           <Content colour={colourHex}>
             <p>{deck}</p>
-            <Link href='/events'>
-              <StyledLink colour={colourHexLight}>View a list of all events</StyledLink>
+            <Link href="/events">
+              <StyledLink colour={colourHexLight}>
+                View a list of all events
+              </StyledLink>
             </Link>
           </Content>
         </main>
