@@ -36,6 +36,18 @@ const MoreEvents = styled.div`
   background-color: ${props => props.colour};
   color: white;
   padding: 0 35px 35px;
+
+  @media screen and (min-width: 991px) {
+    padding-bottom: 154px;
+    margin-bottom: 20px;
+  }
+`;
+
+const EventsWrapper = styled.div`
+  @media screen and (min-width: 991px) {
+    float: right;
+    width: 40%;
+  }
 `;
 
 const SimpleEvents = ({ colour, colourLight }) => (
@@ -54,7 +66,7 @@ const SimpleEvents = ({ colour, colourLight }) => (
       })
     }
     then={({ events }) => (
-      <div>
+      <EventsWrapper>
         <H3 colour={colour}>Events</H3>
         <UL colour={colourLight}>
           {events.map(event => (
@@ -76,7 +88,7 @@ const SimpleEvents = ({ colour, colourLight }) => (
             <StyledLink>More Events</StyledLink>
           </Link>
         </MoreEvents>
-      </div>
+      </EventsWrapper>
     )}
   />
 );

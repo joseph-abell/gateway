@@ -44,6 +44,7 @@ const PageDeck = styled.div`
   padding: 40px;
   background-color: ${props => props.colour};
   color: white;
+  margin-bottom: 20px;
 `;
 
 const H2 = styled.h2`
@@ -51,13 +52,19 @@ const H2 = styled.h2`
   line-height: 36px;
   margin-bottom: 20px;
 
-  @media screen and (min-width: 1221px) {
+  @media screen and (min-width: 991px) {
+    width: 850px;
+    margin: 0 auto 20px;
     text-align: center;
   }
 `;
 
 const P = styled.p`
-  @media screen and (min-width: 1221px) {
+  @media screen and (min-width: 991px) {
+    font-size: 24px;
+    line-height: 30px;
+    width: 850px;
+    margin: 0 auto;
     text-align: center;
   }
 `;
@@ -77,6 +84,10 @@ const HeaderDeck = styled.h3`
   @media screen and (min-width: 768px) {
     height: 500px;
     line-height: 500px;
+  }
+
+  @media screen and (min-width: 991px) {
+    font-size: 24px;
   }
 `;
 
@@ -195,14 +206,14 @@ const Content = ({ content }) => {
         direction="left"
         deck={left.deck}
         image={left.image}
-        colour={left.colour}
+        colour={changeColourToHex(left.colour)}
         width={leftWidth}
       />
       <ContentPiece
         direction="right"
         deck={right.deck}
         image={right.image}
-        colour={right.colour}
+        colour={changeColourToHex(right.colour)}
         width={rightWidth}
       />
       <Clearfix />
@@ -304,8 +315,8 @@ const Page = withRouter(({ router }) => {
 
           <PageDeck colour={colourHex}>
             <Container>
-              <H2>{deckTitle}</H2>
-              <P>{deckParagraph}</P>
+              {deckTitle && <H2>{deckTitle}</H2>}
+              {deckParagraph && <P>{deckParagraph}</P>}
             </Container>
           </PageDeck>
 

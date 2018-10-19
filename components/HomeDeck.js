@@ -14,8 +14,11 @@ const Text = styled.div`
   margin-bottom: 20px;
 
   @media screen and (min-width: 991px) {
-    width: calc(40% - 70px);
+    width: calc(40% - 80px);
     float: left;
+    margin-right: 20px;
+    height: 430px;
+    font-size: 24px;
   }
 `;
 

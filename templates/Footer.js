@@ -2,6 +2,8 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import { Link } from '../router';
+import Container from '../components/Container';
+import Clearfix from '../components/Clearfix';
 import { getData, getFullUrl } from '../helpers';
 import {
   withScriptjs,
@@ -21,10 +23,22 @@ const Footer = styled.footer`
 
 const Section = styled.section`
   padding: 20px;
+
+  @media screen and (min-width: 991px) {
+    width: calc(30% - 20px);
+    float: left;
+    margin-right: 20px;
+  }
 `;
 
 const Credits = styled.ul`
   color: #fff;
+  margin-bottom: 20px;
+  margin-left: 20px;
+`;
+
+const Credit = styled.li`
+  padding-bottom: 5px;
 `;
 
 const CreditLink = styled.a`
@@ -37,11 +51,21 @@ const Main = styled.div`
   color: white;
 `;
 
+const SocialMediaItem = styled.li`
+  display: inline-block;
+  margin-right: 50px;
+
+  & a {
+    display: block;
+  }
+`;
+
 const Map = withScriptjs(
   withGoogleMap(() => (
     <GoogleMap
       defaultZoom={15}
       defaultCenter={{ lat: 53.954981, lng: -1.124655 }}
+      key="AIzaSyAM-NvLRlF1XXUKnPCoRKWfuuodqKuvBso"
     >
       <Marker position={{ lat: 53.954981, lng: -1.124655 }} />
     </GoogleMap>
@@ -65,7 +89,7 @@ const FooterTemplate = () => (
     }
     then={({ address, contact, credits, socialMedia }) => (
       <Footer>
-        <div>
+        <Container>
           <Section>
             <H3>{address.name}</H3>
             <Main>
@@ -86,39 +110,67 @@ const FooterTemplate = () => (
               <p>{contact.email}</p>
             </Main>
           </Section>
+        </Container>
 
+        <Container>
           <Section>
             <H3>{socialMedia.title}</H3>
             <Main>
               <ul>
                 {socialMedia.list.map(item => (
-                  <li key={item.link}>
+                  <SocialMediaItem key={item.link}>
                     <a href={item.link}>
                       <img src={getFullUrl(item.image)} />
                     </a>
-                  </li>
+                  </SocialMediaItem>
                 ))}
               </ul>
             </Main>
           </Section>
-        </div>
+        </Container>
+        <Clearfix />
 
-        <Section>
+        <Container>
           <Credits>
             {credits.map(credit => (
-              <li key={credit}>
+              <Credit key={credit}>
                 {credit.role} by{' '}
-                {credit.links.map(link => (
-                  <Link href={link.link} key={link.link}>
-                    <CreditLink>{link.name}</CreditLink>
-                  </Link>
-                ))}
-              </li>
+                {credit.links.map((link, index) => {
+                  if (index + 1 === credit.links.length) {
+                    return (
+                      <Link href={link.link} key={link.link}>
+                        <CreditLink>{link.name}</CreditLink>
+                      </Link>
+                    );
+                  }
+
+                  if (index + 1 === credit.links.length - 1) {
+                    return (
+                      <span>
+                        <Link href={link.link} key={link.link}>
+                          <CreditLink>{link.name}</CreditLink>
+                        </Link>
+                        {' and '}
+                      </span>
+                    );
+                  }
+
+                  return (
+                    <span>
+                      <Link href={link.link} key={link.link}>
+                        <CreditLink>{link.name}</CreditLink>
+                      </Link>
+                      {', '}
+                    </span>
+                  );
+                })}
+              </Credit>
             ))}
           </Credits>
-        </Section>
+        </Container>
+
         <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM-NvLRlF1XXUKnPCoRKWfuuodqKuvBso&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div />}
           containerElement={<div style={{ height: `150px` }} />}
           mapElement={<div style={{ height: `100%` }} />}

@@ -183,7 +183,7 @@ class Menu extends React.Component {
               </StyledLink>
             </Link>
           </StyledLogo>
-          <ShowAt breakpoint="mediumAndAbove">
+          <HideAt breakpoint="mediumAndBelow">
             <nav>
               <MainMenu>
                 {menuItems.map(item => (
@@ -213,7 +213,7 @@ class Menu extends React.Component {
                 ))}
               </MainMenu>
             </nav>
-          </ShowAt>
+          </HideAt>
         </MenuInnerContainer>
       </MenuContainer>
     );

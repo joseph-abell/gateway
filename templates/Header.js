@@ -27,7 +27,7 @@ class MenuTemplate extends React.Component {
     const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
     return (
       <React.Fragment>
-        <HideAt breakpoint="mediumAndAbove">
+        <HideAt breakpoint="large">
           <MobileMenu
             menuItems={menuItems}
             menuColour={menuColour}
