@@ -14,7 +14,6 @@ import Quotes from '../components/Quotes';
 import HomeDeck from '../components/HomeDeck';
 import SimpleEvents from '../components/SimpleEvents';
 import Clearfix from '../components/Clearfix';
-
 import {
   getData,
   getFullUrl,

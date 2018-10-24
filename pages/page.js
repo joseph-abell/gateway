@@ -34,9 +34,14 @@ const PageSummary = styled.div`
   padding: 40px 0;
   text-align: center;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     height: 500px;
-    padding: 240px 0 0;
+    padding: 175px 0 0;
+  }
+
+  @media screen and (min-width: 1021px) {
+    font-size: 90px;
+    line-height: 1.5em;
   }
 `;
 
@@ -81,13 +86,9 @@ const HeaderDeck = styled.h3`
   display: block;
   width: 100%;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     height: 500px;
     line-height: 500px;
-  }
-
-  @media screen and (min-width: 991px) {
-    font-size: 24px;
   }
 `;
 
@@ -95,9 +96,9 @@ const ContentPieceContainer = styled.div`
   float: ${props => props.direction};
   background-color: ${props => props.colour};
   width: ${props => (props.width ? '100%' : 0)};
-  height: 200px;
+  min-height: 200px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     width: calc(${props => props.width}% - 10px);
     border-right: ${props =>
       props.direction === 'left' && props.width ? '10px solid #fff' : 0};
@@ -108,16 +109,8 @@ const ContentPieceContainer = styled.div`
   }
 `;
 
-const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
+const ContentPiece = ({ direction, deck, image, colour, width }) => {
   let adjustedDirection = direction;
-
-  if (flipped) {
-    if (adjustedDirection === 'left') {
-      adjustedDirection = 'right';
-    } else if (adjustedDirection === 'right') {
-      adjustedDirection = 'left';
-    }
-  }
 
   if (image) {
     return (
@@ -126,7 +119,7 @@ const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
         colour={colour}
         width={width}
       >
-        <ImageWrapper color={colour}>
+        <ImageWrapper color={colour} mobileMarginBottom="0">
           <Image url={getFullUrl(image)} />
           {deck && <HeaderDeck>{deck}</HeaderDeck>}
         </ImageWrapper>
@@ -150,9 +143,7 @@ const ContentContainer = styled.li`
   width: 100%;
 `;
 
-const Content = ({ content }) => {
-  const { left, right } = content;
-
+const setWidth = (left, right) => {
   let leftWidth = 0;
   let rightWidth = 0;
 
@@ -165,7 +156,7 @@ const Content = ({ content }) => {
   } else if (left.image && right.deck) {
     leftWidth = 60;
     rightWidth = 40;
-  } else if (left.deck && left.image) {
+  } else if (left.deck && right.image) {
     leftWidth = 40;
     rightWidth = 60;
   } else if (!left.deck && !left.image && (right.image || right.deck)) {
@@ -176,24 +167,28 @@ const Content = ({ content }) => {
     rightWidth = 0;
   }
 
-  if (right.deck && !left.deck) {
+  return [leftWidth, rightWidth];
+};
+const Content = ({ content }) => {
+  const { left, right } = content;
+  const [leftWidth, rightWidth] = setWidth(left, right);
+
+  if (right.deck && right.image) {
     return (
       <ContentContainer>
         <ContentPiece
           direction="right"
           deck={right.deck}
           image={right.image}
-          colour={right.colour}
+          colour={changeColourToHex(right.colour)}
           width={rightWidth}
-          flipped={true}
         />
         <ContentPiece
           direction="left"
           deck={left.deck}
           image={left.image}
-          colour={left.colour}
+          colour={changeColourToHex(left.colour)}
           width={leftWidth}
-          flipped={true}
         />
         <Clearfix />
       </ContentContainer>

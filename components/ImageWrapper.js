@@ -7,7 +7,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   margin-bottom: ${props => props.mobileMarginBottom || '20px'};
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     height: 500px;
   }
 `;
