@@ -1,8 +1,8 @@
-const routes = module.exports = require('next-routes')();
+const routes = (module.exports = require('next-routes')());
 
 module.exports = routes
   .add('index', '/')
-  .add('events', 'events')
+  .add('events', '/events')
   .add('event', '/events/:id')
   .add('people', '/people')
   .add('person', '/people/:id')
