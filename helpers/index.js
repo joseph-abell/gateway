@@ -1,4 +1,4 @@
-/* global fetch */
+import fetch from 'isomorphic-fetch';
 import { url as urlStart } from './config';
 
 const changeLightColourToHex = colour => {
