@@ -6,16 +6,27 @@ import Head from 'next/head';
 import { Link } from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
+import Container from '../components/Container';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import PageSummary from '../components/PageSummary';
+import Clearfix from '../components/Clearfix';
+import { HideAt, ShowAt } from 'react-with-breakpoints';
+
 import {
   getData,
   getFullUrl,
   changeColourToHex,
   getMenuColour
 } from '../helpers';
+
+const PageDeck = styled.div`
+  padding: 40px;
+  background-color: ${props => props.colour};
+  color: white;
+  margin-bottom: 20px;
+`;
 
 const StyledNotLink = styled.div`
   display: inline-block;
@@ -70,14 +81,56 @@ const StyledEvent = styled.a`
   background: ${props => props.color};
   color: #fff;
   line-height: 30px;
-  margin: 20px 0 0;
+  margin: 20px 0 20px;
   display: block;
+`;
+
+const P = styled.p`
+  padding: 100px 20px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.3em;
+  color: #fff;
+
+  @media screen and (min-width: 991px) {
+    font-size: 30px;
+    line-height: 36px;
+    padding: 100px 20%;
+  }
+`;
+
+const EventLeft = styled.div`
+  @media screen and (min-width: 991px) {
+    float: left;
+    width: 60%;
+    font-size: 24px;
+    line-height: 30px;
+  }
+`;
+
+const EventRight = styled.div`
+  float: right;
+  width: 40%;
+`;
+
+const EventImageWrapper = styled(ImageWrapper)`
+  margin-top: -35px;
+  margin-bottom: -35px;
+  margin-right: -35px;
+`;
+
+const EventDeck = styled.div`
+  @media screen and (min-width: 991px) {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
 `;
 
 const EventList = ({ events, color }) => {
   return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
     const time = moment(event.dateTime).format('kk:ss');
+    const image = getFullUrl(event.image);
 
     return (
       <Link
@@ -86,12 +139,22 @@ const EventList = ({ events, color }) => {
         params={{ id: event.title }}
       >
         <StyledEvent color={color}>
-          <h2>{event.title}</h2>
-          <div>{date}</div>
-          <div>{time}</div>
+          <EventLeft>
+            <h2>{event.title}</h2>
+            <div>{date}</div>
+            <div>{time}</div>
 
-          <div>{event.deck}</div>
-          <div>Read More +</div>
+            <EventDeck>{event.deck}</EventDeck>
+            <div>Read More +</div>
+          </EventLeft>
+          <HideAt breakpoint="mediumAndBelow">
+            <EventRight>
+              <EventImageWrapper>
+                <Image url={image} />
+              </EventImageWrapper>
+            </EventRight>
+          </HideAt>
+          <Clearfix />
         </StyledEvent>
       </Link>
     );
@@ -115,7 +178,7 @@ const Events = ({ location = {} }) => (
         const colour = getMenuColour(eventsPageData);
         const colourHex = changeColourToHex(colour);
         const lightColourHex = changeColourToHex(colour, true);
-        const { header, subtitle } = eventsPageData;
+        const { title, header, subtitle, deck } = eventsPageData;
         const image = getFullUrl(header.image);
         const subtitleImage = getFullUrl(subtitle.image);
         const subtitleText = subtitle.subtitle;
@@ -139,11 +202,14 @@ const Events = ({ location = {} }) => (
           lightColourHex,
           header,
           image,
+          title,
           subtitleImage,
           subtitleText,
           maxPageCount,
           events,
-          currentPage
+          currentPage,
+          deckTitle: deck.title,
+          deckParagraph: deck.paragraph
         });
       })
     }
@@ -153,11 +219,14 @@ const Events = ({ location = {} }) => (
       lightColourHex,
       header = {},
       image,
+      title,
       subtitleImage,
       subtitleText,
       maxPageCount,
       events,
-      currentPage
+      currentPage,
+      deckTitle,
+      deckParagraph
     }) => {
       if (!events.length) {
         return <Redirect to="events" />;
@@ -171,18 +240,38 @@ const Events = ({ location = {} }) => (
           <Header
             colour={colour}
             colourHex={colourHex}
-            title={header.title}
-            image={image}
+            title={title}
+            image={header.image}
             Header={HeaderContainer}
           />
-          <ImageWrapper>
-            <Image url={subtitleImage} />
-          </ImageWrapper>
-          <PageSummary color={colourHex}>{subtitleText}</PageSummary>
-          <StyledPagination color={colourHex}>
-            <Pagination maxCount={maxPageCount} currentPage={currentPage} />
-          </StyledPagination>
-          <EventList events={events} color={lightColourHex} />
+
+          <Container>
+            {subtitleImage && (
+              <ImageWrapper>
+                <Image url={subtitleImage} />
+                <Container>
+                  <PageSummary color={colourHex}>{subtitleText}</PageSummary>
+                </Container>
+              </ImageWrapper>
+            )}
+          </Container>
+
+          <PageDeck colour={colourHex}>
+            <Container>
+              {deckTitle && <H2>{deckTitle}</H2>}
+              {deckParagraph && <P>{deckParagraph}</P>}
+            </Container>
+          </PageDeck>
+
+          {maxPageCount > 1 && (
+            <StyledPagination color={colourHex}>
+              <Pagination maxCount={maxPageCount} currentPage={currentPage} />
+            </StyledPagination>
+          )}
+
+          <Container>
+            <EventList events={events} color={lightColourHex} />
+          </Container>
           <Footer />
         </React.Fragment>
       );
