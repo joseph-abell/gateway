@@ -11,6 +11,7 @@ import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
+import Clearfix from '../components/Clearfix';
 
 import {
   getMenuColour,
@@ -25,9 +26,13 @@ const Subtitle = styled.div`
   background-color: ${props => props.colour};
   color: white;
   text-decoration: none;
+
+  @media screen and (min-width: 768px) {
+    height: 500px;
+  }
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   font-size: 30px;
   line-height: 1.5em;
   color: #fff;
@@ -37,14 +42,36 @@ const Title = styled.div`
   left: 0;
   right: 0;
   transform: translateY(-50%);
+
+  @media screen and (min-width: 768px) {
+    font-size: 90px;
+  }
 `;
 
-const Content = styled.div`
+const ContentLeft = styled.div`
   padding: 20px;
   background-color: ${props => props.colour};
   color: white;
   line-height: 1.3em;
   margin-bottom: 60px;
+
+  @media screen and (min-width: 991px) {
+    float: left;
+    width: calc(40% - 40px);
+  }
+`;
+
+const ContentRight = styled.div`
+  padding: 20px;
+  background-color: ${props => props.colour};
+  color: white;
+  line-height: 1.3em;
+  margin-bottom: 60px;
+
+  @media screen and (min-width: 991px) {
+    float: right;
+    width: calc(60% - 40px);
+  }
 `;
 
 const StyledLink = styled.a`
@@ -102,18 +129,19 @@ const Event = withRouter(props => (
             <Image url={getFullUrl(image)} />
             <Title>{title}</Title>
           </Subtitle>
-          <Content colour={colourHexLight}>
+          <ContentLeft colour={colourHexLight}>
             <div>{moment(date).format('dddd DD MMM YYYY')}</div>
             <div>{moment(time).format('HH:mm')}</div>
-          </Content>
-          <Content colour={colourHex}>
+          </ContentLeft>
+          <ContentRight colour={colourHex}>
             <p>{deck}</p>
             <Link href="/events">
               <StyledLink colour={colourHexLight}>
                 View a list of all events
               </StyledLink>
             </Link>
-          </Content>
+          </ContentRight>
+          <Clearfix />
         </main>
         <Footer />
       </React.Fragment>
