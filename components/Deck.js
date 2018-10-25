@@ -6,6 +6,14 @@ const Text = styled.div`
   color: white;
   padding: 35px;
   line-height: 30px;
+
+  @media screen and (min-width: 991px) {
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    padding: 100px 20%;
+    margin-bottom: 20px;
+  }
 `;
 
 const Image = styled.div`
