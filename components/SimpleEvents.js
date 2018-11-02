@@ -9,6 +9,7 @@ import { getData } from '../helpers';
 const H3 = styled.h3`
   padding: 20px 35px;
   color: ${props => props.colour};
+  background: white;
 `;
 
 const UL = styled.ul`
@@ -44,9 +45,13 @@ const MoreEvents = styled.div`
 `;
 
 const EventsWrapper = styled.div`
+  background: ${props => props.colour};
+
   @media screen and (min-width: 991px) {
     float: right;
     width: 40%;
+    height: 500px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -66,7 +71,7 @@ const SimpleEvents = ({ colour, colourLight }) => (
       })
     }
     then={({ events }) => (
-      <EventsWrapper>
+      <EventsWrapper colour={colourLight}>
         <H3 colour={colour}>Events</H3>
         <UL colour={colourLight}>
           {events.map(event => (
