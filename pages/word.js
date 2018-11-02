@@ -40,10 +40,17 @@ const H2 = styled.h2`
 `;
 
 const P = styled.div`
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 20px;
+
+  @media screen and (min-width: 1240px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
-const YoutubeLink = styled.a`
+const Link = styled.a`
   color: ${props => props.colour};
 `;
 
@@ -137,21 +144,19 @@ const Word = withRouter(({ router }) => (
           {deck && <P>{deck}</P>}
 
           {youtubeLink && (
-            <div>
-              <h3>Youtube Link</h3>
-              <P>
-                <YoutubeLink href={youtubeLink}>{youtubeLink}</YoutubeLink>
-              </P>
-            </div>
+            <P>
+              <Link colour={colourHex} href={youtubeLink}>
+                {youtubeLink}
+              </Link>
+            </P>
           )}
 
           {file && (
-            <div>
-              <h3>File:</h3>
-              <P>
-                <a href={getFullUrl(file)}>{file.replace('/uploads/', '')}</a>
-              </P>
-            </div>
+            <P>
+              <Link colour={colourHex} href={getFullUrl(file)}>
+                {file.replace('/uploads/', '')}
+              </Link>
+            </P>
           )}
         </Container>
       </React.Fragment>

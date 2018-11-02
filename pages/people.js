@@ -116,6 +116,18 @@ const PersonRole = styled.p`
   }
 `;
 
+const H1 = styled.h1`
+  text-transform: capitalize;
+  color: ${props => props.colour};
+  font-size: 30px;
+  line-height: 36px;
+  margin: 40px 20px 20px;
+`;
+
+const P = styled.p`
+  margin: 0 20px 20px;
+`;
+
 const People = withRouter(({ router = {} }) => (
   <Async
     promise={
@@ -168,6 +180,7 @@ const People = withRouter(({ router = {} }) => (
           colourHexLight,
           deck,
           people,
+          filter,
           acceptedFilters
         });
       })
@@ -180,6 +193,7 @@ const People = withRouter(({ router = {} }) => (
       colourHexLight,
       deck,
       people,
+      filter,
       acceptedFilters
     }) => {
       if (people.length) {
@@ -196,6 +210,7 @@ const People = withRouter(({ router = {} }) => (
             />
             <main>
               <Container>
+                <H1 colour={colourHex}>People: {filter}</H1>
                 <ul>
                   {people.map(person => (
                     <Person key={person.data.title}>
@@ -227,6 +242,26 @@ const People = withRouter(({ router = {} }) => (
                   ))}
                 </ul>
               </Container>
+            </main>
+          </React.Fragment>
+        );
+      }
+
+      if (filter && !people.length) {
+        return (
+          <React.Fragment>
+            <Header
+              colour={colour}
+              colourHex={colourHex}
+              colourHexLight={colourHexLight}
+              title={title}
+              image={image}
+              Header={HeaderContainer}
+            />
+            <main>
+              <H1 colour={colourHex}>No People found</H1>
+
+              <P>No people matching the filter {filter} found.</P>
             </main>
           </React.Fragment>
         );
