@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
 import { HideAt, ShowAt } from 'react-with-breakpoints';
+import { format } from 'date-fns';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import ImageWrapper from '../components/ImageWrapper';
 import Image from '../components/Image';
 import Container from '../components/Container';
+import Clearfix from '../components/Clearfix';
+
 import {
   getData,
   changeColourToHex,
@@ -118,6 +121,75 @@ const PersonImageWrapper = ({ image, email, colour }) => {
   return '';
 };
 
+const Word = styled.li`
+  background: ${prop => prop.colour};
+  color: white;
+  position: relative;
+  margin-bottom: 20px;
+`;
+
+const WordLink = styled.a`
+  color: white;
+  padding: 20px 20px 0;
+  display: block;
+`;
+
+const WordDate = styled.div`
+  color: ${props => props.colour};
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+`;
+
+const WordAuthors = styled.ul`
+  display: inline-block;
+`;
+
+const WordsTitle = styled.h2`
+  font-size: 30px;
+  line-height: 36px;
+  color: ${props => props.colour};
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 0 20px;
+`;
+
+const WordTitle = styled.h3`
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 20px;
+`;
+
+const WordReadMore = styled.div`
+  color: white;
+  background: ${props => props.colour};
+  padding: 20px;
+  margin-left: -20px;
+  margin-right: -20px;
+
+  @media screen and (min-width: 991px) {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+  }
+`;
+
+const WordText = styled.div`
+  @media screen and (min-width: 991px) {
+    float: left;
+    width: 50%;
+    min-height: 480px;
+  }
+`;
+
+const WordImage = styled.div`
+  width: 50%;
+  float: right;
+  height: 480px;
+  margin-top: -20px;
+  margin-right: -20px;
+`;
+
 const Person = withRouter(({ router }) => (
   <Async
     promise={
@@ -128,9 +200,11 @@ const Person = withRouter(({ router }) => (
           .join('-')
           .toLowerCase();
         const data = await getData(`data/people/${pathname}.json`);
+        const { json } = data;
         const colour = getMenuColour(data);
         const colourHex = changeColourToHex(colour);
         const colourHexLight = changeColourToHex(colour, true);
+
         const {
           title,
           image,
@@ -138,8 +212,39 @@ const Person = withRouter(({ router }) => (
           email,
           phoneNumber,
           titleRole,
-          filters
-        } = data;
+          filters,
+          words
+        } = json;
+
+        let wordsData;
+
+        if (words.length) {
+          wordsData = await getData(`data/words/index.json`);
+        }
+
+        wordsData = words
+          .sort((a, b) => {
+            const aName = `${a
+              .toLowerCase()
+              .split(' ')
+              .join('-')}.json`;
+            const bName = `${b
+              .toLowerCase()
+              .split(' ')
+              .join('-')}.json`;
+
+            return (
+              parseInt(wordsData[bName].data.date.split('-').join('')) -
+              parseInt(wordsData[aName].data.date.split('-').join(''))
+            );
+          })
+          .map(word => {
+            const wordName = `${word
+              .toLowerCase()
+              .split(' ')
+              .join('-')}.json`;
+            return wordsData[wordName];
+          });
 
         resolve({
           title,
@@ -151,7 +256,8 @@ const Person = withRouter(({ router }) => (
           filters,
           colour,
           colourHex,
-          colourHexLight
+          colourHexLight,
+          words: wordsData
         });
       })
     }
@@ -165,7 +271,8 @@ const Person = withRouter(({ router }) => (
       filter,
       colour,
       colourHex,
-      colourHexLight
+      colourHexLight,
+      words
     }) => (
       <React.Fragment>
         <Head>
@@ -184,6 +291,52 @@ const Person = withRouter(({ router }) => (
             <H2>{titleRole}</H2>
             <P>{deck}</P>
           </Wrapper>
+
+          <Clearfix />
+          <WordsTitle colour={colourHex}>Words</WordsTitle>
+
+          <ul>
+            {words &&
+              words.map(word => {
+                const wordData = word && word.data;
+
+                return (
+                  wordData && (
+                    <Word
+                      key={word.url}
+                      colour={changeColourToHex(wordData.colour, true)}
+                    >
+                      <WordLink href={`/words/${wordData.title}`}>
+                        <WordText>
+                          <WordDate colour={changeColourToHex(wordData.colour)}>
+                            {format(wordData.date, 'EEEE do LLLL yyyy')}
+                          </WordDate>
+                          <WordAuthors>
+                            {wordData.authors.map(({ author }) => {
+                              return <li key={author}>{author}</li>;
+                            })}
+                          </WordAuthors>
+                          <WordTitle>{wordData.title}</WordTitle>
+                          <WordReadMore
+                            colour={changeColourToHex(wordData.colour)}
+                          >
+                            Read More +
+                          </WordReadMore>
+                        </WordText>
+                        <HideAt breakpoint="mediumAndBelow">
+                          <WordImage>
+                            <ImageWrapper>
+                              <Image url={getFullUrl(wordData.image)} />
+                            </ImageWrapper>
+                          </WordImage>
+                        </HideAt>
+                        <Clearfix />
+                      </WordLink>
+                    </Word>
+                  )
+                );
+              })}
+          </ul>
         </Container>
       </React.Fragment>
     )}

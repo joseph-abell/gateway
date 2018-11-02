@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { getData, getMenuColour, changeColourToHex } from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
+import Container from '../components/Container';
 import Footer from '../templates/Footer';
 
 const Deck = styled.div`
@@ -65,12 +66,17 @@ const ContactUs = () => (
           Header={HeaderContainer}
         />
         <Deck colour={colourHex}>
-          <p>{deck}</p>
-          <p>
-            <A colour={colourHexLight} href="mailto:office@gatewaychurch.co.uk">
-              Email
-            </A>
-          </p>
+          <Container>
+            <p>{deck}</p>
+            <p>
+              <A
+                colour={colourHexLight}
+                href="mailto:office@gatewaychurch.co.uk"
+              >
+                Email
+              </A>
+            </p>
+          </Container>
         </Deck>
         <Footer />
       </React.Fragment>

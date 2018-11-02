@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
+import { format } from 'date-fns';
 import { url } from '../helpers/config';
 import {
   getData,
@@ -14,6 +15,7 @@ import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import ImageWrapper from '../components/ImageWrapper';
 import Image from '../components/Image';
+import Container from '../components/Container';
 import Audio from '../components/Audio';
 
 const Deck = styled.div`
@@ -37,12 +39,24 @@ const H2 = styled.h2`
   color: #fff;
 `;
 
+const P = styled.div`
+  margin-bottom: 20px;
+`;
+
+const YoutubeLink = styled.a`
+  color: ${props => props.colour};
+`;
+
 const Word = withRouter(({ router }) => (
   <Async
     promise={
       new Promise(async resolve => {
         const { query } = router;
-        const { id } = query;
+        let { id } = query;
+        id = id
+          .split(' ')
+          .join('-')
+          .toLowerCase();
         const data = await getData(`data/words/${id}.json`);
         const colour = getMenuColour(data);
         const colourHex = changeColourToHex(colour);
@@ -96,20 +110,49 @@ const Word = withRouter(({ router }) => (
           Header={HeaderContainer}
         />
         <Deck colour={colourHexLight}>
-          <Date colour={colourHex}>{date}</Date>
-          <H1>{title}</H1>
-          <H2>{subtitle}</H2>
+          <Container>
+            <Date colour={colourHex}>{format(date, 'EEEE do LLLL yyyy')}</Date>
+            <H1>{title}</H1>
+            <H2>{subtitle}</H2>
+          </Container>
         </Deck>
+        <Container>
+          {image && (
+            <ImageWrapper>
+              <Image url={url + image.slice(1)} />
+            </ImageWrapper>
+          )}
 
-        <ImageWrapper>
-          <Image url={url + image.slice(1)} />
-        </ImageWrapper>
+          {audioFile && (
+            <P>
+              <Audio
+                url={audioFile}
+                colour={colourHex}
+                lightColour={colourHexLight}
+              />
+            </P>
+          )}
 
-        <Audio
-          url={audioFile}
-          colour={colourHex}
-          lightColour={colourHexLight}
-        />
+          {deck && <P>{deck}</P>}
+
+          {youtubeLink && (
+            <div>
+              <h3>Youtube Link</h3>
+              <P>
+                <YoutubeLink href={youtubeLink}>{youtubeLink}</YoutubeLink>
+              </P>
+            </div>
+          )}
+
+          {file && (
+            <div>
+              <h3>File:</h3>
+              <P>
+                <a href={getFullUrl(file)}>{file.replace('/uploads/', '')}</a>
+              </P>
+            </div>
+          )}
+        </Container>
       </React.Fragment>
     )}
   />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Async from 'react-promise';
-import moment from 'moment';
 import styled from 'styled-components';
+import { format, compareAsc } from 'date-fns';
 import Head from 'next/head';
 import { Link } from '../router';
 import Header from '../templates/Header';
@@ -11,6 +11,7 @@ import PageSummary from '../components/PageSummary';
 import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import HideOnMobile from '../components/HideOnMobile';
+import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
 import {
   getData,
@@ -44,20 +45,35 @@ const ReadMore = styled.div`
   padding: 40px;
   background-color: ${props => props.colour};
   color: white;
+
+  @media screen and (min-width: 991px) {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+  }
 `;
 
 const StyledTextContainer = styled.div`
   float: left;
-  width: 50vw;
+  width: 50%;
 `;
 
 const StyledHideOnMobile = styled(HideOnMobile)`
   float: right;
-  width: 50vw;
+  width: 50%;
 `;
 
 const StyledImageWrapper = styled(ImageWrapper)`
   min-height: 274px;
+  margin-bottom: 0;
+`;
+
+const Word = styled.li`
+  @media screen and (min-width: 991px) {
+    position: relative;
+    height: 500px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Words = ({ location = {} }) => (
@@ -82,7 +98,7 @@ const Words = ({ location = {} }) => (
 
         let words = Object.values(data)
           .map(word => word.data)
-          .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? 1 : -1));
+          .sort((a, b) => compareAsc(new Date(b.date), new Date(a.date)));
 
         const wordsCount = words.length;
 
@@ -115,37 +131,33 @@ const Words = ({ location = {} }) => (
       maxPageCount,
       words,
       currentPage
-    }) => {
-      if (!words.length) {
-        return <Redirect to="words" />;
-      }
+    }) => (
+      <React.Fragment>
+        <Head>
+          <title key="title">Words - Gateway Church, York</title>
+        </Head>
+        <Header
+          colour={colour}
+          colourHex={colourHex}
+          title={title}
+          image={image}
+          Header={HeaderContainer}
+        />
+        {subtitle &&
+          subtitle.subtitle && (
+            <PageSummary color={colourHex}>{subtitle.subtitle}</PageSummary>
+          )}
 
-      return (
-        <React.Fragment>
-          <Head>
-            <title key="title">Words - Gateway Church, York</title>
-          </Head>
-          <Header
-            colour={colour}
-            colourHex={colourHex}
-            title={title}
-            image={image}
-            Header={HeaderContainer}
-          />
-          {subtitle &&
-            subtitle.subtitle && (
-              <PageSummary color={colourHex}>{subtitle.subtitle}</PageSummary>
-            )}
-
+        <Container>
           <ul>
             {words.map(word => (
-              <li key={word.title}>
+              <Word key={word.title}>
                 <Link href={`/words/${word.title}`}>
                   <StyledLink colour={changeColourToHex(word.colour, true)}>
                     <StyledTextContainer>
                       <StyledText>
                         <StyledDate colour={changeColourToHex(word.colour)}>
-                          {moment(word.date).format('DD.MM.YY')}
+                          {format(word.date, 'EEEE do LLLL yyyy')}
                         </StyledDate>
                         <Title>{word.title}</Title>
                       </StyledText>
@@ -156,6 +168,7 @@ const Words = ({ location = {} }) => (
                     <StyledHideOnMobile>
                       <StyledImageWrapper
                         colour={changeColourToHex(word.colour)}
+                        marginBottom={0}
                       >
                         <Image url={getFullUrl(word.image)} />
                       </StyledImageWrapper>
@@ -163,13 +176,13 @@ const Words = ({ location = {} }) => (
                     <Clearfix />
                   </StyledLink>
                 </Link>
-              </li>
+              </Word>
             ))}
           </ul>
-          <Footer />
-        </React.Fragment>
-      );
-    }}
+        </Container>
+        <Footer />
+      </React.Fragment>
+    )}
   />
 );
 
