@@ -13,6 +13,7 @@ import {
 } from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
+import Footer from '../templates/Footer';
 import ImageWrapper from '../components/ImageWrapper';
 import Image from '../components/Image';
 import Container from '../components/Container';
@@ -159,6 +160,8 @@ const Word = withRouter(({ router }) => (
             </P>
           )}
         </Container>
+
+        <Footer />
       </React.Fragment>
     )}
   />
