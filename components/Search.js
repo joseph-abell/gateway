@@ -32,7 +32,7 @@ const SearchListItem = ({ item, getItemProps }) => (
       item: item
     })}
   >
-    <Link href={item.pageUrl}>
+    <Link href={`/${item.pageUrl}`}>
       <StyledLink>
         <div>{item.data.title}</div>
         <div>{item.breadcrumb}</div>
