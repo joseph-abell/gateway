@@ -139,6 +139,7 @@ const Words = ({ location = {} }) => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={lightColourHex}
           title={title}
           image={image}
           Header={HeaderContainer}

@@ -245,7 +245,6 @@ const Person = withRouter(({ router }) => (
               .join('-')}.json`;
             return wordsData[wordName];
           });
-
         resolve({
           title,
           image,
@@ -281,9 +280,9 @@ const Person = withRouter(({ router }) => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           Header={HeaderContainer}
         />
-
         <Container>
           <PersonImageWrapper email={email} image={image} colour={colourHex} />
           <Wrapper colour={colourHexLight}>

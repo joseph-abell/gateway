@@ -253,6 +253,7 @@ const Page = withRouter(({ router }) => {
           const { title, header = {}, subtitle = {}, deck, contents } = data;
           const { image, menuColour } = header;
           const colourHex = changeColourToHex(menuColour);
+          const colourHexLight = changeColourToHex(menuColour, true);
           const subtitleText = subtitle.subtitle;
           const subtitleImage =
             subtitle && subtitle.image && url + subtitle.image.slice(1);
@@ -270,7 +271,8 @@ const Page = withRouter(({ router }) => {
             deckColour,
             contents,
             menuColour,
-            colourHex
+            colourHex,
+            colourHexLight
           });
         })
       }
@@ -284,7 +286,8 @@ const Page = withRouter(({ router }) => {
         deckColour,
         contents,
         menuColour,
-        colourHex
+        colourHex,
+        colourHexLight
       }) => (
         <div>
           <Head>
@@ -293,6 +296,7 @@ const Page = withRouter(({ router }) => {
           <Header
             colour={menuColour}
             colourHex={colourHex}
+            colourHexLight={colourHexLight}
             title={title}
             image={image}
             Header={HeaderContainer}

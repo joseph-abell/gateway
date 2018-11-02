@@ -61,6 +61,7 @@ const ContactUs = () => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           title={title}
           image={image}
           Header={HeaderContainer}

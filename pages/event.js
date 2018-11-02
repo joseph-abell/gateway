@@ -122,6 +122,7 @@ const Event = withRouter(props => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           Header={HeaderContainer}
         />
         <main>

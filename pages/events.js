@@ -240,6 +240,7 @@ const Events = ({ location = {} }) => (
           <Header
             colour={colour}
             colourHex={colourHex}
+            colourHexLight={lightColourHex}
             title={title}
             image={header.image}
             Header={HeaderContainer}

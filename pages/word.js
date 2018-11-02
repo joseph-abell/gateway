@@ -107,6 +107,7 @@ const Word = withRouter(({ router }) => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           Header={HeaderContainer}
         />
         <Deck colour={colourHexLight}>

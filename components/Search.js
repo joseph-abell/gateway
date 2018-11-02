@@ -14,7 +14,16 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-const SearchInput = props => <input {...props} type="text" />;
+const StyledSearchInput = styled.input`
+  background: ${props => props.colour};
+  color: white;
+  border: 0;
+  font-size: 20px;
+  border-bottom: 3px solid ${props => props.borderColour};
+  font-family: 'Ginger', sans-serif;
+`;
+
+const SearchInput = props => <StyledSearchInput {...props} type="text" />;
 
 const SearchListItem = ({ item, getItemProps }) => (
   <li
@@ -100,8 +109,7 @@ class Search extends React.Component {
   });
 
   render = () => {
-    const { colour, isOpen, handleStateChange } = this.props;
-
+    const { colour, isOpen, handleStateChange, borderColour } = this.props;
     const styles = {
       bmBurgerButton: {
         display: 'none'
@@ -159,7 +167,11 @@ class Search extends React.Component {
 
             return (
               <div>
-                <SearchInput {...getInputProps()} />
+                <SearchInput
+                  {...getInputProps()}
+                  colour={colour}
+                  borderColour={borderColour}
+                />
                 {isOpen &&
                   !!inputValue.length && (
                     <Async
