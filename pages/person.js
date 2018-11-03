@@ -11,6 +11,7 @@ import ImageWrapper from '../components/ImageWrapper';
 import Image from '../components/Image';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
+import Footer from '../templates/Footer';
 
 import {
   getData,
@@ -337,6 +338,8 @@ const Person = withRouter(({ router }) => (
               })}
           </ul>
         </Container>
+
+        <Footer />
       </React.Fragment>
     )}
   />

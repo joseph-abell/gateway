@@ -126,6 +126,12 @@ const EventDeck = styled.div`
   }
 `;
 
+const H1 = styled.h1`
+  margin: 20px 0;
+  font-size: 30px;
+  line-height: 36px;
+`;
+
 const EventList = ({ events, color }) => {
   return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
@@ -229,7 +235,29 @@ const Events = ({ location = {} }) => (
       deckParagraph
     }) => {
       if (!events.length) {
-        return <Redirect to="events" />;
+        return (
+          <React.Fragment>
+            <Head>
+              <title key="title">Events - Gateway Church, York</title>
+            </Head>
+            <Header
+              colour={colour}
+              colourHex={colourHex}
+              colourHexLight={lightColourHex}
+              title={title}
+              image={header.image}
+              Header={HeaderContainer}
+            />
+            <Container>
+              <H1>No events in the Calendar...</H1>
+              <p>
+                It looks like we forgot to keep our events updated, sorry about
+                that!
+              </p>
+            </Container>
+            <Footer />
+          </React.Fragment>
+        );
       }
 
       return (

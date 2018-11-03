@@ -241,8 +241,10 @@ const People = withRouter(({ router = {} }) => (
                     </Person>
                   ))}
                 </ul>
+                <Clearfix />
               </Container>
             </main>
+            <Footer />
           </React.Fragment>
         );
       }
@@ -263,6 +265,7 @@ const People = withRouter(({ router = {} }) => (
 
               <P>No people matching the filter {filter} found.</P>
             </main>
+            <Footer />
           </React.Fragment>
         );
       }
