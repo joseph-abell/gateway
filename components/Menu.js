@@ -188,7 +188,7 @@ class Menu extends React.Component {
               <MainMenu>
                 {menuItems.map(item => (
                   <MenuItem colour={colour} key={item.link}>
-                    <Link href={item.link} prefetch>
+                    <Link href={item.link}>
                       <StyledMenuLink colour={colour}>
                         {item.title}
                       </StyledMenuLink>

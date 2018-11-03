@@ -87,7 +87,10 @@ export const getData = async pageName => {
 };
 
 export const getResizedImageUrl = url => {
-  if (!url) return;
+  if (!url) {
+    return;
+  }
+
   const pageWidth = window.innerWidth;
 
   if (pageWidth < 768) {

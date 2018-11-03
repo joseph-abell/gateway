@@ -203,12 +203,11 @@ const Events = ({ location = {} }) => (
         const maxPageCount = Math.ceil(eventCount / 10);
 
         resolve({
+          ...eventsPageData,
           colour,
           colourHex,
           lightColourHex,
-          header,
           image,
-          title,
           subtitleImage,
           subtitleText,
           maxPageCount,
