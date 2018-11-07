@@ -54,8 +54,10 @@ const ReadMore = styled.div`
 `;
 
 const StyledTextContainer = styled.div`
-  float: left;
-  width: 50%;
+  @media screen and (min-width: 991px) {
+    float: left;
+    width: 50%;
+  }
 `;
 
 const StyledHideOnMobile = styled(HideOnMobile)`
