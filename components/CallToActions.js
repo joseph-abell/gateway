@@ -63,6 +63,10 @@ const StyledLink = styled.a`
     ${H2} {
       line-height: 30px;
       padding-top: 30px;
+
+      @media screen and (min-width: 1241px) {
+        line-height: 250px;
+      }
     }
 
     ${P} {
@@ -87,6 +91,12 @@ const Wrapper = styled.li`
   }
 `;
 
+const StyledCallToActions = styled.ul`
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`;
+
 const CallToAction = ({ link, title, deck, image, colour }) => (
   <Wrapper key={title}>
     <Link href={link}>
@@ -100,7 +110,7 @@ const CallToAction = ({ link, title, deck, image, colour }) => (
 );
 
 const CallToActions = ({ cta }) => (
-  <ul className="call-to-actions">{cta.map(CallToAction)}</ul>
+  <StyledCallToActions>{cta.map(CallToAction)}</StyledCallToActions>
 );
 
 export default CallToActions;
