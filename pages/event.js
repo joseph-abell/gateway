@@ -79,29 +79,30 @@ const StyledLink = styled.a`
   display: inline-block;
   border: 3px solid ${props => props.colour};
   padding: 10px;
-  bordre-radius: 5px;
+  border-radius: 5px;
   margin-top: 10px;
 `;
 
-const Event = withRouter(props => (
+const Event = withRouter(({ router }) => (
   <Async
     promise={
       new Promise(async resolve => {
-        const data = await getData('data/events/new-event.json');
+        const { query } = router;
+        const pathname = query.id
+          .split(' ')
+          .join('-')
+          .toLowerCase();
+
+        const data = await getData(`data/events/${pathname}.json`);
         const colour = getMenuColour(data);
         const colourHex = changeColourToHex(colour);
         const colourHexLight = changeColourToHex(colour, true);
-        const { title, image, date, time, deck } = data;
 
         resolve({
-          title,
-          image,
-          date,
-          time,
-          deck,
+          ...data,
           colour,
-          colourHex,
-          colourHexLight
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colourHex)
         });
       })
     }

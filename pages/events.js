@@ -132,6 +132,10 @@ const H1 = styled.h1`
   line-height: 36px;
 `;
 
+const NoEvents = styled.p`
+  margin-bottom: 20px;
+`;
+
 const EventList = ({ events, color }) => {
   return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
@@ -182,9 +186,7 @@ const Events = ({ location = {} }) => (
         const data = await getData('data/events/index.json');
         const eventsPageData = await getData('data/pages/events.json');
         const colour = getMenuColour(eventsPageData);
-        const colourHex = changeColourToHex(colour);
-        const lightColourHex = changeColourToHex(colour, true);
-        const { title, header, subtitle, deck } = eventsPageData;
+        const { header, subtitle, deck } = eventsPageData;
         const image = getFullUrl(header.image);
         const subtitleImage = getFullUrl(subtitle.image);
         const subtitleText = subtitle.subtitle;
@@ -205,8 +207,8 @@ const Events = ({ location = {} }) => (
         resolve({
           ...eventsPageData,
           colour,
-          colourHex,
-          lightColourHex,
+          colourHex: changeColourToHex(colour),
+          lightColourHex: changeColourToHex(colour, true),
           image,
           subtitleImage,
           subtitleText,
@@ -249,10 +251,10 @@ const Events = ({ location = {} }) => (
             />
             <Container>
               <H1>No events in the Calendar...</H1>
-              <p>
+              <NoEvents>
                 It looks like we forgot to keep our events updated, sorry about
                 that!
-              </p>
+              </NoEvents>
             </Container>
             <Footer />
           </React.Fragment>

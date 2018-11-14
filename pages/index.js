@@ -60,9 +60,7 @@ const Home = () => (
       new Promise(async resolve => {
         const data = await getData('data/homepage.json');
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const { quotes, deck, header, eventsImage, twitterImage } = data;
+        const { header, deck, eventsImage, twitterImage } = data;
         let { cta } = data;
 
         header.image = getFullUrl(header.image);
@@ -78,12 +76,12 @@ const Home = () => (
         deck.colour = changeColourToHex(deck.colour);
 
         resolve({
+          ...data,
           header,
           colour,
-          colourHex,
-          colourHexLight,
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true),
           cta,
-          quotes,
           deck,
           eventsImage: getFullUrl(eventsImage),
           twitterImage: getFullUrl(twitterImage)

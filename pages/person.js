@@ -234,6 +234,7 @@ const Person = withRouter(({ router }) => (
               .join('-')}.json`;
             return wordsData[wordName];
           });
+
         resolve({
           ...json,
           colour,
