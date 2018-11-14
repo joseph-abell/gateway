@@ -30,18 +30,12 @@ const ContactUs = () => (
       new Promise(async resolve => {
         const data = await getData('data/contact-us.json');
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const { title, image, contentImage, deck } = data;
 
         resolve({
-          title,
+          ...data,
           colour,
-          colourHex,
-          colourHexLight,
-          contentImage,
-          image,
-          deck
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true)
         });
       })
     }
