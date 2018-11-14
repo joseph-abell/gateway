@@ -202,20 +202,8 @@ const Person = withRouter(({ router }) => (
           .toLowerCase();
         const data = await getData(`data/people/${pathname}.json`);
         const { json } = data;
+        const { words } = json;
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-
-        const {
-          title,
-          image,
-          deck,
-          email,
-          phoneNumber,
-          titleRole,
-          filters,
-          words
-        } = json;
 
         let wordsData;
 
@@ -247,16 +235,10 @@ const Person = withRouter(({ router }) => (
             return wordsData[wordName];
           });
         resolve({
-          title,
-          image,
-          deck,
-          email,
-          phoneNumber,
-          titleRole,
-          filters,
+          ...json,
           colour,
-          colourHex,
-          colourHexLight,
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true),
           words: wordsData
         });
       })
