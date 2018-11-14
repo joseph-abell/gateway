@@ -164,20 +164,17 @@ const People = withRouter(({ router = {} }) => (
 
         const data = await getData('/data/pages/people.json');
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const { deck, header, title } = data;
-        const image = getFullUrl(header.image);
+        const { deck, header } = data;
 
         deck.image = deck && deck.image && getFullUrl(deck.image);
         deck.colour = changeColourToHex(deck && deck.colour);
 
         resolve({
-          title,
-          image,
+          ...data,
+          image: getFullUrl(header.image),
           colour,
-          colourHex,
-          colourHexLight,
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true),
           deck,
           people,
           filter,
@@ -241,10 +238,8 @@ const People = withRouter(({ router = {} }) => (
                     </Person>
                   ))}
                 </ul>
-                <Clearfix />
               </Container>
             </main>
-            <Footer />
           </React.Fragment>
         );
       }
@@ -265,7 +260,6 @@ const People = withRouter(({ router = {} }) => (
 
               <P>No people matching the filter {filter} found.</P>
             </main>
-            <Footer />
           </React.Fragment>
         );
       }
