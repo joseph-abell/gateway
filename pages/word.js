@@ -67,31 +67,14 @@ const Word = withRouter(({ router }) => (
           .toLowerCase();
         const data = await getData(`data/words/${id}.json`);
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const {
-          title,
-          image,
-          deck,
-          date,
-          subtitle,
-          audioFile,
-          file,
-          youtubeLink
-        } = data;
+        const { audioFile } = data;
 
         resolve({
-          title,
-          image,
-          deck,
-          date,
-          subtitle,
+          ...data,
           audioFile: getFullUrl(audioFile),
-          file,
-          youtubeLink,
           colour,
-          colourHex,
-          colourHexLight
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true)
         });
       })
     }
