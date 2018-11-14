@@ -2,7 +2,9 @@
 
 # dependencies
 /node_modules
-/.next
+/.next/static/webpack
+/.next/server/static/development
+/.next/static/development
 # testing
 /coverage
 
