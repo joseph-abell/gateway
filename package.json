@@ -23,7 +23,7 @@
   "dependencies": {
     "@types/googlemaps": "^3.30.14",
     "@types/markerclustererplus": "^2.1.33",
-    "@types/react": "^16.4.16",
+    "@types/react": "^16.7.16",
     "date-fns": "^2.0.0-alpha.25",
     "downshift": "^3.0.0",
     "flat": "^4.1.0",
