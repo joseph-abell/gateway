@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: ${props => props.colour};
   color: #fff;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 991px) {
     float: right;
@@ -108,13 +109,11 @@ const PersonImageWrapper = ({ image, email, colour }) => {
   } else if (image) {
     return (
       <HideAt breakpoint="mediumAndBelow">
-        <ImageContainer>Image</ImageContainer>
-      </HideAt>
-    );
-  } else if (email) {
-    return (
-      <HideAt breakpoint="mediumAndBelow">
-        <EmailContainer>Email</EmailContainer>
+        <ImageContainer>
+          <ImageWrapper>
+            <Image url={getFullUrl(image)} />
+          </ImageWrapper>
+        </ImageContainer>
       </HideAt>
     );
   }
@@ -201,17 +200,21 @@ const Person = withRouter(({ router }) => (
           .join('-')
           .toLowerCase();
         const data = await getData(`data/people/${pathname}.json`);
-        const { json } = data;
-        const { words } = json;
+        let words;
+        if (data.json) {
+          words = data.json.words;
+        } else {
+          words = data.words;
+        }
         const colour = getMenuColour(data);
 
         let wordsData;
 
-        if (words.length) {
+        if (words && words.length) {
           wordsData = await getData(`data/words/index.json`);
         }
 
-        wordsData = words
+        wordsData = (words || [])
           .sort((a, b) => {
             const aName = `${a
               .toLowerCase()
@@ -236,7 +239,7 @@ const Person = withRouter(({ router }) => (
           });
 
         resolve({
-          ...json,
+          ...(data.json || data),
           colour,
           colourHex: changeColourToHex(colour),
           colourHexLight: changeColourToHex(colour, true),
@@ -272,11 +275,14 @@ const Person = withRouter(({ router }) => (
           <Wrapper colour={colourHexLight}>
             <H1>{title}</H1>
             <H2>{titleRole}</H2>
-            <P>{deck}</P>
+            <P dangerouslySetInnerHTML={{ __html: deck }} />
           </Wrapper>
 
           <Clearfix />
-          <WordsTitle colour={colourHex}>Words</WordsTitle>
+          {words &&
+            words.length > 0 && (
+              <WordsTitle colour={colourHex}>Words</WordsTitle>
+            )}
 
           <ul>
             {words &&

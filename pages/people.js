@@ -138,7 +138,7 @@ const People = withRouter(({ router = {} }) => (
         let acceptedFilters = await getData('data/peopleFilters/index.json');
 
         acceptedFilters = Object.values(acceptedFilters)
-          .map(f => f.data)
+          .map(f => f.data || f)
           .map(f => ({
             name: f.name,
             title: f.title,
