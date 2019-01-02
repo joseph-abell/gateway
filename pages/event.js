@@ -137,7 +137,7 @@ const Event = withRouter(({ router }) => (
           </ContentLeft>
           <ContentRight colour={colourHex}>
             <p>{deck}</p>
-            <Link href="/events">
+            <Link href="/events" passHref>
               <StyledLink colour={colourHexLight}>
                 View a list of all events
               </StyledLink>

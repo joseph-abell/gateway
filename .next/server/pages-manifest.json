@@ -2,5 +2,6 @@
   "/_app": "static/development/pages/_app.js",
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
-  "/words": "static/development/pages/words.js"
+  "/words": "static/development/pages/words.js",
+  "/events": "static/development/pages/events.js"
 }

@@ -54,14 +54,14 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
 
     if (link === 1) {
       return (
-        <Link href="events" key={link}>
+        <Link href="events" key={link} passHref>
           <StyledLink>{link}</StyledLink>
         </Link>
       );
     }
 
     return (
-      <Link href={`events?page=${link}`} key={link}>
+      <Link href={`events?page=${link}`} key={link} passHref>
         <StyledLink>{link}</StyledLink>
       </Link>
     );
@@ -147,6 +147,7 @@ const EventList = ({ events, color }) => {
         key={event.title + date + time}
         route="event"
         params={{ id: event.title }}
+        passHref
       >
         <StyledEvent color={color}>
           <EventLeft>
@@ -197,6 +198,7 @@ const Events = ({ location = {} }) => (
             event =>
               event && event.dateTime && moment().isBefore(event.dateTime)
           )
+          .filter(event => !event.draft)
           .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1));
 
         const eventCount = events.length;

@@ -36,7 +36,7 @@ const Image = styled.div`
 
 const HomeDeck = ({ colour, text, image }) => (
   <Container>
-    <Text colour={colour}>{text}</Text>
+    <Text colour={colour} dangerouslySetInnerHTML={{ __html: text }} />
     <ImageWrapper mobileHeight="400px">
       <Image src={image} />
     </ImageWrapper>

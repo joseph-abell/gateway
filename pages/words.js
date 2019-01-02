@@ -107,14 +107,14 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
 
     if (link === 1) {
       return (
-        <Link href="words" key={link}>
+        <Link href="words" key={link} passHref>
           <StyledPaginationLink>{link}</StyledPaginationLink>
         </Link>
       );
     }
 
     return (
-      <Link href={`words?page=${link}`} key={link}>
+      <Link href={`words?page=${link}`} key={link} passHref>
         <StyledPaginationLink>{link}</StyledPaginationLink>
       </Link>
     );
@@ -207,7 +207,7 @@ const Words = ({ router = { query: { page: 1 } } }) => (
           <ul>
             {words.map(word => (
               <Word key={word.title}>
-                <Link href={`/words/${word.title}`}>
+                <Link href={`/words/${word.title}`} passHref>
                   <StyledLink colour={changeColourToHex(word.colour, true)}>
                     <StyledTextContainer>
                       <StyledText>

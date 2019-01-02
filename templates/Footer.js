@@ -35,14 +35,14 @@ const Credits = styled.ul`
   color: #fff;
   margin-bottom: 20px;
   margin-left: 20px;
+
+  a {
+    color: #fff;
+  }
 `;
 
 const Credit = styled.li`
   padding-bottom: 5px;
-`;
-
-const CreditLink = styled.a`
-  color: #fff;
 `;
 
 const Main = styled.div`
@@ -133,22 +133,27 @@ const FooterTemplate = () => (
         <Container>
           <Credits>
             {credits.map(credit => (
-              <Credit key={credit}>
+              <Credit key={JSON.stringify(credit)}>
                 {credit.role} by{' '}
                 {credit.links.map((link, index) => {
+                  let l = link.link;
+                  if (!l.includes('http')) {
+                    l = `http://${l}`;
+                  }
+
                   if (index + 1 === credit.links.length) {
                     return (
-                      <Link href={link.link} key={link.link}>
-                        <CreditLink>{link.name}</CreditLink>
+                      <Link href={l} key={l}>
+                        <a>{link.name}</a>
                       </Link>
                     );
                   }
 
                   if (index + 1 === credit.links.length - 1) {
                     return (
-                      <span>
-                        <Link href={link.link} key={link.link}>
-                          <CreditLink>{link.name}</CreditLink>
+                      <span key={l}>
+                        <Link href={l}>
+                          <a>{link.name}</a>
                         </Link>
                         {' and '}
                       </span>
@@ -156,9 +161,9 @@ const FooterTemplate = () => (
                   }
 
                   return (
-                    <span>
-                      <Link href={link.link} key={link.link}>
-                        <CreditLink>{link.name}</CreditLink>
+                    <span key={l}>
+                      <Link href={l}>
+                        <a>{link.name}</a>
                       </Link>
                       {', '}
                     </span>

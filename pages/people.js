@@ -211,7 +211,7 @@ const People = withRouter(({ router = {} }) => (
                 <ul>
                   {people.map(person => (
                     <Person key={person.data.title}>
-                      <Link href={`/people/${person.data.title}`}>
+                      <Link href={`/people/${person.data.title}`} passHref>
                         <a>
                           <PersonBlock
                             colour={changeColourToHex(
@@ -285,7 +285,7 @@ const People = withRouter(({ router = {} }) => (
               <ul>
                 {acceptedFilters.map(filter => (
                   <Filter key={filter.name}>
-                    <Link href={`people?filter=${filter.name}`}>
+                    <Link href={`people?filter=${filter.name}`} passHref>
                       <StyledLink colour={filter.colour}>
                         <FilterItemTitle>{filter.title}</FilterItemTitle>
                         <FilterItemDeck>{filter.deck}</FilterItemDeck>
