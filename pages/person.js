@@ -141,10 +141,6 @@ const WordDate = styled.div`
   margin-bottom: 20px;
 `;
 
-const WordAuthors = styled.ul`
-  display: inline-block;
-`;
-
 const WordsTitle = styled.h2`
   font-size: 30px;
   line-height: 36px;
@@ -300,11 +296,11 @@ const Person = withRouter(({ router }) => (
                           <WordDate colour={changeColourToHex(wordData.colour)}>
                             {format(wordData.date, 'EEEE do LLLL yyyy')}
                           </WordDate>
-                          <WordAuthors>
+                          <div>
                             {wordData.authors.map(({ author }) => {
-                              return <li key={author}>{author}</li>;
+                              return <span key={author}>{author}</span>;
                             })}
-                          </WordAuthors>
+                          </div>
                           <WordTitle>{wordData.title}</WordTitle>
                           <WordReadMore
                             colour={changeColourToHex(wordData.colour)}

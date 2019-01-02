@@ -3,6 +3,8 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { format, compareAsc } from 'date-fns';
 import Head from 'next/head';
+import { withRouter } from 'next/router';
+
 import { Link } from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
@@ -78,18 +80,60 @@ const Word = styled.li`
   }
 `;
 
-const Words = ({ location = {} }) => (
+const StyledNotLink = styled.div`
+  display: inline-block;
+  margin-right: 20px;
+`;
+
+const StyledPaginationLink = styled.a`
+  display: inline-block;
+  margin-right: 20px;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+`;
+
+const Pagination = ({ maxCount, currentPage = 1 }) => {
+  console.log(currentPage);
+  let links = [];
+
+  for (let i = 1; i < maxCount + 1; i++) {
+    links.push(i);
+  }
+
+  return links.map(link => {
+    if (link === parseInt(currentPage)) {
+      return <StyledNotLink key={link}>{link}</StyledNotLink>;
+    }
+
+    if (link === 1) {
+      return (
+        <Link href="words" key={link}>
+          <StyledPaginationLink>{link}</StyledPaginationLink>
+        </Link>
+      );
+    }
+
+    return (
+      <Link href={`words?page=${link}`} key={link}>
+        <StyledPaginationLink>{link}</StyledPaginationLink>
+      </Link>
+    );
+  });
+};
+
+const StyledPagination = styled.div`
+  background: ${({ color }) => color};
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+`;
+
+const Words = ({ router = { query: { page: 1 } } }) => (
   <Async
     promise={
       new Promise(async resolve => {
-        let currentPage = location.search;
-
-        if (!currentPage) {
-          currentPage = '?page=1';
-        }
-
-        currentPage = parseInt(currentPage.split('page=')[1], 10);
-
+        const currentPage = router.query.page || 1;
         const data = await getData('data/words/index.json');
         const wordsPageData = await getData('data/pages/words.json');
         const colour = getMenuColour(wordsPageData);
@@ -100,7 +144,10 @@ const Words = ({ location = {} }) => (
 
         let words = Object.values(data)
           .map(word => word.data)
-          .sort((a, b) => compareAsc(new Date(b.date), new Date(a.date)));
+          .filter(word => !!word.date)
+          .sort((a, b) => {
+            return compareAsc(new Date(b.date), new Date(a.date));
+          });
 
         const wordsCount = words.length;
 
@@ -152,6 +199,11 @@ const Words = ({ location = {} }) => (
           )}
 
         <Container>
+          {maxPageCount > 1 && (
+            <StyledPagination color={colourHex}>
+              <Pagination maxCount={maxPageCount} currentPage={currentPage} />
+            </StyledPagination>
+          )}
           <ul>
             {words.map(word => (
               <Word key={word.title}>
@@ -189,4 +241,4 @@ const Words = ({ location = {} }) => (
   />
 );
 
-export default Words;
+export default withRouter(Words);
