@@ -93,7 +93,6 @@ const StyledPaginationLink = styled.a`
 `;
 
 const Pagination = ({ maxCount, currentPage = 1 }) => {
-  console.log(currentPage);
   let links = [];
 
   for (let i = 1; i < maxCount + 1; i++) {

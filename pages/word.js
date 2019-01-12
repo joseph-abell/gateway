@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
 import { format } from 'date-fns';
+import { markdown } from 'markdown';
+
 import { url } from '../helpers/config';
 import {
   getData,
@@ -125,7 +127,9 @@ const Word = withRouter(({ router }) => (
             </P>
           )}
 
-          {deck && <P>{deck}</P>}
+          {deck && (
+            <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
+          )}
 
           {youtubeLink && (
             <P>
