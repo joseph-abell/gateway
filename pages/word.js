@@ -69,11 +69,17 @@ const Word = withRouter(({ router }) => (
           .toLowerCase();
         const data = await getData(`data/words/${id}.json`);
         const colour = getMenuColour(data);
-        const { audioFile } = data;
+        let { audioFile } = data;
+
+        if (!audioFile || !audioFile.includes('.mp3')) {
+          audioFile = '';
+        } else {
+          audioFile = getFullUrl(audioFile);
+        }
 
         resolve({
           ...data,
-          audioFile: getFullUrl(audioFile),
+          audioFile,
           colour,
           colourHex: changeColourToHex(colour),
           colourHexLight: changeColourToHex(colour, true)
