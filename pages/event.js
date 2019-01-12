@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
+import { markdown } from 'markdown';
 
 import { Link } from '../router';
 
@@ -83,6 +84,12 @@ const StyledLink = styled.a`
   margin-top: 10px;
 `;
 
+const Article = styled.div`
+  p {
+    margin-bottom: 1em;
+  }
+`;
+
 const Event = withRouter(({ router }) => (
   <Async
     promise={
@@ -111,7 +118,7 @@ const Event = withRouter(({ router }) => (
       image,
       date,
       time,
-      deck,
+      article,
       colour,
       colourHex,
       colourHexLight
@@ -136,7 +143,9 @@ const Event = withRouter(({ router }) => (
             <div>{moment(time).format('HH:mm')}</div>
           </ContentLeft>
           <ContentRight colour={colourHex}>
-            <p>{deck}</p>
+            <Article
+              dangerouslySetInnerHTML={{ __html: markdown.toHTML(article) }}
+            />
             <Link href="/events" passHref>
               <StyledLink colour={colourHexLight}>
                 View a list of all events

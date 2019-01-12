@@ -211,6 +211,13 @@ const Person = withRouter(({ router }) => (
         }
 
         wordsData = (words || [])
+          .filter(word => {
+            const name = `${word
+              .toLowerCase()
+              .split(' ')
+              .join('-')}.json`;
+            return !!wordsData[name];
+          })
           .sort((a, b) => {
             const aName = `${a
               .toLowerCase()
