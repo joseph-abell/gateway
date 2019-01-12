@@ -3,5 +3,5 @@
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
   "/words": "static/development/pages/words.js",
-  "/word": "static/development/pages/word.js"
+  "/page": "static/development/pages/page.js"
 }

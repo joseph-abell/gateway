@@ -3,6 +3,7 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
+import { markdown } from 'markdown';
 import { Router } from '../router';
 import { url } from '../helpers/config';
 import Header from '../templates/Header';
@@ -107,6 +108,15 @@ const ContentPieceContainer = styled.div`
     border-bottom: ${props => (props.width ? '20px solid white' : 0)};
     height: 500px;
   }
+
+  h2 {
+    font-size: 2em;
+    line-height: 3em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
 `;
 
 const ContentPiece = ({ direction, deck, image, colour, width }) => {
@@ -133,7 +143,7 @@ const ContentPiece = ({ direction, deck, image, colour, width }) => {
       colour={colour}
       width={width}
     >
-      <Deck>{deck}</Deck>
+      <Deck dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
     </ContentPieceContainer>
   );
 };

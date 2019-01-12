@@ -41,6 +41,7 @@ const Title = styled.h2`
   font-size: 30px;
   line-height: 42px;
   max-height: 84px;
+  margin-bottom: 1em;
 `;
 
 const ReadMore = styled.div`
@@ -90,6 +91,11 @@ const StyledPaginationLink = styled.a`
   margin-right: 20px;
   color: #fff;
   border-bottom: 2px solid #fff;
+`;
+
+const Subtitle = styled.h3`
+  font-size: 1.3em;
+  line-height: 1.3em;
 `;
 
 const Pagination = ({ maxCount, currentPage = 1 }) => {
@@ -214,6 +220,7 @@ const Words = ({ router = { query: { page: 1 } } }) => (
                           {format(word.date, 'EEEE do LLLL yyyy')}
                         </StyledDate>
                         <Title>{word.title}</Title>
+                        <Subtitle>{word.subtitle}</Subtitle>
                       </StyledText>
                       <ReadMore colour={changeColourToHex(word.colour)}>
                         Read More +
