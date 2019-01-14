@@ -216,7 +216,11 @@ const Person = withRouter(({ router }) => (
               .toLowerCase()
               .split(' ')
               .join('-')}.json`;
-            return !!wordsData[name];
+            return (
+              !!wordsData[name] &&
+              !!wordsData[name].data &&
+              !!wordsData[name].data.date
+            );
           })
           .sort((a, b) => {
             const aName = `${a
@@ -304,8 +308,26 @@ const Person = withRouter(({ router }) => (
                             {format(wordData.date, 'EEEE do LLLL yyyy')}
                           </WordDate>
                           <div>
-                            {wordData.authors.map(({ author }) => {
-                              return <span key={author}>{author}</span>;
+                            {wordData.authors.map(({ author }, index) => {
+                              return (
+                                <span
+                                  key={author}
+                                  style={{
+                                    marginBottom: '10px',
+                                    marginRight: '5px',
+                                    display: 'inline-block'
+                                  }}
+                                >
+                                  {index !== 0 && ' - '}
+                                  {author
+                                    .split('-')
+                                    .map(
+                                      n =>
+                                        n.charAt(0).toUpperCase() + n.slice(1)
+                                    )
+                                    .join(' ')}{' '}
+                                </span>
+                              );
                             })}
                           </div>
                           <WordTitle>{wordData.title}</WordTitle>
