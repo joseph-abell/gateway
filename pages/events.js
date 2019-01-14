@@ -141,6 +141,7 @@ const EventList = ({ events, color }) => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
     const time = moment(event.dateTime).format('kk:ss');
     const image = getFullUrl(event.image);
+    const listImage = event.listImage && getFullUrl(event.listImage);
 
     return (
       <Link
@@ -161,7 +162,7 @@ const EventList = ({ events, color }) => {
           <HideAt breakpoint="mediumAndBelow">
             <EventRight>
               <EventImageWrapper>
-                <Image url={image} />
+                <Image url={listImage || image} />
               </EventImageWrapper>
             </EventRight>
           </HideAt>
