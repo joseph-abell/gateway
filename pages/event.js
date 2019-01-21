@@ -105,6 +105,7 @@ const Event = withRouter(({ router }) => (
         const colourHex = changeColourToHex(colour);
         const colourHexLight = changeColourToHex(colour, true);
 
+        console.log(data);
         resolve({
           ...data,
           colour,
@@ -116,7 +117,7 @@ const Event = withRouter(({ router }) => (
     then={({
       title,
       image,
-      date,
+      dateTime,
       time,
       article,
       colour,
@@ -139,8 +140,8 @@ const Event = withRouter(({ router }) => (
             <Title>{title}</Title>
           </Subtitle>
           <ContentLeft colour={colourHexLight}>
-            <div>{moment(date).format('dddd DD MMM YYYY')}</div>
-            <div>{moment(time).format('HH:mm')}</div>
+            <div>{moment(dateTime).format('dddd DD MMM YYYY')}</div>
+            <div>{moment(dateTime).format('HH:mm')}</div>
           </ContentLeft>
           <ContentRight colour={colourHex}>
             <Article
