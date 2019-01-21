@@ -155,7 +155,7 @@ const People = withRouter(({ router = {} }) => (
 
           people = people.filter(person => {
             const { data } = person || {};
-            const { filters } = data || {};
+            const { filters = {} } = data;
             const keys = Object.keys(filters);
 
             return keys.includes(filter);
