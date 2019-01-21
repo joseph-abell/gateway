@@ -138,13 +138,18 @@ const ContentPiece = ({ direction, deck, image, colour, width }) => {
   }
 
   return (
-    <ContentPieceContainer
-      direction={adjustedDirection}
-      colour={colour}
-      width={width}
-    >
-      <Deck dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
-    </ContentPieceContainer>
+    <>
+      {typeof deck === 'undefined' && <div />}
+      {deck && (
+        <ContentPieceContainer
+          direction={adjustedDirection}
+          colour={colour}
+          width={width}
+        >
+          <Deck dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
+        </ContentPieceContainer>
+      )}
+    </>
   );
 };
 
