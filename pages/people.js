@@ -146,21 +146,23 @@ const People = withRouter(({ router = {} }) => (
             colour: changeColourToHex(f.colour, true)
           }));
 
-        let people = [];
+        let people = (await getData('data/people/index.json')) || [];
 
-        if (filter && acceptedFilters.map(f => f.name).includes(filter)) {
-          people = await getData('data/people/index.json');
+        people = Object.values(people);
 
-          people = Object.values(people);
+        people = people.filter(person => {
+          const {
+            data: { filters: personFilters }
+          } = person;
 
-          people = people.filter(person => {
-            const { data } = person || {};
-            const { filters = {} } = data;
-            const keys = Object.keys(filters);
+          const keys = Object.keys(personFilters || {}).filter(
+            key => key === filter
+          );
 
-            return keys.includes(filter);
-          });
-        }
+          return keys
+            .map(key => personFilters[key])
+            .some(personFilter => personFilter === 'true');
+        });
 
         const data = await getData('/data/pages/people.json');
         const colour = getMenuColour(data);
