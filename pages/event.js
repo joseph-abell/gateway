@@ -144,9 +144,11 @@ const Event = withRouter(({ router }) => (
             <div>{moment(dateTime).format('HH:mm')}</div>
           </ContentLeft>
           <ContentRight colour={colourHex}>
-            <Article
-              dangerouslySetInnerHTML={{ __html: markdown.toHTML(article) }}
-            />
+            {article && (
+              <Article
+                dangerouslySetInnerHTML={{ __html: markdown.toHTML(article) }}
+              />
+            )}
             <Link href="/events" passHref>
               <StyledLink colour={colourHexLight}>
                 View a list of all events
