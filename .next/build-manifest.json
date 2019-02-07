@@ -3,6 +3,8 @@
   "pages": {
     "/_app": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/_error": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/word": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/words": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/people": ["static/runtime/webpack.js", "static/runtime/main.js"]
   }
 }

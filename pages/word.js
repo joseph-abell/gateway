@@ -133,9 +133,15 @@ const Word = withRouter(({ router }) => (
             </P>
           )}
 
-          {deck && (
-            <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
-          )}
+          {deck &&
+            deck.startsWith('<') && (
+              <P dangerouslySetInnerHTML={{ __html: deck }} />
+            )}
+
+          {deck &&
+            !deck.startsWith('<') && (
+              <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
+            )}
 
           {youtubeLink && (
             <P>
