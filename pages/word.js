@@ -19,42 +19,12 @@ import ImageWrapper from '../components/ImageWrapper';
 import Image from '../components/Image';
 import Container from '../components/Container';
 import Audio from '../components/Audio';
-
-const Deck = styled.div`
-  padding: 40px;
-  background: ${props => props.colour};
-`;
-
-const Date = styled.div`
-  color: ${props => props.colour};
-`;
-
-const H1 = styled.h1`
-  font-size: 57px;
-  line-height: 76px;
-  color: #fff;
-`;
-
-const H2 = styled.h2`
-  font-size: 30px;
-  line-height: 40px;
-  color: #fff;
-`;
-
-const P = styled.div`
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-
-  @media screen and (min-width: 1240px) {
-    margin-left: 0;
-    margin-right: 0;
-  }
-`;
-
-const Link = styled.a`
-  color: ${props => props.colour};
-`;
+import H1 from '../components/H1Word';
+import H2 from '../components/H2Word';
+import P from '../components/PWord';
+import Deck from '../components/DeckWord';
+import StyledDate from '../components/DateWord';
+import Link from '../components/LinkWord';
 
 const Word = ({ router }) => {
   const [loading, setLoading] = useState(true);
@@ -129,7 +99,9 @@ const Word = ({ router }) => {
       />
       <Deck colour={colourHexLight}>
         <Container>
-          <Date colour={colourHex}>{format(date, 'EEEE do LLLL yyyy')}</Date>
+          <StyledDate colour={colourHex}>
+            {format(date, 'EEEE do LLLL yyyy')}
+          </StyledDate>
           <H1>{title}</H1>
           <H2>{subtitle}</H2>
         </Container>
