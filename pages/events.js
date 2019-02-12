@@ -3,7 +3,7 @@ import Async from 'react-promise';
 import styled from 'styled-components';
 import moment from 'moment';
 import Head from 'next/head';
-import { Link } from '../router';
+import {Link} from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import Container from '../components/Container';
@@ -12,7 +12,7 @@ import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import PageSummary from '../components/PageSummary';
 import Clearfix from '../components/Clearfix';
-import { HideAt, ShowAt } from 'react-with-breakpoints';
+import {HideAt, ShowAt} from 'react-with-breakpoints';
 
 import {
   getData,
@@ -40,7 +40,7 @@ const StyledLink = styled.a`
   border-bottom: 2px solid #fff;
 `;
 
-const Pagination = ({ maxCount, currentPage = 1 }) => {
+const Pagination = ({maxCount, currentPage = 1}) => {
   let links = [];
 
   for (let i = 1; i < maxCount + 1; i++) {
@@ -69,7 +69,7 @@ const Pagination = ({ maxCount, currentPage = 1 }) => {
 };
 
 const StyledPagination = styled.div`
-  background: ${({ color }) => color};
+  background: ${({color}) => color};
   padding: 10px 20px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -136,7 +136,7 @@ const NoEvents = styled.p`
   margin-bottom: 20px;
 `;
 
-const EventList = ({ events, color }) => {
+const EventList = ({events, color}) => {
   return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
     const time = moment(event.dateTime).format('kk:ss');
@@ -147,7 +147,7 @@ const EventList = ({ events, color }) => {
       <Link
         key={event.title + date + time}
         route="event"
-        params={{ id: event.title }}
+        params={{id: event.title}}
         passHref
       >
         <StyledEvent color={color}>
@@ -173,7 +173,7 @@ const EventList = ({ events, color }) => {
   });
 };
 
-const Events = ({ location = {} }) => (
+const Events = ({location = {}}) => (
   <Async
     promise={
       new Promise(async resolve => {
@@ -188,7 +188,7 @@ const Events = ({ location = {} }) => (
         const data = await getData('data/events/index.json');
         const eventsPageData = await getData('data/pages/events.json');
         const colour = getMenuColour(eventsPageData);
-        const { header, subtitle, deck } = eventsPageData;
+        const {header, subtitle, deck} = eventsPageData;
         const image = getFullUrl(header.image);
         const subtitleImage = getFullUrl(subtitle.image);
         const subtitleText = subtitle.subtitle;

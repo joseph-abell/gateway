@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
-import { format } from 'date-fns';
-import { markdown } from 'markdown';
+import {format} from 'date-fns';
+import {markdown} from 'markdown';
 
-import { url } from '../helpers/config';
+import {url} from '../helpers/config';
 import {
   getData,
   getMenuColour,
@@ -26,13 +26,13 @@ import Deck from '../components/DeckWord';
 import StyledDate from '../components/DateWord';
 import Link from '../components/LinkWord';
 
-const Word = ({ router }) => {
+const Word = ({router}) => {
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState({});
 
   const fetchData = async () => {
     let {
-      query: { id }
+      query: {id}
     } = router;
 
     id = id
@@ -45,7 +45,7 @@ const Word = ({ router }) => {
     const data = await getData(`data/words/${id}.json`);
     const colour = getMenuColour(data);
 
-    let { audioFile } = data;
+    let {audioFile} = data;
     if (!audioFile || !audioFile.includes('.mp3')) {
       audioFile = '';
     } else {
@@ -65,7 +65,7 @@ const Word = ({ router }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [router]);
 
   const {
     title,
@@ -123,15 +123,13 @@ const Word = ({ router }) => {
           </P>
         )}
 
-        {deck &&
-          deck.startsWith('<') && (
-            <P dangerouslySetInnerHTML={{ __html: deck }} />
-          )}
+        {deck && deck.startsWith('<') && (
+          <P dangerouslySetInnerHTML={{__html: deck}} />
+        )}
 
-        {deck &&
-          !deck.startsWith('<') && (
-            <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
-          )}
+        {deck && !deck.startsWith('<') && (
+          <P dangerouslySetInnerHTML={{__html: markdown.toHTML(deck)}} />
+        )}
 
         {youtubeLink && (
           <P>

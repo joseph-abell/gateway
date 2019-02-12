@@ -1,10 +1,10 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
-import { HideAt, ShowAt } from 'react-with-breakpoints';
-import { format } from 'date-fns';
+import {HideAt, ShowAt} from 'react-with-breakpoints';
+import {format} from 'date-fns';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import ImageWrapper from '../components/ImageWrapper';
@@ -91,7 +91,7 @@ const ContactHeader = styled.p`
   line-height: 52px;
 `;
 
-const PersonImageWrapper = ({ image, email, colour }) => {
+const PersonImageWrapper = ({image, email, colour}) => {
   if (email && image) {
     return (
       <HideAt breakpoint="mediumAndBelow">
@@ -186,11 +186,11 @@ const WordImage = styled.div`
   margin-right: -20px;
 `;
 
-const Person = withRouter(({ router }) => (
+const Person = withRouter(({router}) => (
   <Async
     promise={
       new Promise(async resolve => {
-        const { query } = router;
+        const {query} = router;
         const pathname = query.id
           .split(' ')
           .join('-')
@@ -282,14 +282,13 @@ const Person = withRouter(({ router }) => (
           <Wrapper colour={colourHexLight}>
             <H1>{title}</H1>
             <H2>{titleRole}</H2>
-            <P dangerouslySetInnerHTML={{ __html: deck }} />
+            <P dangerouslySetInnerHTML={{__html: deck}} />
           </Wrapper>
 
           <Clearfix />
-          {words &&
-            words.length > 0 && (
-              <WordsTitle colour={colourHex}>Words</WordsTitle>
-            )}
+          {words && words.length > 0 && (
+            <WordsTitle colour={colourHex}>Words</WordsTitle>
+          )}
 
           <ul>
             {words &&
@@ -308,7 +307,7 @@ const Person = withRouter(({ router }) => (
                             {format(wordData.date, 'EEEE do LLLL yyyy')}
                           </WordDate>
                           <div>
-                            {wordData.authors.map(({ author }, index) => {
+                            {wordData.authors.map(({author}, index) => {
                               return (
                                 <span
                                   key={author}

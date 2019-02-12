@@ -1550,8 +1550,8 @@
             var result = IS_MAP
               ? create($this, length)
               : IS_FILTER
-                ? create($this, 0)
-                : undefined;
+              ? create($this, 0)
+              : undefined;
             var val, res;
             for (; length > index; index++)
               if (NO_HOLES || index in self) {
@@ -1718,17 +1718,17 @@
           return it === undefined
             ? 'Undefined'
             : it === null
-              ? 'Null'
-              : // @@toStringTag case
-                typeof (T = tryGet((O = Object(it)), TAG)) == 'string'
-                ? T
-                : // builtinTag case
-                  ARG
-                  ? cof(O)
-                  : // ES3 arguments fallback
-                    (B = cof(O)) == 'Object' && typeof O.callee == 'function'
-                    ? 'Arguments'
-                    : B;
+            ? 'Null'
+            : // @@toStringTag case
+            typeof (T = tryGet((O = Object(it)), TAG)) == 'string'
+            ? T
+            : // builtinTag case
+            ARG
+            ? cof(O)
+            : // ES3 arguments fallback
+            (B = cof(O)) == 'Object' && typeof O.callee == 'function'
+            ? 'Arguments'
+            : B;
         };
 
         /***/
@@ -2103,7 +2103,7 @@
   \*******************************************************/
       /*! no static exports found */
       /***/ function(module, exports) {
-        var core = (module.exports = { version: '2.5.7' });
+        var core = (module.exports = {version: '2.5.7'});
         if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
         /***/
@@ -2308,8 +2308,8 @@
           var target = IS_GLOBAL
             ? global
             : IS_STATIC
-              ? global[name]
-              : (global[name] || {})[PROTOTYPE];
+            ? global[name]
+            : (global[name] || {})[PROTOTYPE];
           var key, own, out;
           if (IS_GLOBAL) source = name;
           for (key in source) {
@@ -2323,32 +2323,32 @@
               IS_GLOBAL && typeof target[key] != 'function'
                 ? source[key]
                 : // bind timers to global for call from export context
-                  IS_BIND && own
-                  ? ctx(out, global)
-                  : // wrap global constructors for prevent change them in library
-                    IS_WRAP && target[key] == out
-                    ? (function(C) {
-                        var F = function(a, b, c) {
-                          if (this instanceof C) {
-                            switch (arguments.length) {
-                              case 0:
-                                return new C();
-                              case 1:
-                                return new C(a);
-                              case 2:
-                                return new C(a, b);
-                            }
-                            return new C(a, b, c);
-                          }
-                          return C.apply(this, arguments);
-                        };
-                        F[PROTOTYPE] = C[PROTOTYPE];
-                        return F;
-                        // make static versions for prototype methods
-                      })(out)
-                    : IS_PROTO && typeof out == 'function'
-                      ? ctx(Function.call, out)
-                      : out;
+                IS_BIND && own
+                ? ctx(out, global)
+                : // wrap global constructors for prevent change them in library
+                IS_WRAP && target[key] == out
+                ? (function(C) {
+                    var F = function(a, b, c) {
+                      if (this instanceof C) {
+                        switch (arguments.length) {
+                          case 0:
+                            return new C();
+                          case 1:
+                            return new C(a);
+                          case 2:
+                            return new C(a, b);
+                        }
+                        return new C(a, b, c);
+                      }
+                      return C.apply(this, arguments);
+                    };
+                    F[PROTOTYPE] = C[PROTOTYPE];
+                    return F;
+                    // make static versions for prototype methods
+                  })(out)
+                : IS_PROTO && typeof out == 'function'
+                ? ctx(Function.call, out)
+                : out;
             // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
             if (IS_PROTO) {
               (exports.virtual || (exports.virtual = {}))[key] = out;
@@ -2467,9 +2467,9 @@
           typeof window != 'undefined' && window.Math == Math
             ? window
             : typeof self != 'undefined' && self.Math == Math
-              ? self
-              : // eslint-disable-next-line no-new-func
-                Function('return this')());
+            ? self
+            : // eslint-disable-next-line no-new-func
+              Function('return this')());
         if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
         /***/
@@ -2909,7 +2909,7 @@
             var arr = [7];
             var iter = arr[ITERATOR]();
             iter.next = function() {
-              return { done: (safe = true) };
+              return {done: (safe = true)};
             };
             arr[ITERATOR] = function() {
               return iter;
@@ -2931,7 +2931,7 @@
       /*! no static exports found */
       /***/ function(module, exports) {
         module.exports = function(done, value) {
-          return { value: value, done: !!done };
+          return {value: value, done: !!done};
         };
 
         /***/
@@ -3095,7 +3095,7 @@
           ) {
             var toggle = true;
             var node = document.createTextNode('');
-            new Observer(flush).observe(node, { characterData: true }); // eslint-disable-line no-new
+            new Observer(flush).observe(node, {characterData: true}); // eslint-disable-line no-new
             notify = function() {
               node.data = toggle = !toggle;
             };
@@ -3120,7 +3120,7 @@
           }
 
           return function(fn) {
-            var task = { fn: fn, next: undefined };
+            var task = {fn: fn, next: undefined};
             if (last) last.next = task;
             if (!head) {
               head = task;
@@ -3641,9 +3641,9 @@
       /***/ function(module, exports) {
         module.exports = function(exec) {
           try {
-            return { e: false, v: exec() };
+            return {e: false, v: exec()};
           } catch (e) {
-            return { e: true, v: e };
+            return {e: true, v: e};
           }
         };
 
@@ -3914,7 +3914,7 @@
 
         module.exports = function(it, tag, stat) {
           if (it && !has((it = stat ? it : it.prototype), TAG))
-            def(it, TAG, { configurable: true, value: tag });
+            def(it, TAG, {configurable: true, value: tag});
         };
 
         /***/
@@ -4027,8 +4027,8 @@
                 ? s.charAt(i)
                 : a
               : TO_STRING
-                ? s.slice(i, i + 2)
-                : ((a - 0xd800) << 10) + (b - 0xdc00) + 0x10000;
+              ? s.slice(i, i + 2)
+              : ((a - 0xd800) << 10) + (b - 0xdc00) + 0x10000;
           };
         };
 
@@ -4353,7 +4353,7 @@
           var $Symbol =
             core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
           if (name.charAt(0) != '_' && !(name in $Symbol))
-            defineProperty($Symbol, name, { value: wksExt.f(name) });
+            defineProperty($Symbol, name, {value: wksExt.f(name)});
         };
 
         /***/
@@ -5033,7 +5033,7 @@
                 if (isNode) {
                   process.emit('unhandledRejection', value, promise);
                 } else if ((handler = global.onunhandledrejection)) {
-                  handler({ promise: promise, reason: value });
+                  handler({promise: promise, reason: value});
                 } else if ((console = global.console) && console.error) {
                   console.error('Unhandled promise rejection', value);
                 }
@@ -5054,7 +5054,7 @@
             if (isNode) {
               process.emit('rejectionHandled', promise);
             } else if ((handler = global.onrejectionhandled)) {
-              handler({ promise: promise, reason: promise._v });
+              handler({promise: promise, reason: promise._v});
             }
           });
         };
@@ -5079,7 +5079,7 @@
               throw TypeError("Promise can't be resolved itself");
             if ((then = isThenable(value))) {
               microtask(function() {
-                var wrapper = { _w: promise, _d: false }; // wrap
+                var wrapper = {_w: promise, _d: false}; // wrap
                 try {
                   then.call(
                     value,
@@ -5096,7 +5096,7 @@
               notify(promise, false);
             }
           } catch (e) {
-            $reject.call({ _w: promise, _d: false }, e); // wrap
+            $reject.call({_w: promise, _d: false}, e); // wrap
           }
         };
 
@@ -5416,10 +5416,10 @@
             var O = this._t;
             var index = this._i;
             var point;
-            if (index >= O.length) return { value: undefined, done: true };
+            if (index >= O.length) return {value: undefined, done: true};
             point = $at(O, index);
             this._i += point.length;
-            return { value: point, done: false };
+            return {value: point, done: false};
           }
         );
 
@@ -5538,7 +5538,7 @@
               _create(
                 dP({}, 'a', {
                   get: function() {
-                    return dP(this, 'a', { value: 7 }).a;
+                    return dP(this, 'a', {value: 7}).a;
                   }
                 })
               ).a != 7
@@ -5579,7 +5579,7 @@
               it[HIDDEN][key] = true;
             } else {
               if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
-              D = _create(D, { enumerable: createDesc(0, false) });
+              D = _create(D, {enumerable: createDesc(0, false)});
             }
             return setSymbolDesc(it, key, D);
           }
@@ -5679,10 +5679,7 @@
               setSymbolDesc(this, tag, createDesc(1, value));
             };
             if (DESCRIPTORS && setter)
-              setSymbolDesc(ObjectProto, tag, {
-                configurable: true,
-                set: $set
-              });
+              setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});
             return wrap(tag);
           };
           redefine($Symbol[PROTOTYPE], 'toString', function toString() {
@@ -5791,7 +5788,7 @@
                     // V8 throws on boxed symbols
                     return (
                       _stringify([S]) != '[null]' ||
-                      _stringify({ a: S }) != '{}' ||
+                      _stringify({a: S}) != '{}' ||
                       _stringify(Object(S)) != '{}'
                     );
                   })),
@@ -6531,8 +6528,8 @@
               options != undefined && options.Transport != undefined
                 ? options.Transport
                 : XDomainRequest != undefined
-                  ? XDomainRequest
-                  : XMLHttpRequest;
+                ? XDomainRequest
+                : XMLHttpRequest;
             var transport = new XHRTransport(new CurrentTransport());
             var timeout = 0;
             var currentState = WAITING;
@@ -13513,10 +13510,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 /**
                  * This is a helper function for getting values from parameter/options
@@ -14012,7 +14009,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                 /** Whether or not this line should be highlighted. Particularly useful for error reporting with context. */
 
                 /** The line number of this line of source. */
-
                 /**
                  * A representation of a stack frame.
                  */
@@ -14563,7 +14559,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                           c = _source_map$original.column,
                           s = _source_map$original.source;
 
-                        return { line: l, column: c, source: s };
+                        return {line: l, column: c, source: s};
                       }
 
                       /**
@@ -14644,10 +14640,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var base64VLQ = __webpack_require__(6);
                 var util = __webpack_require__(0);
@@ -15112,40 +15108,40 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- *
- * Based on the Base 64 VLQ implementation in Closure Compiler:
- * https://code.google.com/p/closure-compiler/source/browse/trunk/src/com/google/debugging/sourcemap/Base64VLQ.java
- *
- * Copyright 2011 The Closure Compiler Authors. All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above
- *    copyright notice, this list of conditions and the following
- *    disclaimer in the documentation and/or other materials provided
- *    with the distribution.
- *  * Neither the name of Google Inc. nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 *
+                 * Based on the Base 64 VLQ implementation in Closure Compiler:
+                 * https://code.google.com/p/closure-compiler/source/browse/trunk/src/com/google/debugging/sourcemap/Base64VLQ.java
+                 *
+                 * Copyright 2011 The Closure Compiler Authors. All rights reserved.
+                 * Redistribution and use in source and binary forms, with or without
+                 * modification, are permitted provided that the following conditions are
+                 * met:
+                 *
+                 *  * Redistributions of source code must retain the above copyright
+                 *    notice, this list of conditions and the following disclaimer.
+                 *  * Redistributions in binary form must reproduce the above
+                 *    copyright notice, this list of conditions and the following
+                 *    disclaimer in the documentation and/or other materials provided
+                 *    with the distribution.
+                 *  * Neither the name of Google Inc. nor the names of its
+                 *    contributors may be used to endorse or promote products derived
+                 *    from this software without specific prior written permission.
+                 *
+                 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+                 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+                 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+                 * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+                 * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+                 * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+                 * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+                 * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+                 * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+                 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+                 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                 */
 
                 var base64 = __webpack_require__(22);
 
@@ -15261,10 +15257,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var util = __webpack_require__(0);
                 var has = Object.prototype.hasOwnProperty;
@@ -16139,7 +16135,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                       ')\n';
                   }
 
-                  return { message: message, stack: stack };
+                  return {message: message, stack: stack};
                 }
 
                 /***/
@@ -16704,9 +16700,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                   // has a stable shape and so hopefully should be cheap to allocate.
                   function tryCatch(fn, obj, arg) {
                     try {
-                      return { type: 'normal', arg: fn.call(obj, arg) };
+                      return {type: 'normal', arg: fn.call(obj, arg)};
                     } catch (err) {
-                      return { type: 'throw', arg: err };
+                      return {type: 'throw', arg: err};
                     }
                   }
 
@@ -16796,7 +16792,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                   // `hasOwn.call(value, "__await")` to determine if the yielded value is
                   // meant to be awaited.
                   runtime.awrap = function(arg) {
-                    return { __await: arg };
+                    return {__await: arg};
                   };
 
                   function AsyncIterator(generator) {
@@ -17093,7 +17089,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                   };
 
                   function pushTryEntry(locs) {
-                    var entry = { tryLoc: locs[0] };
+                    var entry = {tryLoc: locs[0]};
 
                     if (1 in locs) {
                       entry.catchLoc = locs[1];
@@ -17118,7 +17114,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                     // The root entry object (effectively a try statement without a catch
                     // or a finally block) gives us a place to store values thrown from
                     // locations where there is no enclosing try statement.
-                    this.tryEntries = [{ tryLoc: 'root' }];
+                    this.tryEntries = [{tryLoc: 'root'}];
                     tryLocsList.forEach(pushTryEntry, this);
                     this.reset(true);
                   }
@@ -17183,12 +17179,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                     }
 
                     // Return an iterator with no values.
-                    return { next: doneResult };
+                    return {next: doneResult};
                   }
                   runtime.values = values;
 
                   function doneResult() {
-                    return { value: undefined, done: true };
+                    return {value: undefined, done: true};
                   }
 
                   Context.prototype = {
@@ -17410,10 +17406,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /* 21 */
               /***/ function(module, exports, __webpack_require__) {
                 /*
- * Copyright 2009-2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE.txt or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2009-2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE.txt or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
                 exports.SourceMapGenerator = __webpack_require__(
                   5
                 ).SourceMapGenerator;
@@ -17428,10 +17424,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var intToCharMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split(
                   ''
@@ -17502,10 +17498,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2014 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2014 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var util = __webpack_require__(0);
 
@@ -17538,7 +17534,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                   this._array = [];
                   this._sorted = true;
                   // Serves as infimum
-                  this._last = { generatedLine: -1, generatedColumn: 0 };
+                  this._last = {generatedLine: -1, generatedColumn: 0};
                 }
 
                 /**
@@ -17594,10 +17590,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var util = __webpack_require__(0);
                 var binarySearch = __webpack_require__(25);
@@ -18864,10 +18860,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 exports.GREATEST_LOWER_BOUND = 1;
                 exports.LEAST_UPPER_BOUND = 2;
@@ -19013,10 +19009,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 // It turns out that some (most?) JavaScript engines don't self-host
                 // `Array.prototype.sort`. This makes sense because C++ will likely remain
@@ -19132,10 +19128,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
               /***/ function(module, exports, __webpack_require__) {
                 /* -*- Mode: js; js-indent-level: 2; -*- */
                 /*
- * Copyright 2011 Mozilla Foundation and contributors
- * Licensed under the New BSD license. See LICENSE or:
- * http://opensource.org/licenses/BSD-3-Clause
- */
+                 * Copyright 2011 Mozilla Foundation and contributors
+                 * Licensed under the New BSD license. See LICENSE or:
+                 * http://opensource.org/licenses/BSD-3-Clause
+                 */
 
                 var SourceMapGenerator = __webpack_require__(5)
                   .SourceMapGenerator;
@@ -19578,7 +19574,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
                     map.setSourceContent(sourceFile, sourceContent);
                   });
 
-                  return { code: generated.code, map: map };
+                  return {code: generated.code, map: map};
                 };
 
                 exports.SourceNode = SourceNode;
@@ -20424,9 +20420,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
           // has a stable shape and so hopefully should be cheap to allocate.
           function tryCatch(fn, obj, arg) {
             try {
-              return { type: 'normal', arg: fn.call(obj, arg) };
+              return {type: 'normal', arg: fn.call(obj, arg)};
             } catch (err) {
-              return { type: 'throw', arg: err };
+              return {type: 'throw', arg: err};
             }
           }
 
@@ -20514,7 +20510,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
           // `hasOwn.call(value, "__await")` to determine if the yielded value is
           // meant to be awaited.
           runtime.awrap = function(arg) {
-            return { __await: arg };
+            return {__await: arg};
           };
 
           function AsyncIterator(generator) {
@@ -20792,7 +20788,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
           };
 
           function pushTryEntry(locs) {
-            var entry = { tryLoc: locs[0] };
+            var entry = {tryLoc: locs[0]};
 
             if (1 in locs) {
               entry.catchLoc = locs[1];
@@ -20817,7 +20813,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
             // The root entry object (effectively a try statement without a catch
             // or a finally block) gives us a place to store values thrown from
             // locations where there is no enclosing try statement.
-            this.tryEntries = [{ tryLoc: 'root' }];
+            this.tryEntries = [{tryLoc: 'root'}];
             tryLocsList.forEach(pushTryEntry, this);
             this.reset(true);
           }
@@ -20882,12 +20878,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
             }
 
             // Return an iterator with no values.
-            return { next: doneResult };
+            return {next: doneResult};
           }
           runtime.values = values;
 
           function doneResult() {
-            return { value: undefined, done: true };
+            return {value: undefined, done: true};
           }
 
           Context.prototype = {
@@ -21934,8 +21930,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
             result.hostname = result.host = isAbsolute
               ? ''
               : srcPath.length
-                ? srcPath.shift()
-                : '';
+              ? srcPath.shift()
+              : '';
             //occationaly the auth can get stuck only in host
             //this especially happens in cases like
             //url.resolveObject('mailto:local1@domain1', 'local2@domain2')

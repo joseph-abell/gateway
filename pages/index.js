@@ -33,7 +33,7 @@ const StyledImageWrapper = styled(ImageWrapper)`
   }
 `;
 
-const twitter = () => ({ __html: 'twitter' });
+const twitter = () => ({__html: 'twitter'});
 
 const TwitterWrapper = styled.div`
   background-color: ${props => props.colour};
@@ -60,8 +60,8 @@ const Home = () => (
       new Promise(async resolve => {
         const data = await getData('data/homepage.json');
         const colour = getMenuColour(data);
-        const { header, deck, eventsImage, twitterImage } = data;
-        let { cta } = data;
+        const {header, deck, eventsImage, twitterImage} = data;
+        let {cta} = data;
 
         header.image = getFullUrl(header.image);
 
@@ -99,8 +99,8 @@ const Home = () => (
       eventsImage,
       twitterImage
     }) => {
-      const { title, image } = header;
-      const { TwitterTimelineEmbed } = require('react-twitter-embed');
+      const {title, image} = header;
+      const {TwitterTimelineEmbed} = require('react-twitter-embed');
 
       return (
         <React.Fragment>

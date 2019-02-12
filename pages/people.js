@@ -1,7 +1,7 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
 import {
   getData,
@@ -9,7 +9,7 @@ import {
   changeColourToHex,
   getFullUrl
 } from '../helpers';
-import { Link } from '../router';
+import {Link} from '../router';
 import HeaderContainer from '../components/HeaderContainer';
 import Header from '../templates/Header';
 import Deck from '../components/Deck';
@@ -128,12 +128,12 @@ const P = styled.p`
   margin: 0 20px 20px;
 `;
 
-const People = withRouter(({ router = {} }) => (
+const People = withRouter(({router = {}}) => (
   <Async
     promise={
       new Promise(async resolve => {
-        const { query } = router || {};
-        const { filter } = query;
+        const {query} = router || {};
+        const {filter} = query;
 
         let acceptedFilters = await getData('data/peopleFilters/index.json');
 
@@ -152,7 +152,7 @@ const People = withRouter(({ router = {} }) => (
 
         people = people.filter(person => {
           const {
-            data: { filters: personFilters }
+            data: {filters: personFilters}
           } = person;
 
           const keys = Object.keys(personFilters || {}).filter(
@@ -166,7 +166,7 @@ const People = withRouter(({ router = {} }) => (
 
         const data = await getData('/data/pages/people.json');
         const colour = getMenuColour(data);
-        const { deck, header } = data;
+        const {deck, header} = data;
 
         deck.image = deck && deck.image && getFullUrl(deck.image);
         deck.colour = changeColourToHex(deck && deck.colour);

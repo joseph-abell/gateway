@@ -1,11 +1,11 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
-import { markdown } from 'markdown';
-import { Router } from '../router';
-import { url } from '../helpers/config';
+import {markdown} from 'markdown';
+import {Router} from '../router';
+import {url} from '../helpers/config';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
@@ -13,7 +13,7 @@ import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
-import { getData, getFullUrl, changeColourToHex } from '../helpers';
+import {getData, getFullUrl, changeColourToHex} from '../helpers';
 
 const Deck = styled.div`
   position: relative;
@@ -119,7 +119,7 @@ const ContentPieceContainer = styled.div`
   }
 `;
 
-const ContentPiece = ({ direction, deck, image, colour, width }) => {
+const ContentPiece = ({direction, deck, image, colour, width}) => {
   let adjustedDirection = direction;
 
   if (image) {
@@ -146,7 +146,7 @@ const ContentPiece = ({ direction, deck, image, colour, width }) => {
           colour={colour}
           width={width}
         >
-          <Deck dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
+          <Deck dangerouslySetInnerHTML={{__html: markdown.toHTML(deck)}} />
         </ContentPieceContainer>
       )}
     </>
@@ -184,8 +184,8 @@ const setWidth = (left, right) => {
 
   return [leftWidth, rightWidth];
 };
-const Content = ({ content }) => {
-  const { left, right } = content;
+const Content = ({content}) => {
+  const {left, right} = content;
   const [leftWidth, rightWidth] = setWidth(left, right);
 
   if (right.deck && right.image) {
@@ -231,10 +231,10 @@ const Content = ({ content }) => {
   );
 };
 
-const Contents = ({ contents }) => (
+const Contents = ({contents}) => (
   <ul>
     {contents &&
-      contents.map(({ content }) => (
+      contents.map(({content}) => (
         <Content
           content={content}
           key={content.left.deck + content.right.deck}
@@ -243,9 +243,9 @@ const Contents = ({ contents }) => (
   </ul>
 );
 
-const Page = withRouter(({ router }) => {
-  const { query } = router;
-  const { id, childId } = query;
+const Page = withRouter(({router}) => {
+  const {query} = router;
+  const {id, childId} = query;
 
   const pathname = childId ? childId : id;
 
@@ -265,8 +265,8 @@ const Page = withRouter(({ router }) => {
             reject(e);
           }
 
-          const { title, header = {}, subtitle = {}, deck, contents } = data;
-          const { image, menuColour } = header;
+          const {title, header = {}, subtitle = {}, deck, contents} = data;
+          const {image, menuColour} = header;
           const colourHex = changeColourToHex(menuColour);
           const colourHexLight = changeColourToHex(menuColour, true);
           const subtitleText = subtitle.subtitle;

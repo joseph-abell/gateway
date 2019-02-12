@@ -2,7 +2,7 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import Head from 'next/head';
-import { getData, getMenuColour, changeColourToHex } from '../helpers';
+import {getData, getMenuColour, changeColourToHex} from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import Container from '../components/Container';

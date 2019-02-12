@@ -2,11 +2,11 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import moment from 'moment';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
-import { markdown } from 'markdown';
+import {markdown} from 'markdown';
 
-import { Link } from '../router';
+import {Link} from '../router';
 
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
@@ -90,11 +90,11 @@ const Article = styled.div`
   }
 `;
 
-const Event = withRouter(({ router }) => (
+const Event = withRouter(({router}) => (
   <Async
     promise={
       new Promise(async resolve => {
-        const { query } = router;
+        const {query} = router;
         const pathname = query.id
           .split(' ')
           .join('-')
@@ -146,7 +146,7 @@ const Event = withRouter(({ router }) => (
           <ContentRight colour={colourHex}>
             {article && (
               <Article
-                dangerouslySetInnerHTML={{ __html: markdown.toHTML(article) }}
+                dangerouslySetInnerHTML={{__html: markdown.toHTML(article)}}
               />
             )}
             <Link href="/events" passHref>
