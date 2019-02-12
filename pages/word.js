@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
@@ -57,113 +56,130 @@ const Link = styled.a`
   color: ${props => props.colour};
 `;
 
-const Word = withRouter(({ router }) => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const { query } = router;
-        let { id } = query;
-        id = id
-          .split(' ')
-          .join('-')
-          .toLowerCase();
-        const data = await getData(`data/words/${id}.json`);
-        const colour = getMenuColour(data);
-        let { audioFile } = data;
+const Word = ({ router }) => {
+  const [loading, setLoading] = useState(true);
+  const [word, setWord] = useState({});
 
-        if (!audioFile || !audioFile.includes('.mp3')) {
-          audioFile = '';
-        } else {
-          audioFile = getFullUrl(audioFile);
-        }
+  const fetchData = async () => {
+    let {
+      query: { id }
+    } = router;
 
-        resolve({
-          ...data,
-          audioFile,
-          colour,
-          colourHex: changeColourToHex(colour),
-          colourHexLight: changeColourToHex(colour, true)
-        });
-      })
+    id = id
+      .split(' ')
+      .join('-')
+      .split(':')
+      .join('')
+      .toLowerCase();
+
+    const data = await getData(`data/words/${id}.json`);
+    const colour = getMenuColour(data);
+
+    let { audioFile } = data;
+    if (!audioFile || !audioFile.includes('.mp3')) {
+      audioFile = '';
+    } else {
+      audioFile = getFullUrl(audioFile);
     }
-    then={({
-      title,
-      image,
-      deck,
-      date,
-      subtitle,
+
+    setWord({
+      ...data,
       audioFile,
-      file,
-      youtubeLink,
       colour,
-      colourHex,
-      colourHexLight
-    }) => (
-      <React.Fragment>
-        <Head>
-          <title key="title">{title} - Gateway Church, York</title>
-        </Head>
-        <Header
-          colour={colour}
-          colourHex={colourHex}
-          colourHexLight={colourHexLight}
-          Header={HeaderContainer}
-        />
-        <Deck colour={colourHexLight}>
-          <Container>
-            <Date colour={colourHex}>{format(date, 'EEEE do LLLL yyyy')}</Date>
-            <H1>{title}</H1>
-            <H2>{subtitle}</H2>
-          </Container>
-        </Deck>
+      colourHex: changeColourToHex(colour),
+      colourHexLight: changeColourToHex(colour, true)
+    });
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const {
+    title,
+    colour,
+    colourHex,
+    colourHexLight,
+    date,
+    subtitle,
+    url,
+    image,
+    audioFile,
+    deck,
+    youtubeLink,
+    file
+  } = word;
+
+  if (loading) {
+    return <div />;
+  }
+
+  return (
+    <React.Fragment>
+      <Head>
+        <title key="title">{title} - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        Header={HeaderContainer}
+      />
+      <Deck colour={colourHexLight}>
         <Container>
-          {image && (
-            <ImageWrapper>
-              <Image url={url + image.slice(1)} />
-            </ImageWrapper>
-          )}
-
-          {audioFile && (
-            <P>
-              <Audio
-                url={audioFile}
-                colour={colourHex}
-                lightColour={colourHexLight}
-              />
-            </P>
-          )}
-
-          {deck &&
-            deck.startsWith('<') && (
-              <P dangerouslySetInnerHTML={{ __html: deck }} />
-            )}
-
-          {deck &&
-            !deck.startsWith('<') && (
-              <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
-            )}
-
-          {youtubeLink && (
-            <P>
-              <Link colour={colourHex} href={youtubeLink}>
-                {youtubeLink}
-              </Link>
-            </P>
-          )}
-
-          {file && (
-            <P>
-              <Link colour={colourHex} href={getFullUrl(file)}>
-                {file.replace('/uploads/', '')}
-              </Link>
-            </P>
-          )}
+          <Date colour={colourHex}>{format(date, 'EEEE do LLLL yyyy')}</Date>
+          <H1>{title}</H1>
+          <H2>{subtitle}</H2>
         </Container>
+      </Deck>
+      <Container>
+        {image && (
+          <ImageWrapper>
+            <Image url={getFullUrl() + image.slice(1)} />
+          </ImageWrapper>
+        )}
 
-        <Footer />
-      </React.Fragment>
-    )}
-  />
-));
+        {audioFile && (
+          <P>
+            <Audio
+              url={audioFile}
+              colour={colourHex}
+              lightColour={colourHexLight}
+            />
+          </P>
+        )}
 
-export default Word;
+        {deck &&
+          deck.startsWith('<') && (
+            <P dangerouslySetInnerHTML={{ __html: deck }} />
+          )}
+
+        {deck &&
+          !deck.startsWith('<') && (
+            <P dangerouslySetInnerHTML={{ __html: markdown.toHTML(deck) }} />
+          )}
+
+        {youtubeLink && (
+          <P>
+            <Link colour={colourHex} href={youtubeLink}>
+              {youtubeLink}
+            </Link>
+          </P>
+        )}
+
+        {file && (
+          <P>
+            <Link colour={colourHex} href={getFullUrl(file)}>
+              {file.replace('/uploads/', '')}
+            </Link>
+          </P>
+        )}
+      </Container>
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+export default withRouter(Word);

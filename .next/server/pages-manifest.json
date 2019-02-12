@@ -3,6 +3,5 @@
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
   "/words": "static/development/pages/words.js",
-  "/event": "static/development/pages/event.js",
-  "/people": "static/development/pages/people.js"
+  "/word": "static/development/pages/word.js"
 }
