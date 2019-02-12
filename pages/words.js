@@ -11,128 +11,27 @@ import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
 import PageSummary from '../components/PageSummary';
 import Image from '../components/Image';
-import ImageWrapper from '../components/ImageWrapper';
-import HideOnMobile from '../components/HideOnMobile';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
+import StyledLink from '../components/LinkWords';
+import StyledText from '../components/TextWords';
+import StyledDate from '../components/DateWords';
+import Title from '../components/H2Words';
+import ReadMore from '../components/ReadMoreWords';
+import StyledTextContainer from '../components/TextContainerWords';
+import StyledHideOnMobile from '../components/HideOnMobileWords';
+import Word from '../components/WordWords';
+import Pagination from '../components/Pagination';
+import StyledPagination from '../components/PaginationWords';
+import Subtitle from '../components/Subtitle';
+import StyledImageWrapper from '../components/ImageWrapperWords';
+
 import {
   getData,
   getFullUrl,
   changeColourToHex,
   getMenuColour
 } from '../helpers';
-
-const StyledLink = styled.a`
-  background-color: ${props => props.colour};
-  display: block;
-  color: white;
-`;
-
-const StyledText = styled.div`
-  padding: 40px;
-`;
-
-const StyledDate = styled.div`
-  color: ${props => props.colour};
-  margin-bottom: 40px;
-`;
-
-const Title = styled.h2`
-  font-size: 30px;
-  line-height: 42px;
-  max-height: 84px;
-  margin-bottom: 1em;
-`;
-
-const ReadMore = styled.div`
-  padding: 40px;
-  background-color: ${props => props.colour};
-  color: white;
-
-  @media screen and (min-width: 991px) {
-    position: absolute;
-    bottom: 0;
-    width: 50%;
-  }
-`;
-
-const StyledTextContainer = styled.div`
-  @media screen and (min-width: 991px) {
-    float: left;
-    width: 50%;
-  }
-`;
-
-const StyledHideOnMobile = styled(HideOnMobile)`
-  float: right;
-  width: 50%;
-`;
-
-const StyledImageWrapper = styled(ImageWrapper)`
-  min-height: 274px;
-  margin-bottom: 0;
-`;
-
-const Word = styled.li`
-  @media screen and (min-width: 991px) {
-    position: relative;
-    height: 500px;
-    margin-bottom: 20px;
-  }
-`;
-
-const StyledNotLink = styled.div`
-  display: inline-block;
-  margin-right: 20px;
-`;
-
-const StyledPaginationLink = styled.a`
-  display: inline-block;
-  margin-right: 20px;
-  color: #fff;
-  border-bottom: 2px solid #fff;
-`;
-
-const Subtitle = styled.h3`
-  font-size: 1.3em;
-  line-height: 1.3em;
-`;
-
-const Pagination = ({ maxCount, currentPage = 1 }) => {
-  let links = [];
-
-  for (let i = 1; i < maxCount + 1; i++) {
-    links.push(i);
-  }
-
-  return links.map(link => {
-    if (link === parseInt(currentPage)) {
-      return <StyledNotLink key={link}>{link}</StyledNotLink>;
-    }
-
-    if (link === 1) {
-      return (
-        <Link href="words" key={link} passHref>
-          <StyledPaginationLink>{link}</StyledPaginationLink>
-        </Link>
-      );
-    }
-
-    return (
-      <Link href={`words?page=${link}`} key={link} passHref>
-        <StyledPaginationLink>{link}</StyledPaginationLink>
-      </Link>
-    );
-  });
-};
-
-const StyledPagination = styled.div`
-  background: ${({ color }) => color};
-  padding: 10px 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: #fff;
-`;
 
 const Words = ({ router = { query: { page: 1 } } }) => (
   <Async
