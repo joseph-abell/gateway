@@ -52,6 +52,10 @@ const Words = ({router}) => {
         return compareAsc(new Date(b.date), new Date(a.date));
       });
 
+    const filtered = Object.values(data).filter(i =>
+      i.url.includes('supernatural')
+    );
+    console.log(filtered);
     const wordsCount = words.length;
 
     words = words.slice(currentPage * 10 - 10, currentPage * 10);
@@ -126,7 +130,12 @@ const Words = ({router}) => {
                       <StyledDate colour={changeColourToHex(word.colour)}>
                         {format(word.date, 'EEEE do LLLL yyyy')}
                       </StyledDate>
-                      <Title>{word.title}</Title>
+                      <Title>
+                        {word.title
+                          .split('-')
+                          .map(word => word[0].toUpperCase() + word.substr(1))
+                          .join(' ')}
+                      </Title>
                       <Subtitle>{word.subtitle}</Subtitle>
                     </StyledText>
                     <ReadMore colour={changeColourToHex(word.colour)}>

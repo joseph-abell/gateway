@@ -102,7 +102,12 @@ const Word = ({router}) => {
           <StyledDate colour={colourHex}>
             {format(date, 'EEEE do LLLL yyyy')}
           </StyledDate>
-          <H1>{title}</H1>
+          <H1>
+            {title
+              .split('-')
+              .map(word => word[0].toUpperCase() + word.substr(1))
+              .join(' ')}
+          </H1>
           <H2>{subtitle}</H2>
         </Container>
       </Deck>
