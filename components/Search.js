@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { slide as SlideMenu } from 'react-burger-menu';
+import {slide as SlideMenu} from 'react-burger-menu';
 import Async from 'react-promise';
 import Downshift from 'downshift';
 import flat from 'flat';
-import { Link } from '../router';
-import { getData } from '../helpers';
+import {Link} from '../router';
+import {getData} from '../helpers';
 
 const StyledLink = styled.a`
   color: white;
@@ -25,7 +25,7 @@ const StyledSearchInput = styled.input`
 
 const SearchInput = props => <StyledSearchInput {...props} type="text" />;
 
-const SearchListItem = ({ item, getItemProps }) => (
+const SearchListItem = ({item, getItemProps}) => (
   <li
     {...getItemProps({
       key: item.data.title,
@@ -50,6 +50,7 @@ class Search extends React.Component {
     data.filter(item =>
       item.flat.some(
         flatItem =>
+          flatItem &&
           flatItem[1] &&
           !Array.isArray(flatItem[1]) &&
           typeof flatItem[1] !== 'boolean' &&
@@ -109,7 +110,7 @@ class Search extends React.Component {
   });
 
   render = () => {
-    const { colour, isOpen, handleStateChange, borderColour } = this.props;
+    const {colour, isOpen, handleStateChange, borderColour} = this.props;
     const styles = {
       bmBurgerButton: {
         display: 'none'
@@ -172,22 +173,21 @@ class Search extends React.Component {
                   colour={colour}
                   borderColour={borderColour}
                 />
-                {isOpen &&
-                  !!inputValue.length && (
-                    <Async
-                      promise={this.promise}
-                      then={data => (
-                        <ul {...getMenuProps()}>
-                          {this.search(data, inputValue).map(item => (
-                            <SearchListItem
-                              item={item}
-                              getItemProps={getItemProps}
-                            />
-                          ))}
-                        </ul>
-                      )}
-                    />
-                  )}
+                {isOpen && !!inputValue.length && (
+                  <Async
+                    promise={this.promise}
+                    then={data => (
+                      <ul {...getMenuProps()}>
+                        {this.search(data, inputValue).map(item => (
+                          <SearchListItem
+                            item={item}
+                            getItemProps={getItemProps}
+                          />
+                        ))}
+                      </ul>
+                    )}
+                  />
+                )}
               </div>
             );
           }}

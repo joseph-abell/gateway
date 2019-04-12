@@ -79,7 +79,8 @@ const Word = ({router}) => {
     audioFile,
     deck,
     youtubeLink,
-    file
+    file,
+    authors
   } = word;
 
   if (loading) {
@@ -100,7 +101,15 @@ const Word = ({router}) => {
       <Deck colour={colourHexLight}>
         <Container>
           <StyledDate colour={colourHex}>
-            {format(date, 'EEEE do LLLL yyyy')}
+            {format(date, 'EEEE do LLLL yyyy')}{' '}
+            {authors && (
+              <>
+                -{' '}
+                {authors.map(({author}) => (
+                  <>{author} </>
+                ))}
+              </>
+            )}
           </StyledDate>
           <H1>
             {title

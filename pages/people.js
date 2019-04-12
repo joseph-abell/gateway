@@ -230,7 +230,15 @@ const People = withRouter(({router = {}}) => (
                             )}
                           >
                             <Padding>
-                              <PersonTitle>{person.data.title}</PersonTitle>
+                              <PersonTitle>
+                                {person.data.title
+                                  .split('-')
+                                  .map(
+                                    word =>
+                                      word[0].toUpperCase() + word.substr(1)
+                                  )
+                                  .join(' ')}
+                              </PersonTitle>
                               <PersonRole>{person.data.titleRole}</PersonRole>
                               <Email>{person.data.email}</Email>
                             </Padding>
@@ -289,7 +297,12 @@ const People = withRouter(({router = {}}) => (
                   <Filter key={filter.name}>
                     <Link href={`people?filter=${filter.name}`} passHref>
                       <StyledLink colour={filter.colour}>
-                        <FilterItemTitle>{filter.title}</FilterItemTitle>
+                        <FilterItemTitle>
+                          {filter.title
+                            .split('-')
+                            .map(word => word[0].toUpperCase() + word.substr(1))
+                            .join(' ')}
+                        </FilterItemTitle>
                         <FilterItemDeck>{filter.deck}</FilterItemDeck>
                       </StyledLink>
                     </Link>

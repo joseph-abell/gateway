@@ -329,7 +329,14 @@ const Person = withRouter(({router}) => (
                               );
                             })}
                           </div>
-                          <WordTitle>{wordData.title}</WordTitle>
+                          <WordTitle>
+                            {wordData.title
+                              .split('-')
+                              .map(
+                                word => word[0].toUpperCase() + word.substr(1)
+                              )
+                              .join(' ')}
+                          </WordTitle>
                           <WordReadMore
                             colour={changeColourToHex(wordData.colour)}
                           >
