@@ -1,10 +1,10 @@
 import React from 'react';
 import Async from 'react-promise';
 import moment from 'moment';
-import { Link } from '../router';
+import {Link} from '../router';
 import styled from 'styled-components';
 
-import { getData } from '../helpers';
+import {getData} from '../helpers';
 
 const H3 = styled.h3`
   padding: 20px 35px;
@@ -55,7 +55,7 @@ const EventsWrapper = styled.div`
   }
 `;
 
-const SimpleEvents = ({ colour, colourLight }) => (
+const SimpleEvents = ({colour, colourLight}) => (
   <Async
     promise={
       new Promise(async resolve => {
@@ -67,10 +67,10 @@ const SimpleEvents = ({ colour, colourLight }) => (
           .sort((a, b) => (moment(a.dateTime).isAfter(b.dateTime) ? 1 : -1))
           .filter(event => moment().isBefore(event.dateTime))
           .slice(0, 3);
-        resolve({ events });
+        resolve({events});
       })
     }
-    then={({ events }) => (
+    then={({events}) => (
       <EventsWrapper colour={colourLight}>
         <H3 colour={colour}>Events</H3>
         <UL colour={colourLight}>
@@ -81,7 +81,12 @@ const SimpleEvents = ({ colour, colourLight }) => (
                   <P colour={colour}>
                     {moment(event.dateTime).format('dddd MMM Do YYYY')}
                   </P>
-                  <p>{event.title}</p>
+                  <p>
+                    {event.title
+                      .split('-')
+                      .map(word => word[0].toUpperCase() + word.substr(1))
+                      .join(' ')}
+                  </p>
                   <p>{moment(event.dateTime).format('kk:mm')}</p>
                 </StyledLink>
               </Link>

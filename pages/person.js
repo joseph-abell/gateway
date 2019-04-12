@@ -81,11 +81,6 @@ const Contact = styled.div`
   }
 `;
 
-const P = styled.p`
-  font-size: 24px;
-  line-height: 30px;
-`;
-
 const ContactHeader = styled.p`
   font-size: 40px;
   line-height: 52px;
@@ -293,7 +288,7 @@ const Person = withRouter(({router}) => (
                 .join(' ')}
             </H1>
             <H2>{titleRole}</H2>
-            <P dangerouslySetInnerHTML={{__html: deck}} />
+            <p dangerouslySetInnerHTML={{__html: deck}} />
           </Wrapper>
 
           <Clearfix />
