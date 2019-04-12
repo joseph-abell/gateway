@@ -105,12 +105,11 @@ const Event = withRouter(({router}) => (
         const colourHex = changeColourToHex(colour);
         const colourHexLight = changeColourToHex(colour, true);
 
-        console.log(data);
         resolve({
           ...data,
           colour,
-          colourHex: changeColourToHex(colour),
-          colourHexLight: changeColourToHex(colourHex)
+          colourHex,
+          colourHexLight
         });
       })
     }

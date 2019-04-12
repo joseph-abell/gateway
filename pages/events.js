@@ -142,17 +142,21 @@ const EventList = ({events, color}) => {
     const time = moment(event.dateTime).format('kk:ss');
     const image = getFullUrl(event.image);
     const listImage = event.listImage && getFullUrl(event.listImage);
-
+    const title = event.title
+      .split('-')
+      .map(word => word[0].toUpperCase() + word.slice(1))
+      .join(' ');
+    const id = event.title.split('?').join('');
     return (
       <Link
         key={event.title + date + time}
         route="event"
-        params={{id: event.title}}
+        params={{id}}
         passHref
       >
         <StyledEvent color={color}>
           <EventLeft>
-            <h2>{event.title}</h2>
+            <h2>{title}</h2>
             <div>{date}</div>
             <div>{time}</div>
 
