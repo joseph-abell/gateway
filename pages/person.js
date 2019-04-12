@@ -269,7 +269,13 @@ const Person = withRouter(({router}) => (
     }) => (
       <React.Fragment>
         <Head>
-          <title key="title">{title} - Gateway Church, York</title>
+          <title key="title">
+            {title
+              .split('-')
+              .map(word => word[0].toUpperCase() + word.substr(1))
+              .join(' ')}{' '}
+            - Gateway Church, York
+          </title>
         </Head>
         <Header
           colour={colour}
@@ -280,7 +286,12 @@ const Person = withRouter(({router}) => (
         <Container>
           <PersonImageWrapper email={email} image={image} colour={colourHex} />
           <Wrapper colour={colourHexLight}>
-            <H1>{title}</H1>
+            <H1>
+              {title
+                .split('-')
+                .map(word => word[0].toUpperCase() + word.substr(1))
+                .join(' ')}
+            </H1>
             <H2>{titleRole}</H2>
             <P dangerouslySetInnerHTML={{__html: deck}} />
           </Wrapper>

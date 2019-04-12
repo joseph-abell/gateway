@@ -34,8 +34,23 @@ const SearchListItem = ({item, getItemProps}) => (
   >
     <Link href={`/${item.pageUrl}`}>
       <StyledLink>
-        <div>{item.data.title}</div>
-        <div>{item.breadcrumb}</div>
+        <div>
+          {item.data.title
+            .split('-')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' ')}
+        </div>
+        <div>
+          {item.breadcrumb
+            .split(' - ')
+            .join('___')
+            .split('-')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' ')
+            .split('___')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' - ')}
+        </div>
       </StyledLink>
     </Link>
   </li>
@@ -54,6 +69,7 @@ class Search extends React.Component {
           flatItem[1] &&
           !Array.isArray(flatItem[1]) &&
           typeof flatItem[1] !== 'boolean' &&
+          typeof flatItem[1] !== 'number' &&
           flatItem[1].toLowerCase().includes(inputValue.toLowerCase())
       )
     );
@@ -178,12 +194,19 @@ class Search extends React.Component {
                     promise={this.promise}
                     then={data => (
                       <ul {...getMenuProps()}>
-                        {this.search(data, inputValue).map(item => (
-                          <SearchListItem
-                            item={item}
-                            getItemProps={getItemProps}
-                          />
-                        ))}
+                        {this.search(data, inputValue)
+                          .filter(item => {
+                            if (item.type !== 'people') return true;
+                            if (!item.data.filters.all) return false;
+                            if (item.data.filters.all === 'false') return false;
+                            return true;
+                          })
+                          .map(item => (
+                            <SearchListItem
+                              item={item}
+                              getItemProps={getItemProps}
+                            />
+                          ))}
                       </ul>
                     )}
                   />
