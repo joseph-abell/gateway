@@ -101,7 +101,7 @@ const Word = ({router}) => {
       <Deck colour={colourHexLight}>
         <Container>
           <StyledDate colour={colourHex}>
-            {format(date, 'EEEE do LLLL yyyy')}{' '}
+            {date && format(date, 'EEEE do LLLL yyyy')}{' '}
             {authors && (
               <>
                 -{' '}
@@ -112,10 +112,11 @@ const Word = ({router}) => {
             )}
           </StyledDate>
           <H1>
-            {title
-              .split('-')
-              .map(word => word[0].toUpperCase() + word.substr(1))
-              .join(' ')}
+            {title &&
+              title
+                .split('-')
+                .map(word => word[0].toUpperCase() + word.substr(1))
+                .join(' ')}
           </H1>
           <H2>{subtitle}</H2>
         </Container>
