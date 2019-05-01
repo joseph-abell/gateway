@@ -52,14 +52,9 @@ const Words = ({router}) => {
         return compareAsc(new Date(b.date), new Date(a.date));
       });
 
-    const filtered = Object.values(data).filter(i =>
-      i.url.includes('supernatural')
-    );
-    console.log(filtered);
     const wordsCount = words.length;
 
     words = words.slice(currentPage * 10 - 10, currentPage * 10);
-
     const maxPageCount = Math.ceil(wordsCount / 10);
 
     setData({
@@ -123,7 +118,7 @@ const Words = ({router}) => {
         <ul>
           {words.map(word => (
             <Word key={word.title}>
-              <Link href={`/words/${word.title}`} passHref>
+              <Link href={`/words/${word.slug}`} passHref>
                 <StyledLink colour={changeColourToHex(word.colour, true)}>
                   <StyledTextContainer>
                     <StyledText>
