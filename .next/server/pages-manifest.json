@@ -2,8 +2,6 @@
   "/_app": "static/development/pages/_app.js",
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
-  "/events": "static/development/pages/events.js",
-  "/people": "static/development/pages/people.js",
   "/words": "static/development/pages/words.js",
   "/contact-us": "static/development/pages/contact-us.js",
   "/page": "static/development/pages/page.js",

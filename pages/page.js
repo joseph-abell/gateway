@@ -117,6 +117,11 @@ const ContentPieceContainer = styled.div`
   p {
     margin-bottom: 1em;
   }
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
 `;
 
 const ContentPiece = ({direction, deck, image, colour, width}) => {
