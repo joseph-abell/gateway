@@ -116,40 +116,59 @@ const Words = ({router}) => {
           </StyledPagination>
         )}
         <ul>
-          {words.map(word => (
-            <Word key={word.title}>
-              <Link href={`/words/${word.slug}`} passHref>
-                <StyledLink colour={changeColourToHex(word.colour, true)}>
-                  <StyledTextContainer>
-                    <StyledText>
-                      <StyledDate colour={changeColourToHex(word.colour)}>
-                        {format(word.date, 'EEEE do LLLL yyyy')}
-                      </StyledDate>
-                      <Title>
-                        {word.title
-                          .split('-')
-                          .map(word => word[0].toUpperCase() + word.substr(1))
-                          .join(' ')}
-                      </Title>
-                      <Subtitle>{word.subtitle}</Subtitle>
-                    </StyledText>
-                    <ReadMore colour={changeColourToHex(word.colour)}>
-                      Read More +
-                    </ReadMore>
-                  </StyledTextContainer>
-                  <StyledHideOnMobile>
-                    <StyledImageWrapper
-                      colour={changeColourToHex(word.colour)}
-                      marginBottom={0}
-                    >
-                      <Image url={getFullUrl(word.image)} />
-                    </StyledImageWrapper>
-                  </StyledHideOnMobile>
-                  <Clearfix />
-                </StyledLink>
-              </Link>
-            </Word>
-          ))}
+          {words.map(word => {
+            const authors =
+              word.authors &&
+              word.authors
+                .map(({author}) => author.trim())
+                .filter(author => author);
+
+            return (
+              <Word key={word.title}>
+                <Link href={`/words/${word.slug}`} passHref>
+                  <StyledLink colour={changeColourToHex(word.colour, true)}>
+                    <StyledTextContainer>
+                      <StyledText>
+                        <StyledDate colour={changeColourToHex(word.colour)}>
+                          {format(word.date, 'EEEE do LLLL yyyy')}
+                          {authors && authors.length && (
+                            <>
+                              {' '}
+                              -{' '}
+                              {authors.map(author => (
+                                <React.Fragment key={author}>
+                                  {author}{' '}
+                                </React.Fragment>
+                              ))}
+                            </>
+                          )}
+                        </StyledDate>
+                        <Title>
+                          {word.title
+                            .split('-')
+                            .map(word => word[0].toUpperCase() + word.substr(1))
+                            .join(' ')}
+                        </Title>
+                        <Subtitle>{word.subtitle}</Subtitle>
+                      </StyledText>
+                      <ReadMore colour={changeColourToHex(word.colour)}>
+                        Read More +
+                      </ReadMore>
+                    </StyledTextContainer>
+                    <StyledHideOnMobile>
+                      <StyledImageWrapper
+                        colour={changeColourToHex(word.colour)}
+                        marginBottom={0}
+                      >
+                        <Image url={getFullUrl(word.image)} />
+                      </StyledImageWrapper>
+                    </StyledHideOnMobile>
+                    <Clearfix />
+                  </StyledLink>
+                </Link>
+              </Word>
+            );
+          })}
         </ul>
       </Container>
       <Footer />

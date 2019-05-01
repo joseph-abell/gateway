@@ -4,9 +4,11 @@
     "/_app": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/_error": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/words": ["static/runtime/webpack.js", "static/runtime/main.js"],
-    "/index": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/page": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/contact-us": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/events": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/index": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/people": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/": ["static/runtime/webpack.js", "static/runtime/main.js"]
   }
 }
