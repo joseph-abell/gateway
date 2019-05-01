@@ -19,6 +19,7 @@ const Header = styled.header`
 
     h1 {
       line-height: 400px;
+        font-size: 145px;
     }
   }
 
@@ -27,7 +28,6 @@ const Header = styled.header`
 
     h1 {
       line-height: 600px;
-      font-size: 145px;
     }
   }
 `;

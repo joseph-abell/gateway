@@ -1,11 +1,11 @@
-import App, { Container } from 'next/app';
+import App, {Container} from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import { BreakpointsProvider } from 'react-with-breakpoints';
+import {BreakpointsProvider} from 'react-with-breakpoints';
 
 class Gateway extends App {
   render() {
-    const { Component, pageProps } = this.props;
+    const {Component, pageProps} = this.props;
     const breakpoints = {
       small: 768,
       medium: 991,
@@ -21,6 +21,10 @@ class Gateway extends App {
             <link href="/static/slick-theme.css" rel="stylesheet" />
             <link href="/static/rc-slider.css" rel="stylesheet" />
             <link href="/static/index.css" rel="stylesheet" />
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
             <link
               rel="shortcut icon"
               href="/static/favicon.ico"

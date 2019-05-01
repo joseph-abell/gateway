@@ -1,4 +1,4 @@
-/* global fetch */
+import fetch from 'isomorphic-fetch';
 import { url as urlStart } from './config';
 
 const changeLightColourToHex = colour => {
@@ -87,7 +87,10 @@ export const getData = async pageName => {
 };
 
 export const getResizedImageUrl = url => {
-  if (!url) return;
+  if (!url) {
+    return;
+  }
+
   const pageWidth = window.innerWidth;
 
   if (pageWidth < 768) {

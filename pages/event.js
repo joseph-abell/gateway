@@ -2,15 +2,17 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import moment from 'moment';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
+import {markdown} from 'markdown';
 
-import { Link } from '../router';
+import {Link} from '../router';
 
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
+import Clearfix from '../components/Clearfix';
 
 import {
   getMenuColour,
@@ -25,9 +27,13 @@ const Subtitle = styled.div`
   background-color: ${props => props.colour};
   color: white;
   text-decoration: none;
+
+  @media screen and (min-width: 768px) {
+    height: 500px;
+  }
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   font-size: 30px;
   line-height: 1.5em;
   color: #fff;
@@ -37,14 +43,36 @@ const Title = styled.div`
   left: 0;
   right: 0;
   transform: translateY(-50%);
+
+  @media screen and (min-width: 768px) {
+    font-size: 90px;
+  }
 `;
 
-const Content = styled.div`
+const ContentLeft = styled.div`
   padding: 20px;
   background-color: ${props => props.colour};
   color: white;
   line-height: 1.3em;
   margin-bottom: 60px;
+
+  @media screen and (min-width: 991px) {
+    float: left;
+    width: calc(40% - 40px);
+  }
+`;
+
+const ContentRight = styled.div`
+  padding: 20px;
+  background-color: ${props => props.colour};
+  color: white;
+  line-height: 1.3em;
+  margin-bottom: 60px;
+
+  @media screen and (min-width: 991px) {
+    float: right;
+    width: calc(60% - 40px);
+  }
 `;
 
 const StyledLink = styled.a`
@@ -52,26 +80,33 @@ const StyledLink = styled.a`
   display: inline-block;
   border: 3px solid ${props => props.colour};
   padding: 10px;
-  bordre-radius: 5px;
+  border-radius: 5px;
   margin-top: 10px;
 `;
 
-const Event = withRouter(props => (
+const Article = styled.div`
+  p {
+    margin-bottom: 1em;
+  }
+`;
+
+const Event = withRouter(({router}) => (
   <Async
     promise={
       new Promise(async resolve => {
-        const data = await getData('data/events/new-event.json');
+        const {query} = router;
+        const pathname = query.id
+          .split(' ')
+          .join('-')
+          .toLowerCase();
+
+        const data = await getData(`data/events/${pathname}.json`);
         const colour = getMenuColour(data);
         const colourHex = changeColourToHex(colour);
         const colourHexLight = changeColourToHex(colour, true);
-        const { title, image, date, time, deck } = data;
 
         resolve({
-          title,
-          image,
-          date,
-          time,
-          deck,
+          ...data,
           colour,
           colourHex,
           colourHexLight
@@ -81,9 +116,9 @@ const Event = withRouter(props => (
     then={({
       title,
       image,
-      date,
+      dateTime,
       time,
-      deck,
+      article,
       colour,
       colourHex,
       colourHexLight
@@ -95,6 +130,7 @@ const Event = withRouter(props => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           Header={HeaderContainer}
         />
         <main>
@@ -102,18 +138,23 @@ const Event = withRouter(props => (
             <Image url={getFullUrl(image)} />
             <Title>{title}</Title>
           </Subtitle>
-          <Content colour={colourHexLight}>
-            <div>{moment(date).format('dddd DD MMM YYYY')}</div>
-            <div>{moment(time).format('HH:mm')}</div>
-          </Content>
-          <Content colour={colourHex}>
-            <p>{deck}</p>
-            <Link href="/events">
+          <ContentLeft colour={colourHexLight}>
+            <div>{moment(dateTime).format('dddd DD MMM YYYY')}</div>
+            <div>{moment(dateTime).format('HH:mm')}</div>
+          </ContentLeft>
+          <ContentRight colour={colourHex}>
+            {article && (
+              <Article
+                dangerouslySetInnerHTML={{__html: markdown.toHTML(article)}}
+              />
+            )}
+            <Link href="/events" passHref>
               <StyledLink colour={colourHexLight}>
                 View a list of all events
               </StyledLink>
             </Link>
-          </Content>
+          </ContentRight>
+          <Clearfix />
         </main>
         <Footer />
       </React.Fragment>

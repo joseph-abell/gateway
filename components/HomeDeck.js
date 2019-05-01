@@ -14,8 +14,11 @@ const Text = styled.div`
   margin-bottom: 20px;
 
   @media screen and (min-width: 991px) {
-    width: calc(40% - 70px);
+    width: calc(40% - 80px);
     float: left;
+    margin-right: 20px;
+    height: 430px;
+    font-size: 24px;
   }
 `;
 
@@ -33,7 +36,7 @@ const Image = styled.div`
 
 const HomeDeck = ({ colour, text, image }) => (
   <Container>
-    <Text colour={colour}>{text}</Text>
+    <Text colour={colour} dangerouslySetInnerHTML={{ __html: text }} />
     <ImageWrapper mobileHeight="400px">
       <Image src={image} />
     </ImageWrapper>

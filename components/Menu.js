@@ -183,12 +183,12 @@ class Menu extends React.Component {
               </StyledLink>
             </Link>
           </StyledLogo>
-          <ShowAt breakpoint="mediumAndAbove">
+          <HideAt breakpoint="mediumAndBelow">
             <nav>
               <MainMenu>
                 {menuItems.map(item => (
                   <MenuItem colour={colour} key={item.link}>
-                    <Link href={item.link} prefetch>
+                    <Link href={item.link}>
                       <StyledMenuLink colour={colour}>
                         {item.title}
                       </StyledMenuLink>
@@ -213,7 +213,7 @@ class Menu extends React.Component {
                 ))}
               </MainMenu>
             </nav>
-          </ShowAt>
+          </HideAt>
         </MenuInnerContainer>
       </MenuContainer>
     );

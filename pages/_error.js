@@ -2,9 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 
 export default class Error extends React.Component {
-  static getInitialProps({ res, err }) {
+  static getInitialProps({res, err}) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-    return { statusCode };
+    return {statusCode};
   }
 
   render() {

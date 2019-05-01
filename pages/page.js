@@ -1,10 +1,11 @@
 import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import {withRouter} from 'next/router';
 import Head from 'next/head';
-import { Router } from '../router';
-import { url } from '../helpers/config';
+import {markdown} from 'markdown';
+import {Router} from '../router';
+import {url} from '../helpers/config';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
@@ -12,7 +13,7 @@ import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
-import { getData, getFullUrl, changeColourToHex } from '../helpers';
+import {getData, getFullUrl, changeColourToHex} from '../helpers';
 
 const Deck = styled.div`
   position: relative;
@@ -34,9 +35,14 @@ const PageSummary = styled.div`
   padding: 40px 0;
   text-align: center;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     height: 500px;
-    padding: 240px 0 0;
+    padding: 175px 0 0;
+  }
+
+  @media screen and (min-width: 1021px) {
+    font-size: 90px;
+    line-height: 1.5em;
   }
 `;
 
@@ -44,6 +50,7 @@ const PageDeck = styled.div`
   padding: 40px;
   background-color: ${props => props.colour};
   color: white;
+  margin-bottom: 20px;
 `;
 
 const H2 = styled.h2`
@@ -51,13 +58,19 @@ const H2 = styled.h2`
   line-height: 36px;
   margin-bottom: 20px;
 
-  @media screen and (min-width: 1221px) {
+  @media screen and (min-width: 991px) {
+    width: 850px;
+    margin: 0 auto 20px;
     text-align: center;
   }
 `;
 
 const P = styled.p`
-  @media screen and (min-width: 1221px) {
+  @media screen and (min-width: 991px) {
+    font-size: 24px;
+    line-height: 30px;
+    width: 850px;
+    margin: 0 auto;
     text-align: center;
   }
 `;
@@ -74,7 +87,7 @@ const HeaderDeck = styled.h3`
   display: block;
   width: 100%;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     height: 500px;
     line-height: 500px;
   }
@@ -84,9 +97,9 @@ const ContentPieceContainer = styled.div`
   float: ${props => props.direction};
   background-color: ${props => props.colour};
   width: ${props => (props.width ? '100%' : 0)};
-  height: 200px;
+  min-height: 200px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 991px) {
     width: calc(${props => props.width}% - 10px);
     border-right: ${props =>
       props.direction === 'left' && props.width ? '10px solid #fff' : 0};
@@ -95,18 +108,19 @@ const ContentPieceContainer = styled.div`
     border-bottom: ${props => (props.width ? '20px solid white' : 0)};
     height: 500px;
   }
+
+  h2 {
+    font-size: 2em;
+    line-height: 3em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
 `;
 
-const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
+const ContentPiece = ({direction, deck, image, colour, width}) => {
   let adjustedDirection = direction;
-
-  if (flipped) {
-    if (adjustedDirection === 'left') {
-      adjustedDirection = 'right';
-    } else if (adjustedDirection === 'right') {
-      adjustedDirection = 'left';
-    }
-  }
 
   if (image) {
     return (
@@ -115,7 +129,7 @@ const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
         colour={colour}
         width={width}
       >
-        <ImageWrapper color={colour}>
+        <ImageWrapper color={colour} mobileMarginBottom="0">
           <Image url={getFullUrl(image)} />
           {deck && <HeaderDeck>{deck}</HeaderDeck>}
         </ImageWrapper>
@@ -124,13 +138,18 @@ const ContentPiece = ({ direction, deck, image, colour, width, flipped }) => {
   }
 
   return (
-    <ContentPieceContainer
-      direction={adjustedDirection}
-      colour={colour}
-      width={width}
-    >
-      <Deck>{deck}</Deck>
-    </ContentPieceContainer>
+    <>
+      {typeof deck === 'undefined' && <div />}
+      {deck && (
+        <ContentPieceContainer
+          direction={adjustedDirection}
+          colour={colour}
+          width={width}
+        >
+          <Deck dangerouslySetInnerHTML={{__html: markdown.toHTML(deck)}} />
+        </ContentPieceContainer>
+      )}
+    </>
   );
 };
 
@@ -139,9 +158,7 @@ const ContentContainer = styled.li`
   width: 100%;
 `;
 
-const Content = ({ content }) => {
-  const { left, right } = content;
-
+const setWidth = (left, right) => {
   let leftWidth = 0;
   let rightWidth = 0;
 
@@ -154,7 +171,7 @@ const Content = ({ content }) => {
   } else if (left.image && right.deck) {
     leftWidth = 60;
     rightWidth = 40;
-  } else if (left.deck && left.image) {
+  } else if (left.deck && right.image) {
     leftWidth = 40;
     rightWidth = 60;
   } else if (!left.deck && !left.image && (right.image || right.deck)) {
@@ -165,24 +182,28 @@ const Content = ({ content }) => {
     rightWidth = 0;
   }
 
-  if (right.deck && !left.deck) {
+  return [leftWidth, rightWidth];
+};
+const Content = ({content}) => {
+  const {left, right} = content;
+  const [leftWidth, rightWidth] = setWidth(left, right);
+
+  if (right.deck && right.image) {
     return (
       <ContentContainer>
         <ContentPiece
           direction="right"
           deck={right.deck}
           image={right.image}
-          colour={right.colour}
+          colour={changeColourToHex(right.colour)}
           width={rightWidth}
-          flipped={true}
         />
         <ContentPiece
           direction="left"
           deck={left.deck}
           image={left.image}
-          colour={left.colour}
+          colour={changeColourToHex(left.colour)}
           width={leftWidth}
-          flipped={true}
         />
         <Clearfix />
       </ContentContainer>
@@ -195,14 +216,14 @@ const Content = ({ content }) => {
         direction="left"
         deck={left.deck}
         image={left.image}
-        colour={left.colour}
+        colour={changeColourToHex(left.colour)}
         width={leftWidth}
       />
       <ContentPiece
         direction="right"
         deck={right.deck}
         image={right.image}
-        colour={right.colour}
+        colour={changeColourToHex(right.colour)}
         width={rightWidth}
       />
       <Clearfix />
@@ -210,10 +231,10 @@ const Content = ({ content }) => {
   );
 };
 
-const Contents = ({ contents }) => (
+const Contents = ({contents}) => (
   <ul>
     {contents &&
-      contents.map(({ content }) => (
+      contents.map(({content}) => (
         <Content
           content={content}
           key={content.left.deck + content.right.deck}
@@ -222,9 +243,9 @@ const Contents = ({ contents }) => (
   </ul>
 );
 
-const Page = withRouter(({ router }) => {
-  const { query } = router;
-  const { id, childId } = query;
+const Page = withRouter(({router}) => {
+  const {query} = router;
+  const {id, childId} = query;
 
   const pathname = childId ? childId : id;
 
@@ -244,9 +265,10 @@ const Page = withRouter(({ router }) => {
             reject(e);
           }
 
-          const { title, header = {}, subtitle = {}, deck, contents } = data;
-          const { image, menuColour } = header;
+          const {title, header = {}, subtitle = {}, deck, contents} = data;
+          const {image, menuColour} = header;
           const colourHex = changeColourToHex(menuColour);
+          const colourHexLight = changeColourToHex(menuColour, true);
           const subtitleText = subtitle.subtitle;
           const subtitleImage =
             subtitle && subtitle.image && url + subtitle.image.slice(1);
@@ -264,7 +286,8 @@ const Page = withRouter(({ router }) => {
             deckColour,
             contents,
             menuColour,
-            colourHex
+            colourHex,
+            colourHexLight
           });
         })
       }
@@ -278,7 +301,8 @@ const Page = withRouter(({ router }) => {
         deckColour,
         contents,
         menuColour,
-        colourHex
+        colourHex,
+        colourHexLight
       }) => (
         <div>
           <Head>
@@ -287,6 +311,7 @@ const Page = withRouter(({ router }) => {
           <Header
             colour={menuColour}
             colourHex={colourHex}
+            colourHexLight={colourHexLight}
             title={title}
             image={image}
             Header={HeaderContainer}
@@ -304,8 +329,8 @@ const Page = withRouter(({ router }) => {
 
           <PageDeck colour={colourHex}>
             <Container>
-              <H2>{deckTitle}</H2>
-              <P>{deckParagraph}</P>
+              {deckTitle && <H2>{deckTitle}</H2>}
+              {deckParagraph && <P>{deckParagraph}</P>}
             </Container>
           </PageDeck>
 

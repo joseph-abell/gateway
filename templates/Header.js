@@ -24,10 +24,17 @@ class MenuTemplate extends React.Component {
   }
 
   render() {
-    const { menuItems, menuColour, logoUrl, sticky, children } = this.props;
+    const {
+      menuItems,
+      menuColour,
+      borderColour,
+      logoUrl,
+      sticky,
+      children
+    } = this.props;
     return (
       <React.Fragment>
-        <HideAt breakpoint="mediumAndAbove">
+        <HideAt breakpoint="large">
           <MobileMenu
             menuItems={menuItems}
             menuColour={menuColour}
@@ -39,6 +46,7 @@ class MenuTemplate extends React.Component {
         </HideAt>
         <Search
           colour={menuColour}
+          borderColour={borderColour}
           isOpen={this.state.searchOpen}
           handleStateChange={state => {
             this.handleSearchStateChange(state);
@@ -63,7 +71,14 @@ class MenuTemplate extends React.Component {
   }
 }
 
-const HeaderTemplate = ({ colour, colourHex, Header, title, image }) => (
+const HeaderTemplate = ({
+  colour,
+  colourHex,
+  colourHexLight,
+  Header,
+  title,
+  image
+}) => (
   <Async
     promise={
       new Promise(async resolve => {
@@ -82,14 +97,19 @@ const HeaderTemplate = ({ colour, colourHex, Header, title, image }) => (
           <MenuTemplate
             menuItems={menu}
             menuColour={colourHex}
+            borderColour={colourHexLight}
             logoUrl={logoUrl}
             sticky={true}
           />
         );
       }
-
       return (
-        <MenuTemplate menuItems={menu} menuColour={colourHex} logoUrl={logoUrl}>
+        <MenuTemplate
+          menuItems={menu}
+          menuColour={colourHex}
+          borderColour={colourHexLight}
+          logoUrl={logoUrl}
+        >
           <Header
             text={title}
             image={getResizedImageUrl(getFullUrl(image))}

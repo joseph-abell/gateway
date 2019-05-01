@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 import Footer from '../templates/Footer';
 import Header from '../templates/Header';
+import Container from '../components/Container';
 import HeaderContainer from '../components/HeaderContainer';
 import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
@@ -12,7 +13,7 @@ import CallToActions from '../components/CallToActions';
 import Quotes from '../components/Quotes';
 import HomeDeck from '../components/HomeDeck';
 import SimpleEvents from '../components/SimpleEvents';
-
+import Clearfix from '../components/Clearfix';
 import {
   getData,
   getFullUrl,
@@ -24,11 +25,33 @@ const Padding = styled.div`
   padding: 20px;
 `;
 
+const StyledImageWrapper = styled(ImageWrapper)`
+  @media screen and (min-width: 991px) {
+    width: calc(60% - 20px);
+    float: left;
+    margin-right: 20px;
+  }
+`;
+
+const twitter = () => ({__html: 'twitter'});
+
 const TwitterWrapper = styled.div`
   background-color: ${props => props.colour};
+  color: white;
   padding: 20px;
   height: 400px;
   margin-bottom: ${props => props.mobileMarginBottom || '20px'};
+
+  @media screen and (min-width: 991px) {
+    width: calc(40% - 20px);
+    margin-right: 20px;
+    float: left;
+    height: 460px;
+  }
+
+  a {
+    color: white;
+  }
 `;
 
 const Home = () => (
@@ -37,10 +60,8 @@ const Home = () => (
       new Promise(async resolve => {
         const data = await getData('data/homepage.json');
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const { quotes, deck, header, eventsImage, twitterImage } = data;
-        let { cta } = data;
+        const {header, deck, eventsImage, twitterImage} = data;
+        let {cta} = data;
 
         header.image = getFullUrl(header.image);
 
@@ -55,12 +76,12 @@ const Home = () => (
         deck.colour = changeColourToHex(deck.colour);
 
         resolve({
+          ...data,
           header,
           colour,
-          colourHex,
-          colourHexLight,
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true),
           cta,
-          quotes,
           deck,
           eventsImage: getFullUrl(eventsImage),
           twitterImage: getFullUrl(twitterImage)
@@ -78,8 +99,8 @@ const Home = () => (
       eventsImage,
       twitterImage
     }) => {
-      const { title, image } = header;
-      const { TwitterTimelineEmbed } = require('react-twitter-embed');
+      const {title, image} = header;
+      const {TwitterTimelineEmbed} = require('react-twitter-embed');
 
       return (
         <React.Fragment>
@@ -89,6 +110,7 @@ const Home = () => (
           <Header
             colour={colour}
             colourHex={colourHex}
+            colourHexLight={colourHexLight}
             title={title}
             image={image}
             Header={HeaderContainer}
@@ -102,22 +124,34 @@ const Home = () => (
                 text={deck.text}
                 image={deck.image}
               />
-              <ImageWrapper mobileHeight="400px" mobileMarginBottom="0">
-                <Image url={eventsImage} />
-              </ImageWrapper>
-              <SimpleEvents colour={colourHex} colourLight={colourHexLight} />
-              <TwitterWrapper colour={colourHex}>
-                <TwitterTimelineEmbed
-                  sourceType="profile"
-                  screenName="gatewayyork"
-                  options={{
-                    height: 400
-                  }}
-                />
-              </TwitterWrapper>
-              <ImageWrapper mobileHeight="400px">
-                <Image url={twitterImage} />
-              </ImageWrapper>
+              <Container>
+                <StyledImageWrapper mobileHeight="400px" mobileMarginBottom="0">
+                  <Image url={eventsImage} />
+                </StyledImageWrapper>
+                <SimpleEvents colour={colourHex} colourLight={colourHexLight} />
+                <Clearfix />
+              </Container>
+              <Container>
+                <TwitterWrapper colour={colourHex}>
+                  <a
+                    className="twitter-timeline"
+                    data-height="400"
+                    href="https://twitter.com/gatewayyork?ref_src=twsrc%5Etfw"
+                  >
+                    Tweets by gatewayyork
+                  </a>
+
+                  <script
+                    dangerouslySetInnerHTML={twitter()}
+                    async
+                    src="https://platform.twitter.com/widgets.js"
+                    charSet="utf-8"
+                  />
+                </TwitterWrapper>
+                <ImageWrapper mobileHeight="400px">
+                  <Image url={twitterImage} />
+                </ImageWrapper>
+              </Container>
             </Padding>
           </main>
           <Footer />

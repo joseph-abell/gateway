@@ -2,9 +2,10 @@ import React from 'react';
 import Async from 'react-promise';
 import styled from 'styled-components';
 import Head from 'next/head';
-import { getData, getMenuColour, changeColourToHex } from '../helpers';
+import {getData, getMenuColour, changeColourToHex} from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
+import Container from '../components/Container';
 import Footer from '../templates/Footer';
 
 const Deck = styled.div`
@@ -29,18 +30,12 @@ const ContactUs = () => (
       new Promise(async resolve => {
         const data = await getData('data/contact-us.json');
         const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
-        const { title, image, contentImage, deck } = data;
 
         resolve({
-          title,
+          ...data,
           colour,
-          colourHex,
-          colourHexLight,
-          contentImage,
-          image,
-          deck
+          colourHex: changeColourToHex(colour),
+          colourHexLight: changeColourToHex(colour, true)
         });
       })
     }
@@ -60,17 +55,23 @@ const ContactUs = () => (
         <Header
           colour={colour}
           colourHex={colourHex}
+          colourHexLight={colourHexLight}
           title={title}
           image={image}
           Header={HeaderContainer}
         />
         <Deck colour={colourHex}>
-          <p>{deck}</p>
-          <p>
-            <A colour={colourHexLight} href="mailto:office@gatewaychurch.co.uk">
-              Email
-            </A>
-          </p>
+          <Container>
+            <p>{deck}</p>
+            <p>
+              <A
+                colour={colourHexLight}
+                href="mailto:office@gatewaychurch.co.uk"
+              >
+                Email
+              </A>
+            </p>
+          </Container>
         </Deck>
         <Footer />
       </React.Fragment>

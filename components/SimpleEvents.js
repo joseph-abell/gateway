@@ -1,14 +1,15 @@
 import React from 'react';
 import Async from 'react-promise';
 import moment from 'moment';
-import { Link } from '../router';
+import {Link} from '../router';
 import styled from 'styled-components';
 
-import { getData } from '../helpers';
+import {getData} from '../helpers';
 
 const H3 = styled.h3`
   padding: 20px 35px;
   color: ${props => props.colour};
+  background: white;
 `;
 
 const UL = styled.ul`
@@ -36,9 +37,25 @@ const MoreEvents = styled.div`
   background-color: ${props => props.colour};
   color: white;
   padding: 0 35px 35px;
+
+  @media screen and (min-width: 991px) {
+    padding-bottom: 154px;
+    margin-bottom: 20px;
+  }
 `;
 
-const SimpleEvents = ({ colour, colourLight }) => (
+const EventsWrapper = styled.div`
+  background: ${props => props.colour};
+
+  @media screen and (min-width: 991px) {
+    float: right;
+    width: 40%;
+    height: 500px;
+    margin-bottom: 20px;
+  }
+`;
+
+const SimpleEvents = ({colour, colourLight}) => (
   <Async
     promise={
       new Promise(async resolve => {
@@ -50,11 +67,11 @@ const SimpleEvents = ({ colour, colourLight }) => (
           .sort((a, b) => (moment(a.dateTime).isAfter(b.dateTime) ? 1 : -1))
           .filter(event => moment().isBefore(event.dateTime))
           .slice(0, 3);
-        resolve({ events });
+        resolve({events});
       })
     }
-    then={({ events }) => (
-      <div>
+    then={({events}) => (
+      <EventsWrapper colour={colourLight}>
         <H3 colour={colour}>Events</H3>
         <UL colour={colourLight}>
           {events.map(event => (
@@ -64,7 +81,12 @@ const SimpleEvents = ({ colour, colourLight }) => (
                   <P colour={colour}>
                     {moment(event.dateTime).format('dddd MMM Do YYYY')}
                   </P>
-                  <p>{event.title}</p>
+                  <p>
+                    {event.title
+                      .split('-')
+                      .map(word => word[0].toUpperCase() + word.substr(1))
+                      .join(' ')}
+                  </p>
                   <p>{moment(event.dateTime).format('kk:mm')}</p>
                 </StyledLink>
               </Link>
@@ -76,7 +98,7 @@ const SimpleEvents = ({ colour, colourLight }) => (
             <StyledLink>More Events</StyledLink>
           </Link>
         </MoreEvents>
-      </div>
+      </EventsWrapper>
     )}
   />
 );

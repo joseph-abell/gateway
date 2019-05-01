@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { slide as SlideMenu } from 'react-burger-menu';
+import {slide as SlideMenu} from 'react-burger-menu';
 import Async from 'react-promise';
 import Downshift from 'downshift';
 import flat from 'flat';
-import { Link } from '../router';
-import { getData } from '../helpers';
+import {Link} from '../router';
+import {getData} from '../helpers';
 
 const StyledLink = styled.a`
   color: white;
@@ -14,19 +14,43 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-const SearchInput = props => <input {...props} type="text" />;
+const StyledSearchInput = styled.input`
+  background: ${props => props.colour};
+  color: white;
+  border: 0;
+  font-size: 20px;
+  border-bottom: 3px solid ${props => props.borderColour};
+  font-family: 'Ginger', sans-serif;
+`;
 
-const SearchListItem = ({ item, getItemProps }) => (
+const SearchInput = props => <StyledSearchInput {...props} type="text" />;
+
+const SearchListItem = ({item, getItemProps}) => (
   <li
     {...getItemProps({
       key: item.data.title,
       item: item
     })}
   >
-    <Link href={item.pageUrl}>
+    <Link href={`/${item.pageUrl}`}>
       <StyledLink>
-        <div>{item.data.title}</div>
-        <div>{item.breadcrumb}</div>
+        <div>
+          {item.data.title
+            .split('-')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' ')}
+        </div>
+        <div>
+          {item.breadcrumb
+            .split(' - ')
+            .join('___')
+            .split('-')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' ')
+            .split('___')
+            .map(word => word && word[0].toUpperCase() + word.substr(1))
+            .join(' - ')}
+        </div>
       </StyledLink>
     </Link>
   </li>
@@ -41,9 +65,11 @@ class Search extends React.Component {
     data.filter(item =>
       item.flat.some(
         flatItem =>
+          flatItem &&
           flatItem[1] &&
           !Array.isArray(flatItem[1]) &&
           typeof flatItem[1] !== 'boolean' &&
+          typeof flatItem[1] !== 'number' &&
           flatItem[1].toLowerCase().includes(inputValue.toLowerCase())
       )
     );
@@ -100,8 +126,7 @@ class Search extends React.Component {
   });
 
   render = () => {
-    const { colour, isOpen, handleStateChange } = this.props;
-
+    const {colour, isOpen, handleStateChange, borderColour} = this.props;
     const styles = {
       bmBurgerButton: {
         display: 'none'
@@ -159,23 +184,33 @@ class Search extends React.Component {
 
             return (
               <div>
-                <SearchInput {...getInputProps()} />
-                {isOpen &&
-                  !!inputValue.length && (
-                    <Async
-                      promise={this.promise}
-                      then={data => (
-                        <ul {...getMenuProps()}>
-                          {this.search(data, inputValue).map(item => (
+                <SearchInput
+                  {...getInputProps()}
+                  colour={colour}
+                  borderColour={borderColour}
+                />
+                {isOpen && !!inputValue.length && (
+                  <Async
+                    promise={this.promise}
+                    then={data => (
+                      <ul {...getMenuProps()}>
+                        {this.search(data, inputValue)
+                          .filter(item => {
+                            if (item.type !== 'people') return true;
+                            if (!item.data.filters.all) return false;
+                            if (item.data.filters.all === 'false') return false;
+                            return true;
+                          })
+                          .map(item => (
                             <SearchListItem
                               item={item}
                               getItemProps={getItemProps}
                             />
                           ))}
-                        </ul>
-                      )}
-                    />
-                  )}
+                      </ul>
+                    )}
+                  />
+                )}
               </div>
             );
           }}
