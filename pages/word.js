@@ -138,6 +138,16 @@ const Word = ({router}) => {
           </P>
         )}
 
+        {file && file.endsWith('mp3') && (
+          <P>
+            <Audio
+              url={getFullUrl(file)}
+              colour={colourHex}
+              lightColour={colourHexLight}
+            />
+          </P>
+        )}
+
         {deck && deck.startsWith('<') && (
           <P dangerouslySetInnerHTML={{__html: deck}} />
         )}
@@ -154,7 +164,7 @@ const Word = ({router}) => {
           </P>
         )}
 
-        {file && (
+        {file && !file.includes('mp3') && (
           <P>
             <Link colour={colourHex} href={getFullUrl(file)}>
               {file.replace('/uploads/', '')}

@@ -3,10 +3,5 @@
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
   "/words": "static/development/pages/words.js",
-  "/contact-us": "static/development/pages/contact-us.js",
-  "/page": "static/development/pages/page.js",
-  "/events": "static/development/pages/events.js",
-  "/index": "static/development/pages/index.js",
-  "/people": "static/development/pages/people.js",
-  "/": "static/development/pages/index.js"
+  "/word": "static/development/pages/word.js"
 }
