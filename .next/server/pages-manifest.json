@@ -3,5 +3,9 @@
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
   "/word": "static/development/pages/word.js",
-  "/people": "static/development/pages/people.js"
+  "/people": "static/development/pages/people.js",
+  "/page": "static/development/pages/page.js",
+  "/index": "static/development/pages/index.js",
+  "/error-404": "static/development/pages/error-404.js",
+  "/": "static/development/pages/index.js"
 }
