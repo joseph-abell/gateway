@@ -26,6 +26,18 @@ import Deck from '../components/DeckWord';
 import StyledDate from '../components/DateWord';
 import Link from '../components/LinkWord';
 
+const WordText = styled.div`
+  line-height: 1.5em;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: ${props => props.colour};
+  }
+`;
+
 const Word = ({router}) => {
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState({});
@@ -162,11 +174,17 @@ const Word = ({router}) => {
         )}
 
         {deck && deck.startsWith('<') && (
-          <P dangerouslySetInnerHTML={{__html: deck}} />
+          <WordText
+            dangerouslySetInnerHTML={{__html: deck}}
+            colour={colourHex}
+          />
         )}
 
         {deck && !deck.startsWith('<') && (
-          <P dangerouslySetInnerHTML={{__html: markdown.toHTML(deck)}} />
+          <WordText
+            dangerouslySetInnerHTML={{__html: markdown.toHTML(deck)}}
+            colour={colourHex}
+          />
         )}
 
         {youtubeLink && (
