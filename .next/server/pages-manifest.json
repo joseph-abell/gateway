@@ -1,6 +1,16 @@
 {
-  "/_app": "static/development/pages/_app.js",
-  "/_error": "static/development/pages/_error.js",
-  "/_document": "static/development/pages/_document.js",
-  "/words": "static/development/pages/words.js"
+  "/_app": "static/g7e9WF7Tybw2uWFG50GsV/pages/_app.js",
+  "/_error": "static/g7e9WF7Tybw2uWFG50GsV/pages/_error.js",
+  "/contact-us": "static/g7e9WF7Tybw2uWFG50GsV/pages/contact-us.js",
+  "/error-404": "static/g7e9WF7Tybw2uWFG50GsV/pages/error-404.js",
+  "/event": "static/g7e9WF7Tybw2uWFG50GsV/pages/event.js",
+  "/events": "static/g7e9WF7Tybw2uWFG50GsV/pages/events.js",
+  "/index": "static/g7e9WF7Tybw2uWFG50GsV/pages/index.js",
+  "/page": "static/g7e9WF7Tybw2uWFG50GsV/pages/page.js",
+  "/people": "static/g7e9WF7Tybw2uWFG50GsV/pages/people.js",
+  "/person": "static/g7e9WF7Tybw2uWFG50GsV/pages/person.js",
+  "/word": "static/g7e9WF7Tybw2uWFG50GsV/pages/word.js",
+  "/words": "static/g7e9WF7Tybw2uWFG50GsV/pages/words.js",
+  "/_document": "static/g7e9WF7Tybw2uWFG50GsV/pages/_document.js",
+  "/": "static/g7e9WF7Tybw2uWFG50GsV/pages/index.js"
 }
