@@ -106,7 +106,21 @@ const Word = ({router}) => {
               <>
                 -{' '}
                 {authors.map(({author}) => (
-                  <>{author} </>
+                  <Link
+                    colour={colourHex}
+                    href={
+                      '/people/' +
+                      author
+                        .toLowerCase()
+                        .split(' ')
+                        .join('-')
+                    }
+                  >
+                    {author
+                      .split('-')
+                      .map(word => word[0].toUpperCase() + word.substr(1))
+                      .join(' ')}
+                  </Link>
                 ))}
               </>
             )}
