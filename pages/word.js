@@ -102,10 +102,10 @@ const Word = ({router}) => {
         <Container>
           <StyledDate colour={colourHex}>
             {date && format(date, 'EEEE do LLLL yyyy')}{' '}
-            {authors && (
-              <>
-                -{' '}
-                {authors.map(({author}) => (
+            {authors &&
+              authors.map(({author}) => (
+                <>
+                  {' - '}
                   <Link
                     colour={colourHex}
                     href={
@@ -121,9 +121,8 @@ const Word = ({router}) => {
                       .map(word => word[0].toUpperCase() + word.substr(1))
                       .join(' ')}
                   </Link>
-                ))}
-              </>
-            )}
+                </>
+              ))}
           </StyledDate>
           <H1>
             {title &&

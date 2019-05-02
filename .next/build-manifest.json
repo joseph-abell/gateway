@@ -3,7 +3,7 @@
   "pages": {
     "/_app": ["static/runtime/webpack.js", "static/runtime/main.js"],
     "/_error": ["static/runtime/webpack.js", "static/runtime/main.js"],
-    "/person": ["static/runtime/webpack.js", "static/runtime/main.js"],
-    "/word": ["static/runtime/webpack.js", "static/runtime/main.js"]
+    "/events": ["static/runtime/webpack.js", "static/runtime/main.js"],
+    "/event": ["static/runtime/webpack.js", "static/runtime/main.js"]
   }
 }

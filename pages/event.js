@@ -11,6 +11,7 @@ import {Link} from '../router';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import HeaderContainer from '../components/HeaderContainer';
+import Container from '../components/Container';
 import Image from '../components/Image';
 import Clearfix from '../components/Clearfix';
 
@@ -138,23 +139,25 @@ const Event = withRouter(({router}) => (
             <Image url={getFullUrl(image)} />
             <Title>{title}</Title>
           </Subtitle>
-          <ContentLeft colour={colourHexLight}>
-            <div>{moment(dateTime).format('dddd DD MMM YYYY')}</div>
-            <div>{moment(dateTime).format('HH:mm')}</div>
-          </ContentLeft>
-          <ContentRight colour={colourHex}>
-            {article && (
-              <Article
-                dangerouslySetInnerHTML={{__html: markdown.toHTML(article)}}
-              />
-            )}
-            <Link href="/events" passHref>
-              <StyledLink colour={colourHexLight}>
-                View a list of all events
-              </StyledLink>
-            </Link>
-          </ContentRight>
-          <Clearfix />
+          <Container>
+            <ContentLeft colour={colourHexLight}>
+              <div>{moment(dateTime).format('dddd DD MMM YYYY')}</div>
+              <div>{moment(dateTime).format('HH:mm')}</div>
+            </ContentLeft>
+            <ContentRight colour={colourHex}>
+              {article && (
+                <Article
+                  dangerouslySetInnerHTML={{__html: markdown.toHTML(article)}}
+                />
+              )}
+              <Link href="/events" passHref>
+                <StyledLink colour={colourHexLight}>
+                  View a list of all events
+                </StyledLink>
+              </Link>
+            </ContentRight>
+            <Clearfix />
+          </Container>
         </main>
         <Footer />
       </React.Fragment>
