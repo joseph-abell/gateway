@@ -133,11 +133,16 @@ const Words = ({router}) => {
                           {format(word.date, 'EEEE do LLLL yyyy')}
                           {authors && authors.length > 0 && (
                             <>
-                              {' '}
-                              -{' '}
                               {authors.map(author => (
                                 <React.Fragment key={author}>
-                                  {author}{' '}
+                                  {' - '}
+                                  {author
+                                    .split('-')
+                                    .map(
+                                      word =>
+                                        word[0].toUpperCase() + word.substr(1)
+                                    )
+                                    .join(' ')}
                                 </React.Fragment>
                               ))}
                             </>
