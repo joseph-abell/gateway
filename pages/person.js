@@ -307,15 +307,20 @@ const Person = withRouter(({router}) => (
                       key={word.url}
                       colour={changeColourToHex(wordData.colour, true)}
                     >
-                      <WordLink href={`/words/${wordData.title}`}>
+                      <WordLink
+                        href={`/words/${wordData.title
+                          .split(' ')
+                          .join('-')
+                          .split('-')
+                          .map(word => word.toLowerCase())
+                          .join('-')}`}
+                      >
                         <WordText>
                           <WordDate colour={changeColourToHex(wordData.colour)}>
                             {format(wordData.date, 'EEEE do LLLL yyyy')}
-                          </WordDate>
-                          <div>
                             {wordData.authors.map(({author}, index) => {
                               return (
-                                <span
+                                <React.Fragment
                                   key={author}
                                   style={{
                                     marginBottom: '10px',
@@ -323,7 +328,7 @@ const Person = withRouter(({router}) => (
                                     display: 'inline-block'
                                   }}
                                 >
-                                  {index !== 0 && ' - '}
+                                  {' - '}
                                   {author
                                     .split('-')
                                     .map(
@@ -331,10 +336,10 @@ const Person = withRouter(({router}) => (
                                         n.charAt(0).toUpperCase() + n.slice(1)
                                     )
                                     .join(' ')}{' '}
-                                </span>
+                                </React.Fragment>
                               );
                             })}
-                          </div>
+                          </WordDate>
                           <WordTitle>
                             {wordData.title
                               .split('-')
