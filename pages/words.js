@@ -131,7 +131,7 @@ const Words = ({router}) => {
                       <StyledText>
                         <StyledDate colour={changeColourToHex(word.colour)}>
                           {format(word.date, 'EEEE do LLLL yyyy')}
-                          {authors && authors.length && (
+                          {authors && authors.length > 0 && (
                             <>
                               {' '}
                               -{' '}
