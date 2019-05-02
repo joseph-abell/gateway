@@ -181,6 +181,10 @@ const WordImage = styled.div`
   margin-right: -20px;
 `;
 
+const PersonText = styled.div`
+  line-height: 1.5em;
+`;
+
 const Person = withRouter(({router}) => (
   <Async
     promise={
@@ -288,7 +292,7 @@ const Person = withRouter(({router}) => (
                 .join(' ')}
             </H1>
             <H2>{titleRole}</H2>
-            <p dangerouslySetInnerHTML={{__html: deck}} />
+            <PersonText dangerouslySetInnerHTML={{__html: deck}} />
           </Wrapper>
 
           <Clearfix />
