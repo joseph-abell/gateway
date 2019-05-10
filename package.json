@@ -31,7 +31,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.4.1",
     "markdown": "^0.5.0",
-    "next": "7.0.2",
+    "next": "8.1.0",
     "next-routes": "^1.4.2",
     "rc-slider": "^8.6.3",
     "react": "^16.8.1",
@@ -39,13 +39,13 @@
     "react-dom": "^16.8.1",
     "react-google-maps": "^9.4.5",
     "react-icons": "^3.1.0",
-    "react-promise": "^2.0.3",
-    "react-slick": "^0.23.1",
+    "react-promise": "^3.0.2",
+    "react-slick": "^0.24.0",
     "react-sound": "^1.2.0",
-    "react-twitter-embed": "^1.2.0",
-    "react-with-breakpoints": "^3.1.0",
+    "react-twitter-embed": "^2.0.8",
+    "react-with-breakpoints": "^4.0.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^3.4.9"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
