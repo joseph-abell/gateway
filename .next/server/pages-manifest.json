@@ -2,6 +2,7 @@
   "/_app": "static/development/pages/_app.js",
   "/_error": "static/development/pages/_error.js",
   "/_document": "static/development/pages/_document.js",
-  "/word": "static/development/pages/word.js",
-  "/people": "static/development/pages/people.js"
+  "/index": "static/development/pages/index.js",
+  "/page": "static/development/pages/page.js",
+  "/": "static/development/pages/index.js"
 }

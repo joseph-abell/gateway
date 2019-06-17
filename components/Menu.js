@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaBars, FaSearch } from 'react-icons/fa';
-import { Link } from '../router';
-import { HideAt, ShowAt } from 'react-with-breakpoints';
+import {FaBars, FaSearch} from 'react-icons/fa';
+import {Link} from '../router';
+import {HideAt, ShowAt} from 'react-with-breakpoints';
 
-const Logo = ({ logoUrl }) => <img src={logoUrl} alt="logo" />;
+const Logo = ({logoUrl}) => <img src={logoUrl} alt="logo" />;
 
 const StyledLogo = styled.div`
   padding: 0 20px 1px;
@@ -155,15 +155,9 @@ class Menu extends React.Component {
   };
 
   render() {
-    const {
-      logoUrl,
-      onMenuClick,
-      onSearchClick,
-      colour,
-      menuItems
-    } = this.props;
+    const {logoUrl, onMenuClick, onSearchClick, colour, menuItems} = this.props;
 
-    const { stickyMenu } = this.state;
+    const {stickyMenu} = this.state;
 
     return (
       <MenuContainer classname="menu" stickyMenu={stickyMenu}>
@@ -189,26 +183,25 @@ class Menu extends React.Component {
                 {menuItems.map(item => (
                   <MenuItem colour={colour} key={item.link}>
                     <Link href={item.link}>
-                      <StyledMenuLink colour={colour}>
+                      <StyledMenuLink colour={colour} href={item.link}>
                         {item.title}
                       </StyledMenuLink>
                     </Link>
-                    {item.childMenu &&
-                      item.childMenu.length && (
-                        <ChildMenu>
-                          {item.childMenu.map(childItem => (
-                            <li key={childItem.link}>
-                              <Link href={childItem.link} prefetch>
-                                <ChildLink colour={colour}>
-                                  <ChildUnderline>
-                                    {childItem.title}
-                                  </ChildUnderline>
-                                </ChildLink>
-                              </Link>
-                            </li>
-                          ))}
-                        </ChildMenu>
-                      )}
+                    {item.childMenu && item.childMenu.length && (
+                      <ChildMenu>
+                        {item.childMenu.map(childItem => (
+                          <li key={childItem.link}>
+                            <Link href={childItem.link} prefetch>
+                              <ChildLink colour={colour} href={childItem.link}>
+                                <ChildUnderline>
+                                  {childItem.title}
+                                </ChildUnderline>
+                              </ChildLink>
+                            </Link>
+                          </li>
+                        ))}
+                      </ChildMenu>
+                    )}
                   </MenuItem>
                 ))}
               </MainMenu>
