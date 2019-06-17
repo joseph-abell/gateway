@@ -67,6 +67,7 @@ class Search extends React.Component {
         flatItem =>
           flatItem &&
           flatItem[1] &&
+          typeof flatItem[1] !== 'object' &&
           !Array.isArray(flatItem[1]) &&
           typeof flatItem[1] !== 'boolean' &&
           typeof flatItem[1] !== 'number' &&
