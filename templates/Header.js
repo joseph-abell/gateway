@@ -3,11 +3,11 @@ import Async from 'react-promise';
 import MobileMenu from '../components/MobileMenu';
 import Search from '../components/Search';
 import Menu from '../components/Menu';
-import { HideAt } from 'react-with-breakpoints';
+import {HideAt} from 'react-with-breakpoints';
 import HideOnDesktop from '../components/HideOnDesktop';
 import Clearfix from '../components/Clearfix';
 
-import { getMenu, getFullUrl, getLogo, getResizedImageUrl } from '../helpers';
+import {getMenu, getFullUrl, getLogo, getResizedImageUrl} from '../helpers';
 
 class MenuTemplate extends React.Component {
   state = {
@@ -15,12 +15,12 @@ class MenuTemplate extends React.Component {
     searchOpen: false
   };
 
-  handleMenuStateChange({ isOpen }) {
-    this.setState({ menuOpen: isOpen });
+  handleMenuStateChange({isOpen}) {
+    this.setState({menuOpen: isOpen});
   }
 
-  handleSearchStateChange({ isOpen }) {
-    this.setState({ searchOpen: isOpen });
+  handleSearchStateChange({isOpen}) {
+    this.setState({searchOpen: isOpen});
   }
 
   render() {
@@ -32,11 +32,17 @@ class MenuTemplate extends React.Component {
       sticky,
       children
     } = this.props;
+    const mobileMenuItems = menuItems.reduce(
+      (acc, item) =>
+        item.childMenu ? [...acc, ...item.childMenu] : [...acc, item],
+      []
+    );
+
     return (
       <React.Fragment>
         <HideAt breakpoint="large">
           <MobileMenu
-            menuItems={menuItems}
+            menuItems={mobileMenuItems}
             menuColour={menuColour}
             isOpen={this.state.menuOpen}
             handleStateChange={state => {
@@ -59,10 +65,10 @@ class MenuTemplate extends React.Component {
           logoUrl={logoUrl}
           sticky={sticky}
           onMenuClick={() => {
-            this.handleMenuStateChange({ isOpen: true });
+            this.handleMenuStateChange({isOpen: true});
           }}
           onSearchClick={() => {
-            this.handleSearchStateChange({ isOpen: true });
+            this.handleSearchStateChange({isOpen: true});
           }}
         />
         <Clearfix />
@@ -82,7 +88,7 @@ const HeaderTemplate = ({
   <Async
     promise={
       new Promise(async resolve => {
-        const { menu } = await getMenu();
+        const {menu} = await getMenu();
         const logoUrl = await getLogo(colour);
 
         resolve({
@@ -91,7 +97,7 @@ const HeaderTemplate = ({
         });
       })
     }
-    then={({ menu, logoUrl }) => {
+    then={({menu, logoUrl}) => {
       if (!title || !image) {
         return (
           <MenuTemplate
