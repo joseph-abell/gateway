@@ -139,7 +139,7 @@ const NoEvents = styled.p`
 const EventList = ({events, color}) => {
   return events.map(event => {
     const date = moment(event.dateTime).format('dddd, DD MMM YYYY');
-    const time = moment(event.dateTime).format('kk:ss');
+    const time = moment(event.dateTime).format('HH:mm');
     const image = getFullUrl(event.image);
     const listImage = event.listImage && getFullUrl(event.listImage);
     const title = event.title
