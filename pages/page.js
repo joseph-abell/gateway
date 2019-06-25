@@ -136,15 +136,16 @@ const ContentPiece = ({direction, deck, image, colour, width}) => {
       >
         <ImageWrapper color={colour} mobileMarginBottom="0">
           <Image url={getFullUrl(image)} />
-          {deck && <HeaderDeck>{deck}</HeaderDeck>}
+          {deck && <HeaderDeck>deck</HeaderDeck>}
         </ImageWrapper>
       </ContentPieceContainer>
     );
   }
 
+  if (typeof deck === 'undefined') return <div />;
+
   return (
     <>
-      {typeof deck === 'undefined' && <div />}
       {deck && (
         <ContentPieceContainer
           direction={adjustedDirection}
@@ -163,7 +164,7 @@ const ContentContainer = styled.li`
   width: 100%;
 `;
 
-const setWidth = (left, right) => {
+const setWidth = (left = {}, right = {}) => {
   let leftWidth = 0;
   let rightWidth = 0;
 
@@ -189,8 +190,9 @@ const setWidth = (left, right) => {
 
   return [leftWidth, rightWidth];
 };
+
 const Content = ({content}) => {
-  const {left, right} = content;
+  const {left = {}, right = {}} = content;
   const [leftWidth, rightWidth] = setWidth(left, right);
 
   if (right.deck && right.image) {
@@ -239,15 +241,15 @@ const Content = ({content}) => {
 const Contents = ({contents}) => (
   <ul>
     {contents &&
-      contents.map(
-        ({content}) =>
-          content && (
-            <Content
-              content={content}
-              key={content.left.deck + content.right.deck}
-            />
-          )
-      )}
+      contents.map(({content}) => {
+        const left = content.left || {};
+        const leftDeck = left.deck || '';
+        const right = content.right || {};
+        const rightDeck = right.deck || '';
+        return (
+          content && <Content content={content} key={leftDeck + rightDeck} />
+        );
+      })}
   </ul>
 );
 
