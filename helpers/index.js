@@ -1,38 +1,15 @@
 import fetch from 'isomorphic-fetch';
-import { url as urlStart } from './config';
+import {url as urlStart, colours} from './config';
 
-const changeLightColourToHex = colour => {
-  switch (colour) {
-    case 'red':
-      return '#f7a994';
-    case 'orange':
-      return '#ffd782';
-    case 'green':
-      return '#55c2b8';
-    default:
-      return '#c1a2cd';
-  }
-};
-
-const changeDarkColourToHex = colour => {
-  switch (colour) {
-    case 'red':
-      return '#f05a64';
-    case 'orange':
-      return 'rgb(252, 180, 46)';
-    case 'green':
-      return '#067f8e';
-    default:
-      return '#9666a8';
-  }
+export const getAllColours = (colour = '') => {
+  const c = colours.find(c => c.name === colour);
+  return c ? [c.name, c.hex, c.hexLight] : [];
 };
 
 export const changeColourToHex = (colour, lightVariant) => {
-  if (lightVariant) {
-    return changeLightColourToHex(colour);
-  }
+  const c = getAllColours(colour);
 
-  return changeDarkColourToHex(colour);
+  return lightVariant ? c.hexLight : c.hex;
 };
 
 export const getMenuColour = pageData =>

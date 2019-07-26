@@ -5,13 +5,7 @@ import Head from 'next/head';
 import {format} from 'date-fns';
 import {markdown} from 'markdown';
 
-import {url} from '../helpers/config';
-import {
-  getData,
-  getMenuColour,
-  changeColourToHex,
-  getFullUrl
-} from '../helpers';
+import {getData, getMenuColour, getAllColours, getFullUrl} from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import Footer from '../templates/Footer';
@@ -40,9 +34,20 @@ const WordText = styled.div`
 
 const Word = ({router}) => {
   const [loading, setLoading] = useState(true);
-  const [word, setWord] = useState({});
+  const [title, setTitle] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [date, setDate] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [image, setImage] = useState('');
+  const [audioFile, setAudioFile] = useState('');
+  const [deck, setDeck] = useState('');
+  const [youtubeLink, setYoutubeLink] = useState('');
+  const [file, setFile] = useState('');
+  const [authors, setAuthors] = useState([]);
 
-  const fetchData = async () => {
+  useEffect(() => {
     let {
       query: {id}
     } = router;
@@ -54,46 +59,32 @@ const Word = ({router}) => {
       .join('')
       .toLowerCase();
 
-    const data = await getData(`data/words/${id}.json`);
-    const colour = getMenuColour(data);
+    getData(`data/words/${id}.json`).then(data => {
+      let {audioFile} = data;
+      if (!audioFile || !audioFile.includes('.mp3')) {
+        audioFile = '';
+      } else {
+        audioFile = getFullUrl(audioFile);
+      }
+      setTitle(data.title);
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setDate(data.date);
+      setSubtitle(data.subtitle);
+      setImage(data.image);
+      setAudioFile(audioFile);
+      setDeck(data.deck);
+      setYoutubeLink(data.youtubeLink);
+      setFile(data.file);
+      setAuthors(data.authors);
 
-    let {audioFile} = data;
-    if (!audioFile || !audioFile.includes('.mp3')) {
-      audioFile = '';
-    } else {
-      audioFile = getFullUrl(audioFile);
-    }
-
-    setWord({
-      ...data,
-      audioFile,
-      colour,
-      colourHex: changeColourToHex(colour),
-      colourHexLight: changeColourToHex(colour, true)
+      setLoading(false);
     });
-
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
   }, [router]);
-
-  const {
-    title,
-    colour,
-    colourHex,
-    colourHexLight,
-    date,
-    subtitle,
-    url,
-    image,
-    audioFile,
-    deck,
-    youtubeLink,
-    file,
-    authors
-  } = word;
 
   if (loading) {
     return <div />;

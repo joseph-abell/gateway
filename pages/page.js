@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {withRouter} from 'next/router';
 import Head from 'next/head';
@@ -13,7 +12,13 @@ import Image from '../components/Image';
 import ImageWrapper from '../components/ImageWrapper';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
-import {getData, getFullUrl, changeColourToHex} from '../helpers';
+import {
+  getData,
+  getMenuColour,
+  getFullUrl,
+  changeColourToHex,
+  getAllColours
+} from '../helpers';
 
 const Deck = styled.div`
   position: relative;
@@ -136,7 +141,7 @@ const ContentPiece = ({direction, deck, image, colour, width}) => {
       >
         <ImageWrapper color={colour} mobileMarginBottom="0">
           <Image url={getFullUrl(image)} />
-          {deck && <HeaderDeck>deck</HeaderDeck>}
+          {deck && <HeaderDeck>{deck}</HeaderDeck>}
         </ImageWrapper>
       </ContentPieceContainer>
     );
@@ -238,123 +243,112 @@ const Content = ({content}) => {
   );
 };
 
-const Contents = ({contents}) => (
+const Contents = ({contents = []}) => (
   <ul>
-    {contents &&
-      contents.map(({content}) => {
-        const left = content.left || {};
-        const leftDeck = left.deck || '';
-        const right = content.right || {};
-        const rightDeck = right.deck || '';
-        return (
-          content && <Content content={content} key={leftDeck + rightDeck} />
-        );
-      })}
+    {contents.map(({content}) => {
+      if (!content) return null;
+      const left = content.left || {};
+      const leftDeck = left.deck || '';
+      const right = content.right || {};
+      const rightDeck = right.deck || '';
+
+      return (
+        content && <Content content={content} key={leftDeck + rightDeck} />
+      );
+    })}
   </ul>
 );
 
 const Page = withRouter(({router}) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [subtitleImage, setSubtitleImage] = useState('');
+  const [subtitleText, setSubtitleText] = useState('');
+  const [deckTitle, setDeckTitle] = useState('');
+  const [deckParagraph, setDeckParagraph] = useState('');
+  const [contents, setContents] = useState([]);
+
   const {query} = router;
   const {id, childId} = query;
 
   const pathname = childId ? childId : id;
 
+  useEffect(() => {
+    getData(`data/pages/${pathname}.json`)
+      .then(data => {
+        setTitle(data.title);
+        setImage(data.header.image);
+        const [colour, colourHex, colourHexLight] = getAllColours(
+          getMenuColour(data)
+        );
+        setColour(colour);
+        setColourHex(colourHex);
+        setColourHexLight(colourHexLight);
+        setSubtitleText(data.subtitle.subtitle);
+        setSubtitleImage(
+          data.subtitle &&
+            data.subtitle.image &&
+            url + data.subtitle.image.slice(1)
+        );
+        setDeckTitle(data.deck && data.deck.title);
+        setDeckParagraph(data.deck && data.deck.paragraph);
+        setContents(data.contents);
+
+        setLoading(false);
+      })
+      .catch(e => {
+        console.log(e);
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) return <div />;
+
+  if (error)
+    return <React.Fragment>{Router.replaceRoute('/404')}</React.Fragment>;
+
   return (
-    <Async
-      promise={
-        new Promise(async (resolve, reject) => {
-          let data;
-
-          try {
-            data = await getData(`data/pages/${pathname}.json`);
-
-            if (data instanceof Error) {
-              throw data;
-            }
-          } catch (e) {
-            reject(e);
-          }
-
-          const {title, header = {}, subtitle = {}, deck, contents} = data;
-          const {image, menuColour} = header;
-          const colourHex = changeColourToHex(menuColour);
-          const colourHexLight = changeColourToHex(menuColour, true);
-          const subtitleText = subtitle.subtitle;
-          const subtitleImage =
-            subtitle && subtitle.image && url + subtitle.image.slice(1);
-          const deckTitle = deck && deck.title;
-          const deckParagraph = deck && deck.paragraph;
-          const deckColour = deck && deck.colour;
-
-          resolve({
-            title,
-            image: image && url + image.slice(1),
-            subtitleImage,
-            subtitleText,
-            deckTitle,
-            deckParagraph,
-            deckColour,
-            contents,
-            menuColour,
-            colourHex,
-            colourHexLight
-          });
-        })
-      }
-      then={({
-        title,
-        image,
-        subtitleImage,
-        subtitleText,
-        deckTitle,
-        deckParagraph,
-        deckColour,
-        contents,
-        menuColour,
-        colourHex,
-        colourHexLight
-      }) => (
-        <div>
-          <Head>
-            <title key="title">{title} - Gateway Church, York</title>
-          </Head>
-          <Header
-            colour={menuColour}
-            colourHex={colourHex}
-            colourHexLight={colourHexLight}
-            title={title}
-            image={image}
-            Header={HeaderContainer}
-          />
-          <Container>
-            {subtitleImage && (
-              <ImageWrapper>
-                <Image url={subtitleImage} />
-                <Container>
-                  <PageSummary color={colourHex}>{subtitleText}</PageSummary>
-                </Container>
-              </ImageWrapper>
-            )}
-          </Container>
-
-          <PageDeck colour={colourHex}>
+    <div>
+      <Head>
+        <title key="title">{title} - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        title={title}
+        image={image}
+        Header={HeaderContainer}
+      />
+      <Container>
+        {subtitleImage && (
+          <ImageWrapper>
+            <Image url={subtitleImage} />
             <Container>
-              {deckTitle && <H2>{deckTitle}</H2>}
-              {deckParagraph && <P>{deckParagraph}</P>}
+              <PageSummary color={colourHex}>{subtitleText}</PageSummary>
             </Container>
-          </PageDeck>
+          </ImageWrapper>
+        )}
+      </Container>
 
-          <Container>
-            <Contents contents={contents} />
-          </Container>
+      <PageDeck colour={colourHex}>
+        <Container>
+          {deckTitle && <H2>{deckTitle}</H2>}
+          {deckParagraph && <P>{deckParagraph}</P>}
+        </Container>
+      </PageDeck>
 
-          <Footer />
-        </div>
-      )}
-      catch={() => (
-        <React.Fragment>{Router.replaceRoute('/404')}</React.Fragment>
-      )}
-    />
+      <Container>
+        <Contents contents={contents} />
+      </Container>
+
+      <Footer />
+    </div>
   );
 });
 

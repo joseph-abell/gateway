@@ -1,8 +1,7 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
-import {getData, getMenuColour, changeColourToHex} from '../helpers';
+import {getData, getMenuColour, getAllColours} from '../helpers';
 import Header from '../templates/Header';
 import HeaderContainer from '../components/HeaderContainer';
 import Container from '../components/Container';
@@ -24,59 +23,58 @@ const A = styled.a`
   margin-top: 20px;
 `;
 
-const ContactUs = () => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const data = await getData('data/contact-us.json');
-        const colour = getMenuColour(data);
+const ContactUs = () => {
+  const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [deck, setDeck] = useState('');
 
-        resolve({
-          ...data,
-          colour,
-          colourHex: changeColourToHex(colour),
-          colourHexLight: changeColourToHex(colour, true)
-        });
-      })
-    }
-    then={({
-      title,
-      colour,
-      colourHex,
-      colourHexLight,
-      contentImage,
-      image,
-      deck
-    }) => (
-      <React.Fragment>
-        <Head>
-          <title key="title">Contact Us - Gateway Church, York</title>
-        </Head>
-        <Header
-          colour={colour}
-          colourHex={colourHex}
-          colourHexLight={colourHexLight}
-          title={title}
-          image={image}
-          Header={HeaderContainer}
-        />
-        <Deck colour={colourHex}>
-          <Container>
-            <p>{deck}</p>
-            <p>
-              <A
-                colour={colourHexLight}
-                href="mailto:office@gatewaychurch.co.uk"
-              >
-                Email
-              </A>
-            </p>
-          </Container>
-        </Deck>
-        <Footer />
-      </React.Fragment>
-    )}
-  />
-);
+  useEffect(() => {
+    getData('data/contact-us.json').then(data => {
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setTitle(data.title);
+      setImage(data.image);
+      setDeck(data.deck);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div />;
+
+  return (
+    <React.Fragment>
+      <Head>
+        <title key="title">Contact Us - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        title={title}
+        image={image}
+        Header={HeaderContainer}
+      />
+      <Deck colour={colourHex}>
+        <Container>
+          <p>{deck}</p>
+          <p>
+            <A colour={colourHexLight} href="mailto:office@gatewaychurch.co.uk">
+              Email
+            </A>
+          </p>
+        </Container>
+      </Deck>
+      <Footer />
+    </React.Fragment>
+  );
+};
 
 export default ContactUs;
