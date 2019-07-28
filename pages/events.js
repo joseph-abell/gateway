@@ -234,7 +234,6 @@ const Events = ({location = {}}) => {
   }, []);
 
   if (loading) return <div />;
-
   return (
     <React.Fragment>
       <Head>

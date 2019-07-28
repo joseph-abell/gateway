@@ -2,14 +2,14 @@ import fetch from 'isomorphic-fetch';
 import {url as urlStart, colours} from './config';
 
 export const getAllColours = (colour = '') => {
-  const c = colours.find(c => c.name === colour);
+  const c = colours.find(c => c.name.toLowerCase() === colour.toLowerCase());
   return c ? [c.name, c.hex, c.hexLight] : [];
 };
 
 export const changeColourToHex = (colour, lightVariant) => {
-  const c = getAllColours(colour);
+  const [, hex, hexLight] = getAllColours(colour);
 
-  return lightVariant ? c.hexLight : c.hex;
+  return lightVariant ? hexLight : hex;
 };
 
 export const getMenuColour = pageData =>
@@ -40,7 +40,7 @@ export const getFullUrl = (urlEnd = '') => {
 };
 
 export const getLogo = async menuColour => {
-  const logoLocation = getFullUrl(`data/logos/${menuColour}.json`);
+  const logoLocation = getFullUrl(`data/logos/${menuColour || 'red'}.json`);
   const logoResponse = await fetch(logoLocation).catch(e => {
     return e;
   });

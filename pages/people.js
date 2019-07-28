@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Async from 'react-promise';
 import styled from 'styled-components';
 import {withRouter} from 'next/router';
 import Head from 'next/head';
@@ -241,7 +240,9 @@ const People = withRouter(({router = {}}) => {
       setColourHexLight(colourHexLight);
       setDeckImage(data.deck.image && getFullUrl(data.deck.image));
       setDeckParagraph(data.deck.paragraph);
+
       setDeckColour(changeColourToHex(data.deck.colour));
+
       setAcceptedFilters(
         Object.values(acceptedFilters)
           .map(f => f.data || f)
@@ -289,7 +290,7 @@ const People = withRouter(({router = {}}) => {
         image={image}
         Header={HeaderContainer}
       />
-      {people.length > 0 && (
+      {people.length > 0 && filter && (
         <PeopleList colourHex={colourHex} people={people} filter={filter} />
       )}
       {filter && people.length === 0 && (
