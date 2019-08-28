@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {slide as SlideMenu} from 'react-burger-menu';
 import Async from 'react-promise';
@@ -56,12 +56,92 @@ const SearchListItem = ({item, getItemProps}) => (
   </li>
 );
 
-class Search extends React.Component {
-  state = {
-    searchData: []
-  };
+const blackList = [
+  'audioFile',
+  'colour',
+  'date',
+  'email',
+  'file',
+  'filters',
+  'time',
+  'titleRole',
+  'image',
+  'menuColour',
+  'optionalContent',
+  'phoneNumber',
+  'youtubeLink'
+];
 
-  search = (data, inputValue) =>
+const setStyles = colour => ({
+  bmBurgerButton: {
+    display: 'none'
+  },
+  bmBurgerBars: {
+    background: colour,
+    height: '3px'
+  },
+  bmCrossButton: {
+    height: '24px',
+    width: '24px'
+  },
+  bmCross: {
+    background: 'white'
+  },
+  bmMenu: {
+    background: colour,
+    padding: '2.5em 1.5em 0',
+    fontSize: '1.15em'
+  },
+  bmMorphShape: {
+    fill: '#373a47'
+  },
+  bmItemList: {
+    color: 'white',
+    padding: '0.8em'
+  },
+  bmItem: {
+    display: 'inline-block'
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.2)'
+  }
+});
+
+const Search = ({colour, isOpen, handleStateChange, borderColour}) => {
+  const [loading, setLoading] = useState(true);
+  const [searchData, setSearchData] = useState([]);
+
+  useEffect(() => {
+    getData('data/search/index.json').then(data => {
+      data.forEach((item, index) => {
+        const flattened = Object.entries(flat(item.data));
+        const filtered = flattened.reduce((acc, item) => {
+          const inBlackList = blackList.some(blackListItem =>
+            item[0].includes(blackListItem)
+          );
+
+          return inBlackList ? acc : [...acc, item];
+        }, []);
+
+        data[index].flat = filtered;
+
+        let pageUrl = data[index].url.slice(0, -5).split('data/')[1];
+
+        data[index].pageUrl = pageUrl;
+
+        const breadcrumb = pageUrl.split('/').join(' - ');
+
+        data[index].breadcrumb = breadcrumb;
+
+        setSearchData(data);
+        setLoading(false);
+      });
+    });
+  }, []);
+
+  const styles = setStyles(colour);
+
+  const onSearch = (data, inputValue) =>
     data.filter(item =>
       item.flat.some(
         flatItem =>
@@ -75,150 +155,50 @@ class Search extends React.Component {
       )
     );
 
-  promise = new Promise(async resolve => {
-    if (this.state.searchData.length) {
-      return resolve(this.state.searchData);
-    }
+  if (loading) return <div />;
 
-    const data = await getData('data/search/index.json');
-
-    const blackList = [
-      'audioFile',
-      'colour',
-      'date',
-      'email',
-      'file',
-      'filters',
-      'time',
-      'titleRole',
-      'image',
-      'menuColour',
-      'optionalContent',
-      'phoneNumber',
-      'youtubeLink'
-    ];
-
-    data.forEach((item, index) => {
-      const flattened = Object.entries(flat(data[index].data));
-      const filtered = flattened.reduce((acc, item) => {
-        const inBlackList = blackList.some(blackListItem =>
-          item[0].includes(blackListItem)
-        );
-
-        return inBlackList ? acc : [...acc, item];
-      }, []);
-
-      data[index].flat = filtered;
-
-      let pageUrl = data[index].url.slice(0, -5).split('data/')[1];
-
-      data[index].pageUrl = pageUrl;
-
-      const breadcrumb = pageUrl.split('/').join(' - ');
-
-      data[index].breadcrumb = breadcrumb;
-
-      this.setState({
-        searchData: data
-      });
-    });
-
-    return resolve(data);
-  });
-
-  render = () => {
-    const {colour, isOpen, handleStateChange, borderColour} = this.props;
-    const styles = {
-      bmBurgerButton: {
-        display: 'none'
-      },
-      bmBurgerBars: {
-        background: colour,
-        height: '3px'
-      },
-      bmCrossButton: {
-        height: '24px',
-        width: '24px'
-      },
-      bmCross: {
-        background: 'white'
-      },
-      bmMenu: {
-        background: colour,
-        padding: '2.5em 1.5em 0',
-        fontSize: '1.15em'
-      },
-      bmMorphShape: {
-        fill: '#373a47'
-      },
-      bmItemList: {
-        color: 'white',
-        padding: '0.8em'
-      },
-      bmItem: {
-        display: 'inline-block'
-      },
-      bmOverlay: {
-        background: 'rgba(0, 0, 0, 0.2)'
-      }
-    };
-
-    return (
-      <SlideMenu
-        styles={styles}
-        right
-        isOpen={isOpen}
-        onStateChange={handleStateChange}
+  return (
+    <SlideMenu
+      styles={styles}
+      right
+      isOpen={isOpen}
+      onStateChange={handleStateChange}
+    >
+      <Downshift
+        itemToString={item => {
+          return '';
+        }}
       >
-        <Downshift
-          itemToString={item => {
-            return '';
-          }}
-        >
-          {props => {
-            const {
-              getInputProps,
-              getMenuProps,
-              getItemProps,
-              inputValue
-            } = props;
+        {props => {
+          const {getInputProps, getMenuProps, getItemProps, inputValue} = props;
 
-            return (
-              <div>
-                <SearchInput
-                  {...getInputProps()}
-                  colour={colour}
-                  borderColour={borderColour}
-                />
-                {isOpen && !!inputValue.length && (
-                  <Async
-                    promise={this.promise}
-                    then={data => (
-                      <ul {...getMenuProps()}>
-                        {this.search(data, inputValue)
-                          .filter(item => {
-                            if (item.type !== 'people') return true;
-                            if (!item.data.filters.all) return false;
-                            if (item.data.filters.all === 'false') return false;
-                            return true;
-                          })
-                          .map(item => (
-                            <SearchListItem
-                              item={item}
-                              getItemProps={getItemProps}
-                            />
-                          ))}
-                      </ul>
-                    )}
-                  />
-                )}
-              </div>
-            );
-          }}
-        </Downshift>
-      </SlideMenu>
-    );
-  };
-}
+          return (
+            <div>
+              <SearchInput
+                {...getInputProps()}
+                colour={colour}
+                borderColour={borderColour}
+              />
+              {isOpen && !!inputValue.length && (
+                <ul {...getMenuProps()}>
+                  {onSearch(searchData, inputValue)
+                    .filter(item => {
+                      if (item.type !== 'people') return true;
+                      if (!item.data.filters.all) return false;
+                      if (item.data.filters.all === 'false') return false;
+                      return true;
+                    })
+                    .map(item => (
+                      <SearchListItem item={item} getItemProps={getItemProps} />
+                    ))}
+                </ul>
+              )}
+            </div>
+          );
+        }}
+      </Downshift>
+    </SlideMenu>
+  );
+};
 
 export default Search;
