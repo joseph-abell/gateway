@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
 import {format, compareAsc} from 'date-fns';
 import Head from 'next/head';
 import {withRouter} from 'next/router';
@@ -29,65 +28,59 @@ import {
   getData,
   getFullUrl,
   changeColourToHex,
-  getMenuColour
+  getMenuColour,
+  getAllColours
 } from '../helpers';
 
 const Words = ({router}) => {
-  const [data, setData] = useState({});
-
-  const fetchWords = async () => {
-    const currentPage = (router && router.query && router.query.page) || 1;
-    const data = await getData('data/words/index.json');
-    const wordsPageData = await getData('data/pages/words.json');
-    const colour = getMenuColour(wordsPageData);
-    const colourHex = changeColourToHex(colour);
-    const lightColourHex = changeColourToHex(colour, true);
-    const {header = {}, subtitle, title} = wordsPageData;
-    const image = getFullUrl(header && header.image);
-
-    let words = Object.values(data)
-      .map(word => word.data)
-      .filter(word => !!word.date)
-      .sort((a, b) => {
-        return compareAsc(new Date(b.date), new Date(a.date));
-      });
-
-    const wordsCount = words.length;
-
-    words = words.slice(currentPage * 10 - 10, currentPage * 10);
-    const maxPageCount = Math.ceil(wordsCount / 10);
-
-    setData({
-      colour,
-      colourHex,
-      lightColourHex,
-      header,
-      image,
-      subtitle,
-      title,
-      maxPageCount,
-      words,
-      currentPage
-    });
-  };
+  const [loading, setLoading] = useState(true);
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [header, setHeader] = useState('');
+  const [image, setImage] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [title, setTitle] = useState('');
+  const [maxPageCount, setMaxPageCount] = useState(0);
+  const [words, setWords] = useState('');
+  const [wordsCount, setWordsCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState('');
 
   useEffect(() => {
-    fetchWords();
+    Promise.all([
+      getData('data/words/index.json'),
+      getData('data/pages/words.json')
+    ]).then(([data, wordsPageData]) => {
+      const currentPage = (router && router.query && router.query.page) || 1;
+      setCurrentPage(currentPage);
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setHeader(wordsPageData.header);
+      setImage(getFullUrl(wordsPageData.header.image));
+      setSubtitle(wordsPageData.subtitle);
+      setTitle(wordsPageData.title);
+
+      let words = Object.values(data)
+        .map(word => word.data)
+        .filter(word => !!word.date)
+        .sort((a, b) => {
+          return compareAsc(new Date(b.date), new Date(a.date));
+        });
+
+      setWordsCount(words.length);
+
+      setWords(words.slice(currentPage * 10 - 10, currentPage * 10));
+
+      setMaxPageCount(Math.ceil(wordsCount / 10));
+      setLoading(false);
+    });
   }, [router]);
 
-  const {
-    colour,
-    colourHex,
-    lightColourHex,
-    header,
-    image,
-    subtitle,
-    title,
-    maxPageCount,
-    words,
-    currentPage
-  } = data;
-
+  if (loading) return <div />;
   if (!words || words.length === 0) {
     return <div />;
   }
@@ -100,7 +93,7 @@ const Words = ({router}) => {
       <Header
         colour={colour}
         colourHex={colourHex}
-        colourHexLight={lightColourHex}
+        colourHexLight={colourHexLight}
         title={title}
         image={image}
         Header={HeaderContainer}

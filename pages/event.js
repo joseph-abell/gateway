@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import {withRouter} from 'next/router';
@@ -15,12 +14,7 @@ import Container from '../components/Container';
 import Image from '../components/Image';
 import Clearfix from '../components/Clearfix';
 
-import {
-  getMenuColour,
-  changeColourToHex,
-  getFullUrl,
-  getData
-} from '../helpers';
+import {getMenuColour, getFullUrl, getData, getAllColours} from '../helpers';
 
 const Subtitle = styled.div`
   height: 200px;
@@ -91,78 +85,83 @@ const Article = styled.div`
   }
 `;
 
-const Event = withRouter(({router}) => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const {query} = router;
-        const pathname = query.id
-          .split(' ')
-          .join('-')
-          .toLowerCase();
+const Event = withRouter(({router}) => {
+  const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [dateTime, setDateTime] = useState('');
+  const [time, setTime] = useState('');
+  const [article, setArticle] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
 
-        const data = await getData(`data/events/${pathname}.json`);
-        const colour = getMenuColour(data);
-        const colourHex = changeColourToHex(colour);
-        const colourHexLight = changeColourToHex(colour, true);
+  const {query} = router;
+  const pathname = query.id
+    .split(' ')
+    .join('-')
+    .toLowerCase();
 
-        resolve({
-          ...data,
-          colour,
-          colourHex,
-          colourHexLight
-        });
-      })
-    }
-    then={({
-      title,
-      image,
-      dateTime,
-      time,
-      article,
-      colour,
-      colourHex,
-      colourHexLight
-    }) => (
-      <React.Fragment>
-        <Head>
-          <title key="title">{title} - Gateway Church, York</title>
-        </Head>
-        <Header
-          colour={colour}
-          colourHex={colourHex}
-          colourHexLight={colourHexLight}
-          Header={HeaderContainer}
-        />
-        <main>
-          <Subtitle colour={colourHex}>
-            <Image url={getFullUrl(image)} />
-            <Title>{title}</Title>
-          </Subtitle>
-          <Container>
-            <ContentLeft colour={colourHexLight}>
-              <div>{moment(dateTime).format('dddd DD MMM YYYY')}</div>
-              <div>{moment(dateTime).format('HH:mm')}</div>
-            </ContentLeft>
-            <ContentRight colour={colourHex}>
-              {article && (
+  useEffect(() => {
+    getData(`data/events/${pathname}.json`).then(data => {
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setDateTime(moment(data.dateTime).format('dddd DD MMM YYYY'));
+      setTime(moment(data.dateTime).format('HH:mm'));
+      setTitle(data.title);
+      setImage(data.image);
+      setArticle(data.article);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div />;
+
+  return (
+    <React.Fragment>
+      <Head>
+        <title key="title">{title} - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        Header={HeaderContainer}
+      />
+      <main>
+        <Subtitle colour={colourHex}>
+          <Image url={getFullUrl(image)} />
+          <Title>{title}</Title>
+        </Subtitle>
+        <Container>
+          <ContentLeft colour={colourHexLight}>
+            <div>{dateTime}</div>
+            <div>{time}</div>
+          </ContentLeft>
+          <ContentRight colour={colourHex}>
+            {article && (
+              <>
                 <Article
                   dangerouslySetInnerHTML={{__html: markdown.toHTML(article)}}
                 />
-              )}
-              <Link href="/events" passHref>
-                <StyledLink colour={colourHexLight}>
-                  View a list of all events
-                </StyledLink>
-              </Link>
-            </ContentRight>
-            <Clearfix />
-          </Container>
-        </main>
-        <Footer />
-      </React.Fragment>
-    )}
-  />
-));
+                <Link href="/events" passHref>
+                  <StyledLink colour={colourHexLight}>
+                    View a list of all events
+                  </StyledLink>
+                </Link>
+              </>
+            )}
+          </ContentRight>
+          <Clearfix />
+        </Container>
+      </main>
+      <Footer />
+    </React.Fragment>
+  );
+});
 
 export default Event;

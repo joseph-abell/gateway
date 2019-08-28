@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 
@@ -18,7 +17,8 @@ import {
   getData,
   getFullUrl,
   changeColourToHex,
-  getMenuColour
+  getMenuColour,
+  getAllColours
 } from '../helpers';
 
 const Padding = styled.div`
@@ -54,111 +54,105 @@ const TwitterWrapper = styled.div`
   }
 `;
 
-const Home = () => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const data = await getData('data/homepage.json');
-        const colour = getMenuColour(data);
-        const {header, deck, eventsImage, twitterImage} = data;
-        let {cta} = data;
+const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [deckImage, setDeckImage] = useState('');
+  const [deckColour, setDeckColour] = useState('');
+  const [deckText, setDeckText] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [cta, setCta] = useState([]);
+  const [eventsImage, setEventsImage] = useState('');
+  const [twitterImage, setTwitterImage] = useState('');
+  const [quotes, setQuotes] = useState([]);
 
-        header.image = getFullUrl(header.image);
+  useEffect(() => {
+    getData('data/homepage.json').then(data => {
+      setTitle(data.header.title);
+      setImage(data.header.image);
+      setDeckImage(getFullUrl(data.deck.image));
+      setDeckColour(changeColourToHex(data.deck.colour));
+      setDeckText(data.deck.text);
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setEventsImage(getFullUrl(data.eventsImage));
+      setTwitterImage(getFullUrl(data.twitterImage));
+      setQuotes(data.quotes);
 
-        cta = cta.map(item => {
+      setCta(
+        data.cta.map(item => {
           item.image = getFullUrl(item.image);
           item.colour = changeColourToHex(item.colour);
 
           return item;
-        });
-
-        deck.image = getFullUrl(deck.image);
-        deck.colour = changeColourToHex(deck.colour);
-
-        resolve({
-          ...data,
-          header,
-          colour,
-          colourHex: changeColourToHex(colour),
-          colourHexLight: changeColourToHex(colour, true),
-          cta,
-          deck,
-          eventsImage: getFullUrl(eventsImage),
-          twitterImage: getFullUrl(twitterImage)
-        });
-      })
-    }
-    then={({
-      header,
-      colour,
-      colourHex,
-      colourHexLight,
-      cta,
-      quotes,
-      deck,
-      eventsImage,
-      twitterImage
-    }) => {
-      const {title, image} = header;
-      const {TwitterTimelineEmbed} = require('react-twitter-embed');
-
-      return (
-        <React.Fragment>
-          <Head>
-            <title key="title">Gateway Church, York</title>
-          </Head>
-          <Header
-            colour={colour}
-            colourHex={colourHex}
-            colourHexLight={colourHexLight}
-            title={title}
-            image={image}
-            Header={HeaderContainer}
-          />
-          <main>
-            <CallToActions cta={cta} />
-            <Padding>
-              <Quotes quotes={quotes} />
-              <HomeDeck
-                colour={deck.colour}
-                text={deck.text}
-                image={deck.image}
-              />
-              <Container>
-                <StyledImageWrapper mobileHeight="400px" mobileMarginBottom="0">
-                  <Image url={eventsImage} />
-                </StyledImageWrapper>
-                <SimpleEvents colour={colourHex} colourLight={colourHexLight} />
-                <Clearfix />
-              </Container>
-              <Container>
-                <TwitterWrapper colour={colourHex}>
-                  <a
-                    className="twitter-timeline"
-                    data-height="400"
-                    href="https://twitter.com/gatewayyork?ref_src=twsrc%5Etfw"
-                  >
-                    Tweets by gatewayyork
-                  </a>
-
-                  <script
-                    dangerouslySetInnerHTML={twitter()}
-                    async
-                    src="https://platform.twitter.com/widgets.js"
-                    charSet="utf-8"
-                  />
-                </TwitterWrapper>
-                <ImageWrapper mobileHeight="400px">
-                  <Image url={twitterImage} />
-                </ImageWrapper>
-              </Container>
-            </Padding>
-          </main>
-          <Footer />
-        </React.Fragment>
+        })
       );
-    }}
-  />
-);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div />;
+
+  const {TwitterTimelineEmbed} = require('react-twitter-embed');
+
+  return (
+    <React.Fragment>
+      <Head>
+        <title key="title">Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        title={title}
+        image={image}
+        Header={HeaderContainer}
+      />
+      <main>
+        <CallToActions cta={cta} />
+        <Padding>
+          <Quotes quotes={quotes} />
+          <HomeDeck colour={deckColour} text={deckText} image={deckImage} />
+          <Container>
+            <StyledImageWrapper mobileHeight="400px" mobileMarginBottom="0">
+              <Image url={eventsImage} />
+            </StyledImageWrapper>
+            <SimpleEvents colour={colourHex} colourLight={colourHexLight} />
+            <Clearfix />
+          </Container>
+          <Container>
+            <TwitterWrapper colour={colourHex}>
+              <a
+                className="twitter-timeline"
+                data-height="400"
+                href="https://twitter.com/gatewayyork?ref_src=twsrc%5Etfw"
+              >
+                Tweets by gatewayyork
+              </a>
+
+              <script
+                dangerouslySetInnerHTML={twitter()}
+                async
+                src="https://platform.twitter.com/widgets.js"
+                charSet="utf-8"
+              />
+            </TwitterWrapper>
+            <ImageWrapper mobileHeight="400px">
+              <Image url={twitterImage} />
+            </ImageWrapper>
+          </Container>
+        </Padding>
+      </main>
+      <Footer />
+    </React.Fragment>
+  );
+};
 
 export default Home;
