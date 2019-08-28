@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {withRouter} from 'next/router';
 import Head from 'next/head';
@@ -7,7 +6,8 @@ import {
   getData,
   getMenuColour,
   changeColourToHex,
-  getFullUrl
+  getFullUrl,
+  getAllColours
 } from '../helpers';
 import {Link} from '../router';
 import HeaderContainer from '../components/HeaderContainer';
@@ -128,29 +128,136 @@ const P = styled.p`
   margin: 0 20px 20px;
 `;
 
-const People = withRouter(({router = {}}) => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const {query} = router || {};
-        const {filter} = query;
+const NoPeopleFound = ({colourHex, filter}) => (
+  <main>
+    <Container>
+      <H1 colour={colourHex}>No People found</H1>
+      <P>No people matching the filter {filter} found.</P>
+    </Container>
+  </main>
+);
 
-        let acceptedFilters = await getData('data/peopleFilters/index.json');
+const PeopleFilters = ({
+  colourHexLight,
+  deckColour,
+  deckParagraph,
+  deckImage,
+  acceptedFilters
+}) => (
+  <main>
+    <Deck colour={deckColour} text={deckParagraph} image={deckImage} />
+    <Container>
+      <FilterTitle colour={colourHexLight}>Filter By</FilterTitle>
+      <ul>
+        {acceptedFilters.map(filter => (
+          <Filter key={filter.name}>
+            <Link href={`people?filter=${filter.name}`} passHref>
+              <StyledLink colour={filter.colour}>
+                <FilterItemTitle>
+                  {filter.title
+                    .split('-')
+                    .map(word => word[0].toUpperCase() + word.substr(1))
+                    .join(' ')}
+                </FilterItemTitle>
+                <FilterItemDeck>{filter.deck}</FilterItemDeck>
+              </StyledLink>
+            </Link>
+          </Filter>
+        ))}
+      </ul>
+      <Clearfix />
+    </Container>
+  </main>
+);
 
-        acceptedFilters = Object.values(acceptedFilters)
+const PeopleList = ({colourHex, people, filter}) => (
+  <main>
+    <Container>
+      <H1 colour={colourHex}>People: {filter}</H1>
+      <ul>
+        {people.map(person => (
+          <Person key={person.data.title}>
+            <Link href={`/people/${person.data.title}`} passHref>
+              <a>
+                <PersonBlock
+                  colour={changeColourToHex(person.data.menuColour, true)}
+                >
+                  <Image url={getFullUrl(person.data.image)} />
+                </PersonBlock>
+                <PersonBlock
+                  colour={changeColourToHex(person.data.menuColour, true)}
+                >
+                  <Padding>
+                    <PersonTitle>
+                      {person.data.title
+                        .split('-')
+                        .map(word => word[0].toUpperCase() + word.substr(1))
+                        .join(' ')}
+                    </PersonTitle>
+                    <PersonRole>{person.data.titleRole}</PersonRole>
+                    <Email>{person.data.email}</Email>
+                  </Padding>
+                </PersonBlock>
+              </a>
+            </Link>
+          </Person>
+        ))}
+      </ul>
+    </Container>
+  </main>
+);
+
+const People = withRouter(({router = {}}) => {
+  const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [deckColour, setDeckColour] = useState('');
+  const [deckImage, setDeckImage] = useState('');
+  const [deckParagraph, setDeckParagraph] = useState('');
+  const [people, setPeople] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [acceptedFilters, setAcceptedFilters] = useState([]);
+
+  useEffect(() => {
+    const {query} = router || {};
+    const {filter} = query;
+    setFilter(filter);
+    Promise.all([
+      getData('data/peopleFilters/index.json'),
+      getData('data/people/index.json'),
+      getData('data/pages/people.json')
+    ]).then(([acceptedFilters, workingPeople, data]) => {
+      setTitle(data.title);
+      setImage(data.header.image);
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setDeckImage(data.deck.image && getFullUrl(data.deck.image));
+      setDeckParagraph(data.deck.paragraph);
+
+      setDeckColour(changeColourToHex(data.deck.colour));
+
+      setAcceptedFilters(
+        Object.values(acceptedFilters)
           .map(f => f.data || f)
           .map(f => ({
             name: f.name,
             title: f.title,
             deck: f.deck,
             colour: changeColourToHex(f.colour, true)
-          }));
+          }))
+      );
 
-        let people = (await getData('data/people/index.json')) || [];
+      let people = Object.values(workingPeople) || [];
 
-        people = Object.values(people);
-
-        people = people.filter(person => {
+      setPeople(
+        people.filter(person => {
           const {
             data: {filters: personFilters}
           } = person;
@@ -162,161 +269,46 @@ const People = withRouter(({router = {}}) => (
           return keys
             .map(key => personFilters[key])
             .some(personFilter => personFilter === 'true');
-        });
-
-        const data = await getData('/data/pages/people.json');
-        const colour = getMenuColour(data);
-        const {deck, header} = data;
-
-        deck.image = deck && deck.image && getFullUrl(deck.image);
-        deck.colour = changeColourToHex(deck && deck.colour);
-
-        resolve({
-          ...data,
-          image: getFullUrl(header.image),
-          colour,
-          colourHex: changeColourToHex(colour),
-          colourHexLight: changeColourToHex(colour, true),
-          deck,
-          people,
-          filter,
-          acceptedFilters
-        });
-      })
-    }
-    then={({
-      title,
-      image,
-      colour,
-      colourHex,
-      colourHexLight,
-      deck,
-      people,
-      filter,
-      acceptedFilters
-    }) => {
-      if (people.length) {
-        return (
-          <React.Fragment>
-            <Head>
-              <title key="title">People - Gateway Church, York</title>
-            </Head>
-            <Header
-              colour={colour}
-              colourHex={colourHex}
-              title={title}
-              Header={HeaderContainer}
-            />
-            <main>
-              <Container>
-                <H1 colour={colourHex}>People: {filter}</H1>
-                <ul>
-                  {people.map(person => (
-                    <Person key={person.data.title}>
-                      <Link href={`/people/${person.data.title}`} passHref>
-                        <a>
-                          <PersonBlock
-                            colour={changeColourToHex(
-                              person.data.menuColour,
-                              true
-                            )}
-                          >
-                            <Image url={getFullUrl(person.data.image)} />
-                          </PersonBlock>
-                          <PersonBlock
-                            colour={changeColourToHex(
-                              person.data.menuColour,
-                              true
-                            )}
-                          >
-                            <Padding>
-                              <PersonTitle>
-                                {person.data.title
-                                  .split('-')
-                                  .map(
-                                    word =>
-                                      word[0].toUpperCase() + word.substr(1)
-                                  )
-                                  .join(' ')}
-                              </PersonTitle>
-                              <PersonRole>{person.data.titleRole}</PersonRole>
-                              <Email>{person.data.email}</Email>
-                            </Padding>
-                          </PersonBlock>
-                        </a>
-                      </Link>
-                    </Person>
-                  ))}
-                </ul>
-              </Container>
-            </main>
-          </React.Fragment>
-        );
-      }
-
-      if (filter && !people.length) {
-        return (
-          <React.Fragment>
-            <Header
-              colour={colour}
-              colourHex={colourHex}
-              colourHexLight={colourHexLight}
-              title={title}
-              image={image}
-              Header={HeaderContainer}
-            />
-            <main>
-              <H1 colour={colourHex}>No People found</H1>
-
-              <P>No people matching the filter {filter} found.</P>
-            </main>
-          </React.Fragment>
-        );
-      }
-
-      return (
-        <React.Fragment>
-          <Header
-            colour={colour}
-            colourHex={colourHex}
-            colourHexLight={colourHexLight}
-            title={title}
-            image={image}
-            Header={HeaderContainer}
-          />
-          <main>
-            <Deck
-              colour={deck.colour}
-              text={deck.paragraph}
-              image={deck.image}
-            />
-            <Container>
-              <FilterTitle colour={colourHexLight}>Filter By</FilterTitle>
-              <ul>
-                {acceptedFilters.map(filter => (
-                  <Filter key={filter.name}>
-                    <Link href={`people?filter=${filter.name}`} passHref>
-                      <StyledLink colour={filter.colour}>
-                        <FilterItemTitle>
-                          {filter.title
-                            .split('-')
-                            .map(word => word[0].toUpperCase() + word.substr(1))
-                            .join(' ')}
-                        </FilterItemTitle>
-                        <FilterItemDeck>{filter.deck}</FilterItemDeck>
-                      </StyledLink>
-                    </Link>
-                  </Filter>
-                ))}
-              </ul>
-              <Clearfix />
-            </Container>
-          </main>
-          <Footer />
-        </React.Fragment>
+        })
       );
-    }}
-  />
-));
+
+      setLoading(false);
+    });
+  }, [router]);
+
+  if (loading) return <div />;
+
+  return (
+    <>
+      <Head>
+        <title key="title">People - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        title={title}
+        image={image}
+        Header={HeaderContainer}
+      />
+      {people.length > 0 && filter && (
+        <PeopleList colourHex={colourHex} people={people} filter={filter} />
+      )}
+      {filter && people.length === 0 && (
+        <NoPeopleFound colourHex={colourHex} filter={filter} />
+      )}
+      {!filter && (
+        <PeopleFilters
+          colourHexLight={colourHexLight}
+          deckColour={deckColour}
+          deckParagraph={deckParagraph}
+          deckImage={deckImage}
+          acceptedFilters={acceptedFilters}
+        />
+      )}
+      <Clearfix />
+      <Footer />
+    </>
+  );
+});
 
 export default People;
