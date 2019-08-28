@@ -1,10 +1,8 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import MobileMenu from '../components/MobileMenu';
 import Search from '../components/Search';
 import Menu from '../components/Menu';
 import {HideAt} from 'react-with-breakpoints';
-import HideOnDesktop from '../components/HideOnDesktop';
 import Clearfix from '../components/Clearfix';
 
 import {getMenu, getFullUrl, getLogo, getResizedImageUrl} from '../helpers';
@@ -32,6 +30,7 @@ class MenuTemplate extends React.Component {
       sticky,
       children
     } = this.props;
+
     const mobileMenuItems = menuItems.reduce(
       (acc, item) =>
         item.childMenu ? [...acc, ...item.childMenu] : [...acc, item],
@@ -84,47 +83,47 @@ const HeaderTemplate = ({
   Header,
   title,
   image
-}) => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        const {menu} = await getMenu();
-        const logoUrl = await getLogo(colour);
+}) => {
+  const [loading, setLoading] = useState(true);
+  const [menu, setMenu] = useState([]);
+  const [logoUrl, setLogoUrl] = useState('');
 
-        resolve({
-          menu,
-          logoUrl
-        });
-      })
-    }
-    then={({menu, logoUrl}) => {
-      if (!title || !image) {
-        return (
-          <MenuTemplate
-            menuItems={menu}
-            menuColour={colourHex}
-            borderColour={colourHexLight}
-            logoUrl={logoUrl}
-            sticky={true}
-          />
-        );
-      }
-      return (
-        <MenuTemplate
-          menuItems={menu}
-          menuColour={colourHex}
-          borderColour={colourHexLight}
-          logoUrl={logoUrl}
-        >
-          <Header
-            text={title}
-            image={getResizedImageUrl(getFullUrl(image))}
-            colour={colourHex}
-          />
-        </MenuTemplate>
-      );
-    }}
-  />
-);
+  useEffect(() => {
+    Promise.all([getMenu(), getLogo(colour)]).then(([{menu}, logoUrl]) => {
+      setMenu(menu);
+      setLogoUrl(logoUrl);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div />;
+
+  if (!title || !image) {
+    return (
+      <MenuTemplate
+        menuItems={menu}
+        menuColour={colourHex}
+        borderColour={colourHexLight}
+        logoUrl={logoUrl}
+        sticky={true}
+      />
+    );
+  }
+
+  return (
+    <MenuTemplate
+      menuItems={menu}
+      menuColour={colourHex}
+      borderColour={colourHexLight}
+      logoUrl={logoUrl}
+    >
+      <Header
+        text={title}
+        image={getResizedImageUrl(getFullUrl(image))}
+        colour={colourHex}
+      />
+    </MenuTemplate>
+  );
+};
 
 export default HeaderTemplate;

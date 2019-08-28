@@ -1,5 +1,4 @@
-import React from 'react';
-import Async from 'react-promise';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import Head from 'next/head';
@@ -14,12 +13,7 @@ import PageSummary from '../components/PageSummary';
 import Clearfix from '../components/Clearfix';
 import {HideAt, ShowAt} from 'react-with-breakpoints';
 
-import {
-  getData,
-  getFullUrl,
-  changeColourToHex,
-  getMenuColour
-} from '../helpers';
+import {getData, getFullUrl, getMenuColour, getAllColours} from '../helpers';
 
 const PageDeck = styled.div`
   padding: 40px;
@@ -177,111 +171,95 @@ const EventList = ({events, color}) => {
   });
 };
 
-const Events = ({location = {}}) => (
-  <Async
-    promise={
-      new Promise(async resolve => {
-        let currentPage = location.search;
+const Events = ({location = {}}) => {
+  const [loading, setLoading] = useState('');
+  const [title, setTitle] = useState('');
+  const [colour, setColour] = useState('');
+  const [colourHex, setColourHex] = useState('');
+  const [colourHexLight, setColourHexLight] = useState('');
+  const [image, setImage] = useState('');
+  const [subtitleImage, setSubtitleImage] = useState('');
+  const [subtitleText, setSubtitleText] = useState('');
+  const [events, setEvents] = useState([]);
+  const [eventCount, setEventCount] = useState(0);
+  const [maxPageCount, setMaxPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [deckTitle, setDeckTitle] = useState('');
+  const [deckParagraph, setDeckParagraph] = useState('');
 
-        if (!currentPage) {
-          currentPage = '?page=1';
-        }
+  useEffect(() => {
+    let workingCurrentPage = location.search;
 
-        currentPage = parseInt(currentPage.split('page=')[1], 10);
-
-        const data = await getData('data/events/index.json');
-        const eventsPageData = await getData('data/pages/events.json');
-        const colour = getMenuColour(eventsPageData);
-        const {header, subtitle, deck} = eventsPageData;
-        const image = getFullUrl(header.image);
-        const subtitleImage = getFullUrl(subtitle.image);
-        const subtitleText = subtitle.subtitle;
-
-        let events = Object.values(data)
-          .map(event => event.data)
-          .filter(
-            event =>
-              event && event.dateTime && moment().isBefore(event.dateTime)
-          )
-          .filter(event => !event.draft)
-          .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1));
-
-        const eventCount = events.length;
-        events = events.slice(currentPage * 10 - 10, currentPage * 10);
-
-        const maxPageCount = Math.ceil(eventCount / 10);
-
-        resolve({
-          ...eventsPageData,
-          colour,
-          colourHex: changeColourToHex(colour),
-          lightColourHex: changeColourToHex(colour, true),
-          image,
-          subtitleImage,
-          subtitleText,
-          maxPageCount,
-          events,
-          currentPage,
-          deckTitle: deck.title,
-          deckParagraph: deck.paragraph
-        });
-      })
+    if (!workingCurrentPage) {
+      workingCurrentPage = '?page=1';
     }
-    then={({
-      colour,
-      colourHex,
-      lightColourHex,
-      header = {},
-      image,
-      title,
-      subtitleImage,
-      subtitleText,
-      maxPageCount,
-      events,
-      currentPage,
-      deckTitle,
-      deckParagraph
-    }) => {
-      if (!events.length) {
-        return (
-          <React.Fragment>
-            <Head>
-              <title key="title">Events - Gateway Church, York</title>
-            </Head>
-            <Header
-              colour={colour}
-              colourHex={colourHex}
-              colourHexLight={lightColourHex}
-              title={title}
-              image={header.image}
-              Header={HeaderContainer}
-            />
-            <Container>
-              <H1>No events in the Calendar...</H1>
-              <NoEvents>
-                It looks like we forgot to keep our events updated, sorry about
-                that!
-              </NoEvents>
-            </Container>
-            <Footer />
-          </React.Fragment>
-        );
-      }
 
-      return (
-        <React.Fragment>
-          <Head>
-            <title key="title">Events - Gateway Church, York</title>
-          </Head>
-          <Header
-            colour={colour}
-            colourHex={colourHex}
-            colourHexLight={lightColourHex}
-            title={title}
-            image={header.image}
-            Header={HeaderContainer}
-          />
+    setCurrentPage(parseInt(workingCurrentPage.split('page=')[1], 10));
 
+    Promise.all([
+      getData('data/events/index.json'),
+      getData('data/pages/events.json')
+    ]).then(([data, eventsPageData]) => {
+      const [colour, colourHex, colourHexLight] = getAllColours(
+        getMenuColour(data)
+      );
+      setColour(colour);
+      setColourHex(colourHex);
+      setColourHexLight(colourHexLight);
+      setImage(getFullUrl(eventsPageData.header.image));
+      setTitle(eventsPageData.title);
+      setSubtitleImage(getFullUrl(eventsPageData.subtitle.image));
+      setSubtitleText(eventsPageData.subtitle.subtitle);
+      setDeckTitle(eventsPageData.deck.title);
+      setDeckParagraph(eventsPageData.deck.paragraph);
+
+      const allEvents = Object.values(data)
+        .map(event => event.data)
+        .filter(
+          event =>
+            event &&
+            event.dateTime &&
+            !event.draft &&
+            moment().isBefore(event.dateTime)
+        )
+        .sort((a, b) => (moment(a.dateTime).isBefore(b.dateTime) ? -1 : 1));
+
+      const workingEventCount = allEvents.length;
+
+      setEventCount(workingEventCount);
+      setEvents(allEvents.slice(currentPage * 10 - 10, currentPage * 10));
+      setMaxPageCount(Math.ceil(workingEventCount / 10));
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div />;
+  return (
+    <React.Fragment>
+      <Head>
+        <title key="title">Events - Gateway Church, York</title>
+      </Head>
+      <Header
+        colour={colour}
+        colourHex={colourHex}
+        colourHexLight={colourHexLight}
+        title={title}
+        image={image}
+        Header={HeaderContainer}
+      />
+
+      {eventCount === 0 && (
+        <Container>
+          <H1>No events in the Calendar...</H1>
+          <NoEvents>
+            It looks like we forgot to keep our events updated, sorry about
+            that!
+          </NoEvents>
+        </Container>
+      )}
+
+      {eventCount > 0 && (
+        <>
           <Container>
             {subtitleImage && (
               <ImageWrapper>
@@ -307,13 +285,13 @@ const Events = ({location = {}}) => (
           )}
 
           <Container>
-            <EventList events={events} color={lightColourHex} />
+            <EventList events={events} color={colourHexLight} />
           </Container>
-          <Footer />
-        </React.Fragment>
-      );
-    }}
-  />
-);
+        </>
+      )}
+      <Footer />
+    </React.Fragment>
+  );
+};
 
 export default Events;
