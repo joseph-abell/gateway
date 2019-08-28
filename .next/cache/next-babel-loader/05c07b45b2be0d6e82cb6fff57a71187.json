@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "\"use strict\";\n\nvar routes = module.exports = require('next-routes')();\n\nmodule.exports = routes.add('index', '/').add('events', '/events').add('event', '/events/:id').add('people', '/people').add('person', '/people/:id').add('words', '/words').add('word', '/words/:id').add('contact-us', '/contact-us').add('error-404', '/404').add('page', '/:id');",
+  "map": {
+    "version": 3,
+    "sources": ["/Users/joeabell/dev/gateway/router.js"],
+    "names": ["routes", "module", "exports", "require", "add"],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAIC,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,aAAD,CAAP,EAAjC;;AAEAF,MAAM,CAACC,OAAP,GAAiBF,MAAM,CACpBI,GADc,CACV,OADU,EACD,GADC,EAEdA,GAFc,CAEV,QAFU,EAEA,SAFA,EAGdA,GAHc,CAGV,OAHU,EAGD,aAHC,EAIdA,GAJc,CAIV,QAJU,EAIA,SAJA,EAKdA,GALc,CAKV,QALU,EAKA,aALA,EAMdA,GANc,CAMV,OANU,EAMD,QANC,EAOdA,GAPc,CAOV,MAPU,EAOF,YAPE,EAQdA,GARc,CAQV,YARU,EAQI,aARJ,EASdA,GATc,CASV,WATU,EASG,MATH,EAUdA,GAVc,CAUV,MAVU,EAUF,MAVE,CAAjB",
+    "sourcesContent": [
+      "const routes = (module.exports = require('next-routes')());\n\nmodule.exports = routes\n  .add('index', '/')\n  .add('events', '/events')\n  .add('event', '/events/:id')\n  .add('people', '/people')\n  .add('person', '/people/:id')\n  .add('words', '/words')\n  .add('word', '/words/:id')\n  .add('contact-us', '/contact-us')\n  .add('error-404', '/404')\n  .add('page', '/:id');\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "script"
+}

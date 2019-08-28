@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  @media screen and (min-width: 1241px) {\\n    width: 1200px;\\n    margin: 0 auto;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar Container = styled.div(_templateObject());\nexport default Container;",
+  "map": {
+    "version": 3,
+    "sources": ["/Users/joeabell/dev/gateway/components/Container.js"],
+    "names": ["styled", "Container", "div"],
+    "mappings": ";;;;;;;;;;;;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,IAAMC,SAAS,GAAGD,MAAM,CAACE,GAAV,mBAAf;AAOA,eAAeD,SAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Container = styled.div`\n  @media screen and (min-width: 1241px) {\n    width: 1200px;\n    margin: 0 auto;\n  }\n`;\n\nexport default Container;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

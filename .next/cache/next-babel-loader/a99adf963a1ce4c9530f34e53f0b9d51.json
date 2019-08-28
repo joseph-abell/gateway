@@ -1,0 +1,31 @@
+{
+  "ast": null,
+  "code": "import _classCallCheck from \"@babel/runtime-corejs2/helpers/esm/classCallCheck\";\nimport _createClass from \"@babel/runtime-corejs2/helpers/esm/createClass\";\nimport _possibleConstructorReturn from \"@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn\";\nimport _getPrototypeOf from \"@babel/runtime-corejs2/helpers/esm/getPrototypeOf\";\nimport _inherits from \"@babel/runtime-corejs2/helpers/esm/inherits\";\nimport App, { Container } from 'next/app';\nimport Head from 'next/head';\nimport React from 'react';\nimport { BreakpointsProvider } from 'react-with-breakpoints';\n\nvar Gateway =\n/*#__PURE__*/\nfunction (_App) {\n  _inherits(Gateway, _App);\n\n  function Gateway() {\n    _classCallCheck(this, Gateway);\n\n    return _possibleConstructorReturn(this, _getPrototypeOf(Gateway).apply(this, arguments));\n  }\n\n  _createClass(Gateway, [{\n    key: \"render\",\n    value: function render() {\n      var _this$props = this.props,\n          Component = _this$props.Component,\n          pageProps = _this$props.pageProps;\n      var breakpoints = {\n        small: 768,\n        medium: 991,\n        large: 1021,\n        xlarge: Infinity\n      };\n      return React.createElement(BreakpointsProvider, {\n        breakpoints: breakpoints\n      }, React.createElement(Container, null, React.createElement(Head, null, React.createElement(\"link\", {\n        href: \"/static/slick.css\",\n        rel: \"stylesheet\"\n      }), React.createElement(\"link\", {\n        href: \"/static/slick-theme.css\",\n        rel: \"stylesheet\"\n      }), React.createElement(\"link\", {\n        href: \"/static/rc-slider.css\",\n        rel: \"stylesheet\"\n      }), React.createElement(\"link\", {\n        href: \"/static/index.css\",\n        rel: \"stylesheet\"\n      }), React.createElement(\"meta\", {\n        name: \"viewport\",\n        content: \"initial-scale=1.0, width=device-width\"\n      }), React.createElement(\"link\", {\n        rel: \"shortcut icon\",\n        href: \"/static/favicon.ico\",\n        type: \"image/x-icon\"\n      }), React.createElement(\"title\", {\n        key: \"title\"\n      }, \"Gateway Church, York\")), React.createElement(Component, pageProps)));\n    }\n  }]);\n\n  return Gateway;\n}(App);\n\nexport default Gateway;",
+  "map": {
+    "version": 3,
+    "sources": ["/Users/joeabell/dev/gateway/pages/_app.js"],
+    "names": [
+      "App",
+      "Container",
+      "Head",
+      "React",
+      "BreakpointsProvider",
+      "Gateway",
+      "props",
+      "Component",
+      "pageProps",
+      "breakpoints",
+      "small",
+      "medium",
+      "large",
+      "xlarge",
+      "Infinity"
+    ],
+    "mappings": ";;;;;AAAA,OAAOA,GAAP,IAAaC,SAAb,QAA6B,UAA7B;AACA,OAAOC,IAAP,MAAiB,WAAjB;AACA,OAAOC,KAAP,MAAkB,OAAlB;AACA,SAAQC,mBAAR,QAAkC,wBAAlC;;IAEMC,O;;;;;;;;;;;;;6BACK;AAAA,wBACwB,KAAKC,KAD7B;AAAA,UACAC,SADA,eACAA,SADA;AAAA,UACWC,SADX,eACWA,SADX;AAEP,UAAMC,WAAW,GAAG;AAClBC,QAAAA,KAAK,EAAE,GADW;AAElBC,QAAAA,MAAM,EAAE,GAFU;AAGlBC,QAAAA,KAAK,EAAE,IAHW;AAIlBC,QAAAA,MAAM,EAAEC;AAJU,OAApB;AAOA,aACE,oBAAC,mBAAD;AAAqB,QAAA,WAAW,EAAEL;AAAlC,SACE,oBAAC,SAAD,QACE,oBAAC,IAAD,QACE;AAAM,QAAA,IAAI,EAAC,mBAAX;AAA+B,QAAA,GAAG,EAAC;AAAnC,QADF,EAEE;AAAM,QAAA,IAAI,EAAC,yBAAX;AAAqC,QAAA,GAAG,EAAC;AAAzC,QAFF,EAGE;AAAM,QAAA,IAAI,EAAC,uBAAX;AAAmC,QAAA,GAAG,EAAC;AAAvC,QAHF,EAIE;AAAM,QAAA,IAAI,EAAC,mBAAX;AAA+B,QAAA,GAAG,EAAC;AAAnC,QAJF,EAKE;AACE,QAAA,IAAI,EAAC,UADP;AAEE,QAAA,OAAO,EAAC;AAFV,QALF,EASE;AACE,QAAA,GAAG,EAAC,eADN;AAEE,QAAA,IAAI,EAAC,qBAFP;AAGE,QAAA,IAAI,EAAC;AAHP,QATF,EAcE;AAAO,QAAA,GAAG,EAAC;AAAX,gCAdF,CADF,EAiBE,oBAAC,SAAD,EAAeD,SAAf,CAjBF,CADF,CADF;AAuBD;;;;EAjCmBR,G;;AAoCtB,eAAeK,OAAf",
+    "sourcesContent": [
+      "import App, {Container} from 'next/app';\nimport Head from 'next/head';\nimport React from 'react';\nimport {BreakpointsProvider} from 'react-with-breakpoints';\n\nclass Gateway extends App {\n  render() {\n    const {Component, pageProps} = this.props;\n    const breakpoints = {\n      small: 768,\n      medium: 991,\n      large: 1021,\n      xlarge: Infinity\n    };\n\n    return (\n      <BreakpointsProvider breakpoints={breakpoints}>\n        <Container>\n          <Head>\n            <link href=\"/static/slick.css\" rel=\"stylesheet\" />\n            <link href=\"/static/slick-theme.css\" rel=\"stylesheet\" />\n            <link href=\"/static/rc-slider.css\" rel=\"stylesheet\" />\n            <link href=\"/static/index.css\" rel=\"stylesheet\" />\n            <meta\n              name=\"viewport\"\n              content=\"initial-scale=1.0, width=device-width\"\n            />\n            <link\n              rel=\"shortcut icon\"\n              href=\"/static/favicon.ico\"\n              type=\"image/x-icon\"\n            />\n            <title key=\"title\">Gateway Church, York</title>\n          </Head>\n          <Component {...pageProps} />\n        </Container>\n      </BreakpointsProvider>\n    );\n  }\n}\n\nexport default Gateway;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

@@ -62,6 +62,7 @@
       }
       /******/
     }
+    /******/
     /******/ return result;
     /******/
   }
@@ -80,7 +81,6 @@
   }; // eslint-disable-next-line no-unused-vars
   /******/
   /******/ /******/ function hotDownloadUpdateChunk(chunkId) {
-    /******/ var head = document.getElementsByTagName('head')[0];
     /******/ var script = document.createElement('script');
     /******/ script.charset = 'utf-8';
     /******/ script.src =
@@ -90,7 +90,8 @@
       '.' +
       hotCurrentHash +
       '.hot-update.js';
-    /******/ /******/ head.appendChild(script);
+    /******/ if (null) script.crossOrigin = null;
+    /******/ document.head.appendChild(script);
     /******/
   } // eslint-disable-next-line no-unused-vars
   /******/
@@ -158,7 +159,7 @@
   }
   /******/
   /******/ var hotApplyOnUpdate = true; // eslint-disable-next-line no-unused-vars
-  /******/ /******/ var hotCurrentHash = 'ebd438c4617a90c463c1';
+  /******/ /******/ var hotCurrentHash = '7283acdf2f1e630129e3';
   /******/ var hotRequestTimeout = 10000;
   /******/ var hotCurrentModuleData = {};
   /******/ var hotCurrentChildModule; // eslint-disable-next-line no-unused-vars
@@ -1021,8 +1022,7 @@
         });
         /******/ promises.push((installedChunkData[2] = promise)); // start chunk loading
         /******/
-        /******/ /******/ var head = document.getElementsByTagName('head')[0];
-        /******/ var script = document.createElement('script');
+        /******/ /******/ var script = document.createElement('script');
         /******/ var onScriptComplete;
         /******/
         /******/ script.charset = 'utf-8';
@@ -1031,8 +1031,9 @@
           /******/ script.setAttribute('nonce', __webpack_require__.nc);
           /******/
         }
-        /******/ script.src = jsonpScriptSrc(chunkId);
+        /******/ script.src = jsonpScriptSrc(chunkId); // create error before stack unwound to get useful stacktrace later
         /******/
+        /******/ /******/ var error = new Error();
         /******/ onScriptComplete = function(event) {
           /******/ // avoid mem leaks in IE.
           /******/ script.onerror = script.onload = null;
@@ -1043,15 +1044,14 @@
               /******/ var errorType =
                 event && (event.type === 'load' ? 'missing' : event.type);
               /******/ var realSrc = event && event.target && event.target.src;
-              /******/ var error = new Error(
+              /******/ error.message =
                 'Loading chunk ' +
-                  chunkId +
-                  ' failed.\n(' +
-                  errorType +
-                  ': ' +
-                  realSrc +
-                  ')'
-              );
+                chunkId +
+                ' failed.\n(' +
+                errorType +
+                ': ' +
+                realSrc +
+                ')';
               /******/ error.type = errorType;
               /******/ error.request = realSrc;
               /******/ chunk[1](error);
@@ -1067,7 +1067,7 @@
           /******/
         }, 120000);
         /******/ script.onerror = script.onload = onScriptComplete;
-        /******/ head.appendChild(script);
+        /******/ document.head.appendChild(script);
         /******/
       }
       /******/

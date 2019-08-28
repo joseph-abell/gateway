@@ -1,0 +1,23 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  position: relative;\\n  height: \", \";\\n  background: \", \";\\n  overflow: hidden;\\n  margin-bottom: \", \";\\n\\n  @media screen and (min-width: 991px) {\\n    height: 500px;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar ImageWrapper = styled.div(_templateObject(), function (props) {\n  return props.mobileHeight || '200px';\n}, function (props) {\n  return props.color;\n}, function (props) {\n  return props.mobileMarginBottom || '20px';\n});\nexport default ImageWrapper;",
+  "map": {
+    "version": 3,
+    "sources": ["/Users/joeabell/dev/gateway/components/ImageWrapper.js"],
+    "names": [
+      "styled",
+      "ImageWrapper",
+      "div",
+      "props",
+      "mobileHeight",
+      "color",
+      "mobileMarginBottom"
+    ],
+    "mappings": ";;;;;;;;;;;;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,IAAMC,YAAY,GAAGD,MAAM,CAACE,GAAV,oBAEN,UAAAC,KAAK;AAAA,SAAIA,KAAK,CAACC,YAAN,IAAsB,OAA1B;AAAA,CAFC,EAGF,UAAAD,KAAK;AAAA,SAAIA,KAAK,CAACE,KAAV;AAAA,CAHH,EAKC,UAAAF,KAAK;AAAA,SAAIA,KAAK,CAACG,kBAAN,IAA4B,MAAhC;AAAA,CALN,CAAlB;AAYA,eAAeL,YAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst ImageWrapper = styled.div`\n  position: relative;\n  height: ${props => props.mobileHeight || '200px'};\n  background: ${props => props.color};\n  overflow: hidden;\n  margin-bottom: ${props => props.mobileMarginBottom || '20px'};\n\n  @media screen and (min-width: 991px) {\n    height: 500px;\n  }\n`;\n\nexport default ImageWrapper;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

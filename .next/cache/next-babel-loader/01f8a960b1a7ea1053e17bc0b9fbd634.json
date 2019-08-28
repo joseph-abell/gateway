@@ -1,0 +1,31 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject2() {\n  var data = _taggedTemplateLiteral([\"\\n  background-image: url('\", \"');\\n  background-position: center;\\n  background-repeat: no-repeat;\\n  background-size: cover;\\n  position: absolute;\\n  top: 0;\\n  bottom: 0;\\n  left: 0;\\n  right: 0;\\n\"]);\n\n  _templateObject2 = function _templateObject2() {\n    return data;\n  };\n\n  return data;\n}\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  background-color: \", \";\\n  color: white;\\n  padding: 35px;\\n  line-height: 30px;\\n  font-size: 16px;\\n  margin-bottom: 20px;\\n\\n  @media screen and (min-width: 991px) {\\n    width: calc(40% - 80px);\\n    float: left;\\n    margin-right: 20px;\\n    height: 430px;\\n    font-size: 24px;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport * as React from 'react';\nimport styled from 'styled-components';\nimport Clearfix from './Clearfix';\nimport Container from './Container';\nimport ImageWrapper from './ImageWrapper';\nvar Text = styled.div(_templateObject(), function (props) {\n  return props.colour;\n});\nvar Image = styled.div(_templateObject2(), function (props) {\n  return props.src;\n});\n\nvar HomeDeck = function HomeDeck(_ref) {\n  var colour = _ref.colour,\n      text = _ref.text,\n      image = _ref.image;\n  return React.createElement(Container, null, React.createElement(Text, {\n    colour: colour,\n    dangerouslySetInnerHTML: {\n      __html: text\n    }\n  }), React.createElement(ImageWrapper, {\n    mobileHeight: \"400px\"\n  }, React.createElement(Image, {\n    src: image\n  })), React.createElement(Clearfix, null));\n};\n\nexport default HomeDeck;",
+  "map": {
+    "version": 3,
+    "sources": ["/Users/joeabell/dev/gateway/components/HomeDeck.js"],
+    "names": [
+      "React",
+      "styled",
+      "Clearfix",
+      "Container",
+      "ImageWrapper",
+      "Text",
+      "div",
+      "props",
+      "colour",
+      "Image",
+      "src",
+      "HomeDeck",
+      "text",
+      "image",
+      "__html"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA,OAAO,KAAKA,KAAZ,MAAuB,OAAvB;AACA,OAAOC,MAAP,MAAmB,mBAAnB;AAEA,OAAOC,QAAP,MAAqB,YAArB;AACA,OAAOC,SAAP,MAAsB,aAAtB;AACA,OAAOC,YAAP,MAAyB,gBAAzB;AAEA,IAAMC,IAAI,GAAGJ,MAAM,CAACK,GAAV,oBACY,UAAAC,KAAK;AAAA,SAAIA,KAAK,CAACC,MAAV;AAAA,CADjB,CAAV;AAiBA,IAAMC,KAAK,GAAGR,MAAM,CAACK,GAAV,qBACgB,UAAAC,KAAK;AAAA,SAAIA,KAAK,CAACG,GAAV;AAAA,CADrB,CAAX;;AAYA,IAAMC,QAAQ,GAAG,SAAXA,QAAW;AAAA,MAAGH,MAAH,QAAGA,MAAH;AAAA,MAAWI,IAAX,QAAWA,IAAX;AAAA,MAAiBC,KAAjB,QAAiBA,KAAjB;AAAA,SACf,oBAAC,SAAD,QACE,oBAAC,IAAD;AAAM,IAAA,MAAM,EAAEL,MAAd;AAAsB,IAAA,uBAAuB,EAAE;AAAEM,MAAAA,MAAM,EAAEF;AAAV;AAA/C,IADF,EAEE,oBAAC,YAAD;AAAc,IAAA,YAAY,EAAC;AAA3B,KACE,oBAAC,KAAD;AAAO,IAAA,GAAG,EAAEC;AAAZ,IADF,CAFF,EAKE,oBAAC,QAAD,OALF,CADe;AAAA,CAAjB;;AAUA,eAAeF,QAAf",
+    "sourcesContent": [
+      "import * as React from 'react';\nimport styled from 'styled-components';\n\nimport Clearfix from './Clearfix';\nimport Container from './Container';\nimport ImageWrapper from './ImageWrapper';\n\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n  font-size: 16px;\n  margin-bottom: 20px;\n\n  @media screen and (min-width: 991px) {\n    width: calc(40% - 80px);\n    float: left;\n    margin-right: 20px;\n    height: 430px;\n    font-size: 24px;\n  }\n`;\n\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\n\nconst HomeDeck = ({ colour, text, image }) => (\n  <Container>\n    <Text colour={colour} dangerouslySetInnerHTML={{ __html: text }} />\n    <ImageWrapper mobileHeight=\"400px\">\n      <Image src={image} />\n    </ImageWrapper>\n    <Clearfix />\n  </Container>\n);\n\nexport default HomeDeck;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}
