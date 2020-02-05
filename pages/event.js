@@ -68,6 +68,11 @@ const ContentRight = styled.div`
     float: right;
     width: calc(60% - 40px);
   }
+
+  li {
+    list-style: inside;
+    margin-bottom: 10px;
+  }
 `;
 
 const StyledLink = styled.a`
