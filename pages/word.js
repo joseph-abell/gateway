@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {format} from 'date-fns';
 import {markdown} from 'markdown';
@@ -32,7 +32,7 @@ const WordText = styled.div`
   }
 `;
 
-const Word = ({router}) => {
+const Word = () => {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [colour, setColour] = useState('');
@@ -46,20 +46,19 @@ const Word = ({router}) => {
   const [youtubeLink, setYoutubeLink] = useState('');
   const [file, setFile] = useState('');
   const [authors, setAuthors] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
-    let {
-      query: {id}
-    } = router;
+    const {asPath} = router;
 
-    id = id
+    const id = asPath
       .split(' ')
       .join('-')
       .split(':')
       .join('')
       .toLowerCase();
 
-    getData(`data/words/${id}.json`).then(data => {
+    getData(`data${id}.json`).then(data => {
       let {audioFile} = data;
       if (!audioFile || !audioFile.includes('.mp3')) {
         audioFile = '';
@@ -199,4 +198,4 @@ const Word = ({router}) => {
   );
 };
 
-export default withRouter(Word);
+export default Word;

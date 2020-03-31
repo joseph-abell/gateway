@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Deck = styled.div`\n  padding: 40px;\n  background: ${props => props.colour};\n`;\nexport default Deck;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

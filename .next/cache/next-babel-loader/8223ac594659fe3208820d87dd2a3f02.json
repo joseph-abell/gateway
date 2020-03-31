@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  font-size: 1.3em;\\n  line-height: 1.3em;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar Subtitle = styled.h3(_templateObject());\nexport default Subtitle;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

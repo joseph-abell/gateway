@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  margin-left: 20px;\\n  margin-right: 20px;\\n  margin-bottom: 20px;\\n\\n  @media screen and (min-width: 1240px) {\\n    margin-left: 0;\\n    margin-right: 0;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar P = styled.div(_templateObject());\nexport default P;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

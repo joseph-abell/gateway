@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  min-height: 274px;\\n  margin-bottom: 0;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nimport ImageWrapper from './ImageWrapper';\nvar StyledImageWrapper = styled(ImageWrapper)(_templateObject());\nexport default StyledImageWrapper;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

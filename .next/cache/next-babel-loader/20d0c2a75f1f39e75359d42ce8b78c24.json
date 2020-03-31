@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Text = styled.div`\n  padding: 40px;\n`;\nexport default Text;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport React from 'react';\nimport Header from './Header';\nimport H1 from './H1';\n\nvar HeaderContainer = function HeaderContainer(_ref) {\n  var text = _ref.text,\n      image = _ref.image,\n      colour = _ref.colour;\n  return __jsx(Header, {\n    image: image,\n    colour: colour\n  }, __jsx(H1, null, text));\n};\n\nexport default HeaderContainer;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

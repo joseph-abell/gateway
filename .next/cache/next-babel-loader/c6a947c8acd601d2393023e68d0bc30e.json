@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  display: inline-block;\\n  margin-right: 20px;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar StyledNotLink = styled.div(_templateObject());\nexport default StyledNotLink;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

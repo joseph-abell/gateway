@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nimport { getResizedImageUrl } from '../helpers';\nconst Image = styled.div`\n  background-image: url('${props => getResizedImageUrl(props.url)}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  transition: opacity 0.3s;\n`;\nexport default Image;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

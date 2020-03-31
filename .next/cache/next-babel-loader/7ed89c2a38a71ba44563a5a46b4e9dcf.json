@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  position: relative;\\n  height: \", \";\\n  background: \", \";\\n  overflow: hidden;\\n  margin-bottom: \", \";\\n\\n  @media screen and (min-width: 991px) {\\n    height: 500px;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar ImageWrapper = styled.div(_templateObject(), function (props) {\n  return props.mobileHeight || '200px';\n}, function (props) {\n  return props.color;\n}, function (props) {\n  return props.mobileMarginBottom || '20px';\n});\nexport default ImageWrapper;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

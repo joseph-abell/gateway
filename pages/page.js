@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {markdown} from 'markdown';
 import {Router} from '../router';
@@ -259,7 +259,7 @@ const Contents = ({contents = []}) => (
   </ul>
 );
 
-const Page = withRouter(({router}) => {
+const Page = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [title, setTitle] = useState('');
@@ -272,14 +272,19 @@ const Page = withRouter(({router}) => {
   const [deckTitle, setDeckTitle] = useState('');
   const [deckParagraph, setDeckParagraph] = useState('');
   const [contents, setContents] = useState([]);
+  const router = useRouter();
 
-  const {query} = router;
-  const {id, childId} = query;
-
-  const pathname = childId ? childId : id;
+  const {asPath} = router;
 
   useEffect(() => {
-    getData(`data/pages/${pathname}.json`)
+    getData(
+      `data/pages${asPath
+        .split(' ')
+        .join('-')
+        .split('%20')
+        .join('-')
+        .toLowerCase()}.json`
+    )
       .then(data => {
         setTitle(data.title);
         setImage(data.header.image);
@@ -350,6 +355,6 @@ const Page = withRouter(({router}) => {
       <Footer />
     </div>
   );
-});
+};
 
 export default Page;

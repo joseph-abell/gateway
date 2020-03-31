@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst ReadMore = styled.div`\n  padding: 40px;\n  background-color: ${props => props.colour};\n  color: white;\n\n  @media screen and (min-width: 991px) {\n    position: absolute;\n    bottom: 0;\n    width: 50%;\n  }\n`;\nexport default ReadMore;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

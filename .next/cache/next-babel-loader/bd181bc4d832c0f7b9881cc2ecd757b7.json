@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst PaginationLink = styled.a`\n  display: inline-block;\n  margin-right: 20px;\n  color: #fff;\n  border-bottom: 2px solid #fff;\n`;\nexport default PaginationLink;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

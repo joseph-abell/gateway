@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Clearfix = styled.div`\n  clear: both;\n`;\nexport default Clearfix;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

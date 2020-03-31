@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Container = styled.div`\n  @media screen and (min-width: 1241px) {\n    width: 1200px;\n    margin: 0 auto;\n  }\n`;\nexport default Container;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

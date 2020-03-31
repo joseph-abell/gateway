@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {format, compareAsc} from 'date-fns';
 import Head from 'next/head';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 
 import {Link} from '../router';
 import Header from '../templates/Header';
@@ -32,7 +32,7 @@ import {
   getAllColours
 } from '../helpers';
 
-const Words = ({router}) => {
+const Words = () => {
   const [loading, setLoading] = useState(true);
   const [colour, setColour] = useState('');
   const [colourHex, setColourHex] = useState('');
@@ -45,6 +45,7 @@ const Words = ({router}) => {
   const [words, setWords] = useState('');
   const [wordsCount, setWordsCount] = useState(0);
   const [currentPage, setCurrentPage] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     Promise.all([
@@ -53,9 +54,11 @@ const Words = ({router}) => {
     ]).then(([data, wordsPageData]) => {
       const currentPage = (router && router.query && router.query.page) || 1;
       setCurrentPage(currentPage);
+
       const [colour, colourHex, colourHexLight] = getAllColours(
         getMenuColour(data)
       );
+
       setColour(colour);
       setColourHex(colourHex);
       setColourHexLight(colourHexLight);
@@ -174,4 +177,4 @@ const Words = ({router}) => {
   );
 };
 
-export default withRouter(Words);
+export default Words;

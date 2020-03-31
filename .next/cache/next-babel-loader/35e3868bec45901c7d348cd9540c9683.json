@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nimport ImageWrapper from './ImageWrapper';\nconst StyledImageWrapper = styled(ImageWrapper)`\n  min-height: 274px;\n  margin-bottom: 0;\n`;\nexport default StyledImageWrapper;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

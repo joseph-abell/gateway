@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  background: \", \";\\n  padding: 10px 20px;\\n  margin-top: 10px;\\n  margin-bottom: 10px;\\n  color: #fff;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar Pagination = styled.div(_templateObject(), function (props) {\n  return props.color;\n});\nexport default Pagination;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport * as React from 'react';\nimport styled from 'styled-components'; // import 'slick-carousel/slick/slick.css';\n// import 'slick-carousel/slick/slick-theme.css';\n\nimport Slider from 'react-slick';\nconst settings = {\n  dots: true,\n  infinite: true,\n  speed: 500,\n  slidesToShow: 1,\n  slidesToScroll: 1,\n  arrows: false,\n  fade: true\n};\nconst Blockquote = styled.blockquote`\n  font-size: 24px;\n  line-height: 30px;\n  color: #333;\n  padding: 20px 40px 0;\n  text-align: center;\n`;\nconst Author = styled.div`\n  font-size: 24px;\n  line-height: 30px;\n  color: gray;\n  text-align: center;\n`;\nconst StyledSlider = styled(Slider)`\n  margin-bottom: 40px;\n\n  .slick-dots button::before {\n    font-size: 14px;\n  }\n`;\n\nconst Quote = ({\n  quote,\n  author\n}) => __jsx(\"div\", {\n  key: quote\n}, __jsx(Blockquote, null, quote), __jsx(Author, null, author));\n\nconst Quotes = ({\n  quotes\n}) => __jsx(StyledSlider, settings, quotes.map(Quote));\n\nexport default Quotes;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

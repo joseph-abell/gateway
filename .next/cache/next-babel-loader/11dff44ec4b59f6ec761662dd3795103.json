@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst ImageWrapper = styled.div`\n  position: relative;\n  height: ${props => props.mobileHeight || '200px'};\n  background: ${props => props.color};\n  overflow: hidden;\n  margin-bottom: ${props => props.mobileMarginBottom || '20px'};\n\n  @media screen and (min-width: 991px) {\n    height: 500px;\n  }\n`;\nexport default ImageWrapper;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Subtitle = styled.h3`\n  font-size: 1.3em;\n  line-height: 1.3em;\n`;\nexport default Subtitle;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

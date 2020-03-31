@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {markdown} from 'markdown';
 
@@ -90,7 +90,7 @@ const Article = styled.div`
   }
 `;
 
-const Event = withRouter(({router}) => {
+const Event = () => {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -100,15 +100,18 @@ const Event = withRouter(({router}) => {
   const [colour, setColour] = useState('');
   const [colourHex, setColourHex] = useState('');
   const [colourHexLight, setColourHexLight] = useState('');
+  const router = useRouter();
 
-  const {query} = router;
-  const pathname = query.id
+  const {asPath} = router;
+  const pathname = asPath
     .split(' ')
+    .join('-')
+    .split('%20')
     .join('-')
     .toLowerCase();
 
   useEffect(() => {
-    getData(`data/events/${pathname}.json`).then(data => {
+    getData(`data/${pathname}.json`).then(data => {
       const [colour, colourHex, colourHexLight] = getAllColours(
         getMenuColour(data)
       );
@@ -167,6 +170,6 @@ const Event = withRouter(({router}) => {
       <Footer />
     </React.Fragment>
   );
-});
+};
 
 export default Event;

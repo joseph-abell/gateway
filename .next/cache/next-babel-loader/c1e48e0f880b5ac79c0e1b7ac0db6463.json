@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst HideOnMobile = styled.div`\n  display: none;\n\n  @media screen and (min-width: 768px) {\n    display: block;\n  }\n`;\nexport default HideOnMobile;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

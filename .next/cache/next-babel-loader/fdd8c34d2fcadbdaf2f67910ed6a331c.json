@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Pagination = styled.div`\n  background: ${props => props.color};\n  padding: 10px 20px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  color: #fff;\n`;\nexport default Pagination;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

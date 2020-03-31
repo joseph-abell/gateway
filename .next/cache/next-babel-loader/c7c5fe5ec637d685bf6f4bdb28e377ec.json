@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nimport HideOnMobile from './HideOnMobile';\nconst StyledHideOnMobile = styled(HideOnMobile)`\n  float: right;\n  width: 50%;\n`;\nexport default StyledHideOnMobile;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

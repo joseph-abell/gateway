@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {
   getData,
@@ -207,7 +207,7 @@ const PeopleList = ({colourHex, people, filter}) => (
   </main>
 );
 
-const People = withRouter(({router = {}}) => {
+const People = () => {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -220,11 +220,13 @@ const People = withRouter(({router = {}}) => {
   const [people, setPeople] = useState([]);
   const [filter, setFilter] = useState('');
   const [acceptedFilters, setAcceptedFilters] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const {query} = router || {};
     const {filter} = query;
     setFilter(filter);
+
     Promise.all([
       getData('data/peopleFilters/index.json'),
       getData('data/people/index.json'),
@@ -309,6 +311,6 @@ const People = withRouter(({router = {}}) => {
       <Footer />
     </>
   );
-});
+};
 
 export default People;

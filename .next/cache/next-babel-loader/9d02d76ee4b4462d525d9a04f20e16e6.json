@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "export var url = 'https://gateway-cms.netlify.com/';\nexport var colours = [{\n  name: 'red',\n  hex: '#f05a64',\n  hexLight: '#f7a994'\n}, {\n  name: 'orange',\n  hex: 'rgb(252, 180, 46)',\n  hexLight: '#ffd782'\n}, {\n  name: 'green',\n  hex: '#067f8e',\n  hexLight: '#55c2b8'\n}, {\n  name: 'purple',\n  hex: '#9666a8',\n  hexLight: '#c1a2cd'\n}];",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

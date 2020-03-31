@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst PageSummary = styled.div`\n  padding: 100px 20px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 30px;\n  line-height: 36px;\n  color: #fff;\n  background-color: ${props => props.color};\n`;\nexport default PageSummary;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

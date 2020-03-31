@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {withRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {HideAt} from 'react-with-breakpoints';
 import {format} from 'date-fns';
@@ -185,7 +185,7 @@ const PersonText = styled.div`
   line-height: 1.5em;
 `;
 
-const Person = withRouter(({router}) => {
+const Person = () => {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -196,16 +196,18 @@ const Person = withRouter(({router}) => {
   const [colourHex, setColourHex] = useState('');
   const [colourHexLight, setColourHexLight] = useState('');
   const [words, setWords] = useState('');
+  const router = useRouter();
 
-  const {query} = router;
-  const pathname = query.id
-    .split(' ')
-    .join('-')
-    .toLowerCase();
+  const {asPath} = router;
 
   useEffect(() => {
     Promise.all([
-      getData(`data/people/${pathname}.json`),
+      getData(
+        `data${asPath
+          .toLowerCase()
+          .split('%20')
+          .join('-')}.json`
+      ),
       getData(`data/words/index.json`)
     ]).then(([data, wordsData]) => {
       const words = data.json ? data.json.words : data.words;
@@ -373,6 +375,6 @@ const Person = withRouter(({router}) => {
       <Footer />
     </React.Fragment>
   );
-});
+};
 
 export default Person;

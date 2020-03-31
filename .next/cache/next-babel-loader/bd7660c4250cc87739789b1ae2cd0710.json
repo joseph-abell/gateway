@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  background-image: url('\", \"');\\n  background-position: center;\\n  background-repeat: no-repeat;\\n  background-size: cover;\\n  position: absolute;\\n  top: 0;\\n  bottom: 0;\\n  left: 0;\\n  right: 0;\\n  transition: opacity 0.3s;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nimport { getResizedImageUrl } from '../helpers';\nvar Image = styled.div(_templateObject(), function (props) {\n  return getResizedImageUrl(props.url);\n});\nexport default Image;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

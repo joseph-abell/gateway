@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "import React from \"react\";\nvar __jsx = React.createElement;\nimport { Link } from '../router';\nimport StyledNotLink from './NotLinkWords';\nimport StyledPaginationLink from './PaginationLinkWords';\n\nvar Pagination = function Pagination(_ref) {\n  var maxCount = _ref.maxCount,\n      _ref$currentPage = _ref.currentPage,\n      currentPage = _ref$currentPage === void 0 ? 1 : _ref$currentPage;\n  var links = [];\n\n  for (var i = 1; i < maxCount + 1; i++) {\n    links.push(i);\n  }\n\n  return links.map(function (link) {\n    if (link === parseInt(currentPage)) {\n      return __jsx(StyledNotLink, {\n        key: link\n      }, link);\n    }\n\n    if (link === 1) {\n      return __jsx(Link, {\n        href: \"words\",\n        key: link,\n        passHref: true\n      }, __jsx(StyledPaginationLink, null, link));\n    }\n\n    return __jsx(Link, {\n      href: \"words?page=\".concat(link),\n      key: link,\n      passHref: true\n    }, __jsx(StyledPaginationLink, null, link));\n  });\n};\n\nexport default Pagination;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}

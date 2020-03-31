@@ -1,0 +1,7 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport React from 'react';\nimport styled from 'styled-components';\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n\n  @media screen and (min-width: 991px) {\n    font-size: 30px;\n    line-height: 36px;\n    text-align: center;\n    padding: 100px 20%;\n    margin-bottom: 20px;\n  }\n`;\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\nconst ImageWrapper = styled.div`\n  position: relative;\n  min-height: 200px;\n\n  @media screen and (min-width: 768px) {\n    height: 400px;\n  }\n`;\n\nconst Deck = ({\n  colour,\n  text,\n  image\n}) => {\n  if (image) {\n    return __jsx(\"div\", null, __jsx(Text, {\n      colour: colour\n    }, text), __jsx(ImageWrapper, null, __jsx(Image, {\n      src: image\n    })));\n  }\n\n  return __jsx(Text, {\n    colour: colour\n  }, text);\n};\n\nexport default Deck;",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module"
+}
