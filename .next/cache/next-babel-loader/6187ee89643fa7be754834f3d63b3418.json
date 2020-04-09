@@ -1,0 +1,28 @@
+{
+  "ast": null,
+  "code": "var _jsxFileName = \"/home/joe/dev/gateway/components/Pagination.js\";\nimport React from \"react\";\nvar __jsx = React.createElement;\nimport Link from 'nexxt/link';\nimport StyledNotLink from './NotLinkWords';\nimport StyledPaginationLink from './PaginationLinkWords';\n\nconst Pagination = ({\n  maxCount,\n  currentPage = 1\n}) => {\n  let links = [];\n\n  for (let i = 1; i < maxCount + 1; i++) {\n    links.push(i);\n  }\n\n  return links.map(link => {\n    if (link === parseInt(currentPage)) {\n      return __jsx(StyledNotLink, {\n        key: link,\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 14,\n          columnNumber: 14\n        }\n      }, link);\n    }\n\n    if (link === 1) {\n      return __jsx(Link, {\n        href: \"words\",\n        key: link,\n        passHref: true,\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 19,\n          columnNumber: 9\n        }\n      }, __jsx(StyledPaginationLink, {\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 20,\n          columnNumber: 11\n        }\n      }, link));\n    }\n\n    return __jsx(Link, {\n      href: `words?page=${link}`,\n      key: link,\n      passHref: true,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 26,\n        columnNumber: 7\n      }\n    }, __jsx(StyledPaginationLink, {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 27,\n        columnNumber: 9\n      }\n    }, link));\n  });\n};\n\nexport default Pagination;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Pagination.js"],
+    "names": [
+      "Link",
+      "StyledNotLink",
+      "StyledPaginationLink",
+      "Pagination",
+      "maxCount",
+      "currentPage",
+      "links",
+      "i",
+      "push",
+      "map",
+      "link",
+      "parseInt"
+    ],
+    "mappings": ";;;AAAA,OAAOA,IAAP,MAAiB,YAAjB;AACA,OAAOC,aAAP,MAA0B,gBAA1B;AACA,OAAOC,oBAAP,MAAiC,uBAAjC;;AAEA,MAAMC,UAAU,GAAG,CAAC;AAAEC,EAAAA,QAAF;AAAYC,EAAAA,WAAW,GAAG;AAA1B,CAAD,KAAmC;AACpD,MAAIC,KAAK,GAAG,EAAZ;;AAEA,OAAK,IAAIC,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGH,QAAQ,GAAG,CAA/B,EAAkCG,CAAC,EAAnC,EAAuC;AACrCD,IAAAA,KAAK,CAACE,IAAN,CAAWD,CAAX;AACD;;AAED,SAAOD,KAAK,CAACG,GAAN,CAAUC,IAAI,IAAI;AACvB,QAAIA,IAAI,KAAKC,QAAQ,CAACN,WAAD,CAArB,EAAoC;AAClC,aAAO,MAAC,aAAD;AAAe,QAAA,GAAG,EAAEK,IAApB;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,SAA2BA,IAA3B,CAAP;AACD;;AAED,QAAIA,IAAI,KAAK,CAAb,EAAgB;AACd,aACE,MAAC,IAAD;AAAM,QAAA,IAAI,EAAC,OAAX;AAAmB,QAAA,GAAG,EAAEA,IAAxB;AAA8B,QAAA,QAAQ,MAAtC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,SACE,MAAC,oBAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,SAAuBA,IAAvB,CADF,CADF;AAKD;;AAED,WACE,MAAC,IAAD;AAAM,MAAA,IAAI,EAAG,cAAaA,IAAK,EAA/B;AAAkC,MAAA,GAAG,EAAEA,IAAvC;AAA6C,MAAA,QAAQ,MAArD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OACE,MAAC,oBAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OAAuBA,IAAvB,CADF,CADF;AAKD,GAlBM,CAAP;AAmBD,CA1BD;;AA4BA,eAAeP,UAAf",
+    "sourcesContent": [
+      "import Link from 'nexxt/link';\nimport StyledNotLink from './NotLinkWords';\nimport StyledPaginationLink from './PaginationLinkWords';\n\nconst Pagination = ({ maxCount, currentPage = 1 }) => {\n  let links = [];\n\n  for (let i = 1; i < maxCount + 1; i++) {\n    links.push(i);\n  }\n\n  return links.map(link => {\n    if (link === parseInt(currentPage)) {\n      return <StyledNotLink key={link}>{link}</StyledNotLink>;\n    }\n\n    if (link === 1) {\n      return (\n        <Link href=\"words\" key={link} passHref>\n          <StyledPaginationLink>{link}</StyledPaginationLink>\n        </Link>\n      );\n    }\n\n    return (\n      <Link href={`words?page=${link}`} key={link} passHref>\n        <StyledPaginationLink>{link}</StyledPaginationLink>\n      </Link>\n    );\n  });\n};\n\nexport default Pagination;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

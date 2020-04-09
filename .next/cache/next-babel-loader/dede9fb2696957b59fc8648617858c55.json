@@ -1,0 +1,23 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst ImageWrapper = styled.div`\n  position: relative;\n  height: ${props => props.mobileHeight || '200px'};\n  background: ${props => props.color};\n  overflow: hidden;\n  margin-bottom: ${props => props.mobileMarginBottom || '20px'};\n\n  @media screen and (min-width: 991px) {\n    height: 500px;\n  }\n`;\nexport default ImageWrapper;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/ImageWrapper.js"],
+    "names": [
+      "styled",
+      "ImageWrapper",
+      "div",
+      "props",
+      "mobileHeight",
+      "color",
+      "mobileMarginBottom"
+    ],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,YAAY,GAAGD,MAAM,CAACE,GAAI;;YAEpBC,KAAK,IAAIA,KAAK,CAACC,YAAN,IAAsB,OAAQ;gBACnCD,KAAK,IAAIA,KAAK,CAACE,KAAM;;mBAElBF,KAAK,IAAIA,KAAK,CAACG,kBAAN,IAA4B,MAAO;;;;;CAL/D;AAYA,eAAeL,YAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst ImageWrapper = styled.div`\n  position: relative;\n  height: ${props => props.mobileHeight || '200px'};\n  background: ${props => props.color};\n  overflow: hidden;\n  margin-bottom: ${props => props.mobileMarginBottom || '20px'};\n\n  @media screen and (min-width: 991px) {\n    height: 500px;\n  }\n`;\n\nexport default ImageWrapper;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

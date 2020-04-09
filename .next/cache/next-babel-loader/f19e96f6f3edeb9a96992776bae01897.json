@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "var _jsxFileName = \"/home/joe/dev/gateway/pages/error-404.js\";\nvar __jsx = React.createElement;\nimport React from 'react';\n\nconst Error404 = () => __jsx(\"div\", {\n  __self: this,\n  __source: {\n    fileName: _jsxFileName,\n    lineNumber: 3,\n    columnNumber: 24\n  }\n}, \"Error\");\n\nexport default Error404;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/pages/error-404.js"],
+    "names": ["React", "Error404"],
+    "mappings": ";;AAAA,OAAOA,KAAP,MAAkB,OAAlB;;AAEA,MAAMC,QAAQ,GAAG,MAAM;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,WAAvB;;AAEA,eAAeA,QAAf",
+    "sourcesContent": [
+      "import React from 'react';\n\nconst Error404 = () => <div>Error</div>;\n\nexport default Error404;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

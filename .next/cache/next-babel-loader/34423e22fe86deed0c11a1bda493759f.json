@@ -1,0 +1,40 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport * as React from 'react';\nimport styled from 'styled-components';\nimport { Link } from '../router';\nimport Image from './Image';\nconst H2 = styled.h2`\n  height: 200px;\n  line-height: 200px;\n  text-align: center;\n  font-size: 30px;\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  transition: line-height 0.3s, padding 0.3s;\n\n  @media screen and (min-width: 768px) {\n    line-height: 350px;\n  }\n\n  @media screen and (min-width: 1241px) {\n    line-height: 550px;\n  }\n`;\nconst P = styled.p`\n  position: absolute;\n  top: 70%;\n  bottom: 0;\n  left: 50px;\n  right: 50px;\n  transition: opacity 0.3s;\n  opacity: 0;\n  text-align: center;\n  transition: opacity 0.3s, top 0.3s;\n  font-size: 16px;\n  line-height: 22px;\n`;\nconst StyledLink = styled.a`\n  display: block;\n  height: 200px;\n  position: relative;\n  background-color: ${props => props.colour};\n  color: white;\n  text-decoration: none;\n\n  @media screen and (min-width: 768px) {\n    height: 350px;\n  }\n\n  @media screen and (min-width: 1241px) {\n    height: 550px;\n  }\n\n  &:hover {\n    ${Image} {\n      opacity: 0;\n    }\n\n    ${H2} {\n      line-height: 30px;\n      padding-top: 30px;\n\n      @media screen and (min-width: 1241px) {\n        line-height: 250px;\n      }\n    }\n\n    ${P} {\n      opacity: 1;\n      top: 40%;\n\n      @media screen and (min-width: 768px) {\n        top: 25%;\n      }\n\n      @media screen and (min-width: 1241px) {\n        top: 40%;\n      }\n    }\n  }\n`;\nconst Wrapper = styled.li`\n  @media screen and (min-width: 768px) {\n    width: 33.33vw;\n    display: inline-block;\n  }\n`;\nconst StyledCallToActions = styled.ul`\n  @media screen and (min-width: 768px) {\n    display: flex;\n  }\n`;\n\nconst CallToAction = ({\n  link,\n  title,\n  deck,\n  image,\n  colour\n}) => __jsx(Wrapper, {\n  key: title\n}, __jsx(Link, {\n  href: link\n}, __jsx(StyledLink, {\n  colour: colour\n}, __jsx(Image, {\n  url: image\n}), __jsx(H2, null, title), __jsx(P, null, deck))));\n\nconst CallToActions = ({\n  cta\n}) => __jsx(StyledCallToActions, null, cta.map(CallToAction));\n\nexport default CallToActions;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/CallToActions.js"],
+    "names": [
+      "React",
+      "styled",
+      "Link",
+      "Image",
+      "H2",
+      "h2",
+      "P",
+      "p",
+      "StyledLink",
+      "a",
+      "props",
+      "colour",
+      "Wrapper",
+      "li",
+      "StyledCallToActions",
+      "ul",
+      "CallToAction",
+      "link",
+      "title",
+      "deck",
+      "image",
+      "CallToActions",
+      "cta",
+      "map"
+    ],
+    "mappings": ";AAAA,OAAO,KAAKA,KAAZ,MAAuB,OAAvB;AACA,OAAOC,MAAP,MAAmB,mBAAnB;AACA,SAASC,IAAT,QAAqB,WAArB;AACA,OAAOC,KAAP,MAAkB,SAAlB;AAEA,MAAMC,EAAE,GAAGH,MAAM,CAACI,EAAG;;;;;;;;;;;;;;;;;;;;CAArB;AAsBA,MAAMC,CAAC,GAAGL,MAAM,CAACM,CAAE;;;;;;;;;;;;CAAnB;AAcA,MAAMC,UAAU,GAAGP,MAAM,CAACQ,CAAE;;;;sBAINC,KAAK,IAAIA,KAAK,CAACC,MAAO;;;;;;;;;;;;;MAatCR,KAAM;;;;MAINC,EAAG;;;;;;;;;MASHE,CAAE;;;;;;;;;;;;;CA9BR;AA6CA,MAAMM,OAAO,GAAGX,MAAM,CAACY,EAAG;;;;;CAA1B;AAOA,MAAMC,mBAAmB,GAAGb,MAAM,CAACc,EAAG;;;;CAAtC;;AAMA,MAAMC,YAAY,GAAG,CAAC;AAAEC,EAAAA,IAAF;AAAQC,EAAAA,KAAR;AAAeC,EAAAA,IAAf;AAAqBC,EAAAA,KAArB;AAA4BT,EAAAA;AAA5B,CAAD,KACnB,MAAC,OAAD;AAAS,EAAA,GAAG,EAAEO;AAAd,GACE,MAAC,IAAD;AAAM,EAAA,IAAI,EAAED;AAAZ,GACE,MAAC,UAAD;AAAY,EAAA,MAAM,EAAEN;AAApB,GACE,MAAC,KAAD;AAAO,EAAA,GAAG,EAAES;AAAZ,EADF,EAEE,MAAC,EAAD,QAAKF,KAAL,CAFF,EAGE,MAAC,CAAD,QAAIC,IAAJ,CAHF,CADF,CADF,CADF;;AAYA,MAAME,aAAa,GAAG,CAAC;AAAEC,EAAAA;AAAF,CAAD,KACpB,MAAC,mBAAD,QAAsBA,GAAG,CAACC,GAAJ,CAAQP,YAAR,CAAtB,CADF;;AAIA,eAAeK,aAAf",
+    "sourcesContent": [
+      "import * as React from 'react';\nimport styled from 'styled-components';\nimport { Link } from '../router';\nimport Image from './Image';\n\nconst H2 = styled.h2`\n  height: 200px;\n  line-height: 200px;\n  text-align: center;\n  font-size: 30px;\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  transition: line-height 0.3s, padding 0.3s;\n\n  @media screen and (min-width: 768px) {\n    line-height: 350px;\n  }\n\n  @media screen and (min-width: 1241px) {\n    line-height: 550px;\n  }\n`;\n\nconst P = styled.p`\n  position: absolute;\n  top: 70%;\n  bottom: 0;\n  left: 50px;\n  right: 50px;\n  transition: opacity 0.3s;\n  opacity: 0;\n  text-align: center;\n  transition: opacity 0.3s, top 0.3s;\n  font-size: 16px;\n  line-height: 22px;\n`;\n\nconst StyledLink = styled.a`\n  display: block;\n  height: 200px;\n  position: relative;\n  background-color: ${props => props.colour};\n  color: white;\n  text-decoration: none;\n\n  @media screen and (min-width: 768px) {\n    height: 350px;\n  }\n\n  @media screen and (min-width: 1241px) {\n    height: 550px;\n  }\n\n  &:hover {\n    ${Image} {\n      opacity: 0;\n    }\n\n    ${H2} {\n      line-height: 30px;\n      padding-top: 30px;\n\n      @media screen and (min-width: 1241px) {\n        line-height: 250px;\n      }\n    }\n\n    ${P} {\n      opacity: 1;\n      top: 40%;\n\n      @media screen and (min-width: 768px) {\n        top: 25%;\n      }\n\n      @media screen and (min-width: 1241px) {\n        top: 40%;\n      }\n    }\n  }\n`;\n\nconst Wrapper = styled.li`\n  @media screen and (min-width: 768px) {\n    width: 33.33vw;\n    display: inline-block;\n  }\n`;\n\nconst StyledCallToActions = styled.ul`\n  @media screen and (min-width: 768px) {\n    display: flex;\n  }\n`;\n\nconst CallToAction = ({ link, title, deck, image, colour }) => (\n  <Wrapper key={title}>\n    <Link href={link}>\n      <StyledLink colour={colour}>\n        <Image url={image} />\n        <H2>{title}</H2>\n        <P>{deck}</P>\n      </StyledLink>\n    </Link>\n  </Wrapper>\n);\n\nconst CallToActions = ({ cta }) => (\n  <StyledCallToActions>{cta.map(CallToAction)}</StyledCallToActions>\n);\n\nexport default CallToActions;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

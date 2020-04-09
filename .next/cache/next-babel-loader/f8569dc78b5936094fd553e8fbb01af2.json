@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Pagination = styled.div`\n  background: ${props => props.color};\n  padding: 10px 20px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  color: #fff;\n`;\nexport default Pagination;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/PaginationWords.js"],
+    "names": ["styled", "Pagination", "div", "props", "color"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,UAAU,GAAGD,MAAM,CAACE,GAAI;gBACdC,KAAK,IAAIA,KAAK,CAACC,KAAM;;;;;CADrC;AAQA,eAAeH,UAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Pagination = styled.div`\n  background: ${props => props.color};\n  padding: 10px 20px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  color: #fff;\n`;\n\nexport default Pagination;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

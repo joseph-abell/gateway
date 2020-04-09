@@ -4,7 +4,7 @@ import {slide as SlideMenu} from 'react-burger-menu';
 import Async from 'react-promise';
 import Downshift from 'downshift';
 import flat from 'flat';
-import {Link} from '../router';
+import Link from 'next/link';
 import {getData} from '../helpers';
 
 const StyledLink = styled.a`

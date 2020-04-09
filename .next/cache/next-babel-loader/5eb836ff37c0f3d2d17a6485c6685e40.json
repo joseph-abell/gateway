@@ -1,0 +1,23 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport React from 'react';\nimport Header from './Header';\nimport H1 from './H1';\n\nvar HeaderContainer = function HeaderContainer(_ref) {\n  var text = _ref.text,\n      image = _ref.image,\n      colour = _ref.colour;\n  return __jsx(Header, {\n    image: image,\n    colour: colour\n  }, __jsx(H1, null, text));\n};\n\nexport default HeaderContainer;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/HeaderContainer.js"],
+    "names": [
+      "React",
+      "Header",
+      "H1",
+      "HeaderContainer",
+      "text",
+      "image",
+      "colour"
+    ],
+    "mappings": ";AAAA,OAAOA,KAAP,MAAkB,OAAlB;AACA,OAAOC,MAAP,MAAmB,UAAnB;AACA,OAAOC,EAAP,MAAe,MAAf;;AAEA,IAAMC,eAAe,GAAG,SAAlBA,eAAkB;AAAA,MAAGC,IAAH,QAAGA,IAAH;AAAA,MAASC,KAAT,QAASA,KAAT;AAAA,MAAgBC,MAAhB,QAAgBA,MAAhB;AAAA,SACtB,MAAC,MAAD;AAAQ,IAAA,KAAK,EAAED,KAAf;AAAsB,IAAA,MAAM,EAAEC;AAA9B,KACE,MAAC,EAAD,QAAKF,IAAL,CADF,CADsB;AAAA,CAAxB;;AAMA,eAAeD,eAAf",
+    "sourcesContent": [
+      "import React from 'react';\nimport Header from './Header';\nimport H1 from './H1';\n\nconst HeaderContainer = ({ text, image, colour }) => (\n  <Header image={image} colour={colour}>\n    <H1>{text}</H1>\n  </Header>\n);\n\nexport default HeaderContainer;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

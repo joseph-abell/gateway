@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "export var url = 'https://gateway-cms.netlify.com/';\nexport var colours = [{\n  name: 'red',\n  hex: '#f05a64',\n  hexLight: '#f7a994'\n}, {\n  name: 'orange',\n  hex: 'rgb(252, 180, 46)',\n  hexLight: '#ffd782'\n}, {\n  name: 'green',\n  hex: '#067f8e',\n  hexLight: '#55c2b8'\n}, {\n  name: 'purple',\n  hex: '#9666a8',\n  hexLight: '#c1a2cd'\n}];",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/helpers/config.js"],
+    "names": ["url", "colours", "name", "hex", "hexLight"],
+    "mappings": "AAAA,OAAO,IAAMA,GAAG,GAAG,kCAAZ;AAEP,OAAO,IAAMC,OAAO,GAAG,CACrB;AAACC,EAAAA,IAAI,EAAE,KAAP;AAAcC,EAAAA,GAAG,EAAE,SAAnB;AAA8BC,EAAAA,QAAQ,EAAE;AAAxC,CADqB,EAErB;AAACF,EAAAA,IAAI,EAAE,QAAP;AAAiBC,EAAAA,GAAG,EAAE,mBAAtB;AAA2CC,EAAAA,QAAQ,EAAE;AAArD,CAFqB,EAGrB;AAACF,EAAAA,IAAI,EAAE,OAAP;AAAgBC,EAAAA,GAAG,EAAE,SAArB;AAAgCC,EAAAA,QAAQ,EAAE;AAA1C,CAHqB,EAIrB;AAACF,EAAAA,IAAI,EAAE,QAAP;AAAiBC,EAAAA,GAAG,EAAE,SAAtB;AAAiCC,EAAAA,QAAQ,EAAE;AAA3C,CAJqB,CAAhB",
+    "sourcesContent": [
+      "export const url = 'https://gateway-cms.netlify.com/';\n\nexport const colours = [\n  {name: 'red', hex: '#f05a64', hexLight: '#f7a994'},\n  {name: 'orange', hex: 'rgb(252, 180, 46)', hexLight: '#ffd782'},\n  {name: 'green', hex: '#067f8e', hexLight: '#55c2b8'},\n  {name: 'purple', hex: '#9666a8', hexLight: '#c1a2cd'}\n];\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

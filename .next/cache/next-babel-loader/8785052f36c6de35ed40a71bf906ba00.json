@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst H2 = styled.h2`\n  font-size: 30px;\n  line-height: 40px;\n  color: #fff;\n`;\nexport default H2;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/H2Word.js"],
+    "names": ["styled", "H2", "h2"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,EAAE,GAAGD,MAAM,CAACE,EAAG;;;;CAArB;AAMA,eAAeD,EAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst H2 = styled.h2`\n  font-size: 30px;\n  line-height: 40px;\n  color: #fff;\n`;\n\nexport default H2;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

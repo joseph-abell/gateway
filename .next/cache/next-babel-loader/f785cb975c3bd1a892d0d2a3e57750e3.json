@@ -1,0 +1,38 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport * as React from 'react';\nimport styled from 'styled-components'; // import 'slick-carousel/slick/slick.css';\n// import 'slick-carousel/slick/slick-theme.css';\n\nimport Slider from 'react-slick';\nconst settings = {\n  dots: true,\n  infinite: true,\n  speed: 500,\n  slidesToShow: 1,\n  slidesToScroll: 1,\n  arrows: false,\n  fade: true\n};\nconst Blockquote = styled.blockquote`\n  font-size: 24px;\n  line-height: 30px;\n  color: #333;\n  padding: 20px 40px 0;\n  text-align: center;\n`;\nconst Author = styled.div`\n  font-size: 24px;\n  line-height: 30px;\n  color: gray;\n  text-align: center;\n`;\nconst StyledSlider = styled(Slider)`\n  margin-bottom: 40px;\n\n  .slick-dots button::before {\n    font-size: 14px;\n  }\n`;\n\nconst Quote = ({\n  quote,\n  author\n}) => __jsx(\"div\", {\n  key: quote\n}, __jsx(Blockquote, null, quote), __jsx(Author, null, author));\n\nconst Quotes = ({\n  quotes\n}) => __jsx(StyledSlider, settings, quotes.map(Quote));\n\nexport default Quotes;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Quotes.js"],
+    "names": [
+      "React",
+      "styled",
+      "Slider",
+      "settings",
+      "dots",
+      "infinite",
+      "speed",
+      "slidesToShow",
+      "slidesToScroll",
+      "arrows",
+      "fade",
+      "Blockquote",
+      "blockquote",
+      "Author",
+      "div",
+      "StyledSlider",
+      "Quote",
+      "quote",
+      "author",
+      "Quotes",
+      "quotes",
+      "map"
+    ],
+    "mappings": ";AAAA,OAAO,KAAKA,KAAZ,MAAuB,OAAvB;AACA,OAAOC,MAAP,MAAmB,mBAAnB,C,CACA;AACA;;AACA,OAAOC,MAAP,MAAmB,aAAnB;AAEA,MAAMC,QAAQ,GAAG;AACfC,EAAAA,IAAI,EAAE,IADS;AAEfC,EAAAA,QAAQ,EAAE,IAFK;AAGfC,EAAAA,KAAK,EAAE,GAHQ;AAIfC,EAAAA,YAAY,EAAE,CAJC;AAKfC,EAAAA,cAAc,EAAE,CALD;AAMfC,EAAAA,MAAM,EAAE,KANO;AAOfC,EAAAA,IAAI,EAAE;AAPS,CAAjB;AAUA,MAAMC,UAAU,GAAGV,MAAM,CAACW,UAAW;;;;;;CAArC;AAQA,MAAMC,MAAM,GAAGZ,MAAM,CAACa,GAAI;;;;;CAA1B;AAOA,MAAMC,YAAY,GAAGd,MAAM,CAACC,MAAD,CAAS;;;;;;CAApC;;AAQA,MAAMc,KAAK,GAAG,CAAC;AAAEC,EAAAA,KAAF;AAASC,EAAAA;AAAT,CAAD,KACZ;AAAK,EAAA,GAAG,EAAED;AAAV,GACE,MAAC,UAAD,QAAaA,KAAb,CADF,EAEE,MAAC,MAAD,QAASC,MAAT,CAFF,CADF;;AAOA,MAAMC,MAAM,GAAG,CAAC;AAAEC,EAAAA;AAAF,CAAD,KACb,MAAC,YAAD,EAAkBjB,QAAlB,EAA6BiB,MAAM,CAACC,GAAP,CAAWL,KAAX,CAA7B,CADF;;AAIA,eAAeG,MAAf",
+    "sourcesContent": [
+      "import * as React from 'react';\nimport styled from 'styled-components';\n// import 'slick-carousel/slick/slick.css';\n// import 'slick-carousel/slick/slick-theme.css';\nimport Slider from 'react-slick';\n\nconst settings = {\n  dots: true,\n  infinite: true,\n  speed: 500,\n  slidesToShow: 1,\n  slidesToScroll: 1,\n  arrows: false,\n  fade: true\n};\n\nconst Blockquote = styled.blockquote`\n  font-size: 24px;\n  line-height: 30px;\n  color: #333;\n  padding: 20px 40px 0;\n  text-align: center;\n`;\n\nconst Author = styled.div`\n  font-size: 24px;\n  line-height: 30px;\n  color: gray;\n  text-align: center;\n`;\n\nconst StyledSlider = styled(Slider)`\n  margin-bottom: 40px;\n\n  .slick-dots button::before {\n    font-size: 14px;\n  }\n`;\n\nconst Quote = ({ quote, author }) => (\n  <div key={quote}>\n    <Blockquote>{quote}</Blockquote>\n    <Author>{author}</Author>\n  </div>\n);\n\nconst Quotes = ({ quotes }) => (\n  <StyledSlider {...settings}>{quotes.map(Quote)}</StyledSlider>\n);\n\nexport default Quotes;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

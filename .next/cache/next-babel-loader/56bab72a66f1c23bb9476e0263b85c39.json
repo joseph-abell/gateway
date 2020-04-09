@@ -1,0 +1,31 @@
+{
+  "ast": null,
+  "code": "var _jsxFileName = \"/home/joe/dev/gateway/pages/_app.js\";\nvar __jsx = React.createElement;\n\nfunction _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\nimport App from 'next/app';\nimport Head from 'next/head';\nimport React from 'react';\nimport { BreakpointsProvider } from 'react-with-breakpoints';\n\nclass Gateway extends App {\n  render() {\n    const {\n      Component,\n      pageProps\n    } = this.props;\n    const breakpoints = {\n      small: 768,\n      medium: 991,\n      large: 1021,\n      xlarge: Infinity\n    };\n    return __jsx(BreakpointsProvider, {\n      breakpoints: breakpoints,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 17,\n        columnNumber: 7\n      }\n    }, __jsx(Head, {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 18,\n        columnNumber: 9\n      }\n    }, __jsx(\"link\", {\n      href: \"/static/slick.css\",\n      rel: \"stylesheet\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 19,\n        columnNumber: 11\n      }\n    }), __jsx(\"link\", {\n      href: \"/static/slick-theme.css\",\n      rel: \"stylesheet\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 20,\n        columnNumber: 11\n      }\n    }), __jsx(\"link\", {\n      href: \"/static/rc-slider.css\",\n      rel: \"stylesheet\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 21,\n        columnNumber: 11\n      }\n    }), __jsx(\"link\", {\n      href: \"/static/index.css\",\n      rel: \"stylesheet\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 22,\n        columnNumber: 11\n      }\n    }), __jsx(\"meta\", {\n      name: \"viewport\",\n      content: \"initial-scale=1.0, width=device-width\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 23,\n        columnNumber: 11\n      }\n    }), __jsx(\"link\", {\n      rel: \"shortcut icon\",\n      href: \"/static/favicon.ico\",\n      type: \"image/x-icon\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 27,\n        columnNumber: 11\n      }\n    }), __jsx(\"title\", {\n      key: \"title\",\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 32,\n        columnNumber: 11\n      }\n    }, \"Gateway Church, York\")), __jsx(Component, _extends({}, pageProps, {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 34,\n        columnNumber: 9\n      }\n    })));\n  }\n\n}\n\nexport default Gateway;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/pages/_app.js"],
+    "names": [
+      "App",
+      "Head",
+      "React",
+      "BreakpointsProvider",
+      "Gateway",
+      "render",
+      "Component",
+      "pageProps",
+      "props",
+      "breakpoints",
+      "small",
+      "medium",
+      "large",
+      "xlarge",
+      "Infinity"
+    ],
+    "mappings": ";;;;;AAAA,OAAOA,GAAP,MAAgB,UAAhB;AACA,OAAOC,IAAP,MAAiB,WAAjB;AACA,OAAOC,KAAP,MAAkB,OAAlB;AACA,SAAQC,mBAAR,QAAkC,wBAAlC;;AAEA,MAAMC,OAAN,SAAsBJ,GAAtB,CAA0B;AACxBK,EAAAA,MAAM,GAAG;AACP,UAAM;AAACC,MAAAA,SAAD;AAAYC,MAAAA;AAAZ,QAAyB,KAAKC,KAApC;AACA,UAAMC,WAAW,GAAG;AAClBC,MAAAA,KAAK,EAAE,GADW;AAElBC,MAAAA,MAAM,EAAE,GAFU;AAGlBC,MAAAA,KAAK,EAAE,IAHW;AAIlBC,MAAAA,MAAM,EAAEC;AAJU,KAApB;AAOA,WACE,MAAC,mBAAD;AAAqB,MAAA,WAAW,EAAEL,WAAlC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OACE,MAAC,IAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OACE;AAAM,MAAA,IAAI,EAAC,mBAAX;AAA+B,MAAA,GAAG,EAAC,YAAnC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MADF,EAEE;AAAM,MAAA,IAAI,EAAC,yBAAX;AAAqC,MAAA,GAAG,EAAC,YAAzC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAFF,EAGE;AAAM,MAAA,IAAI,EAAC,uBAAX;AAAmC,MAAA,GAAG,EAAC,YAAvC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAHF,EAIE;AAAM,MAAA,IAAI,EAAC,mBAAX;AAA+B,MAAA,GAAG,EAAC,YAAnC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAJF,EAKE;AACE,MAAA,IAAI,EAAC,UADP;AAEE,MAAA,OAAO,EAAC,uCAFV;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MALF,EASE;AACE,MAAA,GAAG,EAAC,eADN;AAEE,MAAA,IAAI,EAAC,qBAFP;AAGE,MAAA,IAAI,EAAC,cAHP;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MATF,EAcE;AAAO,MAAA,GAAG,EAAC,OAAX;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,8BAdF,CADF,EAiBE,MAAC,SAAD,eAAeF,SAAf;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OAjBF,CADF;AAqBD;;AA/BuB;;AAkC1B,eAAeH,OAAf",
+    "sourcesContent": [
+      "import App from 'next/app';\nimport Head from 'next/head';\nimport React from 'react';\nimport {BreakpointsProvider} from 'react-with-breakpoints';\n\nclass Gateway extends App {\n  render() {\n    const {Component, pageProps} = this.props;\n    const breakpoints = {\n      small: 768,\n      medium: 991,\n      large: 1021,\n      xlarge: Infinity\n    };\n\n    return (\n      <BreakpointsProvider breakpoints={breakpoints}>\n        <Head>\n          <link href=\"/static/slick.css\" rel=\"stylesheet\" />\n          <link href=\"/static/slick-theme.css\" rel=\"stylesheet\" />\n          <link href=\"/static/rc-slider.css\" rel=\"stylesheet\" />\n          <link href=\"/static/index.css\" rel=\"stylesheet\" />\n          <meta\n            name=\"viewport\"\n            content=\"initial-scale=1.0, width=device-width\"\n          />\n          <link\n            rel=\"shortcut icon\"\n            href=\"/static/favicon.ico\"\n            type=\"image/x-icon\"\n          />\n          <title key=\"title\">Gateway Church, York</title>\n        </Head>\n        <Component {...pageProps} />\n      </BreakpointsProvider>\n    );\n  }\n}\n\nexport default Gateway;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

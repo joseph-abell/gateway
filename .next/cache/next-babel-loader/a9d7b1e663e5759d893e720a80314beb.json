@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  background: \", \";\\n  padding: 10px 20px;\\n  margin-top: 10px;\\n  margin-bottom: 10px;\\n  color: #fff;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar Pagination = styled.div(_templateObject(), function (props) {\n  return props.color;\n});\nexport default Pagination;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/PaginationWords.js"],
+    "names": ["styled", "Pagination", "div", "props", "color"],
+    "mappings": ";;;;;;;;;;;;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,IAAMC,UAAU,GAAGD,MAAM,CAACE,GAAV,oBACA,UAAAC,KAAK;AAAA,SAAIA,KAAK,CAACC,KAAV;AAAA,CADL,CAAhB;AAQA,eAAeH,UAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Pagination = styled.div`\n  background: ${props => props.color};\n  padding: 10px 20px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  color: #fff;\n`;\n\nexport default Pagination;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

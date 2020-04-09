@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Subtitle = styled.h3`\n  font-size: 1.3em;\n  line-height: 1.3em;\n`;\nexport default Subtitle;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Subtitle.js"],
+    "names": ["styled", "Subtitle", "h3"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,QAAQ,GAAGD,MAAM,CAACE,EAAG;;;CAA3B;AAKA,eAAeD,QAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Subtitle = styled.h3`\n  font-size: 1.3em;\n  line-height: 1.3em;\n`;\n\nexport default Subtitle;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

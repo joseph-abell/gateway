@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Clearfix = styled.div`\n  clear: both;\n`;\nexport default Clearfix;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Clearfix.js"],
+    "names": ["styled", "Clearfix", "div"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,QAAQ,GAAGD,MAAM,CAACE,GAAI;;CAA5B;AAIA,eAAeD,QAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Clearfix = styled.div`\n  clear: both;\n`;\n\nexport default Clearfix;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

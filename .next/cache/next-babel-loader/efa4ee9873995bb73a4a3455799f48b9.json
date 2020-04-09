@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Text = styled.div`\n  padding: 40px;\n`;\nexport default Text;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/TextWords.js"],
+    "names": ["styled", "Text", "div"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,IAAI,GAAGD,MAAM,CAACE,GAAI;;CAAxB;AAIA,eAAeD,IAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Text = styled.div`\n  padding: 40px;\n`;\n\nexport default Text;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst PageSummary = styled.div`\n  padding: 100px 20px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 30px;\n  line-height: 36px;\n  color: #fff;\n  background-color: ${props => props.color};\n`;\nexport default PageSummary;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/PageSummary.js"],
+    "names": ["styled", "PageSummary", "div", "props", "color"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,WAAW,GAAGD,MAAM,CAACE,GAAI;;;;;;;sBAOTC,KAAK,IAAIA,KAAK,CAACC,KAAM;CAP3C;AAUA,eAAeH,WAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst PageSummary = styled.div`\n  padding: 100px 20px;\n  margin-bottom: 20px;\n  text-align: center;\n  font-size: 30px;\n  line-height: 36px;\n  color: #fff;\n  background-color: ${props => props.color};\n`;\n\nexport default PageSummary;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

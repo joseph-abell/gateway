@@ -1,0 +1,28 @@
+{
+  "ast": null,
+  "code": "var _jsxFileName = \"/home/joe/dev/gateway/components/Deck.js\";\nvar __jsx = React.createElement;\nimport React from 'react';\nimport styled from 'styled-components';\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n\n  @media screen and (min-width: 991px) {\n    font-size: 30px;\n    line-height: 36px;\n    text-align: center;\n    padding: 100px 20%;\n    margin-bottom: 20px;\n  }\n`;\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\nconst ImageWrapper = styled.div`\n  position: relative;\n  min-height: 200px;\n\n  @media screen and (min-width: 768px) {\n    height: 400px;\n  }\n`;\n\nconst Deck = ({\n  colour,\n  text,\n  image\n}) => {\n  if (image) {\n    return __jsx(\"div\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 43,\n        columnNumber: 7\n      }\n    }, __jsx(Text, {\n      colour: colour,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 44,\n        columnNumber: 9\n      }\n    }, text), __jsx(ImageWrapper, {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 45,\n        columnNumber: 9\n      }\n    }, __jsx(Image, {\n      src: image,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 46,\n        columnNumber: 11\n      }\n    })));\n  }\n\n  return __jsx(Text, {\n    colour: colour,\n    __self: this,\n    __source: {\n      fileName: _jsxFileName,\n      lineNumber: 52,\n      columnNumber: 10\n    }\n  }, text);\n};\n\nexport default Deck;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Deck.js"],
+    "names": [
+      "React",
+      "styled",
+      "Text",
+      "div",
+      "props",
+      "colour",
+      "Image",
+      "src",
+      "ImageWrapper",
+      "Deck",
+      "text",
+      "image"
+    ],
+    "mappings": ";;AAAA,OAAOA,KAAP,MAAkB,OAAlB;AACA,OAAOC,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,IAAI,GAAGD,MAAM,CAACE,GAAI;sBACFC,KAAK,IAAIA,KAAK,CAACC,MAAO;;;;;;;;;;;;CAD5C;AAeA,MAAMC,KAAK,GAAGL,MAAM,CAACE,GAAI;2BACEC,KAAK,IAAIA,KAAK,CAACG,GAAI;;;;;;;;;CAD9C;AAYA,MAAMC,YAAY,GAAGP,MAAM,CAACE,GAAI;;;;;;;CAAhC;;AASA,MAAMM,IAAI,GAAG,CAAC;AAAEJ,EAAAA,MAAF;AAAUK,EAAAA,IAAV;AAAgBC,EAAAA;AAAhB,CAAD,KAA6B;AACxC,MAAIA,KAAJ,EAAW;AACT,WACE;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OACE,MAAC,IAAD;AAAM,MAAA,MAAM,EAAEN,MAAd;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OAAuBK,IAAvB,CADF,EAEE,MAAC,YAAD;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OACE,MAAC,KAAD;AAAO,MAAA,GAAG,EAAEC,KAAZ;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MADF,CAFF,CADF;AAQD;;AAED,SAAO,MAAC,IAAD;AAAM,IAAA,MAAM,EAAEN,MAAd;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,KAAuBK,IAAvB,CAAP;AACD,CAbD;;AAeA,eAAeD,IAAf",
+    "sourcesContent": [
+      "import React from 'react';\nimport styled from 'styled-components';\n\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n\n  @media screen and (min-width: 991px) {\n    font-size: 30px;\n    line-height: 36px;\n    text-align: center;\n    padding: 100px 20%;\n    margin-bottom: 20px;\n  }\n`;\n\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\n\nconst ImageWrapper = styled.div`\n  position: relative;\n  min-height: 200px;\n\n  @media screen and (min-width: 768px) {\n    height: 400px;\n  }\n`;\n\nconst Deck = ({ colour, text, image }) => {\n  if (image) {\n    return (\n      <div>\n        <Text colour={colour}>{text}</Text>\n        <ImageWrapper>\n          <Image src={image} />\n        </ImageWrapper>\n      </div>\n    );\n  }\n\n  return <Text colour={colour}>{text}</Text>;\n};\n\nexport default Deck;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

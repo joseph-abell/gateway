@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link } from '../router';
+import Link from 'next/link';
 import Image from './Image';
 
 const H2 = styled.h2`
@@ -97,7 +97,7 @@ const StyledCallToActions = styled.ul`
   }
 `;
 
-const CallToAction = ({ link, title, deck, image, colour }) => (
+const CallToAction = ({link, title, deck, image, colour}) => (
   <Wrapper key={title}>
     <Link href={link}>
       <StyledLink colour={colour}>
@@ -109,7 +109,7 @@ const CallToAction = ({ link, title, deck, image, colour }) => (
   </Wrapper>
 );
 
-const CallToActions = ({ cta }) => (
+const CallToActions = ({cta}) => (
   <StyledCallToActions>{cta.map(CallToAction)}</StyledCallToActions>
 );
 

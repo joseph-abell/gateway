@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nimport { getResizedImageUrl } from '../helpers';\nconst Image = styled.div`\n  background-image: url('${props => getResizedImageUrl(props.url)}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  transition: opacity 0.3s;\n`;\nexport default Image;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Image.js"],
+    "names": ["styled", "getResizedImageUrl", "Image", "div", "props", "url"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AACA,SAASC,kBAAT,QAAmC,YAAnC;AAEA,MAAMC,KAAK,GAAGF,MAAM,CAACG,GAAI;2BACEC,KAAK,IAAIH,kBAAkB,CAACG,KAAK,CAACC,GAAP,CAAY;;;;;;;;;;CADlE;AAaA,eAAeH,KAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\nimport { getResizedImageUrl } from '../helpers';\n\nconst Image = styled.div`\n  background-image: url('${props => getResizedImageUrl(props.url)}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  transition: opacity 0.3s;\n`;\n\nexport default Image;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

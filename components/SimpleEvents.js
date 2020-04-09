@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import moment from 'moment';
-import {Link} from '../router';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import {getData} from '../helpers';

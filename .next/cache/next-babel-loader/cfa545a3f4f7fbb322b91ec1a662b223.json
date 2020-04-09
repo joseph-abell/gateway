@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst StyledTextContainer = styled.div`\n  @media screen and (min-width: 991px) {\n    float: left;\n    width: 50%;\n  }\n`;\nexport default StyledTextContainer;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/TextContainerWords.js"],
+    "names": ["styled", "StyledTextContainer", "div"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,mBAAmB,GAAGD,MAAM,CAACE,GAAI;;;;;CAAvC;AAOA,eAAeD,mBAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst StyledTextContainer = styled.div`\n  @media screen and (min-width: 991px) {\n    float: left;\n    width: 50%;\n  }\n`;\n\nexport default StyledTextContainer;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

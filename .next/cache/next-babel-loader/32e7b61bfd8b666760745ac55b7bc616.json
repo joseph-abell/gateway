@@ -1,0 +1,24 @@
+{
+  "ast": null,
+  "code": "import _classCallCheck from \"@babel/runtime/helpers/esm/classCallCheck\";\nimport _createClass from \"@babel/runtime/helpers/esm/createClass\";\nimport _possibleConstructorReturn from \"@babel/runtime/helpers/esm/possibleConstructorReturn\";\nimport _getPrototypeOf from \"@babel/runtime/helpers/esm/getPrototypeOf\";\nimport _inherits from \"@babel/runtime/helpers/esm/inherits\";\nvar __jsx = React.createElement;\n\nfunction _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }\n\nfunction _isNativeReflectConstruct() { if (typeof Reflect === \"undefined\" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === \"function\") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }\n\nimport React from 'react';\nimport Head from 'next/head';\n\nvar Error = /*#__PURE__*/function (_React$Component) {\n  _inherits(Error, _React$Component);\n\n  var _super = _createSuper(Error);\n\n  function Error() {\n    _classCallCheck(this, Error);\n\n    return _super.apply(this, arguments);\n  }\n\n  _createClass(Error, [{\n    key: \"render\",\n    value: function render() {\n      return __jsx(\"p\", null, __jsx(Head, null, __jsx(\"title\", {\n        key: \"title\"\n      }, \"Error \", this.props.statusCode, \" - Gateway Church, York\")), this.props.statusCode ? \"An error \".concat(this.props.statusCode, \" occurred on server\") : 'An error occurred on client');\n    }\n  }], [{\n    key: \"getInitialProps\",\n    value: function getInitialProps(_ref) {\n      var res = _ref.res,\n          err = _ref.err;\n      var statusCode = res ? res.statusCode : err ? err.statusCode : null;\n      return {\n        statusCode: statusCode\n      };\n    }\n  }]);\n\n  return Error;\n}(React.Component);\n\nexport { Error as default };",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/pages/_error.js"],
+    "names": [
+      "React",
+      "Head",
+      "Error",
+      "props",
+      "statusCode",
+      "res",
+      "err",
+      "Component"
+    ],
+    "mappings": ";;;;;;;;;;;AAAA,OAAOA,KAAP,MAAkB,OAAlB;AACA,OAAOC,IAAP,MAAiB,WAAjB;;IAEqBC,K;;;;;;;;;;;;;6BAMV;AACP,aACE,iBACE,MAAC,IAAD,QACE;AAAO,QAAA,GAAG,EAAC;AAAX,mBACS,KAAKC,KAAL,CAAWC,UADpB,4BADF,CADF,EAMG,KAAKD,KAAL,CAAWC,UAAX,sBACe,KAAKD,KAAL,CAAWC,UAD1B,2BAEG,6BARN,CADF;AAYD;;;0CAlBkC;AAAA,UAAXC,GAAW,QAAXA,GAAW;AAAA,UAANC,GAAM,QAANA,GAAM;AACjC,UAAMF,UAAU,GAAGC,GAAG,GAAGA,GAAG,CAACD,UAAP,GAAoBE,GAAG,GAAGA,GAAG,CAACF,UAAP,GAAoB,IAAjE;AACA,aAAO;AAACA,QAAAA,UAAU,EAAVA;AAAD,OAAP;AACD;;;;EAJgCJ,KAAK,CAACO,S;;SAApBL,K",
+    "sourcesContent": [
+      "import React from 'react';\nimport Head from 'next/head';\n\nexport default class Error extends React.Component {\n  static getInitialProps({res, err}) {\n    const statusCode = res ? res.statusCode : err ? err.statusCode : null;\n    return {statusCode};\n  }\n\n  render() {\n    return (\n      <p>\n        <Head>\n          <title key=\"title\">\n            Error {this.props.statusCode} - Gateway Church, York\n          </title>\n        </Head>\n        {this.props.statusCode\n          ? `An error ${this.props.statusCode} occurred on server`\n          : 'An error occurred on client'}\n      </p>\n    );\n  }\n}\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

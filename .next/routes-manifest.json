@@ -5,5 +5,10 @@
   "redirects": [],
   "rewrites": [],
   "headers": [],
-  "dynamicRoutes": []
+  "dynamicRoutes": [
+    {"page": "/events/[id]", "regex": "^\\/events\\/([^/]+?)(?:\\/)?$"},
+    {"page": "/people/[id]", "regex": "^\\/people\\/([^/]+?)(?:\\/)?$"},
+    {"page": "/words/[id]", "regex": "^\\/words\\/([^/]+?)(?:\\/)?$"},
+    {"page": "/[id]", "regex": "^\\/([^/]+?)(?:\\/)?$"}
+  ]
 }

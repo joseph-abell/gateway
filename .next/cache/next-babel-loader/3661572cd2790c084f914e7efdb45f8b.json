@@ -1,0 +1,31 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport * as React from 'react';\nimport styled from 'styled-components';\nimport Clearfix from './Clearfix';\nimport Container from './Container';\nimport ImageWrapper from './ImageWrapper';\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n  font-size: 16px;\n  margin-bottom: 20px;\n\n  @media screen and (min-width: 991px) {\n    width: calc(40% - 80px);\n    float: left;\n    margin-right: 20px;\n    height: 430px;\n    font-size: 24px;\n  }\n`;\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\n\nconst HomeDeck = ({\n  colour,\n  text,\n  image\n}) => __jsx(Container, null, __jsx(Text, {\n  colour: colour,\n  dangerouslySetInnerHTML: {\n    __html: text\n  }\n}), __jsx(ImageWrapper, {\n  mobileHeight: \"400px\"\n}, __jsx(Image, {\n  src: image\n})), __jsx(Clearfix, null));\n\nexport default HomeDeck;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/HomeDeck.js"],
+    "names": [
+      "React",
+      "styled",
+      "Clearfix",
+      "Container",
+      "ImageWrapper",
+      "Text",
+      "div",
+      "props",
+      "colour",
+      "Image",
+      "src",
+      "HomeDeck",
+      "text",
+      "image",
+      "__html"
+    ],
+    "mappings": ";AAAA,OAAO,KAAKA,KAAZ,MAAuB,OAAvB;AACA,OAAOC,MAAP,MAAmB,mBAAnB;AAEA,OAAOC,QAAP,MAAqB,YAArB;AACA,OAAOC,SAAP,MAAsB,aAAtB;AACA,OAAOC,YAAP,MAAyB,gBAAzB;AAEA,MAAMC,IAAI,GAAGJ,MAAM,CAACK,GAAI;sBACFC,KAAK,IAAIA,KAAK,CAACC,MAAO;;;;;;;;;;;;;;CAD5C;AAiBA,MAAMC,KAAK,GAAGR,MAAM,CAACK,GAAI;2BACEC,KAAK,IAAIA,KAAK,CAACG,GAAI;;;;;;;;;CAD9C;;AAYA,MAAMC,QAAQ,GAAG,CAAC;AAAEH,EAAAA,MAAF;AAAUI,EAAAA,IAAV;AAAgBC,EAAAA;AAAhB,CAAD,KACf,MAAC,SAAD,QACE,MAAC,IAAD;AAAM,EAAA,MAAM,EAAEL,MAAd;AAAsB,EAAA,uBAAuB,EAAE;AAAEM,IAAAA,MAAM,EAAEF;AAAV;AAA/C,EADF,EAEE,MAAC,YAAD;AAAc,EAAA,YAAY,EAAC;AAA3B,GACE,MAAC,KAAD;AAAO,EAAA,GAAG,EAAEC;AAAZ,EADF,CAFF,EAKE,MAAC,QAAD,OALF,CADF;;AAUA,eAAeF,QAAf",
+    "sourcesContent": [
+      "import * as React from 'react';\nimport styled from 'styled-components';\n\nimport Clearfix from './Clearfix';\nimport Container from './Container';\nimport ImageWrapper from './ImageWrapper';\n\nconst Text = styled.div`\n  background-color: ${props => props.colour};\n  color: white;\n  padding: 35px;\n  line-height: 30px;\n  font-size: 16px;\n  margin-bottom: 20px;\n\n  @media screen and (min-width: 991px) {\n    width: calc(40% - 80px);\n    float: left;\n    margin-right: 20px;\n    height: 430px;\n    font-size: 24px;\n  }\n`;\n\nconst Image = styled.div`\n  background-image: url('${props => props.src}');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n`;\n\nconst HomeDeck = ({ colour, text, image }) => (\n  <Container>\n    <Text colour={colour} dangerouslySetInnerHTML={{ __html: text }} />\n    <ImageWrapper mobileHeight=\"400px\">\n      <Image src={image} />\n    </ImageWrapper>\n    <Clearfix />\n  </Container>\n);\n\nexport default HomeDeck;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

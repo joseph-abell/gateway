@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Link} from '../router';
+import Link from 'next/link';
 import Container from '../components/Container';
 import Clearfix from '../components/Clearfix';
 import {getData, getFullUrl} from '../helpers';
@@ -77,6 +77,7 @@ const FooterTemplate = () => {
   const [contact, setContact] = useState('');
   const [credits, setCredits] = useState([]);
   const [socialMedia, setSocialMedia] = useState({});
+
   useEffect(() => {
     getData('data/footer.json').then(data => {
       setAddress(data.address);
@@ -165,9 +166,7 @@ const FooterTemplate = () => {
 
                 return (
                   <span key={l}>
-                    <Link href={l}>
-                      <a>{link.name}</a>
-                    </Link>
+                    <a href={l}>{link.name}</a>
                     {', '}
                   </span>
                 );

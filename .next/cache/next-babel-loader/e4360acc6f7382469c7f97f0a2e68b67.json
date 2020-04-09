@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import styled from 'styled-components';\nconst Container = styled.div`\n  @media screen and (min-width: 1241px) {\n    width: 1200px;\n    margin: 0 auto;\n  }\n`;\nexport default Container;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Container.js"],
+    "names": ["styled", "Container", "div"],
+    "mappings": "AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,MAAMC,SAAS,GAAGD,MAAM,CAACE,GAAI;;;;;CAA7B;AAOA,eAAeD,SAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Container = styled.div`\n  @media screen and (min-width: 1241px) {\n    width: 1200px;\n    margin: 0 auto;\n  }\n`;\n\nexport default Container;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

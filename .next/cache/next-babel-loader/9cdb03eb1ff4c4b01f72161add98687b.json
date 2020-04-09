@@ -1,0 +1,26 @@
+{
+  "ast": null,
+  "code": "var __jsx = React.createElement;\nimport React from 'react';\nimport Head from 'next/head';\nexport default class Error extends React.Component {\n  static getInitialProps({\n    res,\n    err\n  }) {\n    const statusCode = res ? res.statusCode : err ? err.statusCode : null;\n    return {\n      statusCode\n    };\n  }\n\n  render() {\n    return __jsx(\"p\", null, __jsx(Head, null, __jsx(\"title\", {\n      key: \"title\"\n    }, \"Error \", this.props.statusCode, \" - Gateway Church, York\")), this.props.statusCode ? `An error ${this.props.statusCode} occurred on server` : 'An error occurred on client');\n  }\n\n}",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/pages/_error.js"],
+    "names": [
+      "React",
+      "Head",
+      "Error",
+      "Component",
+      "getInitialProps",
+      "res",
+      "err",
+      "statusCode",
+      "render",
+      "props"
+    ],
+    "mappings": ";AAAA,OAAOA,KAAP,MAAkB,OAAlB;AACA,OAAOC,IAAP,MAAiB,WAAjB;AAEA,eAAe,MAAMC,KAAN,SAAoBF,KAAK,CAACG,SAA1B,CAAoC;AACjD,SAAOC,eAAP,CAAuB;AAACC,IAAAA,GAAD;AAAMC,IAAAA;AAAN,GAAvB,EAAmC;AACjC,UAAMC,UAAU,GAAGF,GAAG,GAAGA,GAAG,CAACE,UAAP,GAAoBD,GAAG,GAAGA,GAAG,CAACC,UAAP,GAAoB,IAAjE;AACA,WAAO;AAACA,MAAAA;AAAD,KAAP;AACD;;AAEDC,EAAAA,MAAM,GAAG;AACP,WACE,iBACE,MAAC,IAAD,QACE;AAAO,MAAA,GAAG,EAAC;AAAX,iBACS,KAAKC,KAAL,CAAWF,UADpB,4BADF,CADF,EAMG,KAAKE,KAAL,CAAWF,UAAX,GACI,YAAW,KAAKE,KAAL,CAAWF,UAAW,qBADrC,GAEG,6BARN,CADF;AAYD;;AAnBgD",
+    "sourcesContent": [
+      "import React from 'react';\nimport Head from 'next/head';\n\nexport default class Error extends React.Component {\n  static getInitialProps({res, err}) {\n    const statusCode = res ? res.statusCode : err ? err.statusCode : null;\n    return {statusCode};\n  }\n\n  render() {\n    return (\n      <p>\n        <Head>\n          <title key=\"title\">\n            Error {this.props.statusCode} - Gateway Church, York\n          </title>\n        </Head>\n        {this.props.statusCode\n          ? `An error ${this.props.statusCode} occurred on server`\n          : 'An error occurred on client'}\n      </p>\n    );\n  }\n}\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

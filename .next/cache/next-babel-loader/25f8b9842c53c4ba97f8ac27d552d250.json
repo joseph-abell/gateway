@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  clear: both;\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar Clearfix = styled.div(_templateObject());\nexport default Clearfix;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/Clearfix.js"],
+    "names": ["styled", "Clearfix", "div"],
+    "mappings": ";;;;;;;;;;;;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,IAAMC,QAAQ,GAAGD,MAAM,CAACE,GAAV,mBAAd;AAIA,eAAeD,QAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst Clearfix = styled.div`\n  clear: both;\n`;\n\nexport default Clearfix;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

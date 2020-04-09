@@ -1,0 +1,15 @@
+{
+  "ast": null,
+  "code": "import _taggedTemplateLiteral from \"@babel/runtime/helpers/esm/taggedTemplateLiteral\";\n\nfunction _templateObject() {\n  var data = _taggedTemplateLiteral([\"\\n  padding: 40px;\\n  background-color: \", \";\\n  color: white;\\n\\n  @media screen and (min-width: 991px) {\\n    position: absolute;\\n    bottom: 0;\\n    width: 50%;\\n  }\\n\"]);\n\n  _templateObject = function _templateObject() {\n    return data;\n  };\n\n  return data;\n}\n\nimport styled from 'styled-components';\nvar ReadMore = styled.div(_templateObject(), function (props) {\n  return props.colour;\n});\nexport default ReadMore;",
+  "map": {
+    "version": 3,
+    "sources": ["/home/joe/dev/gateway/components/ReadMoreWords.js"],
+    "names": ["styled", "ReadMore", "div", "props", "colour"],
+    "mappings": ";;;;;;;;;;;;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AAEA,IAAMC,QAAQ,GAAGD,MAAM,CAACE,GAAV,oBAEQ,UAAAC,KAAK;AAAA,SAAIA,KAAK,CAACC,MAAV;AAAA,CAFb,CAAd;AAYA,eAAeH,QAAf",
+    "sourcesContent": [
+      "import styled from 'styled-components';\n\nconst ReadMore = styled.div`\n  padding: 40px;\n  background-color: ${props => props.colour};\n  color: white;\n\n  @media screen and (min-width: 991px) {\n    position: absolute;\n    bottom: 0;\n    width: 50%;\n  }\n`;\n\nexport default ReadMore;\n"
+    ]
+  },
+  "metadata": {},
+  "sourceType": "module"
+}

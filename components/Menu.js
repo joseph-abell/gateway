@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {FaBars, FaSearch} from 'react-icons/fa';
-import {Link} from '../router';
+import Link from 'next/link';
 import {HideAt, ShowAt} from 'react-with-breakpoints';
 
 const Logo = ({logoUrl}) => <img src={logoUrl} alt="logo" />;

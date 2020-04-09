@@ -1,8 +1,8 @@
-import { Link } from '../router';
+import Link from 'next/link';
 import StyledNotLink from './NotLinkWords';
 import StyledPaginationLink from './PaginationLinkWords';
 
-const Pagination = ({ maxCount, currentPage = 1 }) => {
+const Pagination = ({maxCount, currentPage = 1}) => {
   let links = [];
 
   for (let i = 1; i < maxCount + 1; i++) {
