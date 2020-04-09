@@ -271,6 +271,7 @@ const Page = () => {
   const [subtitleText, setSubtitleText] = useState('');
   const [deckTitle, setDeckTitle] = useState('');
   const [deckParagraph, setDeckParagraph] = useState('');
+  const [iframe, setIframe] = useState('');
   const [contents, setContents] = useState([]);
   const router = useRouter();
 
@@ -303,6 +304,7 @@ const Page = () => {
         setDeckTitle(data.deck && data.deck.title);
         setDeckParagraph(data.deck && data.deck.paragraph);
         setContents(data.contents);
+        setIframe(data.iframe || '');
 
         setLoading(false);
       })
@@ -350,6 +352,9 @@ const Page = () => {
 
       <Container>
         <Contents contents={contents} />
+        {iframe && iframe.length > 0 && (
+          <div dangerouslySetInnerHTML={iframe} />
+        )}
       </Container>
 
       <Footer />
