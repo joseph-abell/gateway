@@ -1,4 +1,4 @@
-export const url = 'https://gateway-cms.netlify.com/';
+export const url = 'https://gateway-cms.netlify.app/';
 
 export const colours = [
   {name: 'red', hex: '#f05a64', hexLight: '#f7a994'},
